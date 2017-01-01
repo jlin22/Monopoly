@@ -1,11 +1,25 @@
 Team Members
 Alan Zhou
 John Lin
+
 Period
 9
+
 Team Name
+Zhou-Lin Monks
 
 Project Title
 Monopoly
 
 I. Project Idea
+Multiplay, Strategy, Boardgame. 
+Starting from 2 players, up to 4 players.
+
+There is a board with 10 tiles on each side, (of 4 sides).
+There are different kinds of tiles:
+-Chance: Card that affects actions in the game, usually with a bigger reward or punishment that Community Chest
+-Community Chest: Card that affects actions in the game
+-Property: Tiles where you can purchase.
+-Utilities: Simialar to properties.
+-Railroads: Also similar to properties.
+-Jail: A place where you go upon rolling 3 doubles, getting a card that sends you there, or landing on a tile that sends you there.
