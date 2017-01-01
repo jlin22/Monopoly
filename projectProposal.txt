@@ -29,7 +29,7 @@ The whole board will be displayed in GUI with a sidebar that allows for interact
 The standard rules of Monopoly are going to be implemented as best as possible.
 
 II. Crticial Features
-1.
+1. Each player can roll the dice, buy property, trade property, buy houses and hotels, mortgage if neccesary. This is done in a turn-to-turn function.
 
 
 2.
@@ -44,4 +44,4 @@ House rules-
 or
 -A certain set amount for players that land on Free Parking.
 -Getting $400 instead of $200 for landing directly on GO.
--
+
