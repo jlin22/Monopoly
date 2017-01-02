@@ -31,8 +31,13 @@ The standard rules of Monopoly are going to be implemented as best as possible.
 II. Crticial Features
 1. Each player can roll the dice, buy property, trade property, buy houses and hotels, mortgage if neccesary. This is done in a turn-to-turn function.
 
+2.Implementing the more important rules:
+-Rolling 3 double sends you to jail.
+-Having limited houses available for players to buy.
+-
+-
+-
 
-2.
 
 
 3.
