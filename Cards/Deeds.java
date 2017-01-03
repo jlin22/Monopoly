@@ -1,17 +1,115 @@
 public class Deeds {
-    private int position;
-    private String name;
-    private int rent;
-    private int rentMonopoly;
-    private int rent1H;
-    private int rent2H;
-    private int rent3H;
-    private int rent4H;
-    private int hotel;
-    private int houseCost;
-    private int mortgage;
-    private int unmortgage;
+    private int position; //a 
+    private String name; //b 
+    private int rent; //c 
+    private int rentMonopoly; //d 
+    private int rent1H; //e 
+    private int rent2H; //f
+    private int rent3H; //g
+    private int rent4H; //h 
+    private int hotel; //i 
+    private int houseCost; //j 
+    private int mortgage; //k
+    private int unmortgage; //l
 
+    //1
+    public Deeds(int a, String b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l) {
+	a =
+	b =
+	c =
+	d =
+	e =
+	f =
+	g =
+	h =
+	i =
+	j =
+	k =
+	l = 
+    }
+
+    //2
+    public Deeds(int a, String b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l) {
+	a =
+	b =
+	c =
+	d =
+	e =
+	f =
+	g =
+	h =
+	i =
+	j =
+	k =
+	l = 
+    }
+
+    //3
+    public Deeds(int a, String b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l) {
+	a =
+	b =
+	c =
+	d =
+	e =
+	f =
+	g =
+	h =
+	i =
+	j =
+	k =
+	l = 
+    }
+
+    //4
+    public Deeds(int a, String b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l) {
+	a =
+	b =
+	c =
+	d =
+	e =
+	f =
+	g =
+	h =
+	i =
+	j =
+	k =
+	l = 
+    }
+
+    //5
+    public Deeds(int a, String b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l) {
+	a =
+	b =
+	c =
+	d =
+	e =
+	f =
+	g =
+	h =
+	i =
+	j =
+	k =
+	l = 
+    }
+
+    //6
+    public Deeds(int a, String b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l) {
+	a =
+	b =
+	c =
+	d =
+	e =
+	f =
+	g =
+	h =
+	i =
+	j =
+	k =
+	l = 
+    }
+
+    //7
+    
     public static int getPosition() {
 	return position;
     }
@@ -59,4 +157,6 @@ public class Deeds {
     public static int getUnmortgage() {
 	return unmortgage;
     }
+
+    
 }
