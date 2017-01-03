@@ -32,8 +32,8 @@ public class Board extends JFrame {
      button = new JButton("Flow Layout then Box layout");
      pane.add(button, BorderLayout.PAGE_END);
 
-     button = new JButton("Leave as long box for Log");
-     pane.add(button, BorderLayout.LINE_END);
+     field = new JTextField("Leave as long box for Log");
+     pane.add(field, BorderLayout.LINE_END);
    
  }
 
