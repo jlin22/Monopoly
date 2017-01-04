@@ -12,104 +12,22 @@ public class Deeds {
     private int mortgage; //k
     private int unmortgage; //l
 
-    //1
     public Deeds(int a, String b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l) {
-	a =
-	b =
-	c =
-	d =
-	e =
-	f =
-	g =
-	h =
-	i =
-	j =
-	k =
-	l = 
+	a = postion;
+	b = name;
+	c = rent;
+	d = rentMonopoly;
+	e = rent1H;
+	f = rent2H;
+	g = rent3H;
+	h = rent4H;
+	i = hotel;
+	j = houseCost;
+	k = mortgage;
+	l = unmortgage;
     }
 
-    //2
-    public Deeds(int a, String b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l) {
-	a =
-	b =
-	c =
-	d =
-	e =
-	f =
-	g =
-	h =
-	i =
-	j =
-	k =
-	l = 
-    }
-
-    //3
-    public Deeds(int a, String b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l) {
-	a =
-	b =
-	c =
-	d =
-	e =
-	f =
-	g =
-	h =
-	i =
-	j =
-	k =
-	l = 
-    }
-
-    //4
-    public Deeds(int a, String b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l) {
-	a =
-	b =
-	c =
-	d =
-	e =
-	f =
-	g =
-	h =
-	i =
-	j =
-	k =
-	l = 
-    }
-
-    //5
-    public Deeds(int a, String b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l) {
-	a =
-	b =
-	c =
-	d =
-	e =
-	f =
-	g =
-	h =
-	i =
-	j =
-	k =
-	l = 
-    }
-
-    //6
-    public Deeds(int a, String b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l) {
-	a =
-	b =
-	c =
-	d =
-	e =
-	f =
-	g =
-	h =
-	i =
-	j =
-	k =
-	l = 
-    }
-
-    //7
-    
+    /*    
     public static int getPosition() {
 	return position;
     }
@@ -158,5 +76,5 @@ public class Deeds {
 	return unmortgage;
     }
 
-    
+    /*    
 }
