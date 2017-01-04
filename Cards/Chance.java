@@ -1,5 +1,5 @@
 //Chance Cards
-
+/*
 "Advance To Go. (Collect $200)"
 "Bank Pays You Dividend of $50."
 "Go Back 3 Spaces."
@@ -15,3 +15,15 @@
 "Advance to Illinois Ave."
 "This Card May Be Kept Until Needed or Sold. GET OUT OF JAIL FREE."
 "Make General Repairs On All Your Property. For Each House Pay $25. For Each Hotel $100."
+*/
+
+public class Chance {
+    private int position;
+    private String message;
+
+    public Chance (int a, String b) {
+	a = position;
+	b = message;
+    }
+    
+}
