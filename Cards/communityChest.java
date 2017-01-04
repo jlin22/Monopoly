@@ -1,5 +1,5 @@
 //CommunityChests
-
+/*
 "Collect $50 From Every Player."
 "Receive $25 For Services."
 "Advance To Go (Collect $200)."
@@ -15,3 +15,15 @@
 "You Are Assessed For Street Repairs. $40 Per House. $115 Per Hotel."
 "Bank Error In Your Favor. Collect $200."
 "Income Tax Refund. Collect $20."
+*/
+
+public class communityChest {
+    private int position;
+    private String message;
+
+    public communityChest (int a, String b) {
+	a = position;
+	b = message;
+    }
+    
+}
