@@ -11,8 +11,9 @@ public class Deeds {
     private int houseCost; //j 
     private int mortgage; //k
     private int unmortgage; //l
+    private int cost; /m
 
-    public Deeds(int a, String b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l) {
+	public Deeds(int a, String b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l,int m) {
 	a = postion;
 	b = name;
 	c = rent;
@@ -23,8 +24,11 @@ public class Deeds {
 	h = rent4H;
 	i = hotel;
 	j = houseCost;
+	k = k * -1;
 	k = mortgage;
 	l = unmortgage;
+	m = -1 * m;
+	m = cost;
     }
 
     /*    
