@@ -2,8 +2,13 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.event.*;
+import javva.awt.event.*;
+import java.io.*;
+
+//attach it to panel, new jpanel, put jpanel insert a panel
  
-public class Board extends JFrame {
+public class Board extends JFrame { //impolments ActionListener
  private Container pane;
 
  private JButton b;
