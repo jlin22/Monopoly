@@ -9,12 +9,12 @@ import java.io.*;
 //attach it to panel, new jpanel, put jpanel insert a panel
  
 public class Board extends JFrame { //impolments ActionListener
- private Container pane;
-
- private JButton b;
- private JLabel l;
- private JTextField t;
- private JCheckBox c;
+    private Container pane;
+    private JPanel outside,inner;
+    private JButton b;
+    private JLabel l;
+    private JTextField t;
+    private JCheckBox c;
 
     public Board() {
      this.setTitle("Monopoly");
