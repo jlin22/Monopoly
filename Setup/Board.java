@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.io.*;
 
  
-public class Board extends JFrame { //impolments ActionListener
+public class Board extends JFrame implements ActionListener {
 
     public Board() {
 	/*this.setTitle("Monopoly");
@@ -214,10 +214,13 @@ public class Board extends JFrame { //impolments ActionListener
 	frame.setSize(500,500);
 	frame.setLocationRelativeTo(null);
 	frame.setVisible(true);
- }
+    }
 
-  public static void main(String[] args) {
-     Board g = new Board();
-     g.setVisible(true);
-  }
+    public void actionPerformed(ActionEvent e){
+    }
+    
+    public static void main(String[] args) {
+      Board g = new Board();
+      g.setVisible(true);
+    }
 }
