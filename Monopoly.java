@@ -1,3 +1,4 @@
+
 public class Monopoly {
     public static void main(String args[]) {
         emptyTile a0 = new emptyTile(0,200,0);
