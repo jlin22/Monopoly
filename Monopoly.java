@@ -41,4 +41,5 @@ public class Monopoly {
 	emptyTile a38 = new emptyTile(38,-100,38);
 	Deed a39 = new Deed(39,"Boardwalk",50,100,200,600,1400,1700,2000,200,200,220,400);
     }
+    //put this all this into one array
 }
