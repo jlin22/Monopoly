@@ -31,54 +31,52 @@ public class Deeds {
 	cost = m;
     }
 
-    /*    
-    public static int getPosition() {
+ 
+    public int getPosition() {
 	return position;
     }
 
-    public static String getName() {
+    public String getName() {
 	return name;
     }
 
-    public static int getRent() {
+    public int getRent() {
 	return rent;
     }
 
-    public static int getRentMonopoly() {
+    public int getRentMonopoly() {
 	return rentMonopoly;
     }
 
-    public static int getRent1H() {
+    public int getRent1H() {
 	return rent1H;
     }
 
-    public static int getRent2H() {
+    public int getRent2H() {
 	return rent2H;
     }
 
-    public static int getRent3H() {
+    public int getRent3H() {
 	return rent3H;
     }
 
-    public static int getRent4H() {
+    public int getRent4H() {
 	return rent4H;
     }
 
-    public static int getHotel() {
+    public int getHotel() {
 	return hotel;
     }
 
-    public static int getHouseCost() {
+    public int getHouseCost() {
 	return houseCost;
     }
 
-    public static int getMortgage() {
+    public int getMortgage() {
 	return mortgage;
     }
     
-    public static int getUnmortgage() {
+    public int getUnmortgage() {
 	return unmortgage;
-    }
-
-    */    
+    }   
 }
