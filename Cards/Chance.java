@@ -25,5 +25,10 @@ public class Chance {
 	a = position;
 	b = message;
     }
-    
+    public int getPosition(){
+	return position;
+    }
+    public String message(){
+	return message;
+    }
 }
