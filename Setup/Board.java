@@ -23,7 +23,7 @@ public class Board extends JFrame { //impolments ActionListener
 	//wholePane.setPreferredSize(new Dimension(500, 500));
 	wholePane.setLayout(new BorderLayout());
 
-		JPanel tpane = new JPanel();
+	JPanel tpane = new JPanel();
 	tpane.setLayout(new FlowLayout(1,0,0));
 
 	JPanel bpane = new JPanel();
@@ -180,6 +180,17 @@ public class Board extends JFrame { //impolments ActionListener
 	JPanel Buttons = new JPanel();
 	Buttons.setLayout(new BoxLayout(Buttons, BoxLayout.Y_AXIS));
 
+	JButton a4 = new JButton("Roll the Dice");
+	JButton b4 = new JButton("Buy a House");
+	JButton c4 = new JButton("Mortgaging");
+	JButton d4 = new JButton("Trading");
+	JButton e4 = new JButton("Jail Free Card");
+	Buttons.add(a4);
+	Buttons.add(b4);
+	Buttons.add(c4);
+	Buttons.add(d4);
+	Buttons.add(e4);
+
 	JPanel Players = new JPanel();
 	Players.setLayout(new FlowLayout());
 
@@ -190,11 +201,11 @@ public class Board extends JFrame { //impolments ActionListener
 	JPanel Title = new JPanel();
 	Title.setLayout(new FlowLayout());
 	
-	//pane.add(Title, BorderLayout.PAGE_START);
+	//outsideLayout.add(Title, BorderLayout.PAGE_START);
 	outsideLayout.add(wholePane,BorderLayout.CENTER);
-	//pane.add(Buttons, BorderLayout.LINE_START);
-     	//pane.add(Players, BorderLayout.PAGE_END);
-	//pane.add(Log, BorderLayout.LINE_END);
+	outsideLayout.add(Buttons, BorderLayout.LINE_START);
+     	//outsideLayout.add(Players, BorderLayout.PAGE_END);
+	//outsideLayout.add(Log, BorderLayout.LINE_END);
 
 
 	JFrame frame =  new JFrame("Monopoly");
