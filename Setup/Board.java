@@ -5,7 +5,7 @@ import java.io.*;
 
  
 public class Board extends JFrame implements ActionListener {
-
+    private JTextField display;
     public Board() {
 	/*this.setTitle("Monopoly");
      this.setSize(800,800);
@@ -43,8 +43,9 @@ public class Board extends JFrame implements ActionListener {
 	wholePane.add(lpane, BorderLayout.LINE_START);
 	wholePane.add(rpane, BorderLayout.LINE_END);
 	//may change later
-	JLabel display = new JLabel("Welcome",JLabel.CENTER);
-	display.setPreferredSize(new Dimension(11,11));
+	display = new JTextField("WELCOME",10);
+	display.setEditable(false);
+	display.setPreferredSize(new Dimension(150,150));
 	wholePane.add(display, BorderLayout.CENTER);
 	
 	
@@ -207,24 +208,44 @@ public class Board extends JFrame implements ActionListener {
 
 	JButton a3 = new JButton("30");
 	a3.setPreferredSize(dim1);
+	a3.addActionListener(this);
+	a3.setActionCommand("30");
 	JButton b3 = new JButton("31");
 	b3.setPreferredSize(dim1);
+	b3.addActionListener(this);
+	b3.setActionCommand("31");
 	JButton c3 = new JButton("32");
 	c3.setPreferredSize(dim1);
+	c3.addActionListener(this);
+	c3.setActionCommand("32");
 	JButton d3 = new JButton("33");
 	d3.setPreferredSize(dim1);
+	d3.addActionListener(this);
+	d3.setActionCommand("33");
 	JButton e3 = new JButton("34");
 	e3.setPreferredSize(dim1);
+	e3.addActionListener(this);
+	e3.setActionCommand("34");
 	JButton f3 = new JButton("35");
 	f3.setPreferredSize(dim1);
+	f3.addActionListener(this);
+	f3.setActionCommand("35");
 	JButton g3 = new JButton("36");
 	g3.setPreferredSize(dim1);
+	g3.addActionListener(this);
+	g3.setActionCommand("36");
 	JButton h3 = new JButton("37");
 	h3.setPreferredSize(dim1);	
+	h3.addActionListener(this);
+	h3.setActionCommand("37");
 	JButton i3 = new JButton("38");
 	i3.setPreferredSize(dim1);
+	i3.addActionListener(this);
+	i3.setActionCommand("38");
 	JButton j3 = new JButton("39");
 	j3.setPreferredSize(dim1);	
+	j3.addActionListener(this);
+	j3.setActionCommand("39");
 	rpane.add(a3);
 	rpane.add(b3);
 	rpane.add(c3);
@@ -278,8 +299,91 @@ public class Board extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
 	String event = e.getActionCommand();
-	if(event.equals("0")) {
-	    display.setText("GO!");
+	//if(event.equals("0")) {
+	//    display.setText("GO");
+	//}
+	switch (event) {
+	case "0": display.setText("GO");
+	    break;
+	case "1": display.setText("GO");
+	    break;
+	case "2": display.setText("GO");
+	    break;
+	case "3": display.setText("GO");
+	    break;
+	case "4": display.setText("GO");
+	    break;
+	case "5": display.setText("GO");
+	    break;
+	case "6": display.setText("GO");
+	    break;
+	case "7": display.setText("GO");
+	    break;
+	case "8": display.setText("GO");
+	    break;
+	case "9": display.setText("GO");
+	    break;
+	case "10": display.setText("JAIL");
+		display.setText("VISITING JAIL [IF YOU LAND ON IT]");
+	    break;
+	case "11": display.setText("GO");
+	    break;
+	case "12": display.setText("GO");
+	    break;
+	case "13": display.setText("GO");
+	    break;
+	case "14": display.setText("GO");
+	    break;
+	case "15": display.setText("GO");
+	    break;
+	case "16": display.setText("GO");
+	    break;
+	case "17": display.setText("GO");
+	    break;
+	case "18": display.setText("GO");
+	    break;
+	case "19": display.setText("GO");
+	    break;
+	case "20": display.setText("FREE PARKING");
+	    break;
+	case "21": display.setText("GO");
+	    break;
+	case "22": display.setText("GO");
+	    break;
+	case "23": display.setText("GO");
+	    break;
+	case "24": display.setText("GO");
+	    break;
+	case "25": display.setText("GO");
+	    break;
+	case "26": display.setText("GO");
+	    break;
+	case "27": display.setText("GO");
+	    break;
+	case "28": display.setText("GO");
+	    break;
+	case "29": display.setText("GO");
+	    break;
+	case "30": display.setText("GO TO JAIL");
+	    break;
+	case "31": display.setText("GO");
+	    break;
+	case "32": display.setText("GO");
+	    break;
+	case "33": display.setText("GO");
+	    break;
+	case "34": display.setText("GO");
+	    break;
+	case "35": display.setText("GO");
+	    break;
+	case "36": display.setText("GO");
+	    break;
+	case "37": display.setText("GO");
+	    break;
+	case "38": display.setText("GO");
+	    break;
+	case "39": display.setText("GO");
+	    break;
 	}
     }
     
