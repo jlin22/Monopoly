@@ -6,15 +6,12 @@ import java.io.*;
  
 public class Board extends JFrame implements ActionListener {
     private JTextField display;
+    private int Money1,Money2,Money3,Money4;
     public Board() {
-	/*this.setTitle("Monopoly");
-     this.setSize(800,800);
-     this.setLocation(200,0);
-     this.setDefaultCloseOperation(EXIT_ON_CLOSE);  
-     pane = this.getContentPane();
-     pane.setLayout(new BorderLayout());
-	*/
-
+	Money1 = 1500;
+	Money2 = 1500;
+	Money3 = 1500;
+	Money4 = 1500;
 	JPanel outsideLayout = new JPanel();
 	outsideLayout.setLayout(new BorderLayout());
 	
@@ -261,11 +258,27 @@ public class Board extends JFrame implements ActionListener {
 	JPanel Buttons = new JPanel();
 	Buttons.setLayout(new BoxLayout(Buttons, BoxLayout.Y_AXIS));
 
+	Dimension dim2 = new Dimension(150,150);	
 	JButton a4 = new JButton("Roll the Dice");
+	a4.setPreferredSize(dim2);		
+	a4.addActionListener(this);
+	a4.setActionCommand("Dice");
 	JButton b4 = new JButton("Buy a House");
+	b4.setPreferredSize(dim2);		
+	b4.addActionListener(this);
+	b4.setActionCommand("House");
 	JButton c4 = new JButton("Mortgaging");
+	c4.setPreferredSize(dim2);	    
+	c4.addActionListener(this);
+	c4.setActionCommand("Mortgage");
 	JButton d4 = new JButton("Trading");
+	d4.setPreferredSize(dim2);	       
+	d4.addActionListener(this);
+	d4.setActionCommand("Trade");
 	JButton e4 = new JButton("Jail Free Card");
+	e4.setPreferredSize(dim2);		
+	e4.addActionListener(this);
+	e4.setActionCommand("Jail Card");
 	Buttons.add(a4);
 	Buttons.add(b4);
 	Buttons.add(c4);
@@ -273,7 +286,23 @@ public class Board extends JFrame implements ActionListener {
 	Buttons.add(e4);
 
 	JPanel Players = new JPanel();
-	Players.setLayout(new FlowLayout());
+	Players.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+	Dimension dim3 = new Dimension(150,50);	
+	JLabel a5 = new JLabel("Player 1: ");
+	a5.setPreferredSize(dim3);	    	
+	JLabel b5 = new JLabel("Player 2: ");
+	b5.setPreferredSize(dim3);	    
+	JLabel c5 = new JLabel("Player 3: ");
+	c5.setPreferredSize(dim3);	   	
+	JLabel d5 = new JLabel("Player 4: ");
+	d5.setPreferredSize(dim3);	    	
+
+	Players.add(a5);
+	Players.add(b5);
+	Players.add(c5);
+	Players.add(d5);
+
 
 	//change later
 	JPanel Log = new JPanel();
@@ -285,7 +314,7 @@ public class Board extends JFrame implements ActionListener {
 	//outsideLayout.add(Title, BorderLayout.PAGE_START);
 	outsideLayout.add(wholePane,BorderLayout.CENTER);
 	outsideLayout.add(Buttons, BorderLayout.LINE_START);
-     	//outsideLayout.add(Players, BorderLayout.PAGE_END);
+     	outsideLayout.add(Players, BorderLayout.PAGE_END);
 	//outsideLayout.add(Log, BorderLayout.LINE_END);
 
 
@@ -299,9 +328,6 @@ public class Board extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
 	String event = e.getActionCommand();
-	//if(event.equals("0")) {
-	//    display.setText("GO");
-	//}
 	switch (event) {
 	case "0": display.setText("GO");
 	    break;
@@ -323,8 +349,7 @@ public class Board extends JFrame implements ActionListener {
 	    break;
 	case "9": display.setText("GO");
 	    break;
-	case "10": display.setText("JAIL");
-		display.setText("VISITING JAIL [IF YOU LAND ON IT]");
+	case "10": display.setText("JAIL [VISITING JAIL IF YOU LAND ON IT]");
 	    break;
 	case "11": display.setText("GO");
 	    break;
@@ -384,6 +409,13 @@ public class Board extends JFrame implements ActionListener {
 	    break;
 	case "39": display.setText("GO");
 	    break;
+	}
+	//have to add more limitation
+	if (event.equals("Dice")) {
+	    int randomNum,randomNum1 = 0;
+	    randomNum = 1 + (int)(Math.random() * 6);
+	    randomNum1 = 1 + (int)(Math.random() * 6); 
+	    display.setText("" + randomNum + "," + randomNum1);
 	}
     }
     
