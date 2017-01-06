@@ -5,16 +5,31 @@ import java.io.*;
 
  
 public class Board extends JFrame implements ActionListener {
-    private JTextField display;
-    private int Money1,Money2,Money3,Money4;
+    private JTextArea display,Log1;
+    private int Money1,Money2,Money3,Money4,turn,position;
+    private JLabel a5,b5,c5,d5;
     public Board() {
 	Money1 = 1500;
 	Money2 = 1500;
 	Money3 = 1500;
 	Money4 = 1500;
+	turn = 0;
+	position = 0;
+
+	JLabel p1 = new JLabel("P1",JLabel.LEFT);
+	JLabel p2 = new JLabel("P2",JLabel.RIGHT);
+	JLabel p3 = new JLabel("P3",JLabel.LEADING);
+	JLabel p4 = new JLabel("P4",JLabel.TRAILING);
+
+	Font labelFont = p1.getFont();
+	p1.setFont(new Font(labelFont.getName(), Font.PLAIN, 50));
+	p2.setFont(new Font(labelFont.getName(), Font.PLAIN, 50));
+	p3.setFont(new Font(labelFont.getName(), Font.PLAIN, 50));
+	p4.setFont(new Font(labelFont.getName(), Font.PLAIN, 50));
+	
 	JPanel outsideLayout = new JPanel();
 	outsideLayout.setLayout(new BorderLayout());
-	
+x	
 	//add in later
 	JPanel wholePane = new JPanel();
 	//wholePane.setPreferredSize(new Dimension(500, 500));
@@ -40,7 +55,7 @@ public class Board extends JFrame implements ActionListener {
 	wholePane.add(lpane, BorderLayout.LINE_START);
 	wholePane.add(rpane, BorderLayout.LINE_END);
 	//may change later
-	display = new JTextField("WELCOME",10);
+	display = new JTextArea("WELCOME");
 	display.setEditable(false);
 	display.setPreferredSize(new Dimension(150,150));
 	wholePane.add(display, BorderLayout.CENTER);
@@ -48,8 +63,9 @@ public class Board extends JFrame implements ActionListener {
 	
 
 	
-	Dimension dim = new Dimension(50,50);
-	Dimension dim1 = new Dimension(52,52);
+	Dimension dim = new Dimension(42,45);
+	Dimension dim1 = new Dimension(48,52);
+	
 	JButton a = new JButton("20");
 	a.setPreferredSize(dim);
 	a.addActionListener(this);
@@ -141,6 +157,12 @@ public class Board extends JFrame implements ActionListener {
 	j1.setPreferredSize(dim);
 	j1.addActionListener(this);
 	j1.setActionCommand("0");
+
+	j1.add(p1);
+	j1.add(p2);
+	j1.add(p3);
+	j1.add(p4);
+	
 	bpane.add(a1);
 	bpane.add(b1);
 	bpane.add(c1);
@@ -289,15 +311,16 @@ public class Board extends JFrame implements ActionListener {
 	Players.setLayout(new FlowLayout(FlowLayout.LEFT));
 
 	Dimension dim3 = new Dimension(150,50);	
-	JLabel a5 = new JLabel("Player 1: ");
+	a5 = new JLabel("Player 1: ");
 	a5.setPreferredSize(dim3);	    	
-	JLabel b5 = new JLabel("Player 2: ");
-	b5.setPreferredSize(dim3);	    
-	JLabel c5 = new JLabel("Player 3: ");
-	c5.setPreferredSize(dim3);	   	
-	JLabel d5 = new JLabel("Player 4: ");
+	b5 = new JLabel("Player 2: ");
+	b5.setPreferredSize(dim3);
+	c5 = new JLabel("Player 3: ");
+	c5.setPreferredSize(dim3);
+	d5 = new JLabel("Player 4: ");
 	d5.setPreferredSize(dim3);	    	
 
+	
 	Players.add(a5);
 	Players.add(b5);
 	Players.add(c5);
@@ -308,6 +331,12 @@ public class Board extends JFrame implements ActionListener {
 	JPanel Log = new JPanel();
 	Log.setLayout(new FlowLayout());
 
+	Log1 = new JTextArea("Log");
+	Log1.setEditable(false);
+	Log1.setPreferredSize(new Dimension(150,600));
+	Log.add(Log1);
+
+	//change later
 	JPanel Title = new JPanel();
 	Title.setLayout(new FlowLayout());
 	
@@ -315,13 +344,13 @@ public class Board extends JFrame implements ActionListener {
 	outsideLayout.add(wholePane,BorderLayout.CENTER);
 	outsideLayout.add(Buttons, BorderLayout.LINE_START);
      	outsideLayout.add(Players, BorderLayout.PAGE_END);
-	//outsideLayout.add(Log, BorderLayout.LINE_END);
+	outsideLayout.add(Log, BorderLayout.LINE_END);
 
 
 	JFrame frame =  new JFrame("Monopoly");
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.add(outsideLayout);
-	frame.setSize(650,600);
+	frame.setSize(760,700);
 	frame.setLocationRelativeTo(null);
 	frame.setVisible(true);
     }
@@ -349,7 +378,7 @@ public class Board extends JFrame implements ActionListener {
 	    break;
 	case "9": display.setText("GO");
 	    break;
-	case "10": display.setText("JAIL [VISITING JAIL IF YOU LAND ON IT]");
+	case "10": display.setText("JAIL \n[VISITING JAIL IF YOU LAND ON IT]");
 	    break;
 	case "11": display.setText("GO");
 	    break;
@@ -416,7 +445,11 @@ public class Board extends JFrame implements ActionListener {
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6); 
 	    display.setText("" + randomNum + "," + randomNum1);
+	    
 	}
+	//for player update
+	//panel.remove(...);
+	//panel.revalidate();
     }
     
     public static void main(String[] args) {
