@@ -454,7 +454,7 @@ public class Board extends JFrame implements ActionListener {
 	    break;
 	case "4": display.setText("Name: Income Tax\nPay 200");
 	    break;
-	case "5": display.setText("GO");
+	case "5": display.setText("Name: " + Name[2] + "\nCost: " + tiles.get(5).getCost() + "\nRent for 1 Railroad: 50\nRent for 2 Railroad: 100\nRent for 3 Railroad: 150\nRent for 4 Railroad: 200\nMortgage Cost: " + tiles.get(5).getMortgage() + "\nUnmortgage Cost: " + tiles.get(5).getUnmortgage());
 	    break;
 	case "6": display.setText("Name: " + Name[3] + "\nCost: " + tiles.get(6).getCost() + "\nRent: " + tiles.get(6).getRent() + "\nRent of 1 House:" + tiles.get(6).getRent1H() + "\nRent of 2 House: " + tiles.get(6).getRent2H() + "\nRent of 3 House: " + tiles.get(6).getRent3H() + "\nRent of 4 Houses: " + tiles.get(6).getRent4H() + "\nRent of Hotel: " + tiles.get(6).getHotel() + "\nCost of Buying a House: " + tiles.get(6).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(6).getHouseCost() + "\nMortgage Cost: " + tiles.get(6).getMortgage() + "\nUnmortgage Cost: " + tiles.get(6).getUnmortgage());
 	    break;
@@ -474,7 +474,7 @@ public class Board extends JFrame implements ActionListener {
 	    break;
 	case "14": display.setText("Name: " + Name[9] + "\nCost: " + tiles.get(14).getCost() + "\nRent: " + tiles.get(14).getRent() + "\nRent of 1 House:" + tiles.get(14).getRent1H() + "\nRent of 2 House: " + tiles.get(14).getRent2H() + "\nRent of 3 House: " + tiles.get(14).getRent3H() + "\nRent of 4 Houses: " + tiles.get(14).getRent4H() + "\nRent of Hotel: " + tiles.get(14).getHotel() + "\nCost of Buying a House: " + tiles.get(14).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(14).getHouseCost() + "\nMortgage Cost: " + tiles.get(14).getMortgage() + "\nUnmortgage Cost: " + tiles.get(14).getUnmortgage());
 	    break;
-	case "15": display.setText("GO");
+	case "15": display.setText("Name: " + Name[10] + "\nCost: " + tiles.get(5).getCost() + "\nRent for 1 Railroad: 50\nRent for 2 Railroad: 100\nRent for 3 Railroad: 150\nRent for 4 Railroad: 200\nMortgage Cost: " + tiles.get(5).getMortgage() + "\nUnmortgage Cost: " + tiles.get(5).getUnmortgage());
 	    break;
 	case "16": display.setText("Name: " + Name[11] + "\nCost: " + tiles.get(16).getCost() + "\nRent: " + tiles.get(16).getRent() + "\nRent of 1 House:" + tiles.get(16).getRent1H() + "\nRent of 2 House: " + tiles.get(16).getRent2H() + "\nRent of 3 House: " + tiles.get(16).getRent3H() + "\nRent of 4 Houses: " + tiles.get(16).getRent4H() + "\nRent of Hotel: " + tiles.get(16).getHotel() + "\nCost of Buying a House: " + tiles.get(16).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(16).getHouseCost() + "\nMortgage Cost: " + tiles.get(16).getMortgage() + "\nUnmortgage Cost: " + tiles.get(16).getUnmortgage());
 	    break;
@@ -484,7 +484,7 @@ public class Board extends JFrame implements ActionListener {
 	    break;
 	case "19": display.setText("Name: " + Name[13] + "\nCost: " + tiles.get(19).getCost() + "\nRent: " + tiles.get(19).getRent() + "\nRent of 1 House:" + tiles.get(19).getRent1H() + "\nRent of 2 House: " + tiles.get(19).getRent2H() + "\nRent of 3 House: " + tiles.get(19).getRent3H() + "\nRent of 4 Houses: " + tiles.get(19).getRent4H() + "\nRent of Hotel: " + tiles.get(19).getHotel() + "\nCost of Buying a House: " + tiles.get(19).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(19).getHouseCost() + "\nMortgage Cost: " + tiles.get(19).getMortgage() + "\nUnmortgage Cost: " + tiles.get(19).getUnmortgage());
 	    break;
-	case "20": display.setText("FREE PARKING");
+	case "20": display.setText("FREE PARKING\nNothing Happens!");
 	    break;
 	case "21": display.setText("Name: " + Name[14] + "\nCost: " + tiles.get(21).getCost() + "\nRent: " + tiles.get(21).getRent() + "\nRent of 1 House:" + tiles.get(21).getRent1H() + "\nRent of 2 House: " + tiles.get(21).getRent2H() + "\nRent of 3 House: " + tiles.get(21).getRent3H() + "\nRent of 4 Houses: " + tiles.get(21).getRent4H() + "\nRent of Hotel: " + tiles.get(21).getHotel() + "\nCost of Buying a House: " + tiles.get(21).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(21).getHouseCost() + "\nMortgage Cost: " + tiles.get(21).getMortgage() + "\nUnmortgage Cost: " + tiles.get(21).getUnmortgage());
 	    break;
@@ -494,7 +494,7 @@ public class Board extends JFrame implements ActionListener {
 	    break;
 	case "24": display.setText("Name: " + Name[16] + "\nCost: " + tiles.get(24).getCost() + "\nRent: " + tiles.get(24).getRent() + "\nRent of 1 House:" + tiles.get(24).getRent1H() + "\nRent of 2 House: " + tiles.get(24).getRent2H() + "\nRent of 3 House: " + tiles.get(24).getRent3H() + "\nRent of 4 Houses: " + tiles.get(24).getRent4H() + "\nRent of Hotel: " + tiles.get(24).getHotel() + "\nCost of Buying a House: " + tiles.get(24).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(24).getHouseCost() + "\nMortgage Cost: " + tiles.get(24).getMortgage() + "\nUnmortgage Cost: " + tiles.get(24).getUnmortgage());
 	    break;
-	case "25": display.setText("GO");
+	case "25": display.setText("Name: " + Name[17] + "\nCost: " + tiles.get(5).getCost() + "\nRent for 1 Railroad: 50\nRent for 2 Railroad: 100\nRent for 3 Railroad: 150\nRent for 4 Railroad: 200\nMortgage Cost: " + tiles.get(5).getMortgage() + "\nUnmortgage Cost: " + tiles.get(5).getUnmortgage());
 	    break;
 	case "26": display.setText("Name: " + Name[18] + "\nCost: " + tiles.get(26).getCost() + "\nRent: " + tiles.get(26).getRent() + "\nRent of 1 House:" + tiles.get(26).getRent1H() + "\nRent of 2 House: " + tiles.get(26).getRent2H() + "\nRent of 3 House: " + tiles.get(26).getRent3H() + "\nRent of 4 Houses: " + tiles.get(26).getRent4H() + "\nRent of Hotel: " + tiles.get(26).getHotel() + "\nCost of Buying a House: " + tiles.get(26).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(26).getHouseCost() + "\nMortgage Cost: " + tiles.get(26).getMortgage() + "\nUnmortgage Cost: " + tiles.get(26).getUnmortgage());
 	    break;
@@ -514,7 +514,7 @@ public class Board extends JFrame implements ActionListener {
 	    break;
 	case "34": display.setText("Name: " + Name[24] + "\nCost: " + tiles.get(34).getCost() + "\nRent: " + tiles.get(34).getRent() + "\nRent of 1 House:" + tiles.get(34).getRent1H() + "\nRent of 2 House: " + tiles.get(34).getRent2H() + "\nRent of 3 House: " + tiles.get(34).getRent3H() + "\nRent of 4 Houses: " + tiles.get(34).getRent4H() + "\nRent of Hotel: " + tiles.get(34).getHotel() + "\nCost of Buying a House: " + tiles.get(34).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(34).getHouseCost() + "\nMortgage Cost: " + tiles.get(34).getMortgage() + "\nUnmortgage Cost: " + tiles.get(34).getUnmortgage());
 	    break;
-	case "35": display.setText("GO");
+	case "35": display.setText("Name: " + Name[25] + "\nCost: " + tiles.get(5).getCost() + "\nRent for 1 Railroad: 50\nRent for 2 Railroad: 100\nRent for 3 Railroad: 150\nRent for 4 Railroad: 200\nMortgage Cost: " + tiles.get(5).getMortgage() + "\nUnmortgage Cost: " + tiles.get(5).getUnmortgage());
 	    break;
 	case "36": display.setText("Name: Chance\nDraw a Chance Card");
 	    break;
