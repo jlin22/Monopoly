@@ -1,6 +1,7 @@
+//"Mediterranean Ave.", "Baltic Ave.", "Reading Railroad.","Oriental Ave.","Vermont Ave.","Connecticut Ave.","St. Charles Place.","Electric Company.","States Ave.","Virginia Ave.","Pennsylvania Railroad.","St. James Place","Tennessee Avenue","New York Avenue","Kentucky Avenue","Indiana Avenue","Illinois Avenue","B&O Railroad.","Atlantic Avenue","Ventnor Avenue","Water Work.","Marvin Gardens","Pacific Avenue","North Carolina Avenue","Pennsylvania Avenue","Short Line.","Park Place","Boardwalk",
+
 public class Deeds {
     private int position; //a 
-    private String name; //b 
     private int rent; //c 
     private int rentMonopoly; //d 
     private int rent1H; //e 
@@ -13,9 +14,9 @@ public class Deeds {
     private int unmortgage; //l
     private int cost; //m
 
-	public Deeds(int a, String b, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l,int m) {
+	public Deeds(int a, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l,int m) {
 	position = a;
-	name = b;
+	
 	rent = c;
 	rentMonopoly = d;
 	rent1H = e;
@@ -34,10 +35,6 @@ public class Deeds {
  
     public int getPosition() {
 	return position;
-    }
-
-    public String getName() {
-	return name;
     }
 
     public int getRent() {
@@ -78,5 +75,23 @@ public class Deeds {
     
     public int getUnmortgage() {
 	return unmortgage;
-    }   
+    }
+
+    public int getCost() {
+	return cost;
+    }
+
+    public String toString() {
+	return "" + position + "," + rent + "," + rentMonopoly + "," + rent1H + "," + rent2H + "," + rent3H + "," + rent4H + "," + hotel +  ","  + houseCost + "," + mortgage + "," + unmortgage + "," + cost + "";
+    }
+
+    public int[] convert(String s) {
+	int [] answer = new int[s.length()];
+	for(int n = 0; n < s.length(); n++) {
+	    answer[n] = (int)(s.indexOf(n));
+	}
+	return answer;
+    }
+
+    
 }
