@@ -17,8 +17,9 @@ public class Deeds {
     private int cardNumber; //n 13
     private int sentPosition; //o 14
     private int getMoney; //q 15
+    private int ownedBy;
 
-    public Deeds(int a, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l,int m,int n, int o,int q) {
+    public Deeds(int a, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l,int m,int n, int o,int q,int r) {
 	position = a;
 	rent = c;
 	rentMonopoly = d;
@@ -34,6 +35,7 @@ public class Deeds {
 	cardNumber = n;
 	sentPosition = o;
 	getMoney = q;
+	ownedBy = r;
     }
 
  
@@ -97,17 +99,12 @@ public class Deeds {
 	return getMoney;
     }
 
+    public int getOwnedBy() {
+	return ownedBy;
+    }
+
     public String toString() {
-	return "" + position + "," + rent + "," + rentMonopoly + "," + rent1H + "," + rent2H + "," + rent3H + "," + rent4H + "," + hotel +  ","  + houseCost + "," + mortgage + "," + unmortgage + "," + cost + "," + cardNumber + "," + sentPosition + "," + getMoney + "";
+	return "" + position + "," + rent + "," + rentMonopoly + "," + rent1H + "," + rent2H + "," + rent3H + "," + rent4H + "," + hotel +  ","  + houseCost + "," + mortgage + "," + unmortgage + "," + cost + "," + cardNumber + "," + sentPosition + "," + getMoney + "," + getOwnedBy() + "";
     }
-
-    public int[] convert(String s) {
-	int [] answer = new int[s.length()];
-	for(int n = 0; n < s.length(); n++) {
-	    answer[n] = (int)(s.indexOf(n));
-	}
-	return answer;
-    }
-
     
 }
