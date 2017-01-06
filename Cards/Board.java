@@ -7,9 +7,8 @@ import java.util.*;
 
  
 public class Board extends JFrame implements ActionListener {
-    private JTextArea display,Log1;
+    private JTextArea display,Log1,a5,b5,c5,d5;
     private int Money1,Money2,Money3,Money4,turn,position;
-    private JLabel a5,b5,c5,d5;
     public String[] Name;
     public ArrayList<Deeds> tiles;
     public Board() {
@@ -397,13 +396,13 @@ public class Board extends JFrame implements ActionListener {
 	Players.setLayout(new FlowLayout(FlowLayout.LEFT));
 
 	Dimension dim3 = new Dimension(150,50);	
-	a5 = new JLabel("Player 1: ");
+	a5 = new JTextArea("Player 1: ");
 	a5.setPreferredSize(dim3);	    	
-	b5 = new JLabel("Player 2: ");
+	b5 = new JTextArea("Player 2: ");
 	b5.setPreferredSize(dim3);
-	c5 = new JLabel("Player 3: ");
+	c5 = new JTextArea("Player 3: ");
 	c5.setPreferredSize(dim3);
-	d5 = new JLabel("Player 4: ");
+	d5 = new JTextArea("Player 4: ");
 	d5.setPreferredSize(dim3);	    	
 
 	
