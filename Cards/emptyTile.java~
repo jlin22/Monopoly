@@ -1,0 +1,9 @@
+public class emptyTile {
+    private int position;
+    private int getMoney;
+
+    public emptyTile(int a, int b) {
+	a = position;
+	b = getMoney;
+    }
+}

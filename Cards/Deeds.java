@@ -13,8 +13,12 @@ public class Deeds {
     private int mortgage; //k
     private int unmortgage; //l
     private int cost; //m
+    //chance & community chest stuff
+    private int cardNumber; //n
+    private int sentPosition; //o
+    private int getMoney; //q
 
-	public Deeds(int a, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l,int m) {
+    public Deeds(int a, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l,int m,int n, int o,int q) {
 	position = a;
 	
 	rent = c;
@@ -30,6 +34,9 @@ public class Deeds {
 	unmortgage = l;
 	m = -1 * m;
 	cost = m;
+	cardNumber = n;
+	sentPosition = o;
+	getMoney = q;
     }
 
  
@@ -81,8 +88,20 @@ public class Deeds {
 	return cost;
     }
 
+    public int getCardNumber() {
+	return cardNumber;
+    }
+
+    public int getSentPosition(){
+	return sentPosition;
+    }
+
+    public int getGetMoney() {
+	return getMoney;
+    }
+
     public String toString() {
-	return "" + position + "," + rent + "," + rentMonopoly + "," + rent1H + "," + rent2H + "," + rent3H + "," + rent4H + "," + hotel +  ","  + houseCost + "," + mortgage + "," + unmortgage + "," + cost + "";
+	return "" + position + "," + rent + "," + rentMonopoly + "," + rent1H + "," + rent2H + "," + rent3H + "," + rent4H + "," + hotel +  ","  + houseCost + "," + mortgage + "," + unmortgage + "," + cost + "," + cardNumber + "," + sentPosition + "," + getMoney + "";
     }
 
     public int[] convert(String s) {
