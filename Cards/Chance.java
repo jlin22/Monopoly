@@ -19,16 +19,39 @@
 
 public class Chance {
     private int position;
-    private String message;
+    private int getMoney;
+    private int sentPosition;
+    private int cardNumber;
+    private int loseMoney;
 
-    public Chance (int a, String b) {
+    public Chance (int a, int b, int c, int d, int e) {
 	a = position;
-	b = message;
+	b = getMoney;
+	c = sentPosition;
+	d = cardNumber;
+	e = loseMoney;
     }
     public int getPosition(){
 	return position;
     }
-    public String message(){
-	return message;
+
+    public int getGetMoney() {
+	return getMoney;
+    }
+
+    public int getSentPosition() {
+	return sentPosition;
+    }
+
+     public int getCardNumber() {
+	 return cardNumber;
+    }
+
+    public int getLoseMoney(){
+	return loseMoney;
+    }
+
+    public String toString() {
+	return "" + position + "," + getMoney + "," + sentPosition + "," + cardNumber + "," + loseMoney;
     }
 }
