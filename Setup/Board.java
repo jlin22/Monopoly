@@ -29,7 +29,7 @@ public class Board extends JFrame implements ActionListener {
 	
 	JPanel outsideLayout = new JPanel();
 	outsideLayout.setLayout(new BorderLayout());
-x	
+	
 	//add in later
 	JPanel wholePane = new JPanel();
 	//wholePane.setPreferredSize(new Dimension(500, 500));
