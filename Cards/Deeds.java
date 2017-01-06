@@ -1,26 +1,25 @@
 //"Mediterranean Ave.", "Baltic Ave.", "Reading Railroad.","Oriental Ave.","Vermont Ave.","Connecticut Ave.","St. Charles Place.","Electric Company.","States Ave.","Virginia Ave.","Pennsylvania Railroad.","St. James Place","Tennessee Avenue","New York Avenue","Kentucky Avenue","Indiana Avenue","Illinois Avenue","B&O Railroad.","Atlantic Avenue","Ventnor Avenue","Water Work.","Marvin Gardens","Pacific Avenue","North Carolina Avenue","Pennsylvania Avenue","Short Line.","Park Place","Boardwalk",
 
 public class Deeds {
-    private int position; //a 
-    private int rent; //c 
-    private int rentMonopoly; //d 
-    private int rent1H; //e 
-    private int rent2H; //f
-    private int rent3H; //g
-    private int rent4H; //h 
-    private int hotel; //i 
-    private int houseCost; //j 
-    private int mortgage; //k
-    private int unmortgage; //l
-    private int cost; //m
+    private int position; //a 1
+    private int rent; //c 2
+    private int rentMonopoly; //d 3 
+    private int rent1H; //e 4
+    private int rent2H; //f 5
+    private int rent3H; //g 6
+    private int rent4H; //h  7 
+    private int hotel; //i 8
+    private int houseCost; //j 9 
+    private int mortgage; //k 10
+    private int unmortgage; //l 11
+    private int cost; //m 12
     //chance & community chest stuff
-    private int cardNumber; //n
-    private int sentPosition; //o
-    private int getMoney; //q
+    private int cardNumber; //n 13
+    private int sentPosition; //o 14
+    private int getMoney; //q 15
 
     public Deeds(int a, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l,int m,int n, int o,int q) {
 	position = a;
-	
 	rent = c;
 	rentMonopoly = d;
 	rent1H = e;
@@ -29,10 +28,8 @@ public class Deeds {
 	rent4H = h;
 	hotel = i;
 	houseCost = j;
-	k = k * -1;
 	mortgage = k;
 	unmortgage = l;
-	m = -1 * m;
 	cost = m;
 	cardNumber = n;
 	sentPosition = o;
