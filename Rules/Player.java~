@@ -1,0 +1,6 @@
+public class Player{
+    private int money;
+    public Player(){
+	money = 1600;
+    }
+}
