@@ -8,4 +8,20 @@ public class emptyTile {
 	b = getMoney;
 	c = sentPosition;
     }
+
+    public int getPosition() {
+	return position;
+    }
+
+    public int getGetMoney() {
+	return getMoney;
+    }
+
+    public int getSentPosition() {
+	return sentPosition;
+    }
+
+    public String toString() {
+	return "" + position + "," + getMoney + "," + sentPosition;
+    }
 }
