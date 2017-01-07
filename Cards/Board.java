@@ -3,8 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
-
-
  
 public class Board extends JFrame implements ActionListener {
     private JTextArea display,Log1,a5,b5,c5,d5;
@@ -13,8 +11,8 @@ public class Board extends JFrame implements ActionListener {
     public ArrayList<Deeds> tiles;
     public JButton[] ButtonsOnBoard;
     public JLabel[] Players;
-    public Player[] PlayerNumber;
-    public Player Player1,Player2,Player3,Player4;
+    public ArrayList<Player> PlayerNumber;
+    
     public Board() {
 	tiles = new ArrayList<Deeds>(40);
 	Deeds a01 = new Deeds(2,0,0,0,0,0,0,0,0,0,0,0,0,0,200,0);
@@ -378,18 +376,17 @@ public class Board extends JFrame implements ActionListener {
 	frame.setVisible(true);
     }
     Rules rule = new Rules();
-    /*
-    Player1 = new Player();
-    Player2 = new Player();
-    Player3 = new Player();
-    Player4 = new Player();
     
-    PlayerNumber = new Player[4];
-    PlayerNumber[1] = Player1;
-    PlayerNumber[2] = Player2;
-    PlayerNumber[3] = Player3;
-    PlayerNumber[4] = Players4;
-    */
+    PlayerNumber = new ArrayList<Player>(4);
+    Player Player1 = new Player();
+    Player Player2 = new Player();
+    Player Player3 = new Player();
+    Player Player4 = new Player();
+    PlayerNumber.add(Player1);
+    PlayerNumber.add(Player2);
+    PlayerNumber.add(Player3);
+    PlayerNumber.add(Player4);
+    
     public void actionPerformed(ActionEvent e){
 	String event = e.getActionCommand();
 	switch (event) {
