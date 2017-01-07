@@ -1,10 +1,10 @@
 import java.util.*;
 public class Player{
-    private int money,position,numberRolled,getOutOfJailCards,player;
+    private int money,position,numberRolled,getOutOfJailCards;
     private ArrayList<Integer> propertiesOwned;
 
-    public Player(int a){
-	player = a;
+    public Player(){
+	
 	money = 1500;
 	position = 0;
 	numberRolled = 0;
