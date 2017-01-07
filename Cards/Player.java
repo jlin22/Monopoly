@@ -1,10 +1,8 @@
 import java.util.*;
 public class Player{
-    private int money;
-    private int position;
-    private int numberRolled;
+    private int money,position,numberRolled,getOutOfJailCards;
     private ArrayList<int> propertiesOwned;
-    private int getOutOfJailCards;
+
     public Player(){
 	money = 1500;
 	position = 0;
@@ -12,22 +10,27 @@ public class Player{
 	propertiesOwned = new ArrayList<int>();
 	getOutOfJailCards = 0;
     }
+    
     public void addMoney(int x){
 	money += x;
     }
+    
     public void loseMoney(int x){
 	money -= x;
     }
-    public void goForward(int x){
-	position += x;
-	position = position % 40;
+    
+    public void goToPosition(int x){
+	position x;
     }
+    
     public void setNumberRolled(int x){
 	numberRolled = x;
     }
+    
     public void addProperty(int x){
-	propertiesOwned.add(x);
+	propertiesOwned.add(Deed.get(x).getProperty());
     }
+    
     public void addGetOutOfJailCard(){
 	getOutOfJailCards += 1;
     }

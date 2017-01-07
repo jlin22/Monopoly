@@ -4,7 +4,7 @@ public class Rules {
     private int players;
     private boolean rolledDice;
     public Rules(){
-	turn = 1;
+	turn = 0;
 	playerGoing = 1;
 	players = 4;
 	rolledDice = false;
@@ -12,14 +12,19 @@ public class Rules {
     public int getTurn(){
 	return turn;
     }
+    
     public int getPlayerGoing(){
-	return turn / players;
+	return (turn % 4) + 1;
     }
+    
     public int getPlayers(){
-	return players;}
+	return players;
+    }
+    
     public boolean getRolledDice(){
 	return rolledDice;
     }
+    
     public void rollDice(){
 	if (!rolledDice){
 	    int randomNum,randomNum1 = 0;
