@@ -3,8 +3,7 @@ public class Player{
     private int money,position,numberRolled,getOutOfJailCards;
     private ArrayList<Integer> propertiesOwned;
 
-    public Player(){
-	
+    public Player() {
 	money = 1500;
 	position = 0;
 	numberRolled = 0;
@@ -29,7 +28,7 @@ public class Player{
     }
     
     public void setPosition(int x){
-	position = x;
+	position = (x % 39);
     }
     
     public void setNumberRolled(int x){

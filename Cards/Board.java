@@ -14,6 +14,16 @@ public class Board extends JFrame implements ActionListener {
     public ArrayList<Player> PlayerNumber;
     
     public Board() {
+	PlayerNumber = new ArrayList<Player>(4);
+	Player one = new Player();
+	PlayerNumber.add(one);
+	Player two = new Player();
+	PlayerNumber.add(two);
+	Player three = new Player();
+	PlayerNumber.add(three);
+	Player four = new Player();
+	PlayerNumber.add(four);
+	
 	tiles = new ArrayList<Deeds>(40);
 	Deeds a01 = new Deeds(2,0,0,0,0,0,0,0,0,0,0,0,0,0,200,0);
 	tiles.add(a01);
@@ -377,15 +387,6 @@ public class Board extends JFrame implements ActionListener {
     }
     Rules rule = new Rules();
     
-    PlayerNumber = new ArrayList<Player>(4);
-    Player Player1 = new Player();
-    Player Player2 = new Player();
-    Player Player3 = new Player();
-    Player Player4 = new Player();
-    PlayerNumber.add(Player1);
-    PlayerNumber.add(Player2);
-    PlayerNumber.add(Player3);
-    PlayerNumber.add(Player4);
     
     public void actionPerformed(ActionEvent e){
 	String event = e.getActionCommand();
@@ -477,11 +478,12 @@ public class Board extends JFrame implements ActionListener {
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6); 
 	    display.setText("" + randomNum + "," + randomNum1);
-	    int x = rule.getPlayerGoing();
-		ButtonsOnBoard[Player1.getPosition()].remove(Players[x]);
-		int newPosition = Player1.getPosition() + randomNum + randomNum1;
+	    int x = rule.getTurn();
+	    ButtonsOnBoard[PlayerNumber.get(x).getPosition()].remove(Players[x]);
+	    int newPosition = (PlayerNumber.get(x).getPosition() + randomNum + randomNum1) % 40;
 		ButtonsOnBoard[newPosition].add(Players[x]);
-	    
+		PlayerNumber.get(x).setPosition(newPosition);
+		rule.setTurn();
 	       
 	}
 	

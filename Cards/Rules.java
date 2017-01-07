@@ -9,12 +9,13 @@ public class Rules {
 	players = 4;
 	rolledDice = false;
     }
-    public int getTurn(){
-	return turn;
+
+    public void setTurn(){
+	turn += 1;
     }
     
-    public int getPlayerGoing(){
-	return (turn % 4) + 1;
+    public int getTurn(){
+	return (turn % 4);
     }
     
     public int getPlayers(){
