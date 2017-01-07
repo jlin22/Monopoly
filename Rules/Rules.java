@@ -3,6 +3,7 @@ public class Rules {
     private int playerGoing;
     private int players;
     private boolean rolledDice;
+    
     public Rules(){
 	turn = 0;
 	playerGoing = 1;

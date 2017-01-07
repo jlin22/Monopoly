@@ -8,26 +8,27 @@ import java.util.*;
  
 public class Board extends JFrame implements ActionListener {
     private JTextArea display,Log1,a5,b5,c5,d5;
-    private int Money1,Money2,Money3,Money4,turn,position;
+    private JLabel p1,p2,p3,p4;
     public String[] Name;
     public ArrayList<Deeds> tiles;
+    public JButton[] ButtonsOnBoard;
     public Board() {
 	tiles = new ArrayList<Deeds>(40);
 	Deeds a01 = new Deeds(2,0,0,0,0,0,0,0,0,0,0,0,0,0,200,0);
-      tiles.add(a01);
-      Deeds a11 = new Deeds(1,2,4,10,30,90,160,250,50,30,33,60,0,1,0,0);
-      tiles.add(a11);
-      Deeds a21 = new Deeds(2,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0);	
-      tiles.add(a21);
-      Deeds a31 = new Deeds(3,4,8,20,60,180,320,450,50,30,33,60,0,3,0,0);
-      tiles.add(a31);
-      Deeds a41 = new Deeds(4,0,0,0,0,0,0,0,0,0,0,0,0,4,-200,0);
-      tiles.add(a41);
-      Deeds a51 = new Deeds(5,25,0,0,0,0,0,0,0,100,110,200,0,5,0,0);
-      tiles.add(a51);
-      Deeds a61 = new Deeds(6,5,10,30,90,270,400,550,50,50,55,100,0,6,0,0);
-      tiles.add(a61);
-      Deeds a71 = new Deeds(7,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0);
+	tiles.add(a01);
+	Deeds a11 = new Deeds(1,2,4,10,30,90,160,250,50,30,33,60,0,1,0,0);
+	tiles.add(a11);
+	Deeds a21 = new Deeds(2,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0);	
+	tiles.add(a21);
+	Deeds a31 = new Deeds(3,4,8,20,60,180,320,450,50,30,33,60,0,3,0,0);
+	tiles.add(a31);
+	Deeds a41 = new Deeds(4,0,0,0,0,0,0,0,0,0,0,0,0,4,-200,0);
+	tiles.add(a41);
+	Deeds a51 = new Deeds(5,25,0,0,0,0,0,0,0,100,110,200,0,5,0,0);
+	tiles.add(a51);
+	Deeds a61 = new Deeds(6,5,10,30,90,270,400,550,50,50,55,100,0,6,0,0);
+	tiles.add(a61);
+	Deeds a71 = new Deeds(7,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0);
       tiles.add(a71);
       Deeds a81 = new Deeds(8,5,10,30,90,270,400,550,50,50,55,100,0,8,0,0);
       tiles.add(a81);
@@ -93,18 +94,12 @@ public class Board extends JFrame implements ActionListener {
       tiles.add(a381);
       Deeds a391 = new Deeds(39,50,100,200,600,1400,1700,2000,200,200,220,400,0,39,0,0);
       tiles.add(a391);
-      Name = new String[]{"Mediterranean Ave", "Baltic Ave", "Reading Railroad","Oriental Ave","Vermont Ave","Connecticut Ave","St. Charles Place","Electric Company","States Ave.","Virginia Ave","Pennsylvania Railroad","St. James Place","Tennessee Avenue","New York Avenue","Kentucky Avenue","Indiana Avenue","Illinois Avenue","B&O Railroad","Atlantic Avenue","Ventnor Avenue","Water Work","Marvin Gardens","Pacific Avenue","North Carolina Avenue","Pennsylvania Avenue","Short Line","Park Place","Boardwalk"};
-	Money1 = 1500;
-	Money2 = 1500;
-	Money3 = 1500;
-	Money4 = 1500;
-	turn = 0;
-	position = 0;
+      Name = new String[]{"Mediterranean Ave", "Baltic Ave", "Reading Railroad","Oriental Ave","Vermont Ave","Connecticut Ave","St. Charles Place","Electric Company","States Ave","Virginia Ave","Pennsylvania Railroad","St. James Place","Tennessee Avenue","New York Avenue","Kentucky Avenue","Indiana Avenue","Illinois Avenue","B&O Railroad","Atlantic Avenue","Ventnor Avenue","Water Work","Marvin Gardens","Pacific Avenue","North Carolina Avenue","Pennsylvania Avenue","Short Line","Park Place","Boardwalk"};
 
-	JLabel p1 = new JLabel("P1",JLabel.LEFT);
-	JLabel p2 = new JLabel("P2",JLabel.RIGHT);
-	JLabel p3 = new JLabel("P3",JLabel.LEADING);
-	JLabel p4 = new JLabel("P4",JLabel.TRAILING);
+	p1 = new JLabel("P1",JLabel.LEFT);
+	p2 = new JLabel("P2",JLabel.RIGHT);
+	p3 = new JLabel("P3",JLabel.LEADING);
+	p4 = new JLabel("P4",JLabel.TRAILING);
 
 	Font labelFont = p1.getFont();
 	p1.setFont(new Font(labelFont.getName(), Font.PLAIN, 50));
@@ -360,8 +355,51 @@ public class Board extends JFrame implements ActionListener {
 	rpane.add(h3);
 	rpane.add(i3);
 	rpane.add(j3);
-	
 
+
+	ButtonsOnBoard = new JButton[40];
+	ButtonsOnBoard[0] = j1;
+	ButtonsOnBoard[1] = i1;
+	ButtonsOnBoard[2] = h1;
+	ButtonsOnBoard[3] = g1;
+	ButtonsOnBoard[4] = f1;
+	ButtonsOnBoard[5] = e1;
+	ButtonsOnBoard[6] = d1;
+	ButtonsOnBoard[7]  = c1;
+	ButtonsOnBoard[8] = b1;
+	ButtonsOnBoard[9] = a1;
+	ButtonsOnBoard[10] = j2;
+	ButtonsOnBoard[11] = i2;
+	ButtonsOnBoard[12] = h2;
+	ButtonsOnBoard[13] = g2;
+	ButtonsOnBoard[14] = f2;
+	ButtonsOnBoard[15] = e2;
+	ButtonsOnBoard[16] = d2;
+	ButtonsOnBoard[17] = c2;
+	ButtonsOnBoard[18] = b2;
+	ButtonsOnBoard[19] = a2;
+	ButtonsOnBoard[20] = a;
+	ButtonsOnBoard[21] = b;
+	ButtonsOnBoard[22] = c;
+	ButtonsOnBoard[23] = d;
+	ButtonsOnBoard[24] = e;
+	ButtonsOnBoard[25] = f;
+	ButtonsOnBoard[26] = g;
+	ButtonsOnBoard[27] = h;
+	ButtonsOnBoard[28] = i;
+	ButtonsOnBoard[29] = j;
+	ButtonsOnBoard[30] = a3;
+	ButtonsOnBoard[31] = b3;
+	ButtonsOnBoard[32] = c3;
+	ButtonsOnBoard[33] = d3;
+	ButtonsOnBoard[34] = e3;
+	ButtonsOnBoard[35] = f3;
+	ButtonsOnBoard[36] = g3;
+	ButtonsOnBoard[37] = h3;
+	ButtonsOnBoard[38] = i3;
+	ButtonsOnBoard[39] = j3;
+
+	    
 	JPanel Buttons = new JPanel();
 	Buttons.setLayout(new BoxLayout(Buttons, BoxLayout.Y_AXIS));
 
@@ -439,6 +477,11 @@ public class Board extends JFrame implements ActionListener {
 	frame.setLocationRelativeTo(null);
 	frame.setVisible(true);
     }
+    Rules rule = new Rules();
+    Player Player1 = new Player(1);
+    Player Player2 = new Player(2);
+    Player Player3 = new Player(3);
+    Player Player4 = new Player(4);
 
     public void actionPerformed(ActionEvent e){
 	String event = e.getActionCommand();
@@ -525,13 +568,21 @@ public class Board extends JFrame implements ActionListener {
 	    break;
 	}
 	//have to add more limitation
-	if (event.equals("Dice")) {
+	if (event.equals("Dice")){
 	    int randomNum,randomNum1 = 0;
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6); 
 	    display.setText("" + randomNum + "," + randomNum1);
-	    
+	    int x = rule.getPlayerGoing();
+	    if ( x == 1) {
+		ButtonsOnBoard[Player1.getPosition()].remove(p1);
+		int newPosition = Player1.getPosition() + randomNum + randomNum1;
+		ButtonsOnBoard[newPosition].add(p1);
+		}
+		
 	}
+	
+	   
 	//for player update
 	//panel.remove(...);
 	//panel.revalidate();
