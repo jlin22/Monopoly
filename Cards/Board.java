@@ -334,7 +334,7 @@ public class Board extends JFrame implements ActionListener {
 		ButtonsOnBoard[ii].setPreferredSize(dim1);	
 	    }
 	}
-
+	
 	
 	JPanel Buttons = new JPanel();
 	Buttons.setLayout(new BoxLayout(Buttons, BoxLayout.Y_AXIS));
@@ -424,8 +424,8 @@ public class Board extends JFrame implements ActionListener {
 	frame.setVisible(true);
     }
     Rules rule = new Rules();
-    
-    
+    CardArray cards = new CardArray();
+
     public void actionPerformed(ActionEvent e){
 	String event = e.getActionCommand();
 	
@@ -526,15 +526,28 @@ public class Board extends JFrame implements ActionListener {
 	    randomNum1 = 1 + (int)(Math.random() * 6); 
 	    display.setText("" + randomNum + "," + randomNum1);
 	    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
-	    int newPosition = 30;
-	    //int newPosition = (playerTurn.getPosition() + randomNum + randomNum1) % 40;
+	    //int newPosition = 30;
+	    int newPosition = (playerTurn.getPosition() + randomNum + randomNum1) % 40;
 	    ButtonsOnBoard[newPosition].add(Players[rule.getTurn()]);
+	    if (newPosition > 39) {
+		playerTurn.addMoney(200);
+		display.setText("Player " + playerTurn + " has passed GO!\n Collect $200.");
+	    }
 	    playerTurn.setPosition(newPosition);
-	    
+	    if (newPosition == 7 || newPosition == 22 || newPosition == 36) {
+		String CC = cards.getRandomizedChanceCard();
+		display.setText("You have landed on Chance!\n" + CC);
+		if (cards.getChancePosition(CC) > 0) {
+		    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
+		    ButtonsOnBoard[cards.getChancePosition(CC)].add(Players[rule.getTurn()]);
+
+		}
+		playerTurn.addMoney(cards.getChanceMoney(CC));
+	    }
 	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy()) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0)) {
 	        playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRent());
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRent());
-		display.setText("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid " +  tiles.get(playerTurn.getPosition()).getRent()+ " to " + tiles.get(playerTurn.getPosition()).getOwnedBy());
+		display.setText("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy());
 	}
 	    
 	    //roll rules
@@ -546,14 +559,15 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	    //go to jail for three doubles,doesnt work yet
 	    if (playerTurn.getDoubleRolls() == 3) {
-	        playerTurn.setPosition(10);
 		display.setText("Player " + (rule.getTurn() + 1) + "has rolled 3 doubles in a roll. Therefore, he has been sent to Jail!");
+		ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
+		ButtonsOnBoard[10].add(Players[rule.getTurn()]);
 	    }
 	    //need to implement jail rules,doesnt work yet
 	    if (playerTurn.getPosition() == 30) {
 		display.setText("Player " + (rule.getTurn() + 1)+ " has been sent to Jail!");
-		playerTurn.setPosition(10);		
-	    }
+		ButtonsOnBoard[30].remove(Players[rule.getTurn()]);
+		ButtonsOnBoard[10].add(Players[rule.getTurn()]);	    }
 	    
 	}
 	
@@ -628,13 +642,12 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	    
 	}
-	if (event.equals("Chance")){
-	    String CC = x.getRandomizedChanceCard();
-	}
+	/*
 	if (event.equals("CommunityChest")){
-	    String CCC = x.getRandomizedCommunityChestCard();
+	    String CCC = cards.getRandomizedCommunityChestCard();
+	    System.out.println(CCC);
 	}
-	       
+	*/     
 	    
 
 
