@@ -406,10 +406,6 @@ public class Board extends JFrame implements ActionListener {
 	
 	switch (event) {
 	case "0": display.setText("GO");
-	    a5.setText("Money: " + PlayerNumber.get(0).getMoney() + "\nProperties: ");
-	    b5.setText("Money: " + PlayerNumber.get(1).getMoney() + "\nProperties: ");
-	    c5.setText("Money: " + PlayerNumber.get(2).getMoney() + "\nProperties: ");
-	    d5.setText("Money: " + PlayerNumber.get(3).getMoney() + "\nProperties: ");
 	    break;
 	case "1": display.setText("Name: " + Name[0] + "\nCost: " + tiles.get(1).getCost() + "\nRent: " + tiles.get(1).getRent() + "\nRent of 1 House:" + tiles.get(1).getRent1H() + "\nRent of 2 House: " + tiles.get(1).getRent2H() + "\nRent of 3 House: " + tiles.get(1).getRent3H() + "\nRent of 4 Houses: " + tiles.get(1).getRent4H() + "\nRent of Hotel: " + tiles.get(1).getHotel() + "\nCost of Buying a House: " + tiles.get(1).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(1).getHouseCost() + "\nMortgage Cost: " + tiles.get(1).getMortgage() + "\nUnmortgage Cost: " + tiles.get(1).getUnmortgage() +"\nOwned By Player: "+ tiles.get(1).getOwnedBy());
 	    break;
@@ -506,7 +502,7 @@ public class Board extends JFrame implements ActionListener {
 	    
 	    if (((tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).getOwnedBy()) != 0) && ((tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).getOwnedBy()) > 0)) {
 		PlayerNumber.get(rule.getTurn()).loseMoney(tiles.get(PlayerNumber.get(x).getPosition()).getRent());
-		PlayerNumber.get(tiles.get(PlayerNumber.get(x).getPosition()).getOwnedBy()).addMoney(tiles.get(PlayerNumber.get(x).getPosition()).getRent());
+		PlayerNumber.get(tiles.get(PlayerNumber.get(x).getPosition()).getOwnedBy() - 1).addMoney(tiles.get(PlayerNumber.get(x).getPosition()).getRent());
 	}
 	    //roll rules
 	    if (randomNum == randomNum1){
@@ -526,6 +522,10 @@ public class Board extends JFrame implements ActionListener {
 		PlayerNumber.get(rule.getTurn()).setRolls(true);
 		rule.setTurn();
 	    }
+	    a5.setText("Money: " + PlayerNumber.get(0).getMoney() + "\nProperties: " + PlayerNumber.get(0).getProperty());
+	    b5.setText("Money: " + PlayerNumber.get(1).getMoney() + "\nProperties: " + PlayerNumber.get(1).getProperty());
+	    c5.setText("Money: " + PlayerNumber.get(2).getMoney() + "\nProperties: " + PlayerNumber.get(2).getProperty());
+	    d5.setText("Money: " + PlayerNumber.get(3).getMoney() + "\nProperties: " + PlayerNumber.get(3).getProperty());
 	}
 
 	if (event.equals("Property")){
