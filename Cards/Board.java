@@ -16,6 +16,7 @@ public class Board extends JFrame implements ActionListener {
     public boolean rolls,hasMonopoly,hasHouse,hasHotel;
     
     public Board() {
+	CardArray CA = new CardArray();
 	rolls = true;
 	PlayerNumber = new ArrayList<Player>(4);
 	Player one = new Player();
@@ -627,6 +628,12 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	    
 	}
+	if (event.equals("Chance")){
+	}
+	if (event.equals("CommunityChest")){
+	}
+	       
+	    
 
 
     }
