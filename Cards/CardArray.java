@@ -70,7 +70,15 @@ public class CardArray{
     public ArrayList<String> getRandomizedChance(){
 	return randomizedChanceList;
     }
-
+    //use these only to print text
+    public String getRandomizedChanceCard(){
+	int y = (int)(Math.random()*(randomizedChanceList.size()));
+	return randomizedChanceList.get(y);
+    }
+    public String getRandomizedCommunityChest(){
+	int y = (int)(Math.random()*(randomizedCommunityChest.size()));
+	return randomizedCommunityChest.get(y);
+    }
     public static void main(String[]a){
 	CardArray x = new CardArray();
 	System.out.println(x.getRandomizedChance());
