@@ -1,13 +1,31 @@
 import java.util.*;
 public class Player{
-    private int money,position,getOutOfJailCards;
+    private int money,position,getOutOfJailCards,count,doubleRolls;
     private int[] propertiesOwned;
-
+    private boolean rolls;
     public Player() {
 	money = 1500;
 	position = 0;
 	propertiesOwned = new int[40];
 	getOutOfJailCards = 0;
+	rolls = true;
+	doubleRolls = 0;
+    }
+    
+    public boolean getRolls() {
+	return rolls;
+    }
+
+    public void setRolls(boolean x) {
+	rolls = x;
+    }
+
+    public int getDoubleRolls() {
+	return doubleRolls;
+    }
+
+    public void setDoubleRolls(int x) {
+	doubleRolls = x;
     }
 
     public int getMoney(){
@@ -31,13 +49,23 @@ public class Player{
     }
     
     public void addProperty(int x){
-	for (int i = 0; i < 40; i++) {
+	for (int i = 0; i < 40 ; i++) {
 	    if (propertiesOwned[i] == 0) {
 		propertiesOwned[i] = x;
+		count = i;
+		return;
 	    }
 	    else{
 	    }
 	}
+    }
+
+    public String getProperty() {
+	String answer = "";
+	for (int i = 0; i < count + 1; i ++) {
+	    answer += propertiesOwned[i] + ", ";
+	}
+	return answer;
     }
    
     public void addGetOutOfJailCard(){

@@ -12,8 +12,11 @@ public class Board extends JFrame implements ActionListener {
     public JButton[] ButtonsOnBoard;
     public JLabel[] Players;
     public ArrayList<Player> PlayerNumber;
+    public int randomNum,randomNum1,doubleRolls;
+    public boolean rolls;
     
     public Board() {
+	rolls = true;
 	PlayerNumber = new ArrayList<Player>(4);
 	Player one = new Player();
 	PlayerNumber.add(one);
@@ -25,27 +28,27 @@ public class Board extends JFrame implements ActionListener {
 	PlayerNumber.add(four);
 
 	tiles = new ArrayList<Deeds>(40);
-	Deeds a01 = new Deeds(2,0,0,0,0,0,0,0,0,0,0,0,0,0,200,0);
+	Deeds a01 = new Deeds(2,0,0,0,0,0,0,0,0,0,0,0,0,0,200,-1);
 	tiles.add(a01);
 	Deeds a11 = new Deeds(1,2,4,10,30,90,160,250,50,30,33,60,0,1,0,0);
 	tiles.add(a11);
-	Deeds a21 = new Deeds(2,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0);	
+	Deeds a21 = new Deeds(2,0,0,0,0,0,0,0,0,0,0,0,0,2,0,-1);	
 	tiles.add(a21);
 	Deeds a31 = new Deeds(3,4,8,20,60,180,320,450,50,30,33,60,0,3,0,0);
 	tiles.add(a31);
-	Deeds a41 = new Deeds(4,0,0,0,0,0,0,0,0,0,0,0,0,4,-200,0);
+	Deeds a41 = new Deeds(4,0,0,0,0,0,0,0,0,0,0,0,0,4,-200,-1);
 	tiles.add(a41);
 	Deeds a51 = new Deeds(5,25,0,0,0,0,0,0,0,100,110,200,0,5,0,0);
 	tiles.add(a51);
 	Deeds a61 = new Deeds(6,5,10,30,90,270,400,550,50,50,55,100,0,6,0,0);
 	tiles.add(a61);
-	Deeds a71 = new Deeds(7,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0);
+	Deeds a71 = new Deeds(7,0,0,0,0,0,0,0,0,0,0,0,0,7,0,-1);
       tiles.add(a71);
       Deeds a81 = new Deeds(8,5,10,30,90,270,400,550,50,50,55,100,0,8,0,0);
       tiles.add(a81);
       Deeds a91 = new Deeds(9,8,16,40,100,300,450,600,50,60,66,120,0,9,0,0);
       tiles.add(a91);
-      Deeds a101 = new Deeds(10,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0);
+      Deeds a101 = new Deeds(10,0,0,0,0,0,0,0,0,0,0,0,0,10,0,-1);
       tiles.add(a101);
       Deeds a111 = new Deeds(11,10,20,50,150,450,625,750,100,70,77,140,0,11,0,0);
       tiles.add(a111);
@@ -59,17 +62,17 @@ public class Board extends JFrame implements ActionListener {
       tiles.add(a151);
       Deeds a161 = new Deeds(16,14,28,70,200,550,750,950,100,90,99,180,0,16,0,0);
       tiles.add(a161);
-      Deeds a171 = new Deeds(17,0,0,0,0,0,0,0,0,0,0,0,0,17,0,0);
+      Deeds a171 = new Deeds(17,0,0,0,0,0,0,0,0,0,0,0,0,17,0,-1);
       tiles.add(a171);
       Deeds a181 = new Deeds(18,14,28,70,200,550,750,950,100,90,99,180,0,18,0,0);
       tiles.add(a181);
       Deeds a191 = new Deeds(19,16,32,80,220,600,800,1000,100,100,110,200,0,19,0,0);
       tiles.add(a191);
-      Deeds a201 = new Deeds(20,0,0,0,0,0,0,0,0,0,0,0,0,20,0,0);
+      Deeds a201 = new Deeds(20,0,0,0,0,0,0,0,0,0,0,0,0,20,0,-1);
       tiles.add(a201);
       Deeds a211 = new Deeds(21,18,36,90,250,700,875,1050,150,110,121,220,0,21,0,0);
       tiles.add(a211);
-      Deeds a221 = new Deeds(22,0,0,0,0,0,0,0,0,0,0,0,0,22,0,0);
+      Deeds a221 = new Deeds(22,0,0,0,0,0,0,0,0,0,0,0,0,22,0,-1);
       tiles.add(a221);
       Deeds a231 = new Deeds(23,18,36,90,250,700,875,1050,150,110,121,220,0,23,0,0); 
       tiles.add(a231);
@@ -85,23 +88,23 @@ public class Board extends JFrame implements ActionListener {
       tiles.add(a281);
       Deeds a291 = new Deeds(29,24,48,120,360,850,1025,1200,150,140,154,280,0,29,0,0);
       tiles.add(a291);
-      Deeds a301 = new Deeds(30,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0);
+      Deeds a301 = new Deeds(30,0,0,0,0,0,0,0,0,0,0,0,0,10,0,-1);
       tiles.add(a301);
       Deeds a311 = new Deeds(31,26,52,130,390,900,1100,1275,200,150,165,300,0,31,0,0);
       tiles.add(a311);
       Deeds a321 = new Deeds(32,26,52,130,390,900,1100,1275,200,150,165,300,0,32,0,0);
       tiles.add(a321);
-      Deeds a331 = new Deeds(33,0,0,0,0,0,0,0,0,0,0,0,0,33,0,0);
+      Deeds a331 = new Deeds(33,0,0,0,0,0,0,0,0,0,0,0,0,33,0,-1);
       tiles.add(a331);
       Deeds a341 = new Deeds(34,28,56,150,450,1000,1200,1400,200,160,176,320,0,34,0,0);
       tiles.add(a341);
       Deeds a351 = new Deeds(35,25,0,0,0,0,0,0,0,100,110,200,0,35,0,0);
       tiles.add(a351);
-      Deeds a361 = new Deeds(36,0,0,0,0,0,0,0,0,0,0,0,0,36,0,0);
+      Deeds a361 = new Deeds(36,0,0,0,0,0,0,0,0,0,0,0,0,36,0,-1);
       tiles.add(a361);
       Deeds a371 = new Deeds(37,35,70,175,500,1100,1300,1500,200,175,193,350,0,37,0,0);
       tiles.add(a371);
-      Deeds a381 = new Deeds(38,0,0,0,0,0,0,0,0,0,0,0,0,38,-100,0);
+      Deeds a381 = new Deeds(38,0,0,0,0,0,0,0,0,0,0,0,0,38,-100,-1);
       tiles.add(a381);
       Deeds a391 = new Deeds(39,50,100,200,600,1400,1700,2000,200,200,220,400,0,39,0,0);
       tiles.add(a391);
@@ -336,14 +339,10 @@ public class Board extends JFrame implements ActionListener {
 	f4.setPreferredSize(dim2);		
 	f4.addActionListener(this);
 	f4.setActionCommand("Property");
-	JButton g4 = new JButton("Yes");
+	JButton g4 = new JButton("End Turn");
 	g4.setPreferredSize(dim2);		
 	g4.addActionListener(this);
-	g4.setActionCommand("Yes");
-	JButton h4 = new JButton("No");
-	h4.setPreferredSize(dim2);		
-	h4.addActionListener(this);
-	h4.setActionCommand("No");
+	g4.setActionCommand("End");
 	
 	Buttons.add(a4);
 	Buttons.add(f4);
@@ -352,21 +351,19 @@ public class Board extends JFrame implements ActionListener {
 	Buttons.add(d4);
 	Buttons.add(e4);
 	Buttons.add(g4);
-	Buttons.add(h4);
 
 	JPanel Players = new JPanel();
 	Players.setLayout(new FlowLayout(FlowLayout.LEFT));
 
 	Dimension dim3 = new Dimension(150,50);	
 	a5 = new JTextArea("Player 1: ");
-	a5.setPreferredSize(dim3);	    	
+	a5.setPreferredSize(dim3);
 	b5 = new JTextArea("Player 2: ");
 	b5.setPreferredSize(dim3);
 	c5 = new JTextArea("Player 3: ");
 	c5.setPreferredSize(dim3);
 	d5 = new JTextArea("Player 4: ");
 	d5.setPreferredSize(dim3);	    	
-
 	
 	Players.add(a5);
 	Players.add(b5);
@@ -406,8 +403,13 @@ public class Board extends JFrame implements ActionListener {
     
     public void actionPerformed(ActionEvent e){
 	String event = e.getActionCommand();
+	
 	switch (event) {
-	case "0": display.setText("GO") ;
+	case "0": display.setText("GO");
+	    a5.setText("Money: " + PlayerNumber.get(0).getMoney() + "\nProperties: ");
+	    b5.setText("Money: " + PlayerNumber.get(1).getMoney() + "\nProperties: ");
+	    c5.setText("Money: " + PlayerNumber.get(2).getMoney() + "\nProperties: ");
+	    d5.setText("Money: " + PlayerNumber.get(3).getMoney() + "\nProperties: ");
 	    break;
 	case "1": display.setText("Name: " + Name[0] + "\nCost: " + tiles.get(1).getCost() + "\nRent: " + tiles.get(1).getRent() + "\nRent of 1 House:" + tiles.get(1).getRent1H() + "\nRent of 2 House: " + tiles.get(1).getRent2H() + "\nRent of 3 House: " + tiles.get(1).getRent3H() + "\nRent of 4 Houses: " + tiles.get(1).getRent4H() + "\nRent of Hotel: " + tiles.get(1).getHotel() + "\nCost of Buying a House: " + tiles.get(1).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(1).getHouseCost() + "\nMortgage Cost: " + tiles.get(1).getMortgage() + "\nUnmortgage Cost: " + tiles.get(1).getUnmortgage() +"\nOwned By Player: "+ tiles.get(1).getOwnedBy());
 	    break;
@@ -490,28 +492,51 @@ public class Board extends JFrame implements ActionListener {
 	}
 
 	//have to add more limitation
-	if (event.equals("Dice")){
-	    int randomNum,randomNum1 = 0;
+	if (event.equals("Dice") && PlayerNumber.get(rule.getTurn()).getRolls() == true){
+	    randomNum = 0;
+	    randomNum1 = 0;
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6); 
 	    display.setText("" + randomNum + "," + randomNum1);
 	    int x = rule.getTurn();
 	    ButtonsOnBoard[PlayerNumber.get(x).getPosition()].remove(Players[x]);
 	    int newPosition = (PlayerNumber.get(x).getPosition() + randomNum + randomNum1) % 40;
-		ButtonsOnBoard[newPosition].add(Players[x]);
-		PlayerNumber.get(x).setPosition(newPosition);
-		/*
-		  if (randomNum != randomNum1) {
-		    rule.setTurn();
-		}
-		*/
+	    ButtonsOnBoard[newPosition].add(Players[x]);
+	    PlayerNumber.get(x).setPosition(newPosition);
+	    
+	    if (((tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).getOwnedBy()) != 0) && ((tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).getOwnedBy()) > 0)) {
+		PlayerNumber.get(rule.getTurn()).loseMoney(tiles.get(PlayerNumber.get(x).getPosition()).getRent());
+		PlayerNumber.get(tiles.get(PlayerNumber.get(x).getPosition()).getOwnedBy()).addMoney(tiles.get(PlayerNumber.get(x).getPosition()).getRent());
+	}
+	    //roll rules
+	    if (randomNum == randomNum1){
+		PlayerNumber.get(x).setDoubleRolls(PlayerNumber.get(x).getDoubleRolls() + 1);
+	    }
+	    if (randomNum != randomNum1) {
+		PlayerNumber.get(x).setRolls(false);
+	    }
+	    if (PlayerNumber.get(x).getDoubleRolls() == 3) {
+		PlayerNumber.get(x).setPosition(10);
+	    }
+	}
+	
+	if (event.equals("End")) {
+	    if (randomNum != randomNum1) {
+		PlayerNumber.get(rule.getTurn()).setDoubleRolls(0);
+		PlayerNumber.get(rule.getTurn()).setRolls(true);
+		rule.setTurn();
+	    }
 	}
 
 	if (event.equals("Property")){
 	    if ((tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).getOwnedBy()) == 0) {
-		System.out.println("Yay");		
+		tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).setOwnedBy(rule.getTurn() + 1);
+		System.out.println(tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).getOwnedBy());		
 		PlayerNumber.get(rule.getTurn()).addProperty(PlayerNumber.get(rule.getTurn()).getPosition());
-		tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).setOwnedBy(rule.getTurn());
+		System.out.println(PlayerNumber.get(rule.getTurn()).getProperty());
+		PlayerNumber.get(rule.getTurn()).loseMoney(tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).getCost());
+		System.out.println(PlayerNumber.get(rule.getTurn()).getMoney());
+		
 	    }
 	    
 	    //else if (event.equals("No")){
