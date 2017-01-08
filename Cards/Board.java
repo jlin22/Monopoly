@@ -13,7 +13,7 @@ public class Board extends JFrame implements ActionListener {
     public JLabel[] Players;
     public ArrayList<Player> PlayerNumber;
     public int randomNum,randomNum1,doubleRolls;
-    public boolean rolls;
+    public boolean rolls,hasMonopoly,hasHouse,hasHotel;
     
     public Board() {
 	rolls = true;
@@ -333,6 +333,7 @@ public class Board extends JFrame implements ActionListener {
 		ButtonsOnBoard[ii].setPreferredSize(dim1);	
 	    }
 	}
+
 	
 	JPanel Buttons = new JPanel();
 	Buttons.setLayout(new BoxLayout(Buttons, BoxLayout.Y_AXIS));
@@ -524,7 +525,8 @@ public class Board extends JFrame implements ActionListener {
 	    randomNum1 = 1 + (int)(Math.random() * 6); 
 	    display.setText("" + randomNum + "," + randomNum1);
 	    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
-	    int newPosition = (playerTurn.getPosition() + randomNum + randomNum1) % 40;
+	    int newPosition = 30;
+	    //int newPosition = (playerTurn.getPosition() + randomNum + randomNum1) % 40;
 	    ButtonsOnBoard[newPosition].add(Players[rule.getTurn()]);
 	    playerTurn.setPosition(newPosition);
 	    
@@ -541,9 +543,15 @@ public class Board extends JFrame implements ActionListener {
 	    if (randomNum != randomNum1) {
 	        playerTurn.setRolls(false);
 	    }
-	    //go to jail for three doubles
+	    //go to jail for three doubles,doesnt work yet
 	    if (playerTurn.getDoubleRolls() == 3) {
 	        playerTurn.setPosition(10);
+		display.setText("Player " + (rule.getTurn() + 1) + "has rolled 3 doubles in a roll. Therefore, he has been sent to Jail!");
+	    }
+	    //need to implement jail rules,doesnt work yet
+	    if (playerTurn.getPosition() == 30) {
+		display.setText("Player " + (rule.getTurn() + 1)+ " has been sent to Jail!");
+		playerTurn.setPosition(10);		
 	    }
 	    
 	}
@@ -576,11 +584,47 @@ public class Board extends JFrame implements ActionListener {
 		display.setText("Player " + playerTurn + " has bought " + Name[playerTurn.getPosition()] + "!");
 	    }
 	    
-	    //else if (event.equals("No")){
-	    //display.setText("This is bought by " + Tiles.getOwnedBy());
-	    //}
+	    if (playerTurn.getProperty().indexOf(1) > 0 && playerTurn.getProperty().indexOf(3) > 0) {
+		playerTurn.setBrownMonopoly(true);
+	    }
+	    if (playerTurn.getProperty().indexOf(6) > 0 && playerTurn.getProperty().indexOf(8) > 0 && playerTurn.getProperty().indexOf(9) > 0){
+		playerTurn.setCyanMonopoly(true);
 	}
+	if (playerTurn.getProperty().indexOf(11) > 0 && playerTurn.getProperty().indexOf(13) > 0&& playerTurn.getProperty().indexOf(14) > 0) {
+	    playerTurn.setMagentaMonopoly(true);
+	}
+	if(playerTurn.getProperty().indexOf(16) > 0 && playerTurn.getProperty().indexOf(18) > 0 && playerTurn.getProperty().indexOf(19) > 0) {
+	    playerTurn.setOrangeMonopoly(true);
+	}
+	if(playerTurn.getProperty().indexOf(21) > 0 && playerTurn.getProperty().indexOf(23) > 0 && playerTurn.getProperty().indexOf(24) > 0);{
+	    playerTurn.setRedMonopoly(true);
+	}
+	     
+	if (playerTurn.getProperty().indexOf(26) > 0 && playerTurn.getProperty().indexOf(27) > 0 && playerTurn.getProperty().indexOf(29) > 0) {
+	    playerTurn.setYellowMonopoly(true);
+	}
+	if(playerTurn.getProperty().indexOf(31) > 0 && playerTurn.getProperty().indexOf(32) > 0 && playerTurn.getProperty().indexOf(34) > 0) {
+	    playerTurn.setGreenMonopoly(true);
+	}
+	if(playerTurn.getProperty().indexOf(37) > 0 && playerTurn.getProperty().indexOf(39) > 0) {
+	    playerTurn.setBlueMonopoly(true);
+	}
+	if(playerTurn.getProperty().indexOf(5) > 0 && playerTurn.getProperty().indexOf(15) > 0 && playerTurn.getProperty().indexOf(25) > 0 && playerTurn.getProperty().indexOf(35) > 0) {
+	    playerTurn.setRailroadMonopoly(true);
+	}
+	if (playerTurn.getProperty().indexOf(12) > 0 && playerTurn.getProperty().indexOf(28) > 0) {
+	    playerTurn.setUtilityMonopoly(true);
+	}
+	    
+	}
+
+	if (event.equals("House") && hasMonopoly == true) {
+	    
+	}
+
+
     }
+    
 		
 	       
 			
