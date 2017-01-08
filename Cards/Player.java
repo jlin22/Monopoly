@@ -1,13 +1,12 @@
 import java.util.*;
 public class Player{
-    private int money,position,numberRolled,getOutOfJailCards;
-    private ArrayList<Integer> propertiesOwned;
+    private int money,position,getOutOfJailCards;
+    private int[] propertiesOwned;
 
     public Player() {
 	money = 1500;
 	position = 0;
-	numberRolled = 0;
-	propertiesOwned = new ArrayList<Integer>();
+	propertiesOwned = new int[40];
 	getOutOfJailCards = 0;
     }
 
@@ -31,14 +30,16 @@ public class Player{
 	position = (x % 39);
     }
     
-    public void setNumberRolled(int x){
-	numberRolled = x;
+    public void addProperty(int x){
+	for (int i = 0; i < 40; i++) {
+	    if (propertiesOwned[i] == 0) {
+		propertiesOwned[i] = x;
+	    }
+	    else{
+	    }
+	}
     }
-    
-    /* public void addProperty(int x){
-	propertiesOwned = x;
-    }
-    */
+   
     public void addGetOutOfJailCard(){
 	getOutOfJailCards += 1;
     }

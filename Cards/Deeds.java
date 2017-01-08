@@ -103,6 +103,10 @@ public class Deeds {
 	return ownedBy;
     }
 
+    public void setOwnedBy(int x) {
+	ownedBy = x;
+    }
+
     public String toString() {
 	return "" + position + "," + rent + "," + rentMonopoly + "," + rent1H + "," + rent2H + "," + rent3H + "," + rent4H + "," + hotel +  ","  + houseCost + "," + mortgage + "," + unmortgage + "," + cost + "," + cardNumber + "," + sentPosition + "," + getMoney + "," + getOwnedBy() + "";
     }

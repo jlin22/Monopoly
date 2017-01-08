@@ -23,7 +23,7 @@ public class Board extends JFrame implements ActionListener {
 	PlayerNumber.add(three);
 	Player four = new Player();
 	PlayerNumber.add(four);
-	
+
 	tiles = new ArrayList<Deeds>(40);
 	Deeds a01 = new Deeds(2,0,0,0,0,0,0,0,0,0,0,0,0,0,200,0);
 	tiles.add(a01);
@@ -311,7 +311,7 @@ public class Board extends JFrame implements ActionListener {
 	JPanel Buttons = new JPanel();
 	Buttons.setLayout(new BoxLayout(Buttons, BoxLayout.Y_AXIS));
 
-	Dimension dim2 = new Dimension(150,150);	
+	Dimension dim2 = new Dimension(100,100);	
 	JButton a4 = new JButton("Roll the Dice");
 	a4.setPreferredSize(dim2);		
 	a4.addActionListener(this);
@@ -332,11 +332,27 @@ public class Board extends JFrame implements ActionListener {
 	e4.setPreferredSize(dim2);		
 	e4.addActionListener(this);
 	e4.setActionCommand("Jail Card");
+	JButton f4 = new JButton("Buy Property");
+	f4.setPreferredSize(dim2);		
+	f4.addActionListener(this);
+	f4.setActionCommand("Property");
+	JButton g4 = new JButton("Yes");
+	g4.setPreferredSize(dim2);		
+	g4.addActionListener(this);
+	g4.setActionCommand("Yes");
+	JButton h4 = new JButton("No");
+	h4.setPreferredSize(dim2);		
+	h4.addActionListener(this);
+	h4.setActionCommand("No");
+	
 	Buttons.add(a4);
+	Buttons.add(f4);
 	Buttons.add(b4);
 	Buttons.add(c4);
 	Buttons.add(d4);
 	Buttons.add(e4);
+	Buttons.add(g4);
+	Buttons.add(h4);
 
 	JPanel Players = new JPanel();
 	Players.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -472,6 +488,7 @@ public class Board extends JFrame implements ActionListener {
 	    case "39": display.setText("Name: " + Name[27] + "\nCost: " + tiles.get(39).getCost() + "\nRent: " + tiles.get(39).getRent() + "\nRent of 1 House:" + tiles.get(39).getRent1H() + "\nRent of 2 House: " + tiles.get(39).getRent2H() + "\nRent of 3 House: " + tiles.get(39).getRent3H() + "\nRent of 4 Houses: " + tiles.get(39).getRent4H() + "\nRent of Hotel: " + tiles.get(39).getHotel() + "\nCost of Buying a House: " + tiles.get(39).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(39).getHouseCost() + "\nMortgage Cost: " + tiles.get(39).getMortgage() + "\nUnmortgage Cost: " + tiles.get(39).getUnmortgage() + "\nOwned By Player: "+ tiles.get(39).getOwnedBy());
 	    break;
 	}
+
 	//have to add more limitation
 	if (event.equals("Dice")){
 	    int randomNum,randomNum1 = 0;
@@ -483,15 +500,32 @@ public class Board extends JFrame implements ActionListener {
 	    int newPosition = (PlayerNumber.get(x).getPosition() + randomNum + randomNum1) % 40;
 		ButtonsOnBoard[newPosition].add(Players[x]);
 		PlayerNumber.get(x).setPosition(newPosition);
-		rule.setTurn();
-	       
+		/*
+		  if (randomNum != randomNum1) {
+		    rule.setTurn();
+		}
+		*/
 	}
-	
-	   
-	//for player update
-	//panel.remove(...);
-	//panel.revalidate();
+
+	if (event.equals("Property")){
+	    if ((tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).getOwnedBy()) == 0) {
+		System.out.println("Yay");		
+		PlayerNumber.get(rule.getTurn()).addProperty(PlayerNumber.get(rule.getTurn()).getPosition());
+		tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).setOwnedBy(rule.getTurn());
+	    }
+	    
+	    //else if (event.equals("No")){
+	    //display.setText("This is bought by " + Tiles.getOwnedBy());
+	    //}
+	}
     }
+		
+	       
+			
+		
+		
+
+	    
     
     public static void main(String[] args) {
       Board g = new Board();
