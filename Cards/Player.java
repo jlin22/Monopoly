@@ -1,6 +1,6 @@
 import java.util.*;
 public class Player{
-    private int money,position,getOutOfJailCards,count,doubleRolls;
+    private int money,position,getOutOfJailCards,count,doubleRolls,turn;
     private int[] propertiesOwned;
     private boolean rolls;
     public Player() {
@@ -10,6 +10,18 @@ public class Player{
 	getOutOfJailCards = 0;
 	rolls = true;
 	doubleRolls = 0;
+	turn = 1;
+    }
+    public String toString() {
+	return "" + turn;
+    }
+
+    public int getTurn() {
+	return turn;
+    }
+
+    public void setTurn(int  x) {
+	turn = x;
     }
     
     public boolean getRolls() {
@@ -63,7 +75,7 @@ public class Player{
     public String getProperty() {
 	String answer = "";
 	for (int i = 0; i < count + 1; i ++) {
-	    answer += propertiesOwned[i] + ", ";
+	    answer += propertiesOwned[i] + ",";
 	}
 	return answer;
     }

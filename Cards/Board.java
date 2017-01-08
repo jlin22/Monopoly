@@ -108,7 +108,7 @@ public class Board extends JFrame implements ActionListener {
       tiles.add(a381);
       Deeds a391 = new Deeds(39,50,100,200,600,1400,1700,2000,200,200,220,400,0,39,0,0);
       tiles.add(a391);
-      Name = new String[]{"Mediterranean Ave", "Baltic Ave", "Reading Railroad","Oriental Ave","Vermont Ave","Connecticut Ave","St. Charles Place","Electric Company","States Ave","Virginia Ave","Pennsylvania Railroad","St. James Place","Tennessee Avenue","New York Avenue","Kentucky Avenue","Indiana Avenue","Illinois Avenue","B&O Railroad","Atlantic Avenue","Ventnor Avenue","Water Work","Marvin Gardens","Pacific Avenue","North Carolina Avenue","Pennsylvania Avenue","Short Line","Park Place","Boardwalk"};
+      Name = new String[]{"GO", "Mediterranean Ave", "Community Chest","Baltic Ave", "Income Tax","Reading Railroad","Oriental Ave","Chance","Vermont Ave","Connecticut Ave","Jail\n(Just Visiting Jail If You Land On It)", "St. Charles Place","Electric Company","States Ave","Virginia Ave","Pennsylvania Railroad","St. James Place","Community Chest","Tennessee Avenue","New York Avenue","Free Parking","Kentucky Avenue","Chance","Indiana Avenue","Illinois Avenue","B&O Railroad","Atlantic Avenue","Ventnor Avenue","Water Work","Marvin Gardens","Go To Jail", "Pacific Avenue","North Carolina Avenue","Community Chest","Pennsylvania Avenue","Short Line","Chance","Park Place", "Luxury Tax","Boardwalk"};
 
 	p1 = new JLabel("P1",JLabel.LEFT);
 	p2 = new JLabel("P2",JLabel.RIGHT);
@@ -428,138 +428,152 @@ public class Board extends JFrame implements ActionListener {
 	String event = e.getActionCommand();
 	
 	switch (event) {
-	case "0": display.setText("GO");
+	case "0": display.setText("GO\nCollect $200 Salary As You Pass");
 	    break;
-	case "1": display.setText("Name: " + Name[0] + "\nCost: " + tiles.get(1).getCost() + "\nRent: " + tiles.get(1).getRent() + "\nRent of 1 House:" + tiles.get(1).getRent1H() + "\nRent of 2 House: " + tiles.get(1).getRent2H() + "\nRent of 3 House: " + tiles.get(1).getRent3H() + "\nRent of 4 Houses: " + tiles.get(1).getRent4H() + "\nRent of Hotel: " + tiles.get(1).getHotel() + "\nCost of Buying a House: " + tiles.get(1).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(1).getHouseCost() + "\nMortgage Cost: " + tiles.get(1).getMortgage() + "\nUnmortgage Cost: " + tiles.get(1).getUnmortgage() +"\nOwned By Player: "+ tiles.get(1).getOwnedBy());
+	case "1": display.setText("Name: " + Name[1] + "\nCost: " + tiles.get(1).getCost() + "\nRent: " + tiles.get(1).getRent() + "\nRent of 1 House:" + tiles.get(1).getRent1H() + "\nRent of 2 House: " + tiles.get(1).getRent2H() + "\nRent of 3 House: " + tiles.get(1).getRent3H() + "\nRent of 4 Houses: " + tiles.get(1).getRent4H() + "\nRent of Hotel: " + tiles.get(1).getHotel() + "\nCost of Buying a House: " + tiles.get(1).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(1).getHouseCost() + "\nMortgage Cost: " + tiles.get(1).getMortgage() + "\nUnmortgage Cost: " + tiles.get(1).getUnmortgage() +"\nOwned By Player: "+ tiles.get(1).getOwnedBy());
 	    break;
 	case "2": display.setText("Name: Community Chest\nDraw a Community Chest Card");
 	    break;
-	case "3": display.setText("Name: " + Name[1] + "\nCost: " + tiles.get(3).getCost() + "\nRent: " + tiles.get(3).getRent() + "\nRent of 1 House:" + tiles.get(3).getRent1H() + "\nRent of 2 House: " + tiles.get(3).getRent2H() + "\nRent of 3 House: " + tiles.get(3).getRent3H() + "\nRent of 4 Houses: " + tiles.get(3).getRent4H() + "\nRent of Hotel: " + tiles.get(3).getHotel() + "\nCost of Buying a House: " + tiles.get(3).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(3).getHouseCost() + "\nMortgage Cost: " + tiles.get(3).getMortgage() + "\nUnmortgage Cost: " + tiles.get(3).getUnmortgage() + "\nOwned By Player: "+ tiles.get(3).getOwnedBy());
+	case "3": display.setText("Name: " + Name[3] + "\nCost: " + tiles.get(3).getCost() + "\nRent: " + tiles.get(3).getRent() + "\nRent of 1 House:" + tiles.get(3).getRent1H() + "\nRent of 2 House: " + tiles.get(3).getRent2H() + "\nRent of 3 House: " + tiles.get(3).getRent3H() + "\nRent of 4 Houses: " + tiles.get(3).getRent4H() + "\nRent of Hotel: " + tiles.get(3).getHotel() + "\nCost of Buying a House: " + tiles.get(3).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(3).getHouseCost() + "\nMortgage Cost: " + tiles.get(3).getMortgage() + "\nUnmortgage Cost: " + tiles.get(3).getUnmortgage() + "\nOwned By Player: "+ tiles.get(3).getOwnedBy());
 	    break;
 	case "4": display.setText("Name: Income Tax\nPay 200");
 	    break;
-	case "5": display.setText("Name: " + Name[2] + "\nCost: " + tiles.get(5).getCost() + "\nRent for 1 Railroad: 50\nRent for 2 Railroad: 100\nRent for 3 Railroad: 150\nRent for 4 Railroad: 200\nMortgage Cost: " + tiles.get(5).getMortgage() + "\nUnmortgage Cost: " + tiles.get(5).getUnmortgage() + "\nOwned By Player: "+ tiles.get(5).getOwnedBy());
+	case "5": display.setText("Name: " + Name[5] + "\nCost: " + tiles.get(5).getCost() + "\nRent for 1 Railroad: 50\nRent for 2 Railroad: 100\nRent for 3 Railroad: 150\nRent for 4 Railroad: 200\nMortgage Cost: " + tiles.get(5).getMortgage() + "\nUnmortgage Cost: " + tiles.get(5).getUnmortgage() + "\nOwned By Player: "+ tiles.get(5).getOwnedBy());
 	    break;
-	case "6": display.setText("Name: " + Name[3] + "\nCost: " + tiles.get(6).getCost() + "\nRent: " + tiles.get(6).getRent() + "\nRent of 1 House:" + tiles.get(6).getRent1H() + "\nRent of 2 House: " + tiles.get(6).getRent2H() + "\nRent of 3 House: " + tiles.get(6).getRent3H() + "\nRent of 4 Houses: " + tiles.get(6).getRent4H() + "\nRent of Hotel: " + tiles.get(6).getHotel() + "\nCost of Buying a House: " + tiles.get(6).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(6).getHouseCost() + "\nMortgage Cost: " + tiles.get(6).getMortgage() + "\nUnmortgage Cost: " + tiles.get(6).getUnmortgage()+ "\nOwned By Player: "+ tiles.get(6).getOwnedBy());
+	case "6": display.setText("Name: " + Name[6] + "\nCost: " + tiles.get(6).getCost() + "\nRent: " + tiles.get(6).getRent() + "\nRent of 1 House:" + tiles.get(6).getRent1H() + "\nRent of 2 House: " + tiles.get(6).getRent2H() + "\nRent of 3 House: " + tiles.get(6).getRent3H() + "\nRent of 4 Houses: " + tiles.get(6).getRent4H() + "\nRent of Hotel: " + tiles.get(6).getHotel() + "\nCost of Buying a House: " + tiles.get(6).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(6).getHouseCost() + "\nMortgage Cost: " + tiles.get(6).getMortgage() + "\nUnmortgage Cost: " + tiles.get(6).getUnmortgage()+ "\nOwned By Player: "+ tiles.get(6).getOwnedBy());
 	    break;
 	case "7": display.setText("Name: Chance\nDraw a Chance Card");
 	    break;
-	case "8": display.setText("Name: " + Name[4] + "\nCost: " + tiles.get(8).getCost() + "\nRent: " + tiles.get(8).getRent() + "\nRent of 1 House:" + tiles.get(8).getRent1H() + "\nRent of 2 House: " + tiles.get(8).getRent2H() + "\nRent of 3 House: " + tiles.get(8).getRent3H() + "\nRent of 4 Houses: " + tiles.get(8).getRent4H() + "\nRent of Hotel: " + tiles.get(8).getHotel() + "\nCost of Buying a House: " + tiles.get(8).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(8).getHouseCost() + "\nMortgage Cost: " + tiles.get(8).getMortgage() + "\nUnmortgage Cost: " + tiles.get(8).getUnmortgage() + "\nOwned By Player: "+ tiles.get(8).getOwnedBy());
+	case "8": display.setText("Name: " + Name[8] + "\nCost: " + tiles.get(8).getCost() + "\nRent: " + tiles.get(8).getRent() + "\nRent of 1 House:" + tiles.get(8).getRent1H() + "\nRent of 2 House: " + tiles.get(8).getRent2H() + "\nRent of 3 House: " + tiles.get(8).getRent3H() + "\nRent of 4 Houses: " + tiles.get(8).getRent4H() + "\nRent of Hotel: " + tiles.get(8).getHotel() + "\nCost of Buying a House: " + tiles.get(8).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(8).getHouseCost() + "\nMortgage Cost: " + tiles.get(8).getMortgage() + "\nUnmortgage Cost: " + tiles.get(8).getUnmortgage() + "\nOwned By Player: "+ tiles.get(8).getOwnedBy());
 	    break;
-	case "9": display.setText("Name: " + Name[5] + "\nCost: " + tiles.get(9).getCost() + "\nRent: " + tiles.get(9).getRent() + "\nRent of 1 House:" + tiles.get(9).getRent1H() + "\nRent of 2 House: " + tiles.get(9).getRent2H() + "\nRent of 3 House: " + tiles.get(9).getRent3H() + "\nRent of 4 Houses: " + tiles.get(9).getRent4H() + "\nRent of Hotel: " + tiles.get(9).getHotel() + "\nCost of Buying a House: " + tiles.get(9).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(9).getHouseCost() + "\nMortgage Cost: " + tiles.get(9).getMortgage() + "\nUnmortgage Cost: " + tiles.get(9).getUnmortgage() + "\nOwned By Player: "+ tiles.get(9).getOwnedBy());
+	case "9": display.setText("Name: " + Name[9] + "\nCost: " + tiles.get(9).getCost() + "\nRent: " + tiles.get(9).getRent() + "\nRent of 1 House:" + tiles.get(9).getRent1H() + "\nRent of 2 House: " + tiles.get(9).getRent2H() + "\nRent of 3 House: " + tiles.get(9).getRent3H() + "\nRent of 4 Houses: " + tiles.get(9).getRent4H() + "\nRent of Hotel: " + tiles.get(9).getHotel() + "\nCost of Buying a House: " + tiles.get(9).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(9).getHouseCost() + "\nMortgage Cost: " + tiles.get(9).getMortgage() + "\nUnmortgage Cost: " + tiles.get(9).getUnmortgage() + "\nOwned By Player: "+ tiles.get(9).getOwnedBy());
 	    break;
 	case "10": display.setText("Jail \n[JUST VISITING JAIL IF YOU LAND ON IT]");
 	    break;
-	case "11": display.setText("Name: " + Name[6] + "\nCost: " + tiles.get(11).getCost() + "\nRent: " + tiles.get(11).getRent() + "\nRent of 1 House:" + tiles.get(11).getRent1H() + "\nRent of 2 House: " + tiles.get(11).getRent2H() + "\nRent of 3 House: " + tiles.get(11).getRent3H() + "\nRent of 4 Houses: " + tiles.get(11).getRent4H() + "\nRent of Hotel: " + tiles.get(11).getHotel() + "\nCost of Buying a House: " + tiles.get(11).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(11).getHouseCost() + "\nMortgage Cost: " + tiles.get(11).getMortgage() + "\nUnmortgage Cost: " + tiles.get(11).getUnmortgage() + "\nOwned By Player: "+ tiles.get(11).getOwnedBy());
+	case "11": display.setText("Name: " + Name[11] + "\nCost: " + tiles.get(11).getCost() + "\nRent: " + tiles.get(11).getRent() + "\nRent of 1 House:" + tiles.get(11).getRent1H() + "\nRent of 2 House: " + tiles.get(11).getRent2H() + "\nRent of 3 House: " + tiles.get(11).getRent3H() + "\nRent of 4 Houses: " + tiles.get(11).getRent4H() + "\nRent of Hotel: " + tiles.get(11).getHotel() + "\nCost of Buying a House: " + tiles.get(11).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(11).getHouseCost() + "\nMortgage Cost: " + tiles.get(11).getMortgage() + "\nUnmortgage Cost: " + tiles.get(11).getUnmortgage() + "\nOwned By Player: "+ tiles.get(11).getOwnedBy());
 	    break;
-	case "12": display.setText("Name: " + Name[7] + "\nCost: " + tiles.get(28).getCost() + "\nRent: 4 times the number rolled on the dice" + "\nRent with Monpoly: 10 times the number rolled on the dice" + "\nMortgage Cost: " + tiles.get(28).getMortgage() + "\nUnmortgage Cost: " + tiles.get(28).getUnmortgage() + "\nOwned By Player: "+ tiles.get(12).getOwnedBy());
+	case "12": display.setText("Name: " + Name[12] + "\nCost: " + tiles.get(28).getCost() + "\nRent: 4 times the number rolled on the dice" + "\nRent with Monpoly: 10 times the number rolled on the dice" + "\nMortgage Cost: " + tiles.get(28).getMortgage() + "\nUnmortgage Cost: " + tiles.get(28).getUnmortgage() + "\nOwned By Player: "+ tiles.get(12).getOwnedBy());
 	    break;
-	case "13": display.setText("Name: " + Name[8] + "\nCost: " + tiles.get(13).getCost() + "\nRent: " + tiles.get(13).getRent() + "\nRent of 1 House:" + tiles.get(13).getRent1H() + "\nRent of 2 House: " + tiles.get(13).getRent2H() + "\nRent of 3 House: " + tiles.get(13).getRent3H() + "\nRent of 4 Houses: " + tiles.get(13).getRent4H() + "\nRent of Hotel: " + tiles.get(13).getHotel() + "\nCost of Buying a House: " + tiles.get(13).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(13).getHouseCost() + "\nMortgage Cost: " + tiles.get(13).getMortgage() + "\nUnmortgage Cost: " + tiles.get(13).getUnmortgage() + "\nOwned By Player: "+ tiles.get(13).getOwnedBy());
+	case "13": display.setText("Name: " + Name[13] + "\nCost: " + tiles.get(13).getCost() + "\nRent: " + tiles.get(13).getRent() + "\nRent of 1 House:" + tiles.get(13).getRent1H() + "\nRent of 2 House: " + tiles.get(13).getRent2H() + "\nRent of 3 House: " + tiles.get(13).getRent3H() + "\nRent of 4 Houses: " + tiles.get(13).getRent4H() + "\nRent of Hotel: " + tiles.get(13).getHotel() + "\nCost of Buying a House: " + tiles.get(13).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(13).getHouseCost() + "\nMortgage Cost: " + tiles.get(13).getMortgage() + "\nUnmortgage Cost: " + tiles.get(13).getUnmortgage() + "\nOwned By Player: "+ tiles.get(13).getOwnedBy());
 	    break;
-	case "14": display.setText("Name: " + Name[9] + "\nCost: " + tiles.get(14).getCost() + "\nRent: " + tiles.get(14).getRent() + "\nRent of 1 House:" + tiles.get(14).getRent1H() + "\nRent of 2 House: " + tiles.get(14).getRent2H() + "\nRent of 3 House: " + tiles.get(14).getRent3H() + "\nRent of 4 Houses: " + tiles.get(14).getRent4H() + "\nRent of Hotel: " + tiles.get(14).getHotel() + "\nCost of Buying a House: " + tiles.get(14).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(14).getHouseCost() + "\nMortgage Cost: " + tiles.get(14).getMortgage() + "\nUnmortgage Cost: " + tiles.get(14).getUnmortgage() + "\nOwned By Player: "+ tiles.get(14).getOwnedBy());
+	case "14": display.setText("Name: " + Name[14] + "\nCost: " + tiles.get(14).getCost() + "\nRent: " + tiles.get(14).getRent() + "\nRent of 1 House:" + tiles.get(14).getRent1H() + "\nRent of 2 House: " + tiles.get(14).getRent2H() + "\nRent of 3 House: " + tiles.get(14).getRent3H() + "\nRent of 4 Houses: " + tiles.get(14).getRent4H() + "\nRent of Hotel: " + tiles.get(14).getHotel() + "\nCost of Buying a House: " + tiles.get(14).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(14).getHouseCost() + "\nMortgage Cost: " + tiles.get(14).getMortgage() + "\nUnmortgage Cost: " + tiles.get(14).getUnmortgage() + "\nOwned By Player: "+ tiles.get(14).getOwnedBy());
 	    break;
-	case "15": display.setText("Name: " + Name[10] + "\nCost: " + tiles.get(5).getCost() + "\nRent for 1 Railroad: 50\nRent for 2 Railroad: 100\nRent for 3 Railroad: 150\nRent for 4 Railroad: 200\nMortgage Cost: " + tiles.get(5).getMortgage() + "\nUnmortgage Cost: " + tiles.get(5).getUnmortgage() + "\nOwned By Player: "+ tiles.get(15).getOwnedBy());
+	case "15": display.setText("Name: " + Name[15] + "\nCost: " + tiles.get(5).getCost() + "\nRent for 1 Railroad: 50\nRent for 2 Railroad: 100\nRent for 3 Railroad: 150\nRent for 4 Railroad: 200\nMortgage Cost: " + tiles.get(5).getMortgage() + "\nUnmortgage Cost: " + tiles.get(5).getUnmortgage() + "\nOwned By Player: "+ tiles.get(15).getOwnedBy());
 	    break;
-	case "16": display.setText("Name: " + Name[11] + "\nCost: " + tiles.get(16).getCost() + "\nRent: " + tiles.get(16).getRent() + "\nRent of 1 House:" + tiles.get(16).getRent1H() + "\nRent of 2 House: " + tiles.get(16).getRent2H() + "\nRent of 3 House: " + tiles.get(16).getRent3H() + "\nRent of 4 Houses: " + tiles.get(16).getRent4H() + "\nRent of Hotel: " + tiles.get(16).getHotel() + "\nCost of Buying a House: " + tiles.get(16).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(16).getHouseCost() + "\nMortgage Cost: " + tiles.get(16).getMortgage() + "\nUnmortgage Cost: " + tiles.get(16).getUnmortgage() + "\nOwned By Player: "+ tiles.get(16).getOwnedBy());
+	case "16": display.setText("Name: " + Name[16] + "\nCost: " + tiles.get(16).getCost() + "\nRent: " + tiles.get(16).getRent() + "\nRent of 1 House:" + tiles.get(16).getRent1H() + "\nRent of 2 House: " + tiles.get(16).getRent2H() + "\nRent of 3 House: " + tiles.get(16).getRent3H() + "\nRent of 4 Houses: " + tiles.get(16).getRent4H() + "\nRent of Hotel: " + tiles.get(16).getHotel() + "\nCost of Buying a House: " + tiles.get(16).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(16).getHouseCost() + "\nMortgage Cost: " + tiles.get(16).getMortgage() + "\nUnmortgage Cost: " + tiles.get(16).getUnmortgage() + "\nOwned By Player: "+ tiles.get(16).getOwnedBy());
 	    break;
 	case "17": display.setText("Name: Community Chest\nDraw a Community Chest Card");
 	    break;
-	case "18": display.setText("Name: " + Name[12] + "\nCost: " + tiles.get(18).getCost() + "\nRent: " + tiles.get(18).getRent() + "\nRent of 1 House:" + tiles.get(18).getRent1H() + "\nRent of 2 House: " + tiles.get(18).getRent2H() + "\nRent of 3 House: " + tiles.get(18).getRent3H() + "\nRent of 4 Houses: " + tiles.get(18).getRent4H() + "\nRent of Hotel: " + tiles.get(18).getHotel() + "\nCost of Buying a House: " + tiles.get(18).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(18).getHouseCost() + "\nMortgage Cost: " + tiles.get(18).getMortgage() + "\nUnmortgage Cost: " + tiles.get(18).getUnmortgage() + "\nOwned By Player: "+ tiles.get(18).getOwnedBy());
+	case "18": display.setText("Name: " + Name[18] + "\nCost: " + tiles.get(18).getCost() + "\nRent: " + tiles.get(18).getRent() + "\nRent of 1 House:" + tiles.get(18).getRent1H() + "\nRent of 2 House: " + tiles.get(18).getRent2H() + "\nRent of 3 House: " + tiles.get(18).getRent3H() + "\nRent of 4 Houses: " + tiles.get(18).getRent4H() + "\nRent of Hotel: " + tiles.get(18).getHotel() + "\nCost of Buying a House: " + tiles.get(18).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(18).getHouseCost() + "\nMortgage Cost: " + tiles.get(18).getMortgage() + "\nUnmortgage Cost: " + tiles.get(18).getUnmortgage() + "\nOwned By Player: "+ tiles.get(18).getOwnedBy());
 	    break;
-	case "19": display.setText("Name: " + Name[13] + "\nCost: " + tiles.get(19).getCost() + "\nRent: " + tiles.get(19).getRent() + "\nRent of 1 House:" + tiles.get(19).getRent1H() + "\nRent of 2 House: " + tiles.get(19).getRent2H() + "\nRent of 3 House: " + tiles.get(19).getRent3H() + "\nRent of 4 Houses: " + tiles.get(19).getRent4H() + "\nRent of Hotel: " + tiles.get(19).getHotel() + "\nCost of Buying a House: " + tiles.get(19).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(19).getHouseCost() + "\nMortgage Cost: " + tiles.get(19).getMortgage() + "\nUnmortgage Cost: " + tiles.get(19).getUnmortgage() + "\nOwned By Player: "+ tiles.get(19).getOwnedBy());
+	case "19": display.setText("Name: " + Name[19] + "\nCost: " + tiles.get(19).getCost() + "\nRent: " + tiles.get(19).getRent() + "\nRent of 1 House:" + tiles.get(19).getRent1H() + "\nRent of 2 House: " + tiles.get(19).getRent2H() + "\nRent of 3 House: " + tiles.get(19).getRent3H() + "\nRent of 4 Houses: " + tiles.get(19).getRent4H() + "\nRent of Hotel: " + tiles.get(19).getHotel() + "\nCost of Buying a House: " + tiles.get(19).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(19).getHouseCost() + "\nMortgage Cost: " + tiles.get(19).getMortgage() + "\nUnmortgage Cost: " + tiles.get(19).getUnmortgage() + "\nOwned By Player: "+ tiles.get(19).getOwnedBy());
 	    break;
 	case "20": display.setText("FREE PARKING\nNothing Happens!");
 	    break;
-	case "21": display.setText("Name: " + Name[14] + "\nCost: " + tiles.get(21).getCost() + "\nRent: " + tiles.get(21).getRent() + "\nRent of 1 House:" + tiles.get(21).getRent1H() + "\nRent of 2 House: " + tiles.get(21).getRent2H() + "\nRent of 3 House: " + tiles.get(21).getRent3H() + "\nRent of 4 Houses: " + tiles.get(21).getRent4H() + "\nRent of Hotel: " + tiles.get(21).getHotel() + "\nCost of Buying a House: " + tiles.get(21).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(21).getHouseCost() + "\nMortgage Cost: " + tiles.get(21).getMortgage() + "\nUnmortgage Cost: " + tiles.get(21).getUnmortgage() + "\nOwned By Player: "+ tiles.get(21).getOwnedBy());
+	case "21": display.setText("Name: " + Name[21] + "\nCost: " + tiles.get(21).getCost() + "\nRent: " + tiles.get(21).getRent() + "\nRent of 1 House:" + tiles.get(21).getRent1H() + "\nRent of 2 House: " + tiles.get(21).getRent2H() + "\nRent of 3 House: " + tiles.get(21).getRent3H() + "\nRent of 4 Houses: " + tiles.get(21).getRent4H() + "\nRent of Hotel: " + tiles.get(21).getHotel() + "\nCost of Buying a House: " + tiles.get(21).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(21).getHouseCost() + "\nMortgage Cost: " + tiles.get(21).getMortgage() + "\nUnmortgage Cost: " + tiles.get(21).getUnmortgage() + "\nOwned By Player: "+ tiles.get(21).getOwnedBy());
 	    break;
 	case "22": display.setText("Name: Chance\nDraw a Chance Card");
 	    break;
-	case "23": display.setText("Name: " + Name[15] + "\nCost: " + tiles.get(23).getCost() + "\nRent: " + tiles.get(23).getRent() + "\nRent of 1 House:" + tiles.get(23).getRent1H() + "\nRent of 2 House: " + tiles.get(23).getRent2H() + "\nRent of 3 House: " + tiles.get(23).getRent3H() + "\nRent of 4 Houses: " + tiles.get(23).getRent4H() + "\nRent of Hotel: " + tiles.get(23).getHotel() + "\nCost of Buying a House: " + tiles.get(23).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(23).getHouseCost() + "\nMortgage Cost: " + tiles.get(23).getMortgage() + "\nUnmortgage Cost: " + tiles.get(23).getUnmortgage() + "\nOwned By Player: "+ tiles.get(23).getOwnedBy());
+	case "23": display.setText("Name: " + Name[23] + "\nCost: " + tiles.get(23).getCost() + "\nRent: " + tiles.get(23).getRent() + "\nRent of 1 House:" + tiles.get(23).getRent1H() + "\nRent of 2 House: " + tiles.get(23).getRent2H() + "\nRent of 3 House: " + tiles.get(23).getRent3H() + "\nRent of 4 Houses: " + tiles.get(23).getRent4H() + "\nRent of Hotel: " + tiles.get(23).getHotel() + "\nCost of Buying a House: " + tiles.get(23).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(23).getHouseCost() + "\nMortgage Cost: " + tiles.get(23).getMortgage() + "\nUnmortgage Cost: " + tiles.get(23).getUnmortgage() + "\nOwned By Player: "+ tiles.get(23).getOwnedBy());
 	    break;
-	case "24": display.setText("Name: " + Name[16] + "\nCost: " + tiles.get(24).getCost() + "\nRent: " + tiles.get(24).getRent() + "\nRent of 1 House:" + tiles.get(24).getRent1H() + "\nRent of 2 House: " + tiles.get(24).getRent2H() + "\nRent of 3 House: " + tiles.get(24).getRent3H() + "\nRent of 4 Houses: " + tiles.get(24).getRent4H() + "\nRent of Hotel: " + tiles.get(24).getHotel() + "\nCost of Buying a House: " + tiles.get(24).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(24).getHouseCost() + "\nMortgage Cost: " + tiles.get(24).getMortgage() + "\nUnmortgage Cost: " + tiles.get(24).getUnmortgage() + "\nOwned By Player: "+ tiles.get(24).getOwnedBy());
+	case "24": display.setText("Name: " + Name[24] + "\nCost: " + tiles.get(24).getCost() + "\nRent: " + tiles.get(24).getRent() + "\nRent of 1 House:" + tiles.get(24).getRent1H() + "\nRent of 2 House: " + tiles.get(24).getRent2H() + "\nRent of 3 House: " + tiles.get(24).getRent3H() + "\nRent of 4 Houses: " + tiles.get(24).getRent4H() + "\nRent of Hotel: " + tiles.get(24).getHotel() + "\nCost of Buying a House: " + tiles.get(24).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(24).getHouseCost() + "\nMortgage Cost: " + tiles.get(24).getMortgage() + "\nUnmortgage Cost: " + tiles.get(24).getUnmortgage() + "\nOwned By Player: "+ tiles.get(24).getOwnedBy());
 	    break;
-	case "25": display.setText("Name: " + Name[17] + "\nCost: " + tiles.get(5).getCost() + "\nRent for 1 Railroad: 50\nRent for 2 Railroad: 100\nRent for 3 Railroad: 150\nRent for 4 Railroad: 200\nMortgage Cost: " + tiles.get(5).getMortgage() + "\nUnmortgage Cost: " + tiles.get(5).getUnmortgage() + "\nOwned By Player: "+ tiles.get(25).getOwnedBy());
+	case "25": display.setText("Name: " + Name[25] + "\nCost: " + tiles.get(5).getCost() + "\nRent for 1 Railroad: 50\nRent for 2 Railroad: 100\nRent for 3 Railroad: 150\nRent for 4 Railroad: 200\nMortgage Cost: " + tiles.get(5).getMortgage() + "\nUnmortgage Cost: " + tiles.get(5).getUnmortgage() + "\nOwned By Player: "+ tiles.get(25).getOwnedBy());
 	    break;
-	case "26": display.setText("Name: " + Name[18] + "\nCost: " + tiles.get(26).getCost() + "\nRent: " + tiles.get(26).getRent() + "\nRent of 1 House:" + tiles.get(26).getRent1H() + "\nRent of 2 House: " + tiles.get(26).getRent2H() + "\nRent of 3 House: " + tiles.get(26).getRent3H() + "\nRent of 4 Houses: " + tiles.get(26).getRent4H() + "\nRent of Hotel: " + tiles.get(26).getHotel() + "\nCost of Buying a House: " + tiles.get(26).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(26).getHouseCost() + "\nMortgage Cost: " + tiles.get(26).getMortgage() + "\nUnmortgage Cost: " + tiles.get(26).getUnmortgage() + "\nOwned By Player: "+ tiles.get(26).getOwnedBy());
+	case "26": display.setText("Name: " + Name[26] + "\nCost: " + tiles.get(26).getCost() + "\nRent: " + tiles.get(26).getRent() + "\nRent of 1 House:" + tiles.get(26).getRent1H() + "\nRent of 2 House: " + tiles.get(26).getRent2H() + "\nRent of 3 House: " + tiles.get(26).getRent3H() + "\nRent of 4 Houses: " + tiles.get(26).getRent4H() + "\nRent of Hotel: " + tiles.get(26).getHotel() + "\nCost of Buying a House: " + tiles.get(26).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(26).getHouseCost() + "\nMortgage Cost: " + tiles.get(26).getMortgage() + "\nUnmortgage Cost: " + tiles.get(26).getUnmortgage() + "\nOwned By Player: "+ tiles.get(26).getOwnedBy());
 	    break;
-	case "27": display.setText("Name: " + Name[19] + "\nCost: " + tiles.get(27).getCost() + "\nRent: " + tiles.get(27).getRent() + "\nRent of 1 House:" + tiles.get(27).getRent1H() + "\nRent of 2 House: " + tiles.get(27).getRent2H() + "\nRent of 3 House: " + tiles.get(27).getRent3H() + "\nRent of 4 Houses: " + tiles.get(27).getRent4H() + "\nRent of Hotel: " + tiles.get(27).getHotel() + "\nCost of Buying a House: " + tiles.get(27).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(27).getHouseCost() + "\nMortgage Cost: " + tiles.get(27).getMortgage() + "\nUnmortgage Cost: " + tiles.get(27).getUnmortgage() + "\nOwned By Player: "+ tiles.get(27).getOwnedBy());
+	case "27": display.setText("Name: " + Name[27] + "\nCost: " + tiles.get(27).getCost() + "\nRent: " + tiles.get(27).getRent() + "\nRent of 1 House:" + tiles.get(27).getRent1H() + "\nRent of 2 House: " + tiles.get(27).getRent2H() + "\nRent of 3 House: " + tiles.get(27).getRent3H() + "\nRent of 4 Houses: " + tiles.get(27).getRent4H() + "\nRent of Hotel: " + tiles.get(27).getHotel() + "\nCost of Buying a House: " + tiles.get(27).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(27).getHouseCost() + "\nMortgage Cost: " + tiles.get(27).getMortgage() + "\nUnmortgage Cost: " + tiles.get(27).getUnmortgage() + "\nOwned By Player: "+ tiles.get(27).getOwnedBy());
 	    break;
-	case "28": display.setText("Name: " + Name[20] + "\nCost: " + tiles.get(28).getCost() + "\nRent: 4 times the number rolled on the dice" + "\nRent with Monpoly: 10 times the number rolled on the dice" + "\nMortgage Cost: " + tiles.get(28).getMortgage() + "\nUnmortgage Cost: " + tiles.get(28).getUnmortgage() + "\nOwned By Player: "+ tiles.get(28).getOwnedBy());
+	case "28": display.setText("Name: " + Name[28] + "\nCost: " + tiles.get(28).getCost() + "\nRent: 4 times the number rolled on the dice" + "\nRent with Monpoly: 10 times the number rolled on the dice" + "\nMortgage Cost: " + tiles.get(28).getMortgage() + "\nUnmortgage Cost: " + tiles.get(28).getUnmortgage() + "\nOwned By Player: "+ tiles.get(28).getOwnedBy());
 	    break;
-	case "29": display.setText("Name: " + Name[21] + "\nCost: " + tiles.get(29).getCost() + "\nRent: " + tiles.get(29).getRent() + "\nRent of 1 House:" + tiles.get(29).getRent1H() + "\nRent of 2 House: " + tiles.get(29).getRent2H() + "\nRent of 3 House: " + tiles.get(29).getRent3H() + "\nRent of 4 Houses: " + tiles.get(29).getRent4H() + "\nRent of Hotel: " + tiles.get(29).getHotel() + "\nCost of Buying a House: " + tiles.get(29).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(29).getHouseCost() + "\nMortgage Cost: " + tiles.get(29).getMortgage() + "\nUnmortgage Cost: " + tiles.get(29).getUnmortgage() + "\nOwned By Player: "+ tiles.get(29).getOwnedBy());
+	case "29": display.setText("Name: " + Name[29] + "\nCost: " + tiles.get(29).getCost() + "\nRent: " + tiles.get(29).getRent() + "\nRent of 1 House:" + tiles.get(29).getRent1H() + "\nRent of 2 House: " + tiles.get(29).getRent2H() + "\nRent of 3 House: " + tiles.get(29).getRent3H() + "\nRent of 4 Houses: " + tiles.get(29).getRent4H() + "\nRent of Hotel: " + tiles.get(29).getHotel() + "\nCost of Buying a House: " + tiles.get(29).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(29).getHouseCost() + "\nMortgage Cost: " + tiles.get(29).getMortgage() + "\nUnmortgage Cost: " + tiles.get(29).getUnmortgage() + "\nOwned By Player: "+ tiles.get(29).getOwnedBy());
 	    break;
 	case "30": display.setText("GO TO JAIL");
 	    break;
-	case "31": display.setText("Name: " + Name[22] + "\nCost: " + tiles.get(31).getCost() + "\nRent: " + tiles.get(31).getRent() + "\nRent of 1 House:" + tiles.get(31).getRent1H() + "\nRent of 2 House: " + tiles.get(31).getRent2H() + "\nRent of 3 House: " + tiles.get(31).getRent3H() + "\nRent of 4 Houses: " + tiles.get(31).getRent4H() + "\nRent of Hotel: " + tiles.get(31).getHotel() + "\nCost of Buying a House: " + tiles.get(31).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(31).getHouseCost() + "\nMortgage Cost: " + tiles.get(31).getMortgage() + "\nUnmortgage Cost: " + tiles.get(31).getUnmortgage() + "\nOwned By Player: "+ tiles.get(31).getOwnedBy());
+	case "31": display.setText("Name: " + Name[31] + "\nCost: " + tiles.get(31).getCost() + "\nRent: " + tiles.get(31).getRent() + "\nRent of 1 House:" + tiles.get(31).getRent1H() + "\nRent of 2 House: " + tiles.get(31).getRent2H() + "\nRent of 3 House: " + tiles.get(31).getRent3H() + "\nRent of 4 Houses: " + tiles.get(31).getRent4H() + "\nRent of Hotel: " + tiles.get(31).getHotel() + "\nCost of Buying a House: " + tiles.get(31).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(31).getHouseCost() + "\nMortgage Cost: " + tiles.get(31).getMortgage() + "\nUnmortgage Cost: " + tiles.get(31).getUnmortgage() + "\nOwned By Player: "+ tiles.get(31).getOwnedBy());
 	    break;
-	    case "32": display.setText("Name: " + Name[23] + "\nCost: " + tiles.get(32).getCost() + "\nRent: " + tiles.get(32).getRent() + "\nRent of 1 House:" + tiles.get(32).getRent1H() + "\nRent of 2 House: " + tiles.get(32).getRent2H() + "\nRent of 3 House: " + tiles.get(32).getRent3H() + "\nRent of 4 Houses: " + tiles.get(32).getRent4H() + "\nRent of Hotel: " + tiles.get(32).getHotel() + "\nCost of Buying a House: " + tiles.get(32).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(32).getHouseCost() + "\nMortgage Cost: " + tiles.get(32).getMortgage() + "\nUnmortgage Cost: " + tiles.get(32).getUnmortgage() + "\nOwned By Player: "+ tiles.get(32).getOwnedBy());
+	case "32": display.setText("Name: " + Name[32] + "\nCost: " + tiles.get(32).getCost() + "\nRent: " + tiles.get(32).getRent() + "\nRent of 1 House:" + tiles.get(32).getRent1H() + "\nRent of 2 House: " + tiles.get(32).getRent2H() + "\nRent of 3 House: " + tiles.get(32).getRent3H() + "\nRent of 4 Houses: " + tiles.get(32).getRent4H() + "\nRent of Hotel: " + tiles.get(32).getHotel() + "\nCost of Buying a House: " + tiles.get(32).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(32).getHouseCost() + "\nMortgage Cost: " + tiles.get(32).getMortgage() + "\nUnmortgage Cost: " + tiles.get(32).getUnmortgage() + "\nOwned By Player: "+ tiles.get(32).getOwnedBy());
 	    break;
 	case "33": display.setText("Name: Community Chest\n Draw a Community Chest Card");
 	    break;
-	case "34": display.setText("Name: " + Name[24] + "\nCost: " + tiles.get(34).getCost() + "\nRent: " + tiles.get(34).getRent() + "\nRent of 1 House:" + tiles.get(34).getRent1H() + "\nRent of 2 House: " + tiles.get(34).getRent2H() + "\nRent of 3 House: " + tiles.get(34).getRent3H() + "\nRent of 4 Houses: " + tiles.get(34).getRent4H() + "\nRent of Hotel: " + tiles.get(34).getHotel() + "\nCost of Buying a House: " + tiles.get(34).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(34).getHouseCost() + "\nMortgage Cost: " + tiles.get(34).getMortgage() + "\nUnmortgage Cost: " + tiles.get(34).getUnmortgage()  + "\nOwned By Player: "+ tiles.get(34).getOwnedBy());
+	case "34": display.setText("Name: " + Name[34] + "\nCost: " + tiles.get(34).getCost() + "\nRent: " + tiles.get(34).getRent() + "\nRent of 1 House:" + tiles.get(34).getRent1H() + "\nRent of 2 House: " + tiles.get(34).getRent2H() + "\nRent of 3 House: " + tiles.get(34).getRent3H() + "\nRent of 4 Houses: " + tiles.get(34).getRent4H() + "\nRent of Hotel: " + tiles.get(34).getHotel() + "\nCost of Buying a House: " + tiles.get(34).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(34).getHouseCost() + "\nMortgage Cost: " + tiles.get(34).getMortgage() + "\nUnmortgage Cost: " + tiles.get(34).getUnmortgage()  + "\nOwned By Player: "+ tiles.get(34).getOwnedBy());
 	    break;
-	case "35": display.setText("Name: " + Name[25] + "\nCost: " + tiles.get(5).getCost() + "\nRent for 1 Railroad: 50\nRent for 2 Railroad: 100\nRent for 3 Railroad: 150\nRent for 4 Railroad: 200\nMortgage Cost: " + tiles.get(5).getMortgage() + "\nUnmortgage Cost: " + tiles.get(5).getUnmortgage() + "\nOwned By Player: "+ tiles.get(35).getOwnedBy());
+	case "35": display.setText("Name: " + Name[35] + "\nCost: " + tiles.get(5).getCost() + "\nRent for 1 Railroad: 50\nRent for 2 Railroad: 100\nRent for 3 Railroad: 150\nRent for 4 Railroad: 200\nMortgage Cost: " + tiles.get(5).getMortgage() + "\nUnmortgage Cost: " + tiles.get(5).getUnmortgage() + "\nOwned By Player: "+ tiles.get(35).getOwnedBy());
 	    break;
 	case "36": display.setText("Name: Chance\nDraw a Chance Card");
 	    break;
-	case "37": display.setText("Name: " + Name[26] + "\nCost: " + tiles.get(37).getCost() + "\nRent: " + tiles.get(37).getRent() + "\nRent of 1 House:" + tiles.get(37).getRent1H() + "\nRent of 2 House: " + tiles.get(37).getRent2H() + "\nRent of 3 House: " + tiles.get(37).getRent3H() + "\nRent of 4 Houses: " + tiles.get(37).getRent4H() + "\nRent of Hotel: " + tiles.get(37).getHotel() + "\nCost of Buying a House: " + tiles.get(37).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(37).getHouseCost() + "\nMortgage Cost: " + tiles.get(37).getMortgage() + "\nUnmortgage Cost: " + tiles.get(37).getUnmortgage() + "\nOwned By Player: "+ tiles.get(37).getOwnedBy());
+	case "37": display.setText("Name: " + Name[37] + "\nCost: " + tiles.get(37).getCost() + "\nRent: " + tiles.get(37).getRent() + "\nRent of 1 House:" + tiles.get(37).getRent1H() + "\nRent of 2 House: " + tiles.get(37).getRent2H() + "\nRent of 3 House: " + tiles.get(37).getRent3H() + "\nRent of 4 Houses: " + tiles.get(37).getRent4H() + "\nRent of Hotel: " + tiles.get(37).getHotel() + "\nCost of Buying a House: " + tiles.get(37).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(37).getHouseCost() + "\nMortgage Cost: " + tiles.get(37).getMortgage() + "\nUnmortgage Cost: " + tiles.get(37).getUnmortgage() + "\nOwned By Player: "+ tiles.get(37).getOwnedBy());
 	    break;
 	case "38": display.setText("Name: Super Tax\nPay 100");
 	    break;
-	    case "39": display.setText("Name: " + Name[27] + "\nCost: " + tiles.get(39).getCost() + "\nRent: " + tiles.get(39).getRent() + "\nRent of 1 House:" + tiles.get(39).getRent1H() + "\nRent of 2 House: " + tiles.get(39).getRent2H() + "\nRent of 3 House: " + tiles.get(39).getRent3H() + "\nRent of 4 Houses: " + tiles.get(39).getRent4H() + "\nRent of Hotel: " + tiles.get(39).getHotel() + "\nCost of Buying a House: " + tiles.get(39).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(39).getHouseCost() + "\nMortgage Cost: " + tiles.get(39).getMortgage() + "\nUnmortgage Cost: " + tiles.get(39).getUnmortgage() + "\nOwned By Player: "+ tiles.get(39).getOwnedBy());
+	case "39": display.setText("Name: " + Name[39] + "\nCost: " + tiles.get(39).getCost() + "\nRent: " + tiles.get(39).getRent() + "\nRent of 1 House:" + tiles.get(39).getRent1H() + "\nRent of 2 House: " + tiles.get(39).getRent2H() + "\nRent of 3 House: " + tiles.get(39).getRent3H() + "\nRent of 4 Houses: " + tiles.get(39).getRent4H() + "\nRent of Hotel: " + tiles.get(39).getHotel() + "\nCost of Buying a House: " + tiles.get(39).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(39).getHouseCost() + "\nMortgage Cost: " + tiles.get(39).getMortgage() + "\nUnmortgage Cost: " + tiles.get(39).getUnmortgage() + "\nOwned By Player: "+ tiles.get(39).getOwnedBy());
 	    break;
 	}
-
+	Player playerTurn = PlayerNumber.get(rule.getTurn());
 	//have to add more limitation
-	if (event.equals("Dice") && PlayerNumber.get(rule.getTurn()).getRolls() == true){
+
+	if (event.equals("Dice") && playerTurn.getRolls() == false) {
+		display.setText("It is not your turn to roll again.\nAfter conducting your moves, please end your turn.");
+	    }
+	    
+	if (event.equals("Dice") && playerTurn.getRolls() == true){
+	    playerTurn.setTurn(rule.getTurn() + 1);		
 	    randomNum = 0;
 	    randomNum1 = 0;
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6); 
 	    display.setText("" + randomNum + "," + randomNum1);
-	    int x = rule.getTurn();
-	    ButtonsOnBoard[PlayerNumber.get(x).getPosition()].remove(Players[x]);
-	    int newPosition = (PlayerNumber.get(x).getPosition() + randomNum + randomNum1) % 40;
-	    ButtonsOnBoard[newPosition].add(Players[x]);
-	    PlayerNumber.get(x).setPosition(newPosition);
+	    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
+	    int newPosition = (playerTurn.getPosition() + randomNum + randomNum1) % 40;
+	    ButtonsOnBoard[newPosition].add(Players[rule.getTurn()]);
+	    playerTurn.setPosition(newPosition);
 	    
-	    if (((tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).getOwnedBy()) != 0) && ((tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).getOwnedBy()) > 0)) {
-		PlayerNumber.get(rule.getTurn()).loseMoney(tiles.get(PlayerNumber.get(x).getPosition()).getRent());
-		PlayerNumber.get(tiles.get(PlayerNumber.get(x).getPosition()).getOwnedBy() - 1).addMoney(tiles.get(PlayerNumber.get(x).getPosition()).getRent());
+	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy()) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0)) {
+	        playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRent());
+		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRent());
+		display.setText("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid " +  tiles.get(playerTurn.getPosition()).getRent()+ " to " + tiles.get(playerTurn.getPosition()).getOwnedBy());
 	}
+	    
 	    //roll rules
 	    if (randomNum == randomNum1){
-		PlayerNumber.get(x).setDoubleRolls(PlayerNumber.get(x).getDoubleRolls() + 1);
+	        playerTurn.setDoubleRolls(playerTurn.getDoubleRolls() + 1);
 	    }
 	    if (randomNum != randomNum1) {
-		PlayerNumber.get(x).setRolls(false);
+	        playerTurn.setRolls(false);
 	    }
-	    if (PlayerNumber.get(x).getDoubleRolls() == 3) {
-		PlayerNumber.get(x).setPosition(10);
+	    //go to jail for three doubles
+	    if (playerTurn.getDoubleRolls() == 3) {
+	        playerTurn.setPosition(10);
 	    }
+	    
 	}
 	
 	if (event.equals("End")) {
-	    if (randomNum != randomNum1) {
-		PlayerNumber.get(rule.getTurn()).setDoubleRolls(0);
-		PlayerNumber.get(rule.getTurn()).setRolls(true);
-		rule.setTurn();
-	    }
-	    a5.setText("Money: " + PlayerNumber.get(0).getMoney() + "\nProperties: " + PlayerNumber.get(0).getProperty());
+	   a5.setText("Money: " + PlayerNumber.get(0).getMoney() + "\nProperties: " + PlayerNumber.get(0).getProperty());
 	    b5.setText("Money: " + PlayerNumber.get(1).getMoney() + "\nProperties: " + PlayerNumber.get(1).getProperty());
 	    c5.setText("Money: " + PlayerNumber.get(2).getMoney() + "\nProperties: " + PlayerNumber.get(2).getProperty());
 	    d5.setText("Money: " + PlayerNumber.get(3).getMoney() + "\nProperties: " + PlayerNumber.get(3).getProperty());
+	    if (randomNum != randomNum1) {
+	        playerTurn.setDoubleRolls(0);
+		playerTurn.setRolls(true);
+		rule.setTurn();
+	    }
+	    display.setText("It is Player " + (rule.getTurn() + 1 )+ "'s Turn!\nPlease roll the dice.");
 	}
 
 	if (event.equals("Property")){
-	    if ((tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).getOwnedBy()) == 0) {
-		tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).setOwnedBy(rule.getTurn() + 1);
-		System.out.println(tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).getOwnedBy());		
-		PlayerNumber.get(rule.getTurn()).addProperty(PlayerNumber.get(rule.getTurn()).getPosition());
-		System.out.println(PlayerNumber.get(rule.getTurn()).getProperty());
-		PlayerNumber.get(rule.getTurn()).loseMoney(tiles.get(PlayerNumber.get(rule.getTurn()).getPosition()).getCost());
-		System.out.println(PlayerNumber.get(rule.getTurn()).getMoney());
-		
+	    if ((tiles.get(playerTurn.getPosition()).getOwnedBy()) == -1) {
+		display.setText("Sorry, you cannot buy this property.");
+	    }
+	    if ((tiles.get(playerTurn.getPosition()).getOwnedBy()) >= 1){
+		display.setText("Sorry, this property is owned by Player" + tiles.get(playerTurn.getPosition()).getOwnedBy());
+	    }
+	    if ((tiles.get(playerTurn.getPosition()).getOwnedBy()) == 0) {
+		tiles.get(playerTurn.getPosition()).setOwnedBy(rule.getTurn() + 1);
+	        playerTurn.addProperty(playerTurn.getPosition());
+	        playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getCost());
+		playerTurn.setTurn(rule.getTurn() + 1);
+		display.setText("Player " + playerTurn + " has bought " + Name[playerTurn.getPosition()] + "!");
 	    }
 	    
 	    //else if (event.equals("No")){
