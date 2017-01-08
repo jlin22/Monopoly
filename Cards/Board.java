@@ -168,14 +168,20 @@ public class Board extends JFrame implements ActionListener {
 	
 	JButton a = new JButton("20");
       	JButton b = new JButton("21");
+	b.setBackground(Color.RED);
 	JButton c = new JButton("22");
 	JButton d = new JButton("23");
+	d.setBackground(Color.RED);
 	JButton e = new JButton("24");
+	e.setBackground(Color.RED);
 	JButton f = new JButton("25");
 	JButton g = new JButton("26");
+	g.setBackground(Color.YELLOW);
 	JButton h = new JButton("27");
+	h.setBackground(Color.YELLOW);
 	JButton i = new JButton("28");
 	JButton j = new JButton("29");
+	j.setBackground(Color.YELLOW);
 	
 	tpane.add(a);
 	tpane.add(b);
@@ -189,14 +195,19 @@ public class Board extends JFrame implements ActionListener {
 	tpane.add(j);
 	
 	JButton a1 = new JButton("9");
+	a1.setBackground(Color.CYAN);
 	JButton b1 = new JButton("8");
+	b1.setBackground(Color.CYAN);
 	JButton c1 = new JButton("7");
 	JButton d1 = new JButton("6");
+	d1.setBackground(Color.CYAN);
 	JButton e1 = new JButton("5");
 	JButton f1 = new JButton("4");
 	JButton g1 = new JButton("3");
+	g1.setBackground(Color.BLACK);
 	JButton h1 = new JButton("2");
 	JButton i1 = new JButton("1");
+	i1.setBackground(Color.BLACK);
 	JButton j1 = new JButton("0");
 
 	j1.add(p1);
@@ -216,15 +227,22 @@ public class Board extends JFrame implements ActionListener {
 	bpane.add(j1);
 
 	JButton a2 = new JButton("19");
+	a2.setBackground(Color.ORANGE);
 	JButton b2 = new JButton("18");
+	b2.setBackground(Color.ORANGE);
 	JButton c2 = new JButton("17");
 	JButton d2 = new JButton("16");
+	d2.setBackground(Color.ORANGE);
 	JButton e2 = new JButton("15");
 	JButton f2 = new JButton("14");
+	f2.setBackground(Color.MAGENTA);
 	JButton g2 = new JButton("13");
+	g2.setBackground(Color.MAGENTA);
 	JButton h2 = new JButton("12");
 	JButton i2 = new JButton("11");
+	i2.setBackground(Color.MAGENTA);
 	JButton j2 = new JButton("10");
+
 
 	lpane.add(a2);
 	lpane.add(b2);
@@ -239,14 +257,19 @@ public class Board extends JFrame implements ActionListener {
 
 	JButton a3 = new JButton("30");
 	JButton b3 = new JButton("31");
+	b3.setBackground(Color.GREEN);
 	JButton c3 = new JButton("32");
+	c3.setBackground(Color.GREEN);
 	JButton d3 = new JButton("33");
 	JButton e3 = new JButton("34");
+	e3.setBackground(Color.GREEN);
 	JButton f3 = new JButton("35");
 	JButton g3 = new JButton("36");
 	JButton h3 = new JButton("37");
+	h3.setBackground(Color.BLUE);
 	JButton i3 = new JButton("38");
 	JButton j3 = new JButton("39");
+	j3.setBackground(Color.BLUE);
 
 	rpane.add(a3);
 	rpane.add(b3);
