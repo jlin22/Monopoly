@@ -2,7 +2,7 @@ import java.util.*;
 public class Player{
     private int money,position,getOutOfJailCards,count,doubleRolls,turn;
     private int[] propertiesOwned;
-    private boolean rolls;
+    private boolean rolls,brownMonopoly,cyanMonopoly,magentaMonopoly,orangeMonopoly,redMonopoly,yellowMonopoly,greenMonopoly,blueMonopoly,railroadMonopoly,utilityMonopoly;
     public Player() {
 	money = 1500;
 	position = 0;
@@ -11,7 +11,96 @@ public class Player{
 	rolls = true;
 	doubleRolls = 0;
 	turn = 1;
+	brownMonopoly = false;
+	cyanMonopoly = false;
+	magentaMonopoly = false;
+	orangeMonopoly = false;
+	redMonopoly = false;
+	yellowMonopoly = false;
+	greenMonopoly = false;
+	blueMonopoly = false;
+	railroadMonopoly = false;
+	utilityMonopoly = false;
     }
+    public boolean getRailroadMonopoly() {
+	return railroadMonopoly;
+    }
+
+    public void setRailroadMonopoly(boolean x) {
+	railroadMonopoly = x;
+    }
+    
+    public boolean getUtilityMonopoly() {
+	return utilityMonopoly;
+    }
+
+    public void setUtilityMonopoly(boolean x) {
+	utilityMonopoly = x;
+    }
+    
+    public boolean getBrownMonopoly() {
+	return brownMonopoly;
+    }
+
+    public void setBrownMonopoly(boolean x) {
+	brownMonopoly = x;
+    }
+
+    public boolean getCyanMonopoly() {
+	return cyanMonopoly;
+    }
+
+    public void setCyanMonopoly(boolean x) {
+	cyanMonopoly = x;
+    }
+    
+    public boolean getMagentaMonopoly() {
+	return magentaMonopoly;
+    }
+
+    public void setMagentaMonopoly(boolean x) {
+	magentaMonopoly = x;
+    }
+    public boolean getOrangeMonopoly() {
+	return orangeMonopoly;
+    }
+
+    public void setOrangeMonopoly(boolean x) {
+	orangeMonopoly = x;
+    }
+
+    public boolean getRedMonopoly() {
+	return redMonopoly;
+    }
+
+    public void setRedMonopoly(boolean x) {
+	redMonopoly = x;
+    }
+
+    public boolean getYellowMonopoly() {
+	return yellowMonopoly;
+    }
+
+    public void setYellowMonopoly(boolean x) {
+	yellowMonopoly = x;
+    }
+
+    public boolean getGreenMonopoly() {
+	return greenMonopoly;
+    }
+
+    public void setGreenMonopoly(boolean x) {
+	greenMonopoly = x;
+    }
+
+    public boolean getBlueMonopoly() {
+	return blueMonopoly;
+    }
+
+    public void setBlueMonopoly(boolean x) {
+	blueMonopoly = x;
+    }
+    
     public String toString() {
 	return "" + turn;
     }
