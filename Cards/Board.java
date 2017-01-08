@@ -618,7 +618,13 @@ public class Board extends JFrame implements ActionListener {
 	    
 	}
 
-	if (event.equals("House") && hasMonopoly == true) {
+	if (event.equals("House") && playerTurn.getHasMonopoly() == true) {
+	    for (int counter = 0; counter < 10; counter ++) {
+		if (playerTurn.getMonopoly()[counter] == true) {
+		    playerTurn.setMonopoly(counter);
+		}
+		//where to put house, how many houses
+	    }
 	    
 	}
 

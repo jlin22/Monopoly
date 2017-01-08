@@ -2,7 +2,8 @@ import java.util.*;
 public class Player{
     private int money,position,getOutOfJailCards,count,doubleRolls,turn;
     private int[] propertiesOwned;
-    private boolean rolls,brownMonopoly,cyanMonopoly,magentaMonopoly,orangeMonopoly,redMonopoly,yellowMonopoly,greenMonopoly,blueMonopoly,railroadMonopoly,utilityMonopoly;
+    private boolean rolls,brownMonopoly,cyanMonopoly,magentaMonopoly,orangeMonopoly,redMonopoly,yellowMonopoly,greenMonopoly,blueMonopoly,railroadMonopoly,utilityMonopoly,hasMonopoly;
+    private boolean[]monopoly;
     public Player() {
 	money = 1500;
 	position = 0;
@@ -21,7 +22,37 @@ public class Player{
 	blueMonopoly = false;
 	railroadMonopoly = false;
 	utilityMonopoly = false;
+	hasMonopoly = false;
+	monopoly = new boolean[10];
     }
+
+    public boolean[] getMonopoly() {
+	 monopoly[0] = brownMonopoly;
+	 monopoly[1] = cyanMonopoly;
+	 monopoly[2] = magentaMonopoly;
+	 monopoly[3] = orangeMonopoly;
+	 monopoly[4] = redMonopoly;
+	 monopoly[5] = yellowMonopoly;
+	 monopoly[6] = greenMonopoly;
+	 monopoly[7] = blueMonopoly;
+	 monopoly[8] = railroadMonopoly;
+	 monopoly[9] = utilityMonopoly;
+	return monopoly;
+    }
+
+    public void setMonopoly(int x) {
+	monopoly[x] = true;
+    }
+
+    public boolean getHasMonopoly() {
+	for (int i = 0; i < 10; i++) {
+	    if (monopoly[i] == true) {
+		return true;
+	    }
+	}
+	return false;
+    }
+    
     public boolean getRailroadMonopoly() {
 	return railroadMonopoly;
     }
