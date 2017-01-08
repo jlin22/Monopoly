@@ -75,21 +75,15 @@ public class CardArray{
     //use these only to print text
     public String getRandomizedChanceCard(){
 	int y = (int)(Math.random()*(randomizedChanceList.size()));
-	String z = randomizedChanceList.get(y);
-	randomizedChanceList.remove(y);
-	return z;
+	return randomizedChanceList.get(y);
     }
-    public String getRandomizedCommunityChestCard(){
+    public String getRandomizedCommunityChest(){
 	int y = (int)(Math.random()*(randomizedCommunityChest.size()));
-	String z = randomizedCommunityChest.get(y);
-	randomizedCommunityChest.remove(y);
-	return z;
+	return randomizedCommunityChest.get(y);
     }
     public static void main(String[]a){
 	CardArray x = new CardArray();
 	System.out.println(x.getRandomizedChance());
 	System.out.println(x.getRandomizedCommunityChest());
-	System.out.println(x.getRandomizedCommunityChestCard());
-	System.out.println(x.getRandomizedChanceCard());
     }
 }
