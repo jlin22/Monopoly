@@ -400,9 +400,13 @@ public class Board extends JFrame implements ActionListener {
 	Log.setLayout(new FlowLayout());
 
 	Log1 = new JTextArea("Log");
-	Log1.setEditable(false);
-	Log1.setPreferredSize(new Dimension(150,600));
-	Log.add(Log1);
+	Log1.setPreferredSize(new Dimension(100,600));
+	Log1.setLineWrap(true);
+	Log1.setWrapStyleWord(true);	
+	JScrollPane Scroll = new JScrollPane(Log1);
+	Scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        Log.add(Scroll);
+
 
 	//change later
 	JPanel Title = new JPanel();
