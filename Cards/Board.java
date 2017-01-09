@@ -12,7 +12,7 @@ public class Board extends JFrame implements ActionListener {
     private JButton[] ButtonsOnBoard;
     private JLabel[] Players;
     private ArrayList<Player> PlayerNumber;
-    private int randomNum,randomNum1,doubleRolls,var;
+    private int randomNum,randomNum1,doubleRolls,var,jailCounter;
     private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
     private boolean[] playerDead;
     
@@ -541,7 +541,7 @@ public class Board extends JFrame implements ActionListener {
 	}
 	Player playerTurn = PlayerNumber.get(rule.getTurn());
 
-	if (event.equals("Dice") && playerTurn.getRolls() == false && playerDead[rule.getTurn() + 1] == false) {	    
+	if (event.equals("Dice") && playerTurn.getRolls() == false && playerDead[rule.getTurn() + 1] == false && playerTurn.getJailCounter() == 0) {	    
 		display.setText("It is not your turn to roll again.\nAfter conducting your moves, please end your turn.");
 	    }
 
@@ -787,6 +787,7 @@ public class Board extends JFrame implements ActionListener {
 		ButtonsOnBoard[30].remove(Players[rule.getTurn()]);
 		ButtonsOnBoard[10].add(Players[rule.getTurn()]);
 		playerTurn.setPosition(10);
+		
 	    }
 	    
 	}
