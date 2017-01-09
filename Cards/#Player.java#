@@ -26,16 +26,6 @@ public class Player{
 	utilityMonopoly = 0;
 	hasMonopoly = 0;
 	monopoly = new int[10];
-	monopoly[0] = brownMonopoly;
-	monopoly[1] = cyanMonopoly;
-	monopoly[2] = magentaMonopoly;
-	monopoly[3] = orangeMonopoly;
-	monopoly[4] = redMonopoly;
-	monopoly[5] = yellowMonopoly;
-	monopoly[6] = greenMonopoly;
-	monopoly[7] = blueMonopoly;
-	monopoly[8] = railroadMonopoly;
-	monopoly[9] = utilityMonopoly;
 	jailCounter = 0;
     }
 
@@ -48,25 +38,12 @@ public class Player{
     }
 
     public int[] getMonopoly() {
-	 monopoly[0] = brownMonopoly;
-	 monopoly[1] = cyanMonopoly;
-	 monopoly[2] = magentaMonopoly;
-	 monopoly[3] = orangeMonopoly;
-	 monopoly[4] = redMonopoly;
-	 monopoly[5] = yellowMonopoly;
-	 monopoly[6] = greenMonopoly;
-	 monopoly[7] = blueMonopoly;
-	 monopoly[8] = railroadMonopoly;
-	 monopoly[9] = utilityMonopoly;
+	 
 	return monopoly;
     }
 
     public void setMonopoly(int x,int y) {
 	monopoly[x] = y;
-    }
-
-    public boolean getHasMonopoly1(int x) {
-	return (monopoly[x] > 0);
     }
 
     public boolean getAnyMonopoly() {
