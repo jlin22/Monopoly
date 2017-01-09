@@ -1,10 +1,10 @@
 import java.util.*;
 public class Player{
-    private int money,position,getOutOfJailCards,count,doubleRolls,turn, jailCounter;
+    private int money,position,getOutOfJailCards,count,doubleRolls,turn, jailCounter,brownMonopoly,cyanMonopoly,magentaMonopoly,orangeMonopoly,redMonopoly,yellowMonopoly,greenMonopoly,blueMonopoly,railroadMonopoly,utilityMonopoly,hasMonopoly;
     private int[] propertiesOwned;
     private int[] houses;
-    private boolean rolls,brownMonopoly,cyanMonopoly,magentaMonopoly,orangeMonopoly,redMonopoly,yellowMonopoly,greenMonopoly,blueMonopoly,railroadMonopoly,utilityMonopoly,hasMonopoly;
-    private boolean[]monopoly;
+    private boolean rolls;
+    private int[]monopoly;
     public Player() {
 	money = 1500;
 	position = 0;
@@ -14,18 +14,18 @@ public class Player{
 	rolls = true;
 	doubleRolls = 0;
 	turn = 1;
-	brownMonopoly = false;
-	cyanMonopoly = false;
-	magentaMonopoly = false;
-	orangeMonopoly = false;
-	redMonopoly = false;
-	yellowMonopoly = false;
-	greenMonopoly = false;
-	blueMonopoly = false;
-	railroadMonopoly = false;
-	utilityMonopoly = false;
-	hasMonopoly = false;
-	monopoly = new boolean[10];
+	brownMonopoly = 0;
+	cyanMonopoly = 0;
+	magentaMonopoly = 0;
+	orangeMonopoly = 0;
+	redMonopoly = 0;
+	yellowMonopoly = 0;
+	greenMonopoly = 0;
+	blueMonopoly = 0;
+	railroadMonopoly = 0;
+	utilityMonopoly = 0;
+	hasMonopoly = 0;
+	monopoly = new int[10];
 	jailCounter = 0;
     }
 
@@ -37,7 +37,7 @@ public class Player{
 	jailCounter += 1; 
     }
 
-    public boolean[] getMonopoly() {
+    public int[] getMonopoly() {
 	 monopoly[0] = brownMonopoly;
 	 monopoly[1] = cyanMonopoly;
 	 monopoly[2] = magentaMonopoly;
@@ -51,35 +51,29 @@ public class Player{
 	return monopoly;
     }
 
-    public void setMonopoly(int x) {
-	monopoly[x] = true;
+    public void setMonopoly(int x,int y) {
+	monopoly[x] = y;
     }
 
-    public boolean getHasMonopoly() {
-	for (int i = 0; i < 10; i++) {
-	    if (monopoly[i] == true) {
+    public boolean getAnyMonopoly() {
+	for (int i = 0; i < 10; i ++) {
+	    if (monopoly[i] > 0) {
 		return true;
 	    }
 	}
 	return false;
     }
 
-    public int getHasMonopolyNum() {
-	for (int i = 0; i < 10; i ++ ) {
-	    if (monopoly[i] == true) {
+    public int getHasMonopoly(int x) {
+	for (int i = 0; i < 10; i++) {
+	    if (monopoly[i] == x) {
 		return i;
 	    }
 	}
-	return 11;
+	return 5;
     }
 
-    public boolean getMonopoly1(int x) {
-	return monopoly[x];
-    }
 
-    public void setMonopoly1(int x,boolean y) {
-	monopoly[x] = y;
-    }
     /*
     public boolean getRailroadMonopoly() {
 	return railroadMonopoly;
