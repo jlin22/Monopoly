@@ -13,8 +13,8 @@ public class Board extends JFrame implements ActionListener {
     private JButton[] ButtonsOnBoard;
     private JLabel[] Players;
     private ArrayList<Player> PlayerNumber;
-    private int randomNum,randomNum1,doubleRolls,var,jailCounter;
-    private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead,went;
+    private int randomNum,randomNum1,doubleRolls,jailCounter,temp;
+    private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
     private boolean[] playerDead;
     
     public Board() {
@@ -511,7 +511,7 @@ public class Board extends JFrame implements ActionListener {
 	    break;
 	case "25": display.setText("Name: " + Name[25] + "\nCost: " + tiles.get(5).getCost() + "\nRent for 1 Railroad: 50\nRent for 2 Railroad: 100\nRent for 3 Railroad: 150\nRent for 4 Railroad: 200\nMortgage Cost: " + tiles.get(5).getMortgage() + "\nUnmortgage Cost: " + tiles.get(5).getUnmortgage() + "\nOwned By Player: "+ tiles.get(25).getOwnedBy());
 	    break;
-	case "26": display.setText("Name: " + Name[26] + "\nCost: " + tiles.get(26).getCost() + "\nRent: " + tiles.get(26).getRent() + "\nRent of 1 House:" + tiles.get(26).getRent1H() + "\nRent of 2 House: " + tiles.get(26).getRent2H() + "\nRent of 3 House: " + tiles.get(26).getRent3H() + "\nRent of 4 Houses: " + tiles.get(26).getRent4H() + "\nRent of Hotel: " + tiles.get(26).getHotel() + "\nCost of Buying a House: " + tiles.get(26).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(26).getHouseCost() + "\nMortgage Cost: " + tiles.get(26).getMortgage() + "\nUnmortgage Cost: " + tiles.get(26).getUnmortgage() + "\nOwned By Player: "+ tiles.get(26).getOwnedBy());
+	case "26": display.setText("Name: " + Name[26] + "\nCost: " + tiles.get(26).getCost() + "\nRent: " + tiles.get(26).getRent() + "\nRent of 1 House:" + tiles.get(26).getRent1H() + "\nRent of 2 House: " + tiles.get(26).getRent2H() + "\nRent of 3 House: " + tiles.get(26).getRent3H() + "\nRent of 4 Houses: " + tiles.get(26).getRent4H() + "\nRent of Hotel: " + tiles.get(26).getHotel() + "\nCost of Buying a House: " + tiles.get(26).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(26).getHouseCost() + "\nMortgage Cost: " + tiles.get(26).getMortgage() + "\nUnmortgage Cost: " + tiles.get(26).getUnmortgage() + "\nOwned By Player: "+ tiles.get(26).getOwnedBy()+"\nNumber of Houses: " + tiles.get(26).getHouseNumber() + "\nHotel: " + tiles.get(26).getHotel());
 	    break;
 	case "27": display.setText("Name: " + Name[27] + "\nCost: " + tiles.get(27).getCost() + "\nRent: " + tiles.get(27).getRent() + "\nRent of 1 House:" + tiles.get(27).getRent1H() + "\nRent of 2 House: " + tiles.get(27).getRent2H() + "\nRent of 3 House: " + tiles.get(27).getRent3H() + "\nRent of 4 Houses: " + tiles.get(27).getRent4H() + "\nRent of Hotel: " + tiles.get(27).getHotel() + "\nCost of Buying a House: " + tiles.get(27).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(27).getHouseCost() + "\nMortgage Cost: " + tiles.get(27).getMortgage() + "\nUnmortgage Cost: " + tiles.get(27).getUnmortgage() + "\nOwned By Player: "+ tiles.get(27).getOwnedBy() + "\nNumber of Houses: " + tiles.get(27).getHouseNumber() + "\nHotel: " + tiles.get(27).getHotel());
 	    break;
@@ -539,15 +539,16 @@ public class Board extends JFrame implements ActionListener {
 	    break;
 	case "39": display.setText("Name: " + Name[39] + "\nCost: " + tiles.get(39).getCost() + "\nRent: " + tiles.get(39).getRent() + "\nRent of 1 House:" + tiles.get(39).getRent1H() + "\nRent of 2 House: " + tiles.get(39).getRent2H() + "\nRent of 3 House: " + tiles.get(39).getRent3H() + "\nRent of 4 Houses: " + tiles.get(39).getRent4H() + "\nRent of Hotel: " + tiles.get(39).getHotel() + "\nCost of Buying a House: " + tiles.get(39).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(39).getHouseCost() + "\nMortgage Cost: " + tiles.get(39).getMortgage() + "\nUnmortgage Cost: " + tiles.get(39).getUnmortgage() + "\nOwned By Player: "+ tiles.get(39).getOwnedBy() + "\nNumber of Houses: " + tiles.get(39).getHouseNumber() + "\nHotel: " + tiles.get(39).getHotel());
 	    break;
+
 	}
 	Player playerTurn = PlayerNumber.get(rule.getTurn());
-
+	
 	if (event.equals("Dice") && playerTurn.getRolls() == false && playerDead[rule.getTurn() + 1] == false && playerTurn.getJailCounter() == 0) {	    
 		display.setText("It is not your turn to roll again.\nAfter conducting your moves, please end your turn.");
 	    }
 
 	if (event.equals("Dice") && playerTurn.getRolls() == true){
-	    went =  true;
+
 	    playerTurn.setTurn(rule.getTurn() + 1);		
 	    randomNum = 0;
 	    randomNum1 = 0;
@@ -557,13 +558,36 @@ public class Board extends JFrame implements ActionListener {
 	    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
 	    //int newPosition = 30;
 	    int newPosition = (playerTurn.getPosition() + randomNum + randomNum1) % 40;
-	    Log1.append("Player " + playerTurn + " rolled a " + (randomNum + randomNum1) + ", their new position is " + Name[newPosition] + "\n");
+	    //Log1.append("Player " + playerTurn + " rolled a " + (randomNum + randomNum1) + ", their new position is " + Name[newPosition] + "\n");
 	    if ((playerTurn.getPosition() + randomNum + randomNum1) > 39) {
 		playerTurn.addMoney(200);
 		display.setText("Player " + playerTurn + " has passed GO!\n Collect $200.");
 	    }
 	    ButtonsOnBoard[newPosition].add(Players[rule.getTurn()]);
 	    playerTurn.setPosition(newPosition);
+	    if (playerTurn.getPosition() == 1 || playerTurn.getPosition() == 3){
+		temp = 0;
+	    }if (playerTurn.getPosition() == 6 || playerTurn.getPosition() == 8 || playerTurn.getPosition() == 8) {
+		temp = 1;
+	    }if (playerTurn.getPosition() == 11 || playerTurn.getPosition() == 13 || playerTurn.getPosition() == 14) {
+		temp = 2;
+	    }if (playerTurn.getPosition() == 16 || playerTurn.getPosition() == 18 || playerTurn.getPosition() == 19) {
+		temp = 3;
+	    }if (playerTurn.getPosition() == 21 || playerTurn.getPosition() == 23 || playerTurn.getPosition() == 24) {
+		temp = 4;
+	    }if (playerTurn.getPosition() == 26 || playerTurn.getPosition() == 27 || playerTurn.getPosition() == 29) {
+		temp = 5;
+	    }if (playerTurn.getPosition() == 31 || playerTurn.getPosition() == 32 || playerTurn.getPosition() == 34) {
+		temp = 6;
+	    }if (playerTurn.getPosition() == 37 || playerTurn.getPosition() == 39){
+		temp = 7;
+	    }if (playerTurn.getPosition() == 12 || playerTurn.getPosition() == 28){
+		temp = 9;
+	    }
+	    if (playerTurn.getPosition() == 5 || playerTurn.getPosition() == 15|| playerTurn.getPosition() == 25 || playerTurn.getPosition() == 35){
+		temp = 8;
+	    }
+	    
 	    if (playerTurn.getPosition() == 4) {
 		playerTurn.loseMoney(200);
 		display.setText("Player " + playerTurn + " has to pay $200 Tax!");
@@ -768,10 +792,10 @@ public class Board extends JFrame implements ActionListener {
 		}
 	    }
 	  
-	    if(((tiles.get(playerTurn.getPosition()).getOwnedBy()) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && charged == false && (PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy()).getAnyMonopoly() == true)) {
-			playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
-			PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
-			display.setText("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + " because he or she has a monopoly over the property");
+	    if(((tiles.get(playerTurn.getPosition()).getOwnedBy()) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && charged == false && (PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy()).getHasMonopoly1(temp))) {
+		playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
+		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
+		display.setText("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + " because he or she has a monopoly over the property");
 			charged = true;
 		    
 	    }
@@ -786,10 +810,10 @@ public class Board extends JFrame implements ActionListener {
 	    
 	    if (randomNum == randomNum1){
 	        playerTurn.setDoubleRolls(playerTurn.getDoubleRolls() + 1);
+		charged = false;
 	    }
 	    if (randomNum != randomNum1) {
 	        playerTurn.setRolls(false);
-		charged = false;
 	    }
 	    if (playerTurn.getDoubleRolls() == 3) {
 		display.setText("Player " + (rule.getTurn() + 1) + " has rolled 3 doubles in a roll.\nTherefore, he has been sent to Jail!");
@@ -808,7 +832,7 @@ public class Board extends JFrame implements ActionListener {
 	    
     }
 	
-	if (event.equals("End") && went == true) {
+	if (event.equals("End") ) {
 	   a5.setText("Money: " + PlayerNumber.get(0).getMoney() + "\nProperties: " + PlayerNumber.get(0).getProperty());
 	    b5.setText("Money: " + PlayerNumber.get(1).getMoney() + "\nProperties: " + PlayerNumber.get(1).getProperty());
 	    c5.setText("Money: " + PlayerNumber.get(2).getMoney() + "\nProperties: " + PlayerNumber.get(2).getProperty());
@@ -818,7 +842,6 @@ public class Board extends JFrame implements ActionListener {
 		playerTurn.setRolls(true);
 		rule.setTurn();
 		charged = false;
-		went = false;
 	    }
 	    display.setText("It is Player " + (rule.getTurn() + 1 )+ "'s Turn!\nPlease roll the dice.");
 	}
@@ -829,7 +852,7 @@ public class Board extends JFrame implements ActionListener {
 		display.setText("Sorry, you cannot buy this property.");
 	    }
 	    if ((tiles.get(playerTurn.getPosition()).getOwnedBy()) >= 1){
-		display.setText("Sorry, this property is owned by Player" + tiles.get(playerTurn.getPosition()).getOwnedBy());
+		display.setText("Sorry, this property is owned by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy());
 	    }
 	    if ((tiles.get(playerTurn.getPosition()).getOwnedBy()) == 0) {
 		tiles.get(playerTurn.getPosition()).setOwnedBy(rule.getTurn() + 1);
@@ -840,9 +863,7 @@ public class Board extends JFrame implements ActionListener {
 		    playerDead[rule.getTurn()] = true;
 		}
 		display.setText("Player " + playerTurn + " has bought " + Name[playerTurn.getPosition()] + "!");
-		Log1.append("Player " + playerTurn + " has bought " +  Name[playerTurn.getPosition()] + "!\n");
-	    
-	    
+		//Log1.append("Player " + playerTurn + " has bought " +  Name[playerTurn.getPosition()] + "!\n");
 		if(tiles.get(1).getOwnedBy() ==  tiles.get(3).getOwnedBy() && tiles.get(3).getOwnedBy() == rule.getTurn()) {
 		    playerTurn.setMonopoly(0,rule.getTurn());
 		}
@@ -890,13 +911,6 @@ public class Board extends JFrame implements ActionListener {
 	    display.setText("error");
 	} 
     }
-    
-		
-	       
-			
-		
-		
-
 	    
     
     public static void main(String[] args) {
