@@ -2,12 +2,14 @@ import java.util.*;
 public class Player{
     private int money,position,getOutOfJailCards,count,doubleRolls,turn, jailCounter;
     private int[] propertiesOwned;
+    private int[] houses;
     private boolean rolls,brownMonopoly,cyanMonopoly,magentaMonopoly,orangeMonopoly,redMonopoly,yellowMonopoly,greenMonopoly,blueMonopoly,railroadMonopoly,utilityMonopoly,hasMonopoly;
     private boolean[]monopoly;
     public Player() {
 	money = 1500;
 	position = 0;
 	propertiesOwned = new int[40];
+	houses = new int[40];
 	getOutOfJailCards = 0;
 	rolls = true;
 	doubleRolls = 0;
@@ -31,8 +33,8 @@ public class Player{
 	return jailCounter;
     }
 
-    public void setJailCounter(int x ) {
-	jailCounter = x; 
+    public void setJailCounter( ) {
+	jailCounter += 1; 
     }
 
     public boolean[] getMonopoly() {
@@ -210,6 +212,7 @@ public class Player{
 	for (int i = 0; i < 40 ; i++) {
 	    if (propertiesOwned[i] == 0) {
 		propertiesOwned[i] = x;
+		houses[i] = 1;
 		count = i;
 		return;
 	    }

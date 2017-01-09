@@ -8,7 +8,7 @@ public class Deeds {
     private int rent2H; //f 5
     private int rent3H; //g 6
     private int rent4H; //h  7 
-    private int hotel; //i 8
+    private int hotelCost; //i 8
     private int houseCost; //j 9 
     private int mortgage; //k 10
     private int unmortgage; //l 11
@@ -18,6 +18,8 @@ public class Deeds {
     private int sentPosition; //o 14
     private int getMoney; //q 15
     private int ownedBy;
+    private int houseNumber;
+    private boolean hotel;
 
     public Deeds(int a, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l,int m,int n, int o,int q,int r) {
 	position = a;
@@ -27,7 +29,7 @@ public class Deeds {
 	rent2H = f;
 	rent3H = g;
 	rent4H = h;
-	hotel = i;
+	hotelCost = i;
 	houseCost = j;
 	mortgage = k;
 	unmortgage = l;
@@ -36,9 +38,11 @@ public class Deeds {
 	sentPosition = o;
 	getMoney = q;
 	ownedBy = r;
+	houseNumber = 0;
+	hotel = false;
     }
 
- 
+    
     public int getPosition() {
 	return position;
     }
@@ -67,8 +71,8 @@ public class Deeds {
 	return rent4H;
     }
 
-    public int getHotel() {
-	return hotel;
+    public int getHotelCost() {
+	return hotelCost;
     }
 
     public int getHouseCost() {
@@ -106,7 +110,18 @@ public class Deeds {
     public void setOwnedBy(int x) {
 	ownedBy = x;
     }
-
+    public int getHouseNumber(){
+	return houseNumber;
+    }
+    public void setHouseNumber(int x){
+	houseNumber = x;
+    }
+    public boolean getHotel(){
+	return hotel;
+    }
+    public void setHotel(boolean x){
+	hotel = x;
+    }
     public String toString() {
 	return "" + position + "," + rent + "," + rentMonopoly + "," + rent1H + "," + rent2H + "," + rent3H + "," + rent4H + "," + hotel +  ","  + houseCost + "," + mortgage + "," + unmortgage + "," + cost + "," + cardNumber + "," + sentPosition + "," + getMoney + "," + getOwnedBy() + "";
     }
