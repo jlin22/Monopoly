@@ -410,14 +410,17 @@ public class Board extends JFrame implements ActionListener {
 	JPanel Log = new JPanel();
 	Log.setLayout(new FlowLayout());
 
-	Log1 = new JTextArea("Log");
+	Log1 = new JTextArea("");
 	Log1.setPreferredSize(new Dimension(100,600));
 	Log1.setLineWrap(true);
 	Log1.setWrapStyleWord(true);
 	Log1.setEditable(false);
 	JScrollPane Scroll = new JScrollPane(Log1);
-	Scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        Log.add(Scroll);
+	JScrollBar sb = Scroll.getVerticalScrollBar();
+	sb.setValue(sb.getMaximum());
+	
+	Log.add(Scroll);
+	Log.add(sb);
 
 
 	//change later
@@ -528,12 +531,11 @@ public class Board extends JFrame implements ActionListener {
 	    break;
 	}
 	Player playerTurn = PlayerNumber.get(rule.getTurn());
-	//have to add more limitation
 
 	if (event.equals("Dice") && playerTurn.getRolls() == false) {	    
 		display.setText("It is not your turn to roll again.\nAfter conducting your moves, please end your turn.");
 	    }
-	    
+
 	if (event.equals("Dice") && playerTurn.getRolls() == true){
 	    playerTurn.setTurn(rule.getTurn() + 1);		
 	    randomNum = 0;
@@ -544,6 +546,7 @@ public class Board extends JFrame implements ActionListener {
 	    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
 	    //int newPosition = 30;
 	    int newPosition = (playerTurn.getPosition() + randomNum + randomNum1) % 40;
+	    Log1.append("Player " + playerTurn + " rolled a " + (randomNum + randomNum1) + ", their new position is " + Name[newPosition] + "\n");
 	    if ((playerTurn.getPosition() + randomNum + randomNum1) > 39) {
 		playerTurn.addMoney(200);
 		display.setText("Player " + playerTurn + " has passed GO!\n Collect $200.");
@@ -739,19 +742,17 @@ public class Board extends JFrame implements ActionListener {
 		    cards.createRandomizedCommunityChest();
 		}
 	    }
-	    /*for (int i = 0; i < 10; i ++) {
-		if (PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).getMonopoly()[i] == true) {
-		    var = i;
-		}
-	    }
-	    if(((tiles.get(playerTurn.getPosition()).getOwnedBy()) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && charged == false && PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).getMonopoly()[var] == true) {
+	  
+	
+	    /*
+	    if(((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) > 0) && charged == false && PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).getMonopoly()[var] == true) {
 		playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
-		display.setText("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "because he or she has a monopoly over the property");
+		display.setText("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + " because he or she has a monopoly over the property");
 		charged = true;
 		    }
 	    */
-	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy()) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && charged == false) {
+	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) > 0) && charged == false && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != rule.getTurn())) {
 	        playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRent());
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRent());
 		display.setText("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy());
@@ -766,7 +767,7 @@ public class Board extends JFrame implements ActionListener {
 	        playerTurn.setRolls(false);
 	    }
 	    if (playerTurn.getDoubleRolls() == 3) {
-		display.setText("Player " + (rule.getTurn() + 1) + "has rolled 3 doubles in a roll. Therefore, he has been sent to Jail!");
+		display.setText("Player " + (rule.getTurn() + 1) + " has rolled 3 doubles in a roll.\nTherefore, he has been sent to Jail!");
 		ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
 		ButtonsOnBoard[10].add(Players[rule.getTurn()]);
 		playerTurn.setPosition(10);
@@ -790,12 +791,12 @@ public class Board extends JFrame implements ActionListener {
 		playerTurn.setRolls(true);
 		rule.setTurn();
 		charged = false;
-		var = 0;
 	    }
 	    display.setText("It is Player " + (rule.getTurn() + 1 )+ "'s Turn!\nPlease roll the dice.");
 	}
 
 	if (event.equals("Property")){
+	    if (playerTurn.getMoney() > 0 ){
 	    if ((tiles.get(playerTurn.getPosition()).getOwnedBy()) == -1) {
 		display.setText("Sorry, you cannot buy this property.");
 	    }
@@ -808,7 +809,8 @@ public class Board extends JFrame implements ActionListener {
 	        playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getCost());
 		playerTurn.setTurn(rule.getTurn() + 1);
 		display.setText("Player " + playerTurn + " has bought " + Name[playerTurn.getPosition()] + "!");
-	    }
+		Log1.append("Player " + playerTurn + " has bought " +  Name[playerTurn.getPosition()] + "!\n");
+	    
 	    
 	    if (playerTurn.getProperty().indexOf(1) > 0 && playerTurn.getProperty().indexOf(3) > 0) {
 		playerTurn.setBrownMonopoly(true);
@@ -841,7 +843,8 @@ public class Board extends JFrame implements ActionListener {
 	if (playerTurn.getProperty().indexOf(12) > 0 && playerTurn.getProperty().indexOf(28) > 0) {
 	    playerTurn.setUtilityMonopoly(true);
 	}
-	    
+	    }
+	    }
 	}
 
 	if (event.equals("House") && playerTurn.getHasMonopoly() == true) {
@@ -849,7 +852,7 @@ public class Board extends JFrame implements ActionListener {
 		if (playerTurn.getMonopoly()[counter] == true) {
 		    playerTurn.setMonopoly(counter);
 		}
-		//where to put house, how many houses
+		//where to put, 
 	    }
 	    
 	} 
