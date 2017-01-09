@@ -228,7 +228,9 @@ public class Player{
 	}
 	return answer;
     }
-   
+    public int getJailCard(){
+	return getOutOfJailCards;
+    }
     public void addGetOutOfJailCard(){
 	getOutOfJailCards += 1;
     }
