@@ -63,7 +63,7 @@ public class CardArray{
     chanceListPosition[10] = 39;
     chanceListPosition[11] = -1; 
     chanceListPosition[12] = 24;
-    chanceListPosition[13] = -1;
+    chanceListPosition[13] = -1; //fix this its get out of jail free
     chanceListPosition[14] = -1;
     chanceListPosition[15] = -1;
 
@@ -71,19 +71,19 @@ public class CardArray{
     chanceListMoney[0] = 200;
     chanceListMoney[1] = 50;
     chanceListMoney[2] = 0;
-    chanceListMoney[3] = 1000;
+    chanceListMoney[3] = 0;
     chanceListMoney[4] = 0;
     chanceListMoney[5] = -15;
-    chanceListMoney[6] = 1000;
-    chanceListMoney[7] = 1000;
-    chanceListMoney[8] = 1000;
-    chanceListMoney[9] = 1000;
-    chanceListMoney[10] = 1000;
+    chanceListMoney[6] = 0;
+    chanceListMoney[7] = 0;
+    chanceListMoney[8] = 0;
+    chanceListMoney[9] = 0;
+    chanceListMoney[10] = 0;
     chanceListMoney[11] = 150; 
-    chanceListMoney[12] = 1000;
-    chanceListMoney[13] = 1000;
-    chanceListMoney[14] = 1000;
-    chanceListMoney[15] = (-50 * 1000);
+    chanceListMoney[12] = 0;
+    chanceListMoney[13] = 1000; // fix this too
+    chanceListMoney[14] = 1000; // fix this later
+    chanceListMoney[15] = -200;
 
     communityListPosition[0] = -1;
     communityListPosition[1] = -1;
@@ -112,10 +112,10 @@ public class CardArray{
     communityListMoney[7] = 100;
     communityListMoney[8] = 10;
     communityListMoney[9] = 100;
-    communityListMoney[10] = 1000;
+    communityListMoney[10] = 1000;//edit
     communityListMoney[11] = 200;
     communityListMoney[12] = 20;
-    communityListMoney[13] = 1000;
+    communityListMoney[13] = 1000;//edit
     communityListMoney[14] = -50;
     communityListMoney[15] = 200;
 
@@ -166,12 +166,20 @@ public class CardArray{
 	}
     }
 
+    public void setChancePosition(int y,int x) {
+	chanceListPosition[y] = x; 
+    }
+
     public void setCommunityPosition(String cardNumber,int x) {
 	for (int i = 0; i < 15; i++ ) {
 	    if(cardNumber.equals(communityChestList.get(i))) {
 		communityListPosition[i] = x;
 	    }
 	}
+    }
+    
+    public void setCommunityPosition(int y,int x) {
+	communityListPosition[y] = x; 
     }
 
     public void setCommunityMoney(String cardNumber,int x) {
@@ -182,6 +190,11 @@ public class CardArray{
 	}
     }
 
+    public void setCommunityMoney(int y,int x) {
+	communityListMoney[y] = x; 
+    }
+
+
     public void setChanceMoney(String cardNumber,int x) {
 	for (int i = 0; i < 15; i++ ) {
 	    if(cardNumber.equals(ChanceList.get(i))) {
@@ -190,6 +203,9 @@ public class CardArray{
 	}
     }
 
+    public void setChanceMoney(int y,int x) {
+	chanceListMoney[y] = x; 
+    }
     
 
     public void createRandomizedCommunityChest(){

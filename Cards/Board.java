@@ -12,10 +12,11 @@ public class Board extends JFrame implements ActionListener {
     public JButton[] ButtonsOnBoard;
     public JLabel[] Players;
     public ArrayList<Player> PlayerNumber;
-    public int randomNum,randomNum1,doubleRolls;
-    public boolean rolls,hasMonopoly,hasHouse,hasHotel;
+    public int randomNum,randomNum1,doubleRolls,var;
+    public boolean rolls,hasMonopoly,hasHouse,hasHotel,charged;
     
     public Board() {
+	charged = false;
 	rolls = true;
 	PlayerNumber = new ArrayList<Player>(4);
 	Player one = new Player();
@@ -132,7 +133,6 @@ public class Board extends JFrame implements ActionListener {
 	
 	//add in later
 	JPanel wholePane = new JPanel();
-	//wholePane.setPreferredSize(new Dimension(500, 500));
 	wholePane.setLayout(new BorderLayout());
 
 	JPanel tpane = new JPanel();
@@ -154,9 +154,12 @@ public class Board extends JFrame implements ActionListener {
 	wholePane.add(bpane, BorderLayout.PAGE_END);
 	wholePane.add(lpane, BorderLayout.LINE_START);
 	wholePane.add(rpane, BorderLayout.LINE_END);
-	//may change later
+
+	
 	display = new JTextArea("WELCOME");
 	display.setEditable(false);
+	display.setLineWrap(true);
+	display.setWrapStyleWord(true);
 	display.setPreferredSize(new Dimension(150,150));
 	wholePane.add(display, BorderLayout.CENTER);
 	
@@ -381,13 +384,21 @@ public class Board extends JFrame implements ActionListener {
 
 	Dimension dim3 = new Dimension(150,50);	
 	a5 = new JTextArea("Player 1: ");
-	a5.setPreferredSize(dim3);
+	a5.setPreferredSize(dim3);	
+	a5.setLineWrap(true);
+	a5.setWrapStyleWord(true);
 	b5 = new JTextArea("Player 2: ");
 	b5.setPreferredSize(dim3);
+	b5.setLineWrap(true);
+	b5.setWrapStyleWord(true);
 	c5 = new JTextArea("Player 3: ");
 	c5.setPreferredSize(dim3);
+	c5.setLineWrap(true);
+	c5.setWrapStyleWord(true);
 	d5 = new JTextArea("Player 4: ");
 	d5.setPreferredSize(dim3);	    	
+	d5.setLineWrap(true);
+	d5.setWrapStyleWord(true);
 	
 	Players.add(a5);
 	Players.add(b5);
@@ -402,7 +413,8 @@ public class Board extends JFrame implements ActionListener {
 	Log1 = new JTextArea("Log");
 	Log1.setPreferredSize(new Dimension(100,600));
 	Log1.setLineWrap(true);
-	Log1.setWrapStyleWord(true);	
+	Log1.setWrapStyleWord(true);
+	Log1.setEditable(false);
 	JScrollPane Scroll = new JScrollPane(Log1);
 	Scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         Log.add(Scroll);
@@ -428,6 +440,7 @@ public class Board extends JFrame implements ActionListener {
     }
     Rules rule = new Rules();
     CardArray cards = new CardArray();
+    
 
     public void actionPerformed(ActionEvent e){
 	String event = e.getActionCommand();
@@ -517,7 +530,7 @@ public class Board extends JFrame implements ActionListener {
 	Player playerTurn = PlayerNumber.get(rule.getTurn());
 	//have to add more limitation
 
-	if (event.equals("Dice") && playerTurn.getRolls() == false) {
+	if (event.equals("Dice") && playerTurn.getRolls() == false) {	    
 		display.setText("It is not your turn to roll again.\nAfter conducting your moves, please end your turn.");
 	    }
 	    
@@ -531,14 +544,161 @@ public class Board extends JFrame implements ActionListener {
 	    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
 	    //int newPosition = 30;
 	    int newPosition = (playerTurn.getPosition() + randomNum + randomNum1) % 40;
-	    if (newPosition > 39) {
+	    if ((playerTurn.getPosition() + randomNum + randomNum1) > 39) {
 		playerTurn.addMoney(200);
 		display.setText("Player " + playerTurn + " has passed GO!\n Collect $200.");
 	    }
 	    ButtonsOnBoard[newPosition].add(Players[rule.getTurn()]);
 	    playerTurn.setPosition(newPosition);
-	    
+
 	    if (newPosition == 7 || newPosition == 22 || newPosition == 36) {
+	    cards.setChancePosition(1,playerTurn.getPosition());
+	    cards.setChancePosition(5,playerTurn.getPosition());
+	    cards.setChancePosition(11,playerTurn.getPosition());
+	    cards.setChancePosition(14,playerTurn.getPosition());
+	    cards.setChancePosition(15,playerTurn.getPosition());
+	    if (playerTurn.getPosition() < 12 || playerTurn.getPosition() > 28) {
+		if (tiles.get(12).getOwnedBy() == 0) {
+		    if (playerTurn.getPosition() > 28) {
+			cards.setChanceMoney(3,20);
+		    }
+		    cards.setChancePosition(3,12);
+		    
+		}
+		else if (tiles.get(28).getOwnedBy() == 0) {
+		    if (playerTurn.getPosition() > 28) {
+			cards.setChanceMoney(3,20);
+		    }
+		    cards.setChancePosition(3,28);
+		}
+		else {
+		    cards.setChancePosition(3,12);
+		    cards.setChanceMoney(3,-1 * 10 * (randomNum + randomNum1));
+		}
+	    }
+	    if (playerTurn.getPosition() > 12 && playerTurn.getPosition() > 28) {
+		if (tiles.get(28).getOwnedBy() == 0) {
+		    cards.setChancePosition(3,28);
+		}
+		else if (tiles.get(12).getOwnedBy() == 0) {
+		    cards.setChancePosition(3,12);
+		}
+		else {
+		    cards.setChancePosition(3,28);
+		    cards.setChanceMoney(3,-1 * 10 * (randomNum + randomNum1));
+		}
+	    }
+	    if (playerTurn.getPosition() < 5 || playerTurn.getPosition() > 35) {
+		if (tiles.get(5).getOwnedBy() == 0) {
+		    if (playerTurn.getPosition() > 5) {
+			cards.setChanceMoney(7,200);
+			cards.setChanceMoney(8,200);
+		    }
+		    cards.setChancePosition(7,5);
+		    cards.setChancePosition(8,5);
+		}
+		else if (tiles.get(15).getOwnedBy() == 0) {
+		    if (playerTurn.getPosition() > 15) {
+			cards.setChanceMoney(7,200);
+			cards.setChanceMoney(8,200);
+		    }
+		    cards.setChancePosition(7,15);
+		    cards.setChancePosition(8,15);
+		}
+		else if (tiles.get(25).getOwnedBy() == 0) {
+		    if (playerTurn.getPosition() > 35) {
+			cards.setChanceMoney(7,200);
+			cards.setChanceMoney(8,200);
+		    }
+		    cards.setChancePosition(7,25);
+		    cards.setChancePosition(8,25);
+		}
+		else if (tiles.get(35).getOwnedBy() == 0) {
+		    if (playerTurn.getPosition() > 35) {
+			cards.setChanceMoney(7,200);
+			cards.setChanceMoney(8,200);
+		    }
+
+		    cards.setChancePosition(7,35);
+		    cards.setChancePosition(8,35);
+		}
+		else {
+		    cards.setChancePosition(7,5);
+		    cards.setChancePosition(8,5);
+		    cards.setChanceMoney(7,25);
+		    cards.setChanceMoney(8,25);
+		    // Edit laterif (PlayerNumber.get(tiles.get(5).getOwnedBy())
+		    
+		}
+	    }
+	    
+	    if (playerTurn.getPosition() > 5 && playerTurn.getPosition() < 15) {
+		if (tiles.get(15).getOwnedBy() == 0) {
+		    cards.setChancePosition(7,15);
+		    cards.setChancePosition(8,15);
+		}
+		else if (tiles.get(25).getOwnedBy() == 0) {
+		    cards.setChancePosition(7,25);
+		    cards.setChancePosition(8,25);
+		}
+		else if (tiles.get(35).getOwnedBy() == 0) {
+		    cards.setChancePosition(7,35);
+		    cards.setChancePosition(8,35);
+		}
+		else if (tiles.get(5).getOwnedBy() == 0) {
+		    cards.setChanceMoney(7,200);
+		    cards.setChanceMoney(8,200);
+		    cards.setChancePosition(7,5);
+		    cards.setChancePosition(8,5);
+		}
+		else {
+		    cards.setChancePosition(7,15);
+		    cards.setChancePosition(8,15);
+		    cards.setChanceMoney(7,25);
+		    cards.setChanceMoney(8,25);
+		}
+	    }
+
+	    if (playerTurn.getPosition() > 15 && playerTurn.getPosition() < 25) {
+		 if (tiles.get(25).getOwnedBy() == 0) {
+		    cards.setChancePosition(7,25);
+		    cards.setChancePosition(8,25);
+		}
+		else if (tiles.get(35).getOwnedBy() == 0) {
+		    cards.setChancePosition(7,35);
+		    cards.setChancePosition(8,35);
+		}
+		else if (tiles.get(5).getOwnedBy() == 0) {
+		    cards.setChanceMoney(7,200);
+		    cards.setChanceMoney(8,200);
+		    cards.setChancePosition(7,5);
+		    cards.setChancePosition(8,5);
+		}
+		else if (tiles.get(15).getOwnedBy() == 0) {
+		    cards.setChanceMoney(7,200);
+		    cards.setChanceMoney(8,200);
+		    cards.setChancePosition(7,15);
+		    cards.setChancePosition(8,15);
+		}
+		else {
+		    cards.setChancePosition(7,25);
+		    cards.setChancePosition(8,25);
+		    cards.setChanceMoney(7,25);
+		    cards.setChanceMoney(8,25);
+		}
+	    }
+	    
+	    if (playerTurn.getPosition() > 11) {
+		cards.setChanceMoney(6,200);
+	    }
+	    if (playerTurn.getPosition() > 5) {
+		cards.setChanceMoney(9,200);
+	    }
+	    if (playerTurn.getPosition() > 24) {
+		cards.setChanceMoney(12,200);
+	    }
+
+		
 		String CC = cards.getRandomizedChanceCard();
 		display.setText("You have landed on Chance!\n" + CC);
 		if (cards.getChancePosition(CC) > 0) {
@@ -546,6 +706,13 @@ public class Board extends JFrame implements ActionListener {
 		    ButtonsOnBoard[cards.getChancePosition(CC)].add(Players[rule.getTurn()]);
 		    playerTurn.setPosition(cards.getChancePosition(CC));
 		}
+		 if (cards.getChancePosition(CC) == 15) {
+		     for (int i = 0; i < 4; i++) {
+			 if (playerTurn.getTurn() - 1 != i) {
+			     PlayerNumber.get(i).addMoney(50);
+			 }
+		     }
+		 }
 		playerTurn.addMoney(cards.getChanceMoney(CC));
 		if (cards.ChanceEmpty()){
 		    cards.createRandomizedChance();
@@ -554,6 +721,12 @@ public class Board extends JFrame implements ActionListener {
 	    }
 
 	    if(newPosition == 2 || newPosition == 17 || newPosition == 33) {
+
+		for (int i = 0; i < 15; i++) {
+		    if (i != 6) {
+			cards.setCommunityPosition(i,playerTurn.getPosition());		    }
+		}		
+		
 		String CCC = cards.getRandomizedCommunityChestCard();
 		display.setText("You have landed on Community Chest!\n" + CCC);
 		if (cards.getCommunityPosition(CCC) > 0) {
@@ -566,12 +739,25 @@ public class Board extends JFrame implements ActionListener {
 		    cards.createRandomizedCommunityChest();
 		}
 	    }
-	    
-	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy()) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0)) {
+	    /*for (int i = 0; i < 10; i ++) {
+		if (PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).getMonopoly()[i] == true) {
+		    var = i;
+		}
+	    }
+	    if(((tiles.get(playerTurn.getPosition()).getOwnedBy()) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && charged == false && PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).getMonopoly()[var] == true) {
+		playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
+		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
+		display.setText("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "because he or she has a monopoly over the property");
+		charged = true;
+		    }
+	    */
+	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy()) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && charged == false) {
 	        playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRent());
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRent());
 		display.setText("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy());
+		charged = true;
 	}
+
 	    
 	    if (randomNum == randomNum1){
 	        playerTurn.setDoubleRolls(playerTurn.getDoubleRolls() + 1);
@@ -603,6 +789,8 @@ public class Board extends JFrame implements ActionListener {
 	        playerTurn.setDoubleRolls(0);
 		playerTurn.setRolls(true);
 		rule.setTurn();
+		charged = false;
+		var = 0;
 	    }
 	    display.setText("It is Player " + (rule.getTurn() + 1 )+ "'s Turn!\nPlease roll the dice.");
 	}
