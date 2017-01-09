@@ -81,7 +81,7 @@ public class CardArray{
     chanceListMoney[10] = 0;
     chanceListMoney[11] = 150; 
     chanceListMoney[12] = 0;
-    chanceListMoney[13] = 1000; // fix this too
+    chanceListMoney[13] = 0; // fix this too
     chanceListMoney[14] = 1000; // fix this later
     chanceListMoney[15] = -200;
 
@@ -115,7 +115,7 @@ public class CardArray{
     communityListMoney[10] = 1000;//edit
     communityListMoney[11] = 200;
     communityListMoney[12] = 20;
-    communityListMoney[13] = 1000;//edit
+    communityListMoney[13] = 0;//edit
     communityListMoney[14] = -50;
     communityListMoney[15] = 200;
 
