@@ -69,6 +69,7 @@ public class Player{
     public void setMonopoly1(int x,boolean y) {
 	monopoly[x] = y;
     }
+    /*
     public boolean getRailroadMonopoly() {
 	return railroadMonopoly;
     }
@@ -147,7 +148,7 @@ public class Player{
     public void setBlueMonopoly(boolean x) {
 	blueMonopoly = x;
     }
-    
+    */
     public String toString() {
 	return "" + turn;
     }
