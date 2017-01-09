@@ -743,16 +743,16 @@ public class Board extends JFrame implements ActionListener {
 		}
 	    }
 	  
-	
-	    /*
-	    if(((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) > 0) && charged == false && PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).getMonopoly()[var] == true) {
-		playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
-		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
-		display.setText("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + " because he or she has a monopoly over the property");
-		charged = true;
+		if(((tiles.get(playerTurn.getPosition()).getOwnedBy()) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && charged == false){
+		    if ((PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy()).getHasMonopolyNum()) < 10) {
+			playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
+			PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
+			display.setText("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + " because he or she has a monopoly over the property");
+			charged = true;
 		    }
-	    */
-	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) > 0) && charged == false && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != rule.getTurn())) {
+		}
+	    
+	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy()) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && charged == false && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) != rule.getTurn() - 1)) {
 	        playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRent());
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRent());
 		display.setText("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy());
@@ -765,6 +765,7 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	    if (randomNum != randomNum1) {
 	        playerTurn.setRolls(false);
+		charged = false;
 	    }
 	    if (playerTurn.getDoubleRolls() == 3) {
 		display.setText("Player " + (rule.getTurn() + 1) + " has rolled 3 doubles in a roll.\nTherefore, he has been sent to Jail!");

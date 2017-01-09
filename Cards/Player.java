@@ -52,6 +52,15 @@ public class Player{
 	}
 	return false;
     }
+
+    public int getHasMonopolyNum() {
+	for (int i = 0; i < 10; i ++ ) {
+	    if (monopoly[i] == true) {
+		return i;
+	    }
+	}
+	return 11;
+    }
     
     public boolean getRailroadMonopoly() {
 	return railroadMonopoly;
