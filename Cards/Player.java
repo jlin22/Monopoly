@@ -1,6 +1,6 @@
 import java.util.*;
 public class Player{
-    private int money,position,getOutOfJailCards,count,doubleRolls,turn;
+    private int money,position,getOutOfJailCards,count,doubleRolls,turn, jailCounter;
     private int[] propertiesOwned;
     private boolean rolls,brownMonopoly,cyanMonopoly,magentaMonopoly,orangeMonopoly,redMonopoly,yellowMonopoly,greenMonopoly,blueMonopoly,railroadMonopoly,utilityMonopoly,hasMonopoly;
     private boolean[]monopoly;
@@ -24,6 +24,15 @@ public class Player{
 	utilityMonopoly = false;
 	hasMonopoly = false;
 	monopoly = new boolean[10];
+	jailCounter = 0;
+    }
+
+    public int getJailCounter() {
+	return jailCounter;
+    }
+
+    public void setJailCounter(int x ) {
+	jailCounter = x; 
     }
 
     public boolean[] getMonopoly() {
@@ -69,6 +78,7 @@ public class Player{
     public void setMonopoly1(int x,boolean y) {
 	monopoly[x] = y;
     }
+    /*
     public boolean getRailroadMonopoly() {
 	return railroadMonopoly;
     }
@@ -147,7 +157,7 @@ public class Player{
     public void setBlueMonopoly(boolean x) {
 	blueMonopoly = x;
     }
-    
+    */
     public String toString() {
 	return "" + turn;
     }
