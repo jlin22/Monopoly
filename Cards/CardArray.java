@@ -220,6 +220,12 @@ public class CardArray{
     public ArrayList<String> getRandomizedChance(){
 	return randomizedChanceList;
     }
+    public boolean ChanceEmpty(){
+	return randomizedChanceList.size() == 0;
+    }
+    public boolean CommunityChestEmpty(){
+	return randomizedCommunityChest.size() == 0;
+    }
     //use these only to print text
     public String getRandomizedChanceCard(){
 	int y = (int)(Math.random()*(randomizedChanceList.size()));

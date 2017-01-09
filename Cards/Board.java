@@ -16,7 +16,6 @@ public class Board extends JFrame implements ActionListener {
     public boolean rolls,hasMonopoly,hasHouse,hasHotel;
     
     public Board() {
-	CardArray CA = new CardArray();
 	rolls = true;
 	PlayerNumber = new ArrayList<Player>(4);
 	Player one = new Player();
@@ -544,6 +543,10 @@ public class Board extends JFrame implements ActionListener {
 		    playerTurn.setPosition(cards.getChancePosition(CC));
 		}
 		playerTurn.addMoney(cards.getChanceMoney(CC));
+		if (cards.ChanceEmpty()){
+		    cards.createRandomizedChance();
+		}
+		    
 	    }
 
 	    if(newPosition == 2 || newPosition == 17 || newPosition == 33) {
@@ -555,6 +558,9 @@ public class Board extends JFrame implements ActionListener {
 		    playerTurn.setPosition(cards.getCommunityPosition(CCC));
 		}
 		playerTurn.addMoney(cards.getCommunityMoney(CCC));
+		if (cards.CommunityChestEmpty()){
+		    cards.createRandomizedCommunityChest();
+		}
 	    }
 	    
 	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy()) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0)) {
