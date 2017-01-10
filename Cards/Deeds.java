@@ -113,8 +113,8 @@ public class Deeds {
     public int getHouseNumber(){
 	return houseNumber;
     }
-    public void setHouseNumber(int x){
-	houseNumber = x;
+    public void setHouseNumber(){
+	houseNumber += 1;
     }
     public boolean getHotel(){
 	return hotel;
