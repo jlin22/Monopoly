@@ -1,7 +1,7 @@
 # Monopoly
 <b>How to Play</b><br>
-Each player rolls the dice at the start of the turn<br>
-If you land on a property, you can buy it<br>
+Each player rolls the dice at the start of the turn.<br>
+If you land on a property, you can buy it.<br>
 If you have a monopoly of that color, you can buy houses for the properties that you land on.<br>
 If you land on a Chance or Community Chest tile, you will draw the respective card, which will do something.<br>
 
