@@ -53,7 +53,7 @@ public class CardArray{
     chanceListPosition[0] = 0;
     chanceListPosition[1] = -1;
     chanceListPosition[2] = 1;
-    chanceListPosition[3] = 1;
+    chanceListPosition[3] = 0;
     chanceListPosition[4] = 10;
     chanceListPosition[5] = -1;
     chanceListPosition[6] = 11;
@@ -63,7 +63,7 @@ public class CardArray{
     chanceListPosition[10] = 39;
     chanceListPosition[11] = -1; 
     chanceListPosition[12] = 24;
-    chanceListPosition[13] = -1; //fix this its get out of jail free
+    chanceListPosition[13] = -1;
     chanceListPosition[14] = -1;
     chanceListPosition[15] = -1;
 
@@ -81,9 +81,9 @@ public class CardArray{
     chanceListMoney[10] = 0;
     chanceListMoney[11] = 150; 
     chanceListMoney[12] = 0;
-    chanceListMoney[13] = 0; // fix this too
+    chanceListMoney[13] = 0; 
     chanceListMoney[14] = 1000; // fix this later
-    chanceListMoney[15] = -200;
+    chanceListMoney[15] = -150;
 
     communityListPosition[0] = -1;
     communityListPosition[1] = -1;
@@ -139,6 +139,7 @@ public class CardArray{
 	}
 	return 0;
     }
+
     
     public int getChanceMoney(String x) {
 	for (int i = 0; i < 15; i ++ ) {
