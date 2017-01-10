@@ -6,18 +6,20 @@ import java.io.*;
 import java.util.*;
  
 public class Board extends JFrame implements ActionListener {
-    private JTextArea display,Log1,a5,b5,c5,d5;
+    private JTextArea display,Log1,a5,b5,c5,d5,TurnDisplay;
     private JLabel p1,p2,p3,p4;
     private String[] Name;
     private ArrayList<Deeds> tiles;
     private JButton[] ButtonsOnBoard;
     private JLabel[] Players;
     private ArrayList<Player> PlayerNumber;
-    private int randomNum,randomNum1,doubleRolls,jailCounter,temp;
+    private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount;
     private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
     private boolean[] playerDead;
     
     public Board() {
+	houseCount = 32;
+	hotelCount = 12;
 	playerDead = new boolean[4];
 	playerDead[0] = player1Dead;
 	playerDead[1] = player2Dead;
@@ -336,8 +338,8 @@ public class Board extends JFrame implements ActionListener {
 	ButtonsOnBoard[36] = g3;
 	ButtonsOnBoard[37] = h3;
 	ButtonsOnBoard[38] = i3;
-	ButtonsOnBoard[39] = j3;
-
+	ButtonsOnBoard[39] = j3;	
+	
 	for (int ii = 0; ii < 40; ii++) {
 	    ButtonsOnBoard[ii].setPreferredSize(dim);
 	    ButtonsOnBoard[ii].addActionListener(this);
@@ -436,8 +438,10 @@ public class Board extends JFrame implements ActionListener {
 	//change later
 	JPanel Title = new JPanel();
 	Title.setLayout(new FlowLayout());
+	TurnDisplay = new JTextArea("Player's Turns");
+	Title.add(TurnDisplay);
 	
-	//outsideLayout.add(Title, BorderLayout.PAGE_START);
+	outsideLayout.add(Title, BorderLayout.PAGE_START);
 	outsideLayout.add(wholePane,BorderLayout.CENTER);
 	outsideLayout.add(Buttons, BorderLayout.LINE_START);
      	outsideLayout.add(Players, BorderLayout.PAGE_END);
@@ -548,8 +552,8 @@ public class Board extends JFrame implements ActionListener {
 	    }
 
 	if (event.equals("Dice") && playerTurn.getRolls() == true){
-
-	    playerTurn.setTurn(rule.getTurn() + 1);		
+	    playerTurn.setTurn(rule.getTurn() + 1);
+	    TurnDisplay.setText("It is now Player " + (rule.getTurn() + 1)  + "'s Turn.");
 	    randomNum = 0;
 	    randomNum1 = 0;
 	    randomNum = 1 + (int)(Math.random() * 6);
@@ -832,7 +836,7 @@ public class Board extends JFrame implements ActionListener {
 	    
     }
 	
-	if (event.equals("End") ) {
+	if (event.equals("End")) {
 	   a5.setText("Money: " + PlayerNumber.get(0).getMoney() + "\nProperties: " + PlayerNumber.get(0).getProperty());
 	    b5.setText("Money: " + PlayerNumber.get(1).getMoney() + "\nProperties: " + PlayerNumber.get(1).getProperty());
 	    c5.setText("Money: " + PlayerNumber.get(2).getMoney() + "\nProperties: " + PlayerNumber.get(2).getProperty());
@@ -901,16 +905,16 @@ public class Board extends JFrame implements ActionListener {
 	    }	
 	}
 
-	if (event.equals("House") && playerTurn.getAnyMonopoly() == true) {
-	    for (int counter = 0; counter < 10; counter ++) {
-		if (playerTurn.getMonopoly()[counter] > 0) {
-		    playerTurn.setMonopoly(counter,rule.getTurn());
-		}
-	     
+	if (event.equals("House") && playerTurn.getHasMonopoly1(temp) == true) {
+	    display.setText("Please click on the tile you are on to buy a house on it.\nKeep in mind that you  must have at least 1 house on all tiles of that color before buying a second one.");
+	    if (event.equals(ButtonsOnBoard[playerTurn.getPosition()])) {
+		houseCount -= 1;
+		tiles.get(playerTurn.getPosition()).setHouseNumber();
 	    }
-	    display.setText("error");
-	} 
-    }
+	}	
+		    
+    } 
+
 	    
     
     public static void main(String[] args) {
