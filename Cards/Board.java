@@ -562,7 +562,7 @@ public class Board extends JFrame implements ActionListener {
 	    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
 	    //int newPosition = 30;
 	    int newPosition = (playerTurn.getPosition() + randomNum + randomNum1) % 40;
-	    //Log1.append("Player " + playerTurn + " rolled a " + (randomNum + randomNum1) + ", their new position is " + Name[newPosition] + "\n");
+	    Log1.append("Player " + playerTurn + " rolled a " + (randomNum + randomNum1) + ", their new position is " + Name[newPosition] + "\n");
 	    if ((playerTurn.getPosition() + randomNum + randomNum1) > 39) {
 		playerTurn.addMoney(200);
 		display.setText("Player " + playerTurn + " has passed GO!\n Collect $200.");
@@ -867,7 +867,7 @@ public class Board extends JFrame implements ActionListener {
 		    playerDead[rule.getTurn()] = true;
 		}
 		display.setText("Player " + playerTurn + " has bought " + Name[playerTurn.getPosition()] + "!");
-		//Log1.append("Player " + playerTurn + " has bought " +  Name[playerTurn.getPosition()] + "!\n");
+		Log1.append("Player " + playerTurn + " has bought " +  Name[playerTurn.getPosition()] + "!\n");
 		if(tiles.get(1).getOwnedBy() ==  tiles.get(3).getOwnedBy() && tiles.get(3).getOwnedBy() == rule.getTurn()) {
 		    playerTurn.setMonopoly(0,rule.getTurn());
 		}
