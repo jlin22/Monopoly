@@ -1,5 +1,3 @@
-//"Mediterranean Ave.", "Baltic Ave.", "Reading Railroad.","Oriental Ave.","Vermont Ave.","Connecticut Ave.","St. Charles Place.","Electric Company.","States Ave.","Virginia Ave.","Pennsylvania Railroad.","St. James Place","Tennessee Avenue","New York Avenue","Kentucky Avenue","Indiana Avenue","Illinois Avenue","B&O Railroad.","Atlantic Avenue","Ventnor Avenue","Water Work.","Marvin Gardens","Pacific Avenue","North Carolina Avenue","Pennsylvania Avenue","Short Line.","Park Place","Boardwalk",
-
 public class Deeds {
     private int position; //a 1
     private int rent; //c 2
@@ -49,6 +47,14 @@ public class Deeds {
 
     public int getRent() {
 	return rent;
+    }
+
+    public void setRent(int x) {
+	rent = x;
+    }
+
+    public void setRentMonopoly(int x) {
+	rentMonopoly = x;
     }
 
     public int getRentMonopoly() {
