@@ -1,6 +1,6 @@
 import java.util.*;
 public class Player{
-    private int money,position,getOutOfJailCards,count,doubleRolls,turn, jailCounter,brownMonopoly,cyanMonopoly,magentaMonopoly,orangeMonopoly,redMonopoly,yellowMonopoly,greenMonopoly,blueMonopoly,railroadMonopoly,utilityMonopoly,hasMonopoly;
+    private int money,position,getOutOfJailCards,count,doubleRolls,turn, jailCounter,brownMonopoly,cyanMonopoly,magentaMonopoly,orangeMonopoly,redMonopoly,yellowMonopoly,greenMonopoly,blueMonopoly,railroadMonopoly,utilityMonopoly,hasMonopoly,houseCount,hotelCount;
     private int[] propertiesOwned;
     private int[] houses;
     private boolean rolls;
@@ -37,6 +37,22 @@ public class Player{
 	monopoly[8] = railroadMonopoly;
 	monopoly[9] = utilityMonopoly;
 	jailCounter = 0;
+    }
+
+    public int getHouseCount() {
+	return houseCount;
+    }
+
+    public int getHotelCount() {
+	return hotelCount;
+    }
+
+    public void setHouseCount(int x) {
+	houseCount += x;
+    }
+
+    public void setHotelCount(int x ) {
+	hotelCount += x;
     }
 
     public int getJailCounter() {
@@ -239,7 +255,7 @@ public class Player{
     public int getJailCard(){
 	return getOutOfJailCards;
     }
-    public void addGetOutOfJailCard(){
-	getOutOfJailCards += 1;
+    public void setJailCard(int x ){
+	getOutOfJailCards += x;
     }
 }

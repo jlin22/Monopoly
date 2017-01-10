@@ -120,7 +120,7 @@ public class Board extends JFrame implements ActionListener {
       tiles.add(a381);
       Deeds a391 = new Deeds(39,50,100,200,600,1400,1700,2000,200,200,220,400,0,39,0,0);
       tiles.add(a391);
-      Name = new String[]{"GO", "Mediterranean Ave", "Community Chest","Baltic Ave", "Income Tax","Reading Railroad","Oriental Ave","Chance","Vermont Ave","Connecticut Ave","Jail\n(Just Visiting Jail If You Land On It)", "St. Charles Place","Electric Company","States Ave","Virginia Ave","Pennsylvania Railroad","St. James Place","Community Chest","Tennessee Avenue","New York Avenue","Free Parking","Kentucky Avenue","Chance","Indiana Avenue","Illinois Avenue","B&O Railroad","Atlantic Avenue","Ventnor Avenue","Water Work","Marvin Gardens","Go To Jail", "Pacific Avenue","North Carolina Avenue","Community Chest","Pennsylvania Avenue","Short Line","Chance","Park Place", "Luxury Tax","Boardwalk"};
+      Name = new String[]{"GO", "Mediterranean Ave", "Community Chest","Baltic Ave", "Income Tax","Reading Railroad","Oriental Ave","Chance","Vermont Ave","Connecticut Ave","Jail(Just Visiting Jail If You Land On It)", "St. Charles Place","Electric Company","States Ave","Virginia Ave","Pennsylvania Railroad","St. James Place","Community Chest","Tennessee Avenue","New York Avenue","Free Parking","Kentucky Avenue","Chance","Indiana Avenue","Illinois Avenue","B&O Railroad","Atlantic Avenue","Ventnor Avenue","Water Work","Marvin Gardens","Go To Jail", "Pacific Avenue","North Carolina Avenue","Community Chest","Pennsylvania Avenue","Short Line","Chance","Park Place", "Luxury Tax","Boardwalk"};
 
 	p1 = new JLabel("P1",JLabel.LEFT);
 	p2 = new JLabel("P2",JLabel.RIGHT);
@@ -427,11 +427,11 @@ public class Board extends JFrame implements ActionListener {
 	Log1.setWrapStyleWord(true);
 	Log1.setEditable(false);
 	JScrollPane Scroll = new JScrollPane(Log1);
-	JScrollBar sb = Scroll.getVerticalScrollBar();
-	sb.setValue(sb.getMaximum());
+	Scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	Scroll.getVerticalScrollBar().setUnitIncrement(18);
 	
+	Log.add(Log1);
 	Log.add(Scroll);
-	Log.add(sb);
 
 
 	//change later
@@ -550,24 +550,32 @@ public class Board extends JFrame implements ActionListener {
 		display.setText("It is not your turn to roll again.\nAfter conducting your moves, please end your turn.");
 	    }
 
+	//fix later
+
 	if (event.equals("Dice") && playerTurn.getRolls() == true){
 	    playerTurn.setTurn(rule.getTurn() + 1);
-	    TurnDisplay.setText("It is now Player " + (rule.getTurn() + 1)  + "'s Turn.");
 	    randomNum = 0;
 	    randomNum1 = 0;
 	    randomNum = 1 + (int)(Math.random() * 6);
-	    randomNum1 = 1 + (int)(Math.random() * 6); 
+	    randomNum1 = 1 + (int)(Math.random() * 6);
 	    display.setText("" + randomNum + "," + randomNum1);
+	    if (playerTurn.getJailCounter() == 1 && randomNum != randomNum1) {
+		display.setText("You are in Jail for your " + playerTurn.getJailCounter() + "st turn. You can only get out if you roll a double and you did not get a double.\nAfter your third turn of not getting a double, you will be forced to pay 50 and get out anyways.\nYou can also opt to pay 50 now and get out.");
+		playerTurn.setRolls(false);
+		charged = false;
+	    }
+	    
 	    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
 	    //int newPosition = 30;
 	    int newPosition = (playerTurn.getPosition() + randomNum + randomNum1) % 40;
-	    Log1.append("Player " + playerTurn + " rolled a " + (randomNum + randomNum1) + ", their new position is " + Name[newPosition] + "\n");
 	    if ((playerTurn.getPosition() + randomNum + randomNum1) > 39) {
 		playerTurn.addMoney(200);
 		display.setText("Player " + playerTurn + " has passed GO!\n Collect $200.");
 	    }
 	    ButtonsOnBoard[newPosition].add(Players[rule.getTurn()]);
 	    playerTurn.setPosition(newPosition);
+	    TurnDisplay.setText("It is now Player " + (rule.getTurn() + 1)  + "'s Turn. Player " + (rule.getTurn() + 1) + " is on " + Name[playerTurn.getPosition()]);
+	    Log1.append("Player " + playerTurn + " rolled a " + (randomNum + randomNum1) + ", their new position is " + Name[newPosition] + "\n");
 	    if (playerTurn.getPosition() == 1 || playerTurn.getPosition() == 3){
 		temp = 0;
 	    }if (playerTurn.getPosition() == 6 || playerTurn.getPosition() == 8 || playerTurn.getPosition() == 8) {
@@ -602,6 +610,7 @@ public class Board extends JFrame implements ActionListener {
 
 	    if (newPosition == 7 || newPosition == 22 || newPosition == 36) {
 	    cards.setChancePosition(1,playerTurn.getPosition());
+	    cards.setChancePosition(2,playerTurn.getPosition() - 3);
 	    cards.setChancePosition(5,playerTurn.getPosition());
 	    cards.setChancePosition(11,playerTurn.getPosition());
 	    cards.setChancePosition(14,playerTurn.getPosition());
@@ -750,21 +759,31 @@ public class Board extends JFrame implements ActionListener {
 		
 		String CC = cards.getRandomizedChanceCard();
 		display.setText("You have landed on Chance!\n" + CC);
-		if (cards.getChancePosition(CC) > 0) {
-		    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
-		    ButtonsOnBoard[cards.getChancePosition(CC)].add(Players[rule.getTurn()]);
-		    playerTurn.setPosition(cards.getChancePosition(CC));
-		}
-		 if (cards.getChancePosition(CC) == 15) {
+		if (cards.getChancePosition(CC) == 15) {
 		     for (int i = 0; i < 4; i++) {
-			 if (playerTurn.getTurn() - 1 != i) {
+			 if (rule.getTurn() != i) {
 			     PlayerNumber.get(i).addMoney(50);
 			 }
 		     }
 		 }
-		 if (cards.getChancePosition(CC) == 6) {
+		 if (cards.getChancePosition(CC) == 14) {
+		     cards.setChanceMoney(14,((playerTurn.getHouseCount()) * 25 + (playerTurn.getHotelCount() * 100)));
+		     display.setText("" + playerTurn.getHouseCount() * 25 + playerTurn.getHotelCount() * 100);
+
+		 }
+		 if (cards.getChancePosition(CC) == 13) {
+		     playerTurn.setJailCard(1);
+		 }
+		 if (cards.getChancePosition(CC) == 4) {
 		     playerTurn.setJailCounter();
 		 }
+		if (cards.getChancePosition(CC) >= 0) {
+		    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
+		    ButtonsOnBoard[cards.getChancePosition(CC)].add(Players[rule.getTurn()]);
+		    playerTurn.setPosition(cards.getChancePosition(CC));
+		    TurnDisplay.setText("It is now Player " + (rule.getTurn() + 1)  + "'s Turn. Player " + (rule.getTurn() + 1) + " is on " + Name[playerTurn.getPosition()]);
+		}
+		 
 		playerTurn.addMoney(cards.getChanceMoney(CC));
 		if (cards.ChanceEmpty()){
 		    cards.createRandomizedChance();
@@ -781,15 +800,32 @@ public class Board extends JFrame implements ActionListener {
 		
 		String CCC = cards.getRandomizedCommunityChestCard();
 		display.setText("You have landed on Community Chest!\n" + CCC);
+		if (cards.getCommunityPosition(CCC) == 13) {
+		     playerTurn.setJailCard(1);
+		 }
+		if (cards.getCommunityPosition(CCC) == 6) {
+		    playerTurn.setJailCounter();
+		        
+		}
+		if (cards.getCommunityPosition(CCC) == 0) {
+		    for (int i = 0; i < 4; i++) {
+			 if (rule.getTurn() != i) {
+			     PlayerNumber.get(i).loseMoney(-10); //edit for # of players
+			 }
+		    }
+		}
+		    if (cards.getCommunityPosition(CCC) == 10) {
+			cards.setCommunityMoney(10,(playerTurn.getHouseCount() * 40 + playerTurn.getHotelCount() * 115));
+		     display.setText("" + playerTurn.getHouseCount() * 40 + playerTurn.getHotelCount() * 115);
+		}
 		if (cards.getCommunityPosition(CCC) > 0) {
 		    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
 		    ButtonsOnBoard[cards.getCommunityPosition(CCC)].add(Players[rule.getTurn()]);
 		    playerTurn.setPosition(cards.getCommunityPosition(CCC));
+		    TurnDisplay.setText("It is now Player " + (rule.getTurn() + 1)  + "'s Turn. Player " + (rule.getTurn() + 1) + " is on " + Name[playerTurn.getPosition()]);
 		}
 		playerTurn.addMoney(cards.getCommunityMoney(CCC));
-		if (cards.getCommunityPosition(CCC) == 6) {
-		    playerTurn.setJailCounter();
-		}
+	
 		if (cards.CommunityChestEmpty()){
 		    cards.createRandomizedCommunityChest();
 		}
@@ -803,7 +839,7 @@ public class Board extends JFrame implements ActionListener {
 		    
 	    }
 	    
-	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy()) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && charged == false && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) != rule.getTurn() - 1)) {
+	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy()) != 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && charged == false && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) != rule.getTurn())) {
 	        playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRent());
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRent());
 		display.setText("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy());
@@ -817,12 +853,14 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	    if (randomNum != randomNum1) {
 	        playerTurn.setRolls(false);
+		charged = false;
 	    }
 	    if (playerTurn.getDoubleRolls() == 3) {
 		display.setText("Player " + (rule.getTurn() + 1) + " has rolled 3 doubles in a roll.\nTherefore, he has been sent to Jail!");
 		ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
 		ButtonsOnBoard[10].add(Players[rule.getTurn()]);
 		playerTurn.setPosition(10);
+		TurnDisplay.setText("It is now Player " + (rule.getTurn() + 1)  + "'s Turn. Player " + (rule.getTurn() + 1) + " is on " + Name[playerTurn.getPosition()]);
 		playerTurn.setJailCounter();
 	    }
 	    if (playerTurn.getPosition() == 30) {
@@ -830,6 +868,7 @@ public class Board extends JFrame implements ActionListener {
 		ButtonsOnBoard[30].remove(Players[rule.getTurn()]);
 		ButtonsOnBoard[10].add(Players[rule.getTurn()]);
 		playerTurn.setPosition(10);
+	        TurnDisplay.setText("It is now Player " + (rule.getTurn() + 1)  + "'s Turn. Player " + (rule.getTurn() + 1) + " is on " + Name[playerTurn.getPosition()]);
 		playerTurn.setJailCounter();
 	    }
 	    
@@ -909,10 +948,26 @@ public class Board extends JFrame implements ActionListener {
 	    if (event.equals(ButtonsOnBoard[playerTurn.getPosition()])) {
 		houseCount -= 1;
 		tiles.get(playerTurn.getPosition()).setHouseNumber();
-		display.setText("Player: " + playerTurn + "has bought 1 house on" + name[playerTurn.getPosition()] "!");
-		log1.append("Player: " + playerTurn + "has bought 1 house on" + name[playerTurn.getPosition()] "!");
+		display.setText("Player: " + playerTurn + "has bought 1 house on" + Name[playerTurn.getPosition()] +  "!");
+		Log1.append("Player: " + playerTurn + "has bought 1 house on" + Name[playerTurn.getPosition()]+  "!");
 	    }
-	}	
+	}
+
+	if(event.equals("House") && playerTurn.getHasMonopoly1(temp) == false) {
+	    if (tiles.get(playerTurn.getPosition()).getOwnedBy() == -1) {
+		display.setText("You cannot buy this property meaning you cannot build houses on it.");
+		}
+	    else {
+		display.setText("Sorry. You must have a monopoly over the property AND land on the tile to buy a house.");
+	    }
+	    }
+	/*
+	if (event.equals("Jail Card") && playerTurn.getJailCard > 0 && playerTurn.getPosition() == 10) {
+	    playerTurn.setJailCard(-1);
+	    playerTurn.setJailCounter(3);
+	}
+	*/
+
 		    
     } 
 
