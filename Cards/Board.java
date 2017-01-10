@@ -1,4 +1,3 @@
-//check branching
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -910,6 +909,8 @@ public class Board extends JFrame implements ActionListener {
 	    if (event.equals(ButtonsOnBoard[playerTurn.getPosition()])) {
 		houseCount -= 1;
 		tiles.get(playerTurn.getPosition()).setHouseNumber();
+		display.setText("Player: " + playerTurn + "has bought 1 house on" + name[playerTurn.getPosition()] "!");
+		log1.append("Player: " + playerTurn + "has bought 1 house on" + name[playerTurn.getPosition()] "!");
 	    }
 	}	
 		    
