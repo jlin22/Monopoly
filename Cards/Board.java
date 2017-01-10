@@ -545,10 +545,12 @@ public class Board extends JFrame implements ActionListener {
 
 	}
 	Player playerTurn = PlayerNumber.get(rule.getTurn());
-	
+
+	/*
 	if (event.equals("Dice") && playerTurn.getRolls() == false && playerDead[rule.getTurn() + 1] == false && playerTurn.getJailCounter() == 0) {	    
 		display.setText("It is not your turn to roll again.\nAfter conducting your moves, please end your turn.");
 	    }
+	*/
 
 	//fix later
 
@@ -779,10 +781,10 @@ public class Board extends JFrame implements ActionListener {
 		     playerTurn.setJailCounter();
 		 }
 		if (cards.getChancePosition(CC) >= 0) {
-		    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
-		    ButtonsOnBoard[cards.getChancePosition(CC)].add(Players[rule.getTurn()]);
 		    playerTurn.setPosition(cards.getChancePosition(CC));
 		    playerTurn.addMoney(cards.getChanceMoney(CC));
+		    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
+		    ButtonsOnBoard[cards.getChancePosition(CC)].add(Players[rule.getTurn()]);
 		    TurnDisplay.setText("It is now Player " + (rule.getTurn() + 1)  + "'s Turn. Player " + (rule.getTurn() + 1) + " is on " + Name[playerTurn.getPosition()]);
 		}
 		 
@@ -816,12 +818,11 @@ public class Board extends JFrame implements ActionListener {
 		playerTurn.setJailCounter();
 	    }
 	    if (cards.getCommunityPosition(CCC) > 0) {
-		ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
+		playerTurn.addMoney(cards.getCommunityMoney(CCC));
+		playerTurn.setPosition(cards.getCommunityPosition(CCC));		ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
 		ButtonsOnBoard[cards.getCommunityPosition(CCC)].add(Players[rule.getTurn()]);
-		    playerTurn.setPosition(cards.getCommunityPosition(CCC));
 		    TurnDisplay.setText("It is now Player " + (rule.getTurn() + 1)  + "'s Turn. Player " + (rule.getTurn() + 1) + " is on " + Name[playerTurn.getPosition()]);
 		}
-		playerTurn.addMoney(cards.getCommunityMoney(CCC));
 	
 		if (cards.CommunityChestEmpty()){
 		    cards.createRandomizedCommunityChest();
