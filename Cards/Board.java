@@ -809,8 +809,8 @@ public class Board extends JFrame implements ActionListener {
 	    String CCC = cards.getRandomizedCommunityChestCard();
 	    display.append("\nYou have landed on Community Chest!\n" + CCC);
 	    if (CCC.equals("It Is Your Birthday. Collect $10 From Every Player.")){
-		for (int i = 0; i < 5; i++) {
-		    if ((rule.getTurn() + 1)!= i) {
+		for (int i = 0; i < 4; i++) {
+		    if ((rule.getTurn() + 1 )!= i) {
 			PlayerNumber.get(i).loseMoney(-10); //edit for # of players
 		    }
 		}
@@ -833,14 +833,14 @@ public class Board extends JFrame implements ActionListener {
 		}
 	    }
 	    charged = false;
-	    if(((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) >= 0) && charged == false && (tiles.get(playerTurn.getPosition()).getHouseNumber() > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != rule.getTurn())) {
+	    if(((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) >= 0) && charged == false && (tiles.get(playerTurn.getPosition()).getHouseNumber() > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false) {
 		playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getHouseRent(tiles.get(playerTurn.getPosition()).getHouseNumber()));
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getHouseRent(tiles.get(playerTurn.getPosition()).getHouseNumber()));
 		display.append("\n" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getHouseRent(tiles.get(playerTurn.getPosition()).getHouseNumber())+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + " because he or she has " + tiles.get(playerTurn.getPosition()).getHouseNumber() + " house(s).");
 		charged = true;
 	    }
 	    
-	    if(((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) >= 0) && charged == false && (PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).getHasMonopoly1(temp)) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != rule.getTurn())) {
+	    if(((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) >= 0) && charged == false && (PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).getHasMonopoly1(temp)) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false) {
 		playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
 		display.append("\n" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRentMonopoly()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + " because he or she has a monopoly over the property");
@@ -848,8 +848,7 @@ public class Board extends JFrame implements ActionListener {
 		    
 	    }
 	    
-	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) >= 0) && charged == false && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != rule.getTurn())) {
-		Log1.append("" + PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).getHasMonopoly1(temp));
+	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) >= 0) && charged == false && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false) {
 	        playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRent());
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRent());
 		display.setText("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy());
@@ -957,7 +956,10 @@ public class Board extends JFrame implements ActionListener {
 	}
 
 	if (event.equals("House") && playerTurn.getHasMonopoly1(temp) == true){
-	     if (houseCount == 0){
+	    if (tiles.get(playerTurn.getPosition()).getMortgaged() == true) {
+		display.setText("Sorry. You cannot buy a house when the property is mortgaged.");
+	    }
+	    if (houseCount == 0){
 		display.setText("Sorry. You cannot buy a house, because there are no more houses left");
 		return;
 	     }
@@ -974,7 +976,7 @@ public class Board extends JFrame implements ActionListener {
 	    playerTurn.setHouseArray(temp,tiles.get(playerTurn.getPosition()).getNumInMonopoly(),tiles.get(playerTurn.getPosition()).getHouseNumber());
 	    playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getHouseCost());
 	    display.append("\nPlayer " + playerTurn + " has bought 1 house on " + Name[playerTurn.getPosition()] +  "!");
-	    Log1.append("\nPlayer " + playerTurn + " has bought 1 house on " + Name[playerTurn.getPosition()]+  "!");
+	    Log1.append("Player " + playerTurn + " has bought 1 house on " + Name[playerTurn.getPosition()]+  "!");
 	     }
 	     if (canDo == false) {
 		 display.setText("You must have at least 1 house on all tiles of that color before buying a second one.");
@@ -997,7 +999,11 @@ public class Board extends JFrame implements ActionListener {
 	*/
 
 	// need boolean for if player owns property
-	if (event.equals("Mortgage")){
+	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false){
+	    display.append("\nPlayer " + (rule.getTurn()  + 1)+ " has mortgaged " +Name[ playerTurn.getPosition()] + ".\nPlayer " + (rule.getTurn()  + 1) + " will receive " + tiles.get(playerTurn.getPosition()).getMortgage() + " for mortgaging the property.\nThe cost for unmortgaging will be $" + tiles.get(playerTurn.getPosition()).getUnmortgage() + "");
+	    Log1.append("Player " + (rule.getTurn() + 1)  + " has mortgaged " +Name[ playerTurn.getPosition()] + ".");
+	    tiles.get(playerTurn.getPosition()).setMortgaged(true);
+	    tiles.get(playerTurn.getPosition()).setMortgageCounter();
 	    playerTurn.addMoney(tiles.get(playerTurn.getPosition()).getMortgage());
 	    
 	    

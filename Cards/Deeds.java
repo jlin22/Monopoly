@@ -19,6 +19,8 @@ public class Deeds {
     private int houseNumber;
     private boolean hotel;
     private int numInMonopoly;
+    private int mortgageCounter;
+    private boolean mortgaged;
 
     public Deeds(int a, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l,int m,int n, int o,int q,int r, int s) {
 	numInMonopoly = s;
@@ -40,8 +42,28 @@ public class Deeds {
 	ownedBy = r;
 	houseNumber = 0;
 	hotel = false;
+	mortgaged = false;
+    }
+    public boolean getMortgaged() {
+	return mortgaged;
     }
 
+    public void setMortgaged(boolean x) {
+	mortgaged = x;
+    }
+    
+    public int getMortgageCounter() {
+	return mortgageCounter;
+    }
+    
+    public void setMortgageCounter() {
+	mortgageCounter = 3;
+    }
+    
+    public void setMortgageCounter1() {
+	mortgageCounter -= 1;
+    }
+    
     public int getNumInMonopoly() {
 	return numInMonopoly;
     }
