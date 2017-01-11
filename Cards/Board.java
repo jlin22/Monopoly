@@ -977,8 +977,13 @@ public class Board extends JFrame implements ActionListener {
 	}
 	*/
 
-		    
-    } 
+	// need boolean for if player owns property
+	if (event.equals("Mortgage")){
+	    playerTurn.addMoney(tiles.get(playerTurn.getPosition()).getMortgage());
+	    
+	    
+	}
+    }
 
 	    
     
