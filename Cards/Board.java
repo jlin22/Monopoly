@@ -918,16 +918,19 @@ public class Board extends JFrame implements ActionListener {
 	}
 
 	if (event.equals("Property")){
-	    if (playerTurn.getMoney() > 0 ){
+	    if ((playerTurn.getMoney() - tiles.get(playerTurn.getPosition()).getCost()) < 0 ) {
+		display.append("\nSorry, you do not have enough money to buy this property.");
+	    }
+	    if ((playerTurn.getMoney() - tiles.get(playerTurn.getPosition()).getCost()) > 0 ){
 		if ((tiles.get(playerTurn.getPosition()).getOwnedBy()) == -1) {
-		display.setText("Sorry, you cannot buy this property.");
+		display.append("\nSorry, you cannot buy this property.");
 	    }
 	    if ((tiles.get(playerTurn.getPosition()).getOwnedBy()) >= 1){
 		if((tiles.get(playerTurn.getPosition()).getOwnedBy()) == rule.getTurn() + 1) {
-		    display.setText("You own this property.");
+		    display.append("\nYou own this property.");
 		}
 		else{
-		    display.setText("Sorry, this property is owned by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy());
+		    display.append("\nSorry, this property is owned by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy());
 		}
 	    }
 	    if ((tiles.get(playerTurn.getPosition()).getOwnedBy()) == 0) {
@@ -979,10 +982,10 @@ public class Board extends JFrame implements ActionListener {
 
 	if (event.equals("House") && playerTurn.getHasMonopoly1(temp) == true){
 	    if (tiles.get(playerTurn.getPosition()).getMortgaged() == true) {
-		display.setText("Sorry. You cannot buy a house when the property is mortgaged.");
+		display.append("\nSorry. You cannot buy a house when the property is mortgaged.");
 	    }
 	    if (houseCount == 0){
-		display.setText("Sorry. You cannot buy a house, because there are no more houses left");
+		display.append("\nSorry. You cannot buy a house, because there are no more houses left");
 		return;
 	     }
 	     boolean canDo = true;
@@ -992,7 +995,7 @@ public class Board extends JFrame implements ActionListener {
 		 }
 	     }
 	     if (canDo == true) {
-	    display.setText("You have bought a house on " + Name[playerTurn.getPosition()] +"\nKeep in mind that you  must have at least 1 house on all tiles of that color before buying a second one.");
+	    display.append("\nYou have bought a house on " + Name[playerTurn.getPosition()] +"\nKeep in mind that you  must have at least 1 house on all tiles of that color before buying a second one.");
 	    houseCount -= 1;
 	    tiles.get(playerTurn.getPosition()).setHouseNumber();
 	    playerTurn.setHouseArray(temp,tiles.get(playerTurn.getPosition()).getNumInMonopoly(),tiles.get(playerTurn.getPosition()).getHouseNumber());
@@ -1001,16 +1004,16 @@ public class Board extends JFrame implements ActionListener {
 	    Log1.append("Player " + playerTurn + " has bought 1 house on " + Name[playerTurn.getPosition()]+  "!");
 	     }
 	     if (canDo == false) {
-		 display.setText("You must have at least 1 house on all tiles of that color before buying a second one.");
+		 display.append("\nYou must have at least 1 house on all tiles of that color before buying a second one.");
 	     }
 	}
 
 	if(event.equals("House") && playerTurn.getHasMonopoly1(temp) == false) {
 	    if (tiles.get(playerTurn.getPosition()).getOwnedBy() == -1) {
-		display.setText("You cannot buy this property meaning you cannot build houses on it.");
+		display.append("\nYou cannot buy this property meaning you cannot build houses on it.");
 		}
 	    else {
-		display.setText("Sorry. You must have a monopoly over the property AND land on the tile to buy a house.");
+		display.append("\nSorry. You must have a monopoly over the property AND land on the tile to buy a house.");
 	    }
 	    }
 	/*
@@ -1041,15 +1044,22 @@ public class Board extends JFrame implements ActionListener {
 		display.setText("Roll the dice to begin.");
 		playerDead[2] = true;
 		playerDead[3] = true;
-		rule.setPlayers(2);;
+		rule.setPlayers(2);
+		ButtonsOnBoard[0].remove(Players[2]);
+		ButtonsOnBoard[0].remove(Players[3]);
 	    }
 	    if (textField.getText().equals("3")) {
 		display.setText("Roll the dice to begin.");
 		playerDead[3] = true;
 		rule.setPlayers(3);
+		ButtonsOnBoard[0].remove(Players[3]);
 	    }
 	    if (textField.getText().equals("4")) {
 		display.setText("Roll the dice to begin.");
+	    }
+	    if (!textField.getText().equals("1") && !textField.getText().equals("2") && !textField.getText().equals("3") && !textField.getText().equals("4")){
+		display.append("\nPlease input a valid number.");
+		gameStart = true;
 	    }
 	}
 	/*
