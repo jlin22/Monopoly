@@ -6,7 +6,8 @@ import java.util.*;
  
 public class Board extends JFrame implements ActionListener {
     private JTextArea display,Log1,a5,b5,c5,d5,TurnDisplay;
-    private JTextField yes,no;
+    private JTextField textField;
+    private JButton yes,no;
     private JLabel p1,p2,p3,p4;
     private String[] Name;
     private ArrayList<Deeds> tiles;
@@ -16,9 +17,11 @@ public class Board extends JFrame implements ActionListener {
     private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount;
     private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
     private boolean[] playerDead;
+    private boolean gameStart;
     
     
     public Board() {
+	gameStart = true;
 	houseCount = 32;
 	hotelCount = 12;
 	playerDead = new boolean[4];
@@ -423,9 +426,18 @@ public class Board extends JFrame implements ActionListener {
 
 
 	//change later
+	textField = new JTextField();
+	textField.addActionListener(this);
+	textField.addActionCommand("textField");
+	yes = new JButton("Yes");	
+	yes.addActionListener(this);
+	yes.setActionCommand("Yes");
+	no = new JButton("No");
+	no.addActionListener(this);
+	no.setActionCommand("No");
 	JPanel Log = new JPanel();
-	Log.setLayout(new FlowLayout());
-
+	Log.setLayout(new BoxLayout(Log,BoxLayout.PAGE_AXIS));
+	    
 	Log1 = new JTextArea("");
 	Log1.setPreferredSize(new Dimension(100,600));
 	Log1.setLineWrap(true);
@@ -437,14 +449,16 @@ public class Board extends JFrame implements ActionListener {
 	
 	Log.add(Log1);
 	Log.add(Scroll);
-
-
-	//change later
+	Log.add(yes);
+	Log.add(no);
+	Log.add(textField);
+	
 	JPanel Title = new JPanel();
 	Title.setLayout(new FlowLayout());
 	TurnDisplay = new JTextArea("Player's Turns");
 	TurnDisplay.setEditable(false);
 	Title.add(TurnDisplay);
+	
 	
 	outsideLayout.add(Title, BorderLayout.PAGE_START);
 	outsideLayout.add(wholePane,BorderLayout.CENTER);
@@ -462,7 +476,7 @@ public class Board extends JFrame implements ActionListener {
     }
     Rules rule = new Rules();
     CardArray cards = new CardArray();
-
+    
     public void actionPerformed(ActionEvent e){
 	String event = e.getActionCommand();
 	switch(event) {
@@ -1009,9 +1023,34 @@ public class Board extends JFrame implements ActionListener {
 	    
 	    
 	}
-    }
-
-	    
+	//add the option for deciding who goes first
+	if (event.equals("textField") && gameStart == true) {
+	    gameStart = false;
+	    if (textField.get()  == "1") {
+		display.setText("You must have more than one player. Please type in a number from 2 to 4.");
+	    }
+	    if (textField.get() == "2") {
+		display.setText("Roll the dice to begin.");
+		playerDead[2] = true;
+		playerDead[3] = true;
+	    }
+	    if (textField.get() == "3") {
+		display.setText("Roll the dice to begin.");
+		playerDead[3] = true;
+	    }
+	    if (textField.get() == "4") {
+		display.setText("Roll the dice to begin.");
+	    }
+	}
+	/*
+	if(event.equals("Trade") {
+		if (textField.get() == "1") {
+		    
+		}
+	    }
+	*/
+    
+    }	    
     
     public static void main(String[] args) {
       Board g = new Board();
