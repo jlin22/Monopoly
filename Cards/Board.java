@@ -561,9 +561,9 @@ public class Board extends JFrame implements ActionListener {
 	if (event.equals("Dice") && playerTurn.getRolls() == true){
 	    playerTurn.setTurn(rule.getTurn() + 1);
 	    randomNum = 0;
-	    randomNum1 = 0;
-	    randomNum = 1 + (int)(Math.random() * 6);
-	    randomNum1 = 1 + (int)(Math.random() * 6);
+	    randomNum1 = 1;
+	    //randomNum = 1 + (int)(Math.random() * 6);
+	    //randomNum1 = 1 + (int)(Math.random() * 6);
 	    display.setText("" + randomNum + "," + randomNum1);
 	    tiles.get(12).setRent((randomNum + randomNum1) * 4);
 	    tiles.get(12).setRentMonopoly((randomNum + randomNum1) * 10);
@@ -842,6 +842,7 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	    
 	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) >= 0) && charged == false && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != rule.getTurn())) {
+		Log1.append("" + PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).getHasMonopoly1(temp));
 	        playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRent());
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRent());
 		display.setText("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy());
@@ -911,29 +912,32 @@ public class Board extends JFrame implements ActionListener {
 		}
 		display.setText("Player " + playerTurn + " has bought " + Name[playerTurn.getPosition()] + "!");
 		Log1.append("Player " + playerTurn + " has bought " +  Name[playerTurn.getPosition()] + "!\n");
-		if(tiles.get(1).getOwnedBy() ==  tiles.get(3).getOwnedBy() && tiles.get(3).getOwnedBy() == rule.getTurn()) {
-		    playerTurn.setMonopoly(0,rule.getTurn());
+		Log1.append("" + rule.getTurn());
+		Log1.append("" + tiles.get(1).getOwnedBy());
+		Log1.append("" + tiles.get(3).getOwnedBy());
+		if(tiles.get(1).getOwnedBy() ==  tiles.get(3).getOwnedBy() && tiles.get(3).getOwnedBy() == (rule.getTurn() + 1)) {
+		    playerTurn.setMonopoly(0,rule.getTurn() + 1);
 		}
-		if (tiles.get(6).getOwnedBy() == tiles.get(8).getOwnedBy() && tiles.get(9).getOwnedBy() == tiles.get(6).getOwnedBy() && tiles.get(6).getOwnedBy() == rule.getTurn()){
-		    playerTurn.setMonopoly(1,rule.getTurn());
+		if (tiles.get(6).getOwnedBy() == tiles.get(8).getOwnedBy() && tiles.get(9).getOwnedBy() == tiles.get(6).getOwnedBy() && tiles.get(6).getOwnedBy() == rule.getTurn() + 1){
+		    playerTurn.setMonopoly(1,rule.getTurn() + 1);
 		}
-		if (tiles.get(11).getOwnedBy() == tiles.get(13).getOwnedBy() && tiles.get(11).getOwnedBy() == tiles.get(14).getOwnedBy()&& tiles.get(11).getOwnedBy() == rule.getTurn()) {
-		playerTurn.setMonopoly(2,rule.getTurn());
+		if (tiles.get(11).getOwnedBy() == tiles.get(13).getOwnedBy() && tiles.get(11).getOwnedBy() == tiles.get(14).getOwnedBy()&& tiles.get(11).getOwnedBy() == rule.getTurn() + 1) {
+		playerTurn.setMonopoly(2,rule.getTurn() + 1);
 	    }
-		if(tiles.get(16).getOwnedBy() == tiles.get(18).getOwnedBy() &&tiles.get(19).getOwnedBy() == tiles.get(16).getOwnedBy() && tiles.get(18).getOwnedBy() == rule.getTurn()) {
-		playerTurn.setMonopoly(3,rule.getTurn());
+		if(tiles.get(16).getOwnedBy() == tiles.get(18).getOwnedBy() &&tiles.get(19).getOwnedBy() == tiles.get(16).getOwnedBy() && tiles.get(18).getOwnedBy() == rule.getTurn() + 1 ) {
+		playerTurn.setMonopoly(3,rule.getTurn() + 1);
 		}
-		if(tiles.get(21).getOwnedBy() == tiles.get(23).getOwnedBy() &&tiles.get(21).getOwnedBy() == tiles.get(24).getOwnedBy() && tiles.get(24).getOwnedBy() == rule.getTurn()){
-		playerTurn.setMonopoly(4,rule.getTurn());
+		if(tiles.get(21).getOwnedBy() == tiles.get(23).getOwnedBy() &&tiles.get(21).getOwnedBy() == tiles.get(24).getOwnedBy() && tiles.get(24).getOwnedBy() == rule.getTurn() + 1){
+		playerTurn.setMonopoly(4,rule.getTurn() + 1);
 		}
-		if (tiles.get(26).getOwnedBy() == tiles.get(28).getOwnedBy() &&tiles.get(29).getOwnedBy() == tiles.get(26).getOwnedBy() && tiles.get(28).getOwnedBy() == rule.getTurn()){
-		    playerTurn.setMonopoly(5,rule.getTurn());
+		if (tiles.get(26).getOwnedBy() == tiles.get(28).getOwnedBy() &&tiles.get(29).getOwnedBy() == tiles.get(26).getOwnedBy() && tiles.get(28).getOwnedBy() == rule.getTurn() + 1){
+		    playerTurn.setMonopoly(5,rule.getTurn() + 1);
 		}
-		if(tiles.get(31).getOwnedBy() == tiles.get(32).getOwnedBy() &&tiles.get(32).getOwnedBy() == tiles.get(34).getOwnedBy() && tiles.get(34).getOwnedBy() == rule.getTurn()) {
-		    playerTurn.setMonopoly(6,rule.getTurn());
+		if(tiles.get(31).getOwnedBy() == tiles.get(32).getOwnedBy() &&tiles.get(32).getOwnedBy() == tiles.get(34).getOwnedBy() && tiles.get(34).getOwnedBy() == rule.getTurn() + 1) {
+		    playerTurn.setMonopoly(6,rule.getTurn() + 1);
 		}
-		if(tiles.get(37).getOwnedBy() == tiles.get(39).getOwnedBy() && tiles.get(37).getOwnedBy() == rule.getTurn()) {
-		    playerTurn.setMonopoly(7,rule.getTurn());
+		if(tiles.get(37).getOwnedBy() == tiles.get(39).getOwnedBy() && tiles.get(37).getOwnedBy() == rule.getTurn() + 1 ) {
+		    playerTurn.setMonopoly(7,rule.getTurn() + 1);
 		}
 		/*
 		if(tiles.get(5).getOwnedBy() == tiles.get(15).getOwnedBy() &&tiles.get(25).getOwnedBy() == tiles.get(35).getOwnedBy() && tiles.get(15).getOwnedBy() == rule.getTurn()) {
