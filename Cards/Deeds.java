@@ -66,6 +66,22 @@ public class Deeds {
 	return rentMonopoly;
     }
 
+    public int getHouseRent(int x) {
+	if (x == 1) {
+	    return rent1H;
+	}
+	else if (x == 2) {
+	    return rent2H;
+	}
+	else if (x == 3) {
+	    return rent3H;
+	}
+	else if (x == 4) {
+	    return rent4H;
+	}
+	return 0;
+    }
+    
     public int getRent1H() {
 	return rent1H;
     }
@@ -81,7 +97,7 @@ public class Deeds {
     public int getRent4H() {
 	return rent4H;
     }
-
+    
     public int getHotelCost() {
 	return hotelCost;
     }
