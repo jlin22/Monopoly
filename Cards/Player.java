@@ -5,6 +5,8 @@ public class Player{
     private int[] houses;
     private boolean rolls;
     private int[]monopoly;
+    private int[] brownMonopolyH,cyanMonopolyH,magentaMonopolyH,orangeMonopolyH,redMonopolyH,yellowMonopolyH,greenMonopolyH,blueMonopolyH;
+    private int[][]houseArray;
     public Player() {
 	money = 1500;
 	position = 0;
@@ -37,8 +39,51 @@ public class Player{
 	monopoly[8] = railroadMonopoly;
 	monopoly[9] = utilityMonopoly;
 	jailCounter = 0;
+	brownMonopolyH = new int[2];
+	cyanMonopolyH = new int [3];
+	magentaMonopolyH = new int [3];
+	orangeMonopolyH = new int[3];
+	redMonopolyH = new int [3];
+	yellowMonopolyH = new int[3];
+	greenMonopolyH = new int[3];
+	blueMonopolyH = new int[2];
+	houseArray = new int[8][3];
+	houseArray[0][0] = brownMonopolyH[0];
+	houseArray[0][1] = brownMonopolyH[1];
+	houseArray[1][0] = cyanMonopolyH[0];
+	houseArray[1][1] = cyanMonopolyH[1];
+	houseArray[1][2] = cyanMonopolyH[2];
+	houseArray[2][0] = magentaMonopolyH[0];
+	houseArray[2][1] = magentaMonopolyH[1];
+	houseArray[2][2] = magentaMonopolyH[2];
+	houseArray[3][0] = orangeMonopolyH[0];
+	houseArray[3][1] = orangeMonopolyH[1];
+	houseArray[3][2] = orangeMonopolyH[2];
+	houseArray[4][0] = redMonopolyH[0];
+	houseArray[4][1] = redMonopolyH[1];
+	houseArray[4][2] = redMonopolyH[2];
+	houseArray[5][0] = yellowMonopolyH[0];
+	houseArray[5][1] = yellowMonopolyH[1];
+	houseArray[5][2] = yellowMonopolyH[2];
+	houseArray[6][0] = greenMonopolyH[0];
+	houseArray[6][1] = greenMonopolyH[1];
+	houseArray[6][2] = greenMonopolyH[2];
+	houseArray[7][0] = blueMonopolyH[0];
+	houseArray[7][1] = blueMonopolyH[1];
     }
 
+    public int getHouseArray1(int whichArray) {
+	return houseArray[whichArray].length;
+    }
+    
+    public int getHouseArray(int whichArray,int whichPosition) {
+	return houseArray[whichArray][whichPosition];
+    }
+
+    public void setHouseArray(int whichArray, int whichTile,int newNum) {
+	houseArray[whichArray][whichTile]  = newNum; 
+    }
+    
     public int getHouseCount() {
 	return houseCount;
     }

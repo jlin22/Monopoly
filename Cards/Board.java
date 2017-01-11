@@ -16,6 +16,7 @@ public class Board extends JFrame implements ActionListener {
     private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
     private boolean[] playerDead;
     
+    
     public Board() {
 	houseCount = 32;
 	hotelCount = 12;
@@ -40,85 +41,85 @@ public class Board extends JFrame implements ActionListener {
 	PlayerNumber.add(four);
 
 	tiles = new ArrayList<Deeds>(40);
-	Deeds a01 = new Deeds(2,0,0,0,0,0,0,0,0,0,0,0,0,0,200,-1);
+	Deeds a01 = new Deeds(2,0,0,0,0,0,0,0,0,0,0,0,0,0,200,-1,0);
 	tiles.add(a01);
-	Deeds a11 = new Deeds(1,2,4,10,30,90,160,250,50,30,33,60,0,1,0,0);
+	Deeds a11 = new Deeds(1,2,4,10,30,90,160,250,50,30,33,60,0,1,0,0,1);
 	tiles.add(a11);
-	Deeds a21 = new Deeds(2,0,0,0,0,0,0,0,0,0,0,0,0,2,0,-1);	
+	Deeds a21 = new Deeds(2,0,0,0,0,0,0,0,0,0,0,0,0,2,0,-1,0);	
 	tiles.add(a21);
-	Deeds a31 = new Deeds(3,4,8,20,60,180,320,450,50,30,33,60,0,3,0,0);
+	Deeds a31 = new Deeds(3,4,8,20,60,180,320,450,50,30,33,60,0,3,0,0,2);
 	tiles.add(a31);
-	Deeds a41 = new Deeds(4,0,0,0,0,0,0,0,0,0,0,0,0,4,-200,-1);
+	Deeds a41 = new Deeds(4,0,0,0,0,0,0,0,0,0,0,0,0,4,-200,-1,0);
 	tiles.add(a41);
-	Deeds a51 = new Deeds(5,25,0,0,0,0,0,0,0,100,110,200,0,5,0,0);
+	Deeds a51 = new Deeds(5,25,0,0,0,0,0,0,0,100,110,200,0,5,0,0,0);
 	tiles.add(a51);
-	Deeds a61 = new Deeds(6,5,10,30,90,270,400,550,50,50,55,100,0,6,0,0);
+	Deeds a61 = new Deeds(6,5,10,30,90,270,400,550,50,50,55,100,0,6,0,0,1);
 	tiles.add(a61);
-	Deeds a71 = new Deeds(7,0,0,0,0,0,0,0,0,0,0,0,0,7,0,-1);
+	Deeds a71 = new Deeds(7,0,0,0,0,0,0,0,0,0,0,0,0,7,0,-1,0);
       tiles.add(a71);
-      Deeds a81 = new Deeds(8,5,10,30,90,270,400,550,50,50,55,100,0,8,0,0);
+      Deeds a81 = new Deeds(8,5,10,30,90,270,400,550,50,50,55,100,0,8,0,0,2);
       tiles.add(a81);
-      Deeds a91 = new Deeds(9,8,16,40,100,300,450,600,50,60,66,120,0,9,0,0);
+      Deeds a91 = new Deeds(9,8,16,40,100,300,450,600,50,60,66,120,0,9,0,0,3);
       tiles.add(a91);
-      Deeds a101 = new Deeds(10,0,0,0,0,0,0,0,0,0,0,0,0,10,0,-1);
+      Deeds a101 = new Deeds(10,0,0,0,0,0,0,0,0,0,0,0,0,10,0,-1,0);
       tiles.add(a101);
-      Deeds a111 = new Deeds(11,10,20,50,150,450,625,750,100,70,77,140,0,11,0,0);
+      Deeds a111 = new Deeds(11,10,20,50,150,450,625,750,100,70,77,140,0,11,0,0,1);
       tiles.add(a111);
-      Deeds a121 = new Deeds(12,4,10,0,0,0,0,0,0,75,83,150,0,12,0,0);
+      Deeds a121 = new Deeds(12,4,10,0,0,0,0,0,0,75,83,150,0,12,0,0,0);
       tiles.add(a121);
-      Deeds a131 = new Deeds(13,10,20,50,150,450,625,750,100,70,77,140,0,13,0,0);
+      Deeds a131 = new Deeds(13,10,20,50,150,450,625,750,100,70,77,140,0,13,0,0,2);
       tiles.add(a131);
-      Deeds a141 = new Deeds(14,12,24,60,180,500,700,900,100,80,88,160,0,14,0,0);
+      Deeds a141 = new Deeds(14,12,24,60,180,500,700,900,100,80,88,160,0,14,0,0,3);
       tiles.add(a141);
-      Deeds a151 = new Deeds(15,25,0,0,0,0,0,0,0,100,110,200,0,15,0,0);
+      Deeds a151 = new Deeds(15,25,0,0,0,0,0,0,0,100,110,200,0,15,0,0,0);
       tiles.add(a151);
-      Deeds a161 = new Deeds(16,14,28,70,200,550,750,950,100,90,99,180,0,16,0,0);
+      Deeds a161 = new Deeds(16,14,28,70,200,550,750,950,100,90,99,180,0,16,0,0,1);
       tiles.add(a161);
-      Deeds a171 = new Deeds(17,0,0,0,0,0,0,0,0,0,0,0,0,17,0,-1);
+      Deeds a171 = new Deeds(17,0,0,0,0,0,0,0,0,0,0,0,0,17,0,-1,0);
       tiles.add(a171);
-      Deeds a181 = new Deeds(18,14,28,70,200,550,750,950,100,90,99,180,0,18,0,0);
+      Deeds a181 = new Deeds(18,14,28,70,200,550,750,950,100,90,99,180,0,18,0,0,2);
       tiles.add(a181);
-      Deeds a191 = new Deeds(19,16,32,80,220,600,800,1000,100,100,110,200,0,19,0,0);
+      Deeds a191 = new Deeds(19,16,32,80,220,600,800,1000,100,100,110,200,0,19,0,0,3);
       tiles.add(a191);
-      Deeds a201 = new Deeds(20,0,0,0,0,0,0,0,0,0,0,0,0,20,0,-1);
+      Deeds a201 = new Deeds(20,0,0,0,0,0,0,0,0,0,0,0,0,20,0,-1,0);
       tiles.add(a201);
-      Deeds a211 = new Deeds(21,18,36,90,250,700,875,1050,150,110,121,220,0,21,0,0);
+      Deeds a211 = new Deeds(21,18,36,90,250,700,875,1050,150,110,121,220,0,21,0,0,1);
       tiles.add(a211);
-      Deeds a221 = new Deeds(22,0,0,0,0,0,0,0,0,0,0,0,0,22,0,-1);
+      Deeds a221 = new Deeds(22,0,0,0,0,0,0,0,0,0,0,0,0,22,0,-1,0);
       tiles.add(a221);
-      Deeds a231 = new Deeds(23,18,36,90,250,700,875,1050,150,110,121,220,0,23,0,0); 
+      Deeds a231 = new Deeds(23,18,36,90,250,700,875,1050,150,110,121,220,0,23,0,0,2); 
       tiles.add(a231);
-      Deeds a241 = new Deeds(24,20,40,100,300,750,925,1100,150,120,132,240,0,24,0,0);
+      Deeds a241 = new Deeds(24,20,40,100,300,750,925,1100,150,120,132,240,0,24,0,0,3);
       tiles.add(a241);
-      Deeds a251 = new Deeds(25,25,0,0,0,0,0,0,0,100,110,200,0,25,0,0);
+      Deeds a251 = new Deeds(25,25,0,0,0,0,0,0,0,100,110,200,0,25,0,0,0);
       tiles.add(a251);
-      Deeds a261 = new Deeds(26,22,44,110,330,800,975,1150,150,130,143,260,0,26,0,0);
+      Deeds a261 = new Deeds(26,22,44,110,330,800,975,1150,150,130,143,260,0,26,0,0,1);
       tiles.add(a261);
-      Deeds a271 = new Deeds(27,22,44,110,330,800,975,1150,150,130,143,260,0,27,0,0); 
+      Deeds a271 = new Deeds(27,22,44,110,330,800,975,1150,150,130,143,260,0,27,0,0,2); 
       tiles.add(a271);
-      Deeds a281 = new Deeds(28,4,10,0,0,0,0,0,0,75,83,150,0,28,0,0);
+      Deeds a281 = new Deeds(28,4,10,0,0,0,0,0,0,75,83,150,0,28,0,0,0);
       tiles.add(a281);
-      Deeds a291 = new Deeds(29,24,48,120,360,850,1025,1200,150,140,154,280,0,29,0,0);
+      Deeds a291 = new Deeds(29,24,48,120,360,850,1025,1200,150,140,154,280,0,29,0,0,3);
       tiles.add(a291);
-      Deeds a301 = new Deeds(30,0,0,0,0,0,0,0,0,0,0,0,0,10,0,-1);
+      Deeds a301 = new Deeds(30,0,0,0,0,0,0,0,0,0,0,0,0,10,0,-1,0);
       tiles.add(a301);
-      Deeds a311 = new Deeds(31,26,52,130,390,900,1100,1275,200,150,165,300,0,31,0,0);
+      Deeds a311 = new Deeds(31,26,52,130,390,900,1100,1275,200,150,165,300,0,31,0,0,1);
       tiles.add(a311);
-      Deeds a321 = new Deeds(32,26,52,130,390,900,1100,1275,200,150,165,300,0,32,0,0);
+      Deeds a321 = new Deeds(32,26,52,130,390,900,1100,1275,200,150,165,300,0,32,0,0,2);
       tiles.add(a321);
-      Deeds a331 = new Deeds(33,0,0,0,0,0,0,0,0,0,0,0,0,33,0,-1);
+      Deeds a331 = new Deeds(33,0,0,0,0,0,0,0,0,0,0,0,0,33,0,-1,0);
       tiles.add(a331);
-      Deeds a341 = new Deeds(34,28,56,150,450,1000,1200,1400,200,160,176,320,0,34,0,0);
+      Deeds a341 = new Deeds(34,28,56,150,450,1000,1200,1400,200,160,176,320,0,34,0,0,3);
       tiles.add(a341);
-      Deeds a351 = new Deeds(35,25,0,0,0,0,0,0,0,100,110,200,0,35,0,0);
+      Deeds a351 = new Deeds(35,25,0,0,0,0,0,0,0,100,110,200,0,35,0,0,0);
       tiles.add(a351);
-      Deeds a361 = new Deeds(36,0,0,0,0,0,0,0,0,0,0,0,0,36,0,-1);
+      Deeds a361 = new Deeds(36,0,0,0,0,0,0,0,0,0,0,0,0,36,0,-1,0);
       tiles.add(a361);
-      Deeds a371 = new Deeds(37,35,70,175,500,1100,1300,1500,200,175,193,350,0,37,0,0);
+      Deeds a371 = new Deeds(37,35,70,175,500,1100,1300,1500,200,175,193,350,0,37,0,0,1);
       tiles.add(a371);
-      Deeds a381 = new Deeds(38,0,0,0,0,0,0,0,0,0,0,0,0,38,-100,-1);
+      Deeds a381 = new Deeds(38,0,0,0,0,0,0,0,0,0,0,0,0,38,-100,-1,0);
       tiles.add(a381);
-      Deeds a391 = new Deeds(39,50,100,200,600,1400,1700,2000,200,200,220,400,0,39,0,0);
+      Deeds a391 = new Deeds(39,50,100,200,600,1400,1700,2000,200,200,220,400,0,39,0,0,2);
       tiles.add(a391);
       Name = new String[]{"GO", "Mediterranean Ave", "Community Chest","Baltic Ave", "Income Tax","Reading Railroad","Oriental Ave","Chance","Vermont Ave","Connecticut Ave","Jail(Just Visiting Jail If You Land On It)", "St. Charles Place","Electric Company","States Ave","Virginia Ave","Pennsylvania Railroad","St. James Place","Community Chest","Tennessee Avenue","New York Avenue","Free Parking","Kentucky Avenue","Chance","Indiana Avenue","Illinois Avenue","B&O Railroad","Atlantic Avenue","Ventnor Avenue","Water Work","Marvin Gardens","Go To Jail", "Pacific Avenue","North Carolina Avenue","Community Chest","Pennsylvania Avenue","Short Line","Chance","Park Place", "Luxury Tax","Boardwalk"};
 
@@ -460,7 +461,6 @@ public class Board extends JFrame implements ActionListener {
     }
     Rules rule = new Rules();
     CardArray cards = new CardArray();
-    
 
     public void actionPerformed(ActionEvent e){
 	String event = e.getActionCommand();
@@ -809,7 +809,7 @@ public class Board extends JFrame implements ActionListener {
 	    String CCC = cards.getRandomizedCommunityChestCard();
 	    display.append("\nYou have landed on Community Chest!\n" + CCC);
 	    if (CCC.equals("It Is Your Birthday. Collect $10 From Every Player.")){
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 5; i++) {
 		    if ((rule.getTurn() + 1)!= i) {
 			PlayerNumber.get(i).loseMoney(-10); //edit for # of players
 		    }
@@ -952,18 +952,28 @@ public class Board extends JFrame implements ActionListener {
 	    }	
 	}
 
-	if (event.equals("House") && playerTurn.getHasMonopoly1(temp) == true) {
-	    display.setText("Please click on the tile you are on to buy a house on it.\nKeep in mind that you  must have at least 1 house on all tiles of that color before buying a second one.");
-	    if (houseCount == 0){
+	if (event.equals("House") && playerTurn.getHasMonopoly1(temp) == true){
+	     if (houseCount == 0){
 		display.setText("Sorry. You cannot buy a house, because there are no more houses left");
 		return;
-	    }
-	    if (event.equals(ButtonsOnBoard[playerTurn.getPosition()])) {
-		houseCount -= 1;
-		tiles.get(playerTurn.getPosition()).setHouseNumber();
-		display.setText("Player: " + playerTurn + "has bought 1 house on" + Name[playerTurn.getPosition()] +  "!");
-		Log1.append("Player: " + playerTurn + "has bought 1 house on" + Name[playerTurn.getPosition()]+  "!");
-	    }
+	     }
+	     boolean canDo = true;
+	     for (int i = playerTurn.getHouseArray1(temp) - 1; i > 0; i--) {
+		 if ( playerTurn.getHouseArray(temp,i) != playerTurn.getHouseArray(temp,(i -1))) {
+		     canDo = false;
+		 }
+	     }
+	     if (canDo == true) {
+	    display.setText("You have bought a house on " + Name[playerTurn.getPosition()] +"\nKeep in mind that you  must have at least 1 house on all tiles of that color before buying a second one.");
+	    houseCount -= 1;
+	    tiles.get(playerTurn.getPosition()).setHouseNumber();
+	    playerTurn.setHouseArray(temp,tiles.get(playerTurn.getPosition()).getNumInMonopoly(),tiles.get(playerTurn.getPosition()).getHouseNumber());
+	    display.append("\nPlayer " + playerTurn + " has bought 1 house on " + Name[playerTurn.getPosition()] +  "!");
+	    Log1.append("\nPlayer " + playerTurn + " has bought 1 house on" + Name[playerTurn.getPosition()]+  "!");
+	     }
+	     if (canDo == false) {
+		 display.setText("You must have at least 1 house on all tiles of that color before buying a second one.");
+	     }
 	}
 
 	if(event.equals("House") && playerTurn.getHasMonopoly1(temp) == false) {

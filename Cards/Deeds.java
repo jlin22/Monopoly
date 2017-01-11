@@ -18,8 +18,10 @@ public class Deeds {
     private int ownedBy;
     private int houseNumber;
     private boolean hotel;
+    private int numInMonopoly;
 
-    public Deeds(int a, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l,int m,int n, int o,int q,int r) {
+    public Deeds(int a, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l,int m,int n, int o,int q,int r, int s) {
+	numInMonopoly = s;
 	position = a;
 	rent = c;
 	rentMonopoly = d;
@@ -40,6 +42,9 @@ public class Deeds {
 	hotel = false;
     }
 
+    public int getNumInMonopoly() {
+	return numInMonopoly;
+    }
     
     public int getPosition() {
 	return position;
