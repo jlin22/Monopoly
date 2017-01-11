@@ -554,9 +554,9 @@ public class Board extends JFrame implements ActionListener {
 	    playerTurn.setTurn(rule.getTurn() + 1);
 	    TurnDisplay.setText("It is now Player " + (rule.getTurn() + 1)  + "'s Turn.");
 	    randomNum = 0;
-	    randomNum1 = 0;
-	    randomNum = 1 + (int)(Math.random() * 6);
-	    randomNum1 = 1 + (int)(Math.random() * 6); 
+	    randomNum1 = 1;
+	    //randomNum = 1 + (int)(Math.random() * 6);
+	    // randomNum1 = 1 + (int)(Math.random() * 6); 
 	    display.setText("" + randomNum + "," + randomNum1);
 	    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
 	    //int newPosition = 30;
@@ -909,8 +909,8 @@ public class Board extends JFrame implements ActionListener {
 	    if (event.equals(ButtonsOnBoard[playerTurn.getPosition()])) {
 		houseCount -= 1;
 		tiles.get(playerTurn.getPosition()).setHouseNumber();
-		display.setText("Player: " + playerTurn + "has bought 1 house on" + name[playerTurn.getPosition()] "!");
-		log1.append("Player: " + playerTurn + "has bought 1 house on" + name[playerTurn.getPosition()] "!");
+		display.setText("Player: " + playerTurn + "has bought 1 house on" + Name[playerTurn.getPosition()] + "!");
+		Log1.append("Player: " + playerTurn + "has bought 1 house on" + Name[playerTurn.getPosition()] + "!");
 	    }
 	}	
 		    
