@@ -21,6 +21,7 @@ public class Deeds {
     private int numInMonopoly;
     private int mortgageCounter;
     private boolean mortgaged;
+    private int hotelRent;
 
     public Deeds(int a, int c, int d, int e, int f, int g, int h, int i, int j, int k, int l,int m,int n, int o,int q,int r, int s) {
 	numInMonopoly = s;
@@ -31,7 +32,7 @@ public class Deeds {
 	rent2H = f;
 	rent3H = g;
 	rent4H = h;
-	hotelCost = i;
+	hotelRent = i;
 	houseCost = j;
 	mortgage = k;
 	unmortgage = l;
@@ -101,6 +102,9 @@ public class Deeds {
 	else if (x == 4) {
 	    return rent4H;
 	}
+	else if (x == 5) {
+	    return hotelRent;
+	}
 	return 0;
     }
     
@@ -118,6 +122,10 @@ public class Deeds {
 
     public int getRent4H() {
 	return rent4H;
+    }
+
+    public int getHotelRent() {
+	return hotelRent;
     }
     
     public int getHotelCost() {
