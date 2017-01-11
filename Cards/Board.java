@@ -7,14 +7,14 @@ import java.util.*;
 public class Board extends JFrame implements ActionListener {
     private JTextArea display,Log1,a5,b5,c5,d5,TurnDisplay;
     private JTextField textField;
-    private JButton yes,no;
+    private JButton Enter;
     private JLabel p1,p2,p3,p4;
     private String[] Name;
     private ArrayList<Deeds> tiles;
     private JButton[] ButtonsOnBoard;
     private JLabel[] Players;
     private ArrayList<Player> PlayerNumber;
-    private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount;
+    private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter;
     private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
     private boolean[] playerDead;
     private boolean gameStart;
@@ -172,16 +172,13 @@ public class Board extends JFrame implements ActionListener {
 	wholePane.add(rpane, BorderLayout.LINE_END);
 
 	
-	display = new JTextArea("WELCOME");
+	display = new JTextArea("Type in a number on the bottom corner to declare how many players are playing. Then, press enter.");
 	display.setEditable(false);
 	display.setLineWrap(true);
 	display.setWrapStyleWord(true);
 	display.setPreferredSize(new Dimension(150,150));
 	wholePane.add(display, BorderLayout.CENTER);
-	
-	
-
-	
+		
 	Dimension dim = new Dimension(42,45);
 	Dimension dim1 = new Dimension(48,52);
 	
@@ -425,33 +422,29 @@ public class Board extends JFrame implements ActionListener {
 	Players.add(d5);
 
 
+
 	//change later
 	textField = new JTextField();
-	textField.addActionListener(this);
-	textField.addActionCommand("textField");
-	yes = new JButton("Yes");	
-	yes.addActionListener(this);
-	yes.setActionCommand("Yes");
-	no = new JButton("No");
-	no.addActionListener(this);
-	no.setActionCommand("No");
+	Enter = new JButton("Enter");
+	Enter.setPreferredSize(dim1);
+	Enter.addActionListener(this);
+	Enter.setActionCommand("Enter");
+
 	JPanel Log = new JPanel();
 	Log.setLayout(new BoxLayout(Log,BoxLayout.PAGE_AXIS));
 	    
 	Log1 = new JTextArea("");
-	Log1.setPreferredSize(new Dimension(100,600));
+	Log1.setPreferredSize(new Dimension(150,600));
 	Log1.setLineWrap(true);
 	Log1.setWrapStyleWord(true);
 	Log1.setEditable(false);
 	JScrollPane Scroll = new JScrollPane(Log1);
-	Scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-	Scroll.getVerticalScrollBar().setUnitIncrement(18);
 	
 	Log.add(Log1);
 	Log.add(Scroll);
-	Log.add(yes);
-	Log.add(no);
 	Log.add(textField);
+	Log.add(Enter);
+		
 	
 	JPanel Title = new JPanel();
 	Title.setLayout(new FlowLayout());
@@ -573,10 +566,8 @@ public class Board extends JFrame implements ActionListener {
 
 	//fix later
 
-	if (event.equals("Dice") && playerTurn.getRolls() == true){
-	    playerTurn.setTurn(rule.getTurn() + 1);
-	    //randomNum = 0;
-	    //randomNum1 = 1;
+	if (event.equals("Dice") && playerTurn.getRolls() && !gameStart){
+	    
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
 	    display.setText("" + randomNum + "," + randomNum1);
@@ -866,7 +857,7 @@ public class Board extends JFrame implements ActionListener {
 	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) >= 0) && charged == false && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false) {
 	        playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRent());
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRent());
-		display.append("" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy());
+		display.append("\n" + Name[playerTurn.getPosition()] + " has already been bought by Player " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\nPlayer " + playerTurn + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to Player " + tiles.get(playerTurn.getPosition()).getOwnedBy());
 		charged = true;
 	}
 
@@ -897,10 +888,26 @@ public class Board extends JFrame implements ActionListener {
     }
 	
 	if (event.equals("End")) {
-	   a5.setText("Money: " + PlayerNumber.get(0).getMoney() + "\nProperties: " + PlayerNumber.get(0).getProperty());
+	    if (rule.getPlayers() == 2) {
+	    a5.setText("Money: " + PlayerNumber.get(0).getMoney() + "\nProperties: " + PlayerNumber.get(0).getProperty());
 	    b5.setText("Money: " + PlayerNumber.get(1).getMoney() + "\nProperties: " + PlayerNumber.get(1).getProperty());
-	    c5.setText("Money: " + PlayerNumber.get(2).getMoney() + "\nProperties: " + PlayerNumber.get(2).getProperty());
-	    d5.setText("Money: " + PlayerNumber.get(3).getMoney() + "\nProperties: " + PlayerNumber.get(3).getProperty());
+	    c5.setText("Player 3 is not playing.");
+	    d5.setText("Player 4 is not playing.");
+	    }
+	    if (rule.getPlayers() == 3) {
+		a5.setText("Money: " + PlayerNumber.get(0).getMoney() + "\nProperties: " + PlayerNumber.get(0).getProperty());
+	    b5.setText("Money: " + PlayerNumber.get(1).getMoney() + "\nProperties: " + PlayerNumber.get(1).getProperty());
+		c5.setText("Money: " + PlayerNumber.get(2).getMoney() + "\nProperties: " + PlayerNumber.get(2).getProperty());
+		d5.setText("Player 4 is not playing.");
+
+	    }
+	    if (rule.getPlayers() == 4) {
+		a5.setText("Money: " + PlayerNumber.get(0).getMoney() + "\nProperties: " + PlayerNumber.get(0).getProperty());
+	    b5.setText("Money: " + PlayerNumber.get(1).getMoney() + "\nProperties: " + PlayerNumber.get(1).getProperty());
+		c5.setText("Money: " + PlayerNumber.get(2).getMoney() + "\nProperties: " + PlayerNumber.get(2).getProperty());
+		d5.setText("Money: " + PlayerNumber.get(3).getMoney() + "\nProperties: " + PlayerNumber.get(3).getProperty());
+
+	    }
 	    if (randomNum != randomNum1) {
 	        playerTurn.setDoubleRolls(0);
 		playerTurn.setRolls(true);
@@ -1024,21 +1031,24 @@ public class Board extends JFrame implements ActionListener {
 	    
 	}
 	//add the option for deciding who goes first
-	if (event.equals("textField") && gameStart == true) {
+	if (event.equals("Enter") && gameStart && !textField.getText().equals("") ) {
 	    gameStart = false;
-	    if (textField.get()  == "1") {
+	    if (textField.getText().equals("1")) {
 		display.setText("You must have more than one player. Please type in a number from 2 to 4.");
+		gameStart = true;
 	    }
-	    if (textField.get() == "2") {
+	    if (textField.getText().equals("2")) {
 		display.setText("Roll the dice to begin.");
 		playerDead[2] = true;
 		playerDead[3] = true;
+		rule.setPlayers(2);;
 	    }
-	    if (textField.get() == "3") {
+	    if (textField.getText().equals("3")) {
 		display.setText("Roll the dice to begin.");
 		playerDead[3] = true;
+		rule.setPlayers(3);
 	    }
-	    if (textField.get() == "4") {
+	    if (textField.getText().equals("4")) {
 		display.setText("Roll the dice to begin.");
 	    }
 	}

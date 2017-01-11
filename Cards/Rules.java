@@ -10,16 +10,22 @@ public class Rules {
 	rolledDice = false;
     }
 
+
     public void setTurn(){
 	turn += 1;
+	
     }
     
     public int getTurn(){
-	return (turn % 4);
+	return (turn % players);
     }
     
     public int getPlayers(){
 	return players;
+    }
+
+    public void setPlayers(int x) {
+	players = x;
     }
     
     public boolean getRolledDice(){
