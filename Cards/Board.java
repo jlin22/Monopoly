@@ -6,6 +6,7 @@ import java.util.*;
  
 public class Board extends JFrame implements ActionListener {
     private JTextArea display,Log1,a5,b5,c5,d5,TurnDisplay;
+    private JTextField yes,no;
     private JLabel p1,p2,p3,p4;
     private String[] Name;
     private ArrayList<Deeds> tiles;
