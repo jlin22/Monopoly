@@ -398,19 +398,22 @@ public class Board extends JFrame implements ActionListener {
 	a5.setPreferredSize(dim3);	
 	a5.setLineWrap(true);
 	a5.setWrapStyleWord(true);
+	a5.setEditable(false);
 	b5 = new JTextArea("Player 2: ");
 	b5.setPreferredSize(dim3);
 	b5.setLineWrap(true);
 	b5.setWrapStyleWord(true);
+	b5.setEditable(false);
 	c5 = new JTextArea("Player 3: ");
 	c5.setPreferredSize(dim3);
 	c5.setLineWrap(true);
 	c5.setWrapStyleWord(true);
+	c5.setEditable(false);
 	d5 = new JTextArea("Player 4: ");
 	d5.setPreferredSize(dim3);	    	
 	d5.setLineWrap(true);
 	d5.setWrapStyleWord(true);
-	
+	d5.setEditable(false);
 	Players.add(a5);
 	Players.add(b5);
 	Players.add(c5);
@@ -438,6 +441,7 @@ public class Board extends JFrame implements ActionListener {
 	JPanel Title = new JPanel();
 	Title.setLayout(new FlowLayout());
 	TurnDisplay = new JTextArea("Player's Turns");
+	TurnDisplay.setEditable(false);
 	Title.add(TurnDisplay);
 	
 	outsideLayout.add(Title, BorderLayout.PAGE_START);
