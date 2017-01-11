@@ -946,6 +946,10 @@ public class Board extends JFrame implements ActionListener {
 
 	if (event.equals("House") && playerTurn.getHasMonopoly1(temp) == true) {
 	    display.setText("Please click on the tile you are on to buy a house on it.\nKeep in mind that you  must have at least 1 house on all tiles of that color before buying a second one.");
+	    if (houseCount == 0){
+		display.setText("Sorry. You cannot buy a house, because there are no more houses left");
+		return;
+	    }
 	    if (event.equals(ButtonsOnBoard[playerTurn.getPosition()])) {
 		houseCount -= 1;
 		tiles.get(playerTurn.getPosition()).setHouseNumber();
