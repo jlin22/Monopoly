@@ -17,7 +17,7 @@ public class Rules {
     
     public void setAunctionTurn() {
 	originalAunctionTurn += 1;
-	return (originalAunctionTurn % players);
+	originalAunctionTurn = (originalAunctionTurn % players);
     }
 
     public int getAunctionTurn() {

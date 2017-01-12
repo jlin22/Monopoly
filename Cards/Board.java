@@ -22,7 +22,7 @@ public class Board extends JFrame implements ActionListener {
     
     public Board() {
 	playerAunctioning = new boolean[4];
-	for (int a; a < 4; a ++) {
+	for (int a = 0; a < 4; a ++) {
 	    playerAunctioning[a] = true;
 	}
 	setNickname = false;
@@ -569,11 +569,11 @@ public class Board extends JFrame implements ActionListener {
     
 	Player playerTurn = PlayerNumber.get(rule.getTurn());
 
-	/*
+	
 	if (event.equals("Dice") && playerTurn.getRolls() == false && playerDead[rule.getTurn() + 1] == false && playerTurn.getJailCounter() == 0) {	    
 		display.setText("It is not your turn to roll again.\nAfter conducting your moves, please end your turn.");
 	    }
-	*/
+	
 
 	//fix later
 
@@ -586,13 +586,15 @@ public class Board extends JFrame implements ActionListener {
 	    tiles.get(12).setRentMonopoly((randomNum + randomNum1) * 10);
 	    tiles.get(28).setRent((randomNum + randomNum1) * 4);
 	    tiles.get(28).setRentMonopoly((randomNum + randomNum1) * 10);
-	    /*
-	    if (playerTurn.getJailCounter() == 1 && randomNum != randomNum1) {
+	    
+	    if (playerTurn.getJailCounter() > 0 && randomNum != randomNum1) {
 		display.setText("You are in Jail for your " + playerTurn.getJailCounter() + "st turn. You can only get out if you roll a double and you did not get a double.\nAfter your third turn of not getting a double, you will be forced to pay 50 and get out anyways.\nYou can also opt to pay 50 now and get out.");
 		playerTurn.setRolls(false);
 		charged = false;
+		playerTurn.loseJailCounter();
+
 	    }
-	    */
+	    
 	    
 	    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
 	    int newPosition = (playerTurn.getPosition() + randomNum + randomNum1) % 40;
@@ -991,7 +993,7 @@ public class Board extends JFrame implements ActionListener {
 	    display.setText("Auctioning will begin.");
 	}
 
-	if(display.getText().equals("Auctioning will begin.")) {
+	/*	if(display.getText().equals("Auctioning will begin.")) {
 	    rule.setOriginalAunctionTurn() = rule.getTurn();
 	    display.append("\n" + playerName[rule.getTurn()] + " will have the option of aunctioning for the property since it was not bought.\nIf you do not want to buy it, put 0 in the textbox and press enter.\nIf you do, bid an amount that is higher than the last bidder.\nSimply add the money after the $ sign, for example, if you want to bid 100, the textbox should look like: $100.");
 	    textField.setText("$");
@@ -1004,11 +1006,11 @@ public class Board extends JFrame implements ActionListener {
 		    rule.setAunctionTurn();
 		    textField.setText("$");
 		    if (textField.getText().charAt(0) == '$') {
-			display.append("\n" + playerName[rule.getAunctionTurn()] "'s turn to aunction."];
+			display.append("\n" + playerName[rule.getAunctionTurn()] + "'s turn to aunction."]);
 		    }
 		}
 	    }
-	}
+	    }*/
 
 	if (event.equals("House") && playerTurn.getHasMonopoly1(temp) == true){
 	    if (tiles.get(playerTurn.getPosition()).getMortgaged() == true) {
