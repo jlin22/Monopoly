@@ -872,12 +872,13 @@ public class Board extends JFrame implements ActionListener {
 	    if (randomNum != randomNum1) {
 	        playerTurn.setRolls(false);
 	    }
+	    //need to fix
 	    if (playerTurn.getDoubleRolls() == 3) {
 		display.append("\n" + playerName[rule.getTurn()] + " has rolled 3 doubles in a roll.\nTherefore, he or she has been sent to Jail!");
 		ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
 		ButtonsOnBoard[10].add(Players[rule.getTurn()]);
 		playerTurn.setPosition(10);
-		TurnDisplay.setText("It is now Player " + (rule.getTurn() + 1)  + "'s Turn. Player " + (rule.getTurn() + 1) + " is on " + Name[playerTurn.getPosition()]);
+		TurnDisplay.setText("It is now " + playerName[rule.getTurn()]  + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 		playerTurn.setJailCounter();
 	    }
 	    if (playerTurn.getPosition() == 30) {
@@ -1072,7 +1073,7 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	    if (textField.getText().equals("4")) {
 	        display.append("\nPlayer set.");
-		display.append("\nEnter in Player 1's nickname followed by a comma and then Player 2's in the textbox and press enter.(Do this for as many Players as you have.) Remove the name part and leave no spaces in between.\nFor example, if it is 3 Players:\nAlan,John,Andy.");
+		display.append("\nEnter in Player 1's nickname followed by a comma and then Player 2's in the textbox and press enter.(Do this for as many Players as you have.) Remove the name part and leave no spaces in between.\nFor example, if it is 3 Players:\nAlan,John,Andy");
 		textField.setText("Names:");
 	    }
 	    if (!textField.getText().equals("Names:")){
@@ -1085,24 +1086,25 @@ public class Board extends JFrame implements ActionListener {
 	    String t = textField.getText();
 	    if (rule.getPlayers() == 2) {
 		playerName[0] = t.substring(0,t.indexOf(','));
-		playerName[1] = textField.getText().substring((t.indexOf(',') + 1),t.length());
+		playerName[1] = t.substring((t.indexOf(',') + 1),t.length());
 		setNickname = false;
-		display.setText("Nicknames set");
+		display.setText("Nicknames set.");
 	    }
 	     if (rule.getPlayers() == 3) {
-		playerName[0] = textField.getText();
-	        playerName[1] = textField.getText();
-	        playerName[2] = textField.getText();
+		playerName[0] = t.substring(0,t.indexOf(','));
+	        playerName[1] = t.substring((t.indexOf(',') + 1),t.lastIndexOf(','));
+	        playerName[2] = t.substring((t.lastIndexOf(',') + 1),t.length());
 		setNickname = false;
-		display.setText("Nicknames set");
+		display.setText("Nicknames set.");
 	    }
 	      if (rule.getPlayers() == 4) {
-		playerName[0] = textField.getText();
-	        playerName[1] = textField.getText();
-		playerName[2] = textField.getText();
-	        playerName[3] = textField.getText();
+		  String substring1 = t.substring((t.indexOf(',') + 1),t.lastIndexOf(',')); //"2nd,3rd"
+		  playerName[0] = t.substring(0,t.indexOf(','));
+		  playerName[1] = substring1.substring(0,(substring1.indexOf(',')));
+		  playerName[2] = substring1.substring((substring1.indexOf(',') + 1),substring1.length());
+		  playerName[3] = t.substring((t.lastIndexOf(',') + 1),t.length());
 		setNickname = false;
-		display.setText("Nicknames set");
+		display.setText("Nicknames set.");
 	    }
 	    if (!setNickname) {
 		display.append("\nRoll the dice to begin.");
