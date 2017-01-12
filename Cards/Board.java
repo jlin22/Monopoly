@@ -1016,12 +1016,13 @@ public class Board extends JFrame implements ActionListener {
 		display.append("\nSorry. You must have a monopoly over the property AND land on the tile to buy a house.");
 	    }
 	    }
-	/*
-	if (event.equals("Jail Card") && playerTurn.getJailCard > 0 && playerTurn.getPosition() == 10) {
+       
+	if (event.equals("Jail Card") && playerTurn.getJailCard() > 0 && playerTurn.getPosition() == 10) {
 	    playerTurn.setJailCard(-1);
-	    playerTurn.setJailCounter(3);
+	    while (playerTurn.getJailCounter() < 3){
+		playerTurn.setJailCounter();
+	    }
 	}
-	*/
 
 	// need boolean for if player owns property
 	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false){

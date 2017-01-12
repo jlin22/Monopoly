@@ -104,8 +104,8 @@ public class Player{
 	return jailCounter;
     }
 
-    public void setJailCounter( ) {
-	jailCounter += 1; 
+    public void setJailCounter() {
+	jailCounter += 1 ; 
     }
 
     public int[] getMonopoly() {
@@ -301,6 +301,6 @@ public class Player{
 	return getOutOfJailCards;
     }
     public void setJailCard(int x ){
-	getOutOfJailCards += x;
+	getOutOfJailCards = x;
     }
 }
