@@ -16,11 +16,15 @@ public class Board extends JFrame implements ActionListener {
     private ArrayList<Player> PlayerNumber;
     private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter;
     private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
-    private boolean[] playerDead;
+    private boolean[] playerDead,playerAunctioning;
     private boolean gameStart,setNickname;
     
     
     public Board() {
+	playerAunctioning = new boolean[4];
+	for (int a; a < 4; a ++) {
+	    playerAunctioning[a] = true;
+	}
 	setNickname = false;
 	gameStart = true;
 	houseCount = 32;
@@ -983,7 +987,27 @@ public class Board extends JFrame implements ActionListener {
 		}
 		playerTurn.setTurn(rule.getTurn() + 1);
 	    }
-	    }	
+	    }
+	    display.setText("Auctioning will begin.");
+	}
+
+	if(display.getText().equals("Auctioning will begin.")) {
+	    rule.setOriginalAunctionTurn() = rule.getTurn();
+	    display.append("\n" + playerName[rule.getTurn()] + " will have the option of aunctioning for the property since it was not bought.\nIf you do not want to buy it, put 0 in the textbox and press enter.\nIf you do, bid an amount that is higher than the last bidder.\nSimply add the money after the $ sign, for example, if you want to bid 100, the textbox should look like: $100.");
+	    textField.setText("$");
+	    if (textField.getText().charAt(0) == '$') {
+		display.append("\n" + playerName[rule.getTurn()] + "'s turn to aunction.");
+		if (!textField.getText().charAt(0) == '$') {
+		    display.append("\nPlease enter in the correct format");
+		}
+		if (!textField.getText().equals("$0")) {
+		    rule.setAunctionTurn();
+		    textField.setText("$");
+		    if (textField.getText().charAt(0) == '$') {
+			display.append("\n" + playerName[rule.getAunctionTurn()] "'s turn to aunction."];
+		    }
+		}
+	    }
 	}
 
 	if (event.equals("House") && playerTurn.getHasMonopoly1(temp) == true){

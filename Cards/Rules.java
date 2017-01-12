@@ -3,11 +3,25 @@ public class Rules {
     private int playerGoing;
     private int players;
     private boolean rolledDice;
+    private int aunctionTurn, originalAunctionTurn;
     public Rules(){
 	turn = 0;
 	playerGoing = 1;
 	players = 4;
 	rolledDice = false;
+    }
+
+    public void setOriginalAunctionTurn(int x) {
+	originalAunctionTurn = x;
+    }
+    
+    public void setAunctionTurn() {
+	originalAunctionTurn += 1;
+	return (originalAunctionTurn % players);
+    }
+
+    public int getAunctionTurn() {
+	return originalAunctionTurn;
     }
 
 
