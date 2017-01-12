@@ -788,6 +788,7 @@ public class Board extends JFrame implements ActionListener {
 		     playerTurn.setJailCard(1);
 		 }
 		if (CC.equals("Go DIRECTLY To Jail. Do Not Pass Go, Do Not Collect $200.")) {
+		    playerTurn.setPosition(10);
 		     playerTurn.setJailCounter();
 		 }
 		if (cards.getChancePosition(CC) >= 0) {
