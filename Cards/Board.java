@@ -14,7 +14,7 @@ public class Board extends JFrame implements ActionListener {
     private JButton[] ButtonsOnBoard;
     private JLabel[] Players;
     private ArrayList<Player> PlayerNumber;
-    private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter;
+    private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid;
     private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
     private boolean[] playerDead,playerAunctioning;
     private boolean gameStart,setNickname;
@@ -22,7 +22,7 @@ public class Board extends JFrame implements ActionListener {
     
     public Board() {
 	playerAunctioning = new boolean[4];
-	for (int a; a < 4; a ++) {
+	for (int a = 0; a < 4; a ++) {
 	    playerAunctioning[a] = true;
 	}
 	setNickname = false;
@@ -920,9 +920,9 @@ public class Board extends JFrame implements ActionListener {
 	    if (randomNum != randomNum1) {
 	        playerTurn.setDoubleRolls(0);
 		playerTurn.setRolls(true);
+		TurnDisplay.setText("It is now " + playerName[rule.getTurn()] + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 		rule.setTurn();
 		charged = false;
-		TurnDisplay.setText("It is now " + playerName[rule.getTurn()] + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 	    }
 	    display.setText("It is " + playerName[rule.getTurn()]+ "'s Turn!\nPlease roll the dice.");
 	}
@@ -988,9 +988,9 @@ public class Board extends JFrame implements ActionListener {
 		playerTurn.setTurn(rule.getTurn() + 1);
 	    }
 	    }
-	    display.setText("Auctioning will begin.");
+	    //display.setText("Auctioning will begin.");
 	}
-
+	/*
 	if(display.getText().equals("Auctioning will begin.")) {
 	    rule.setOriginalAunctionTurn() = rule.getTurn();
 	    display.append("\n" + playerName[rule.getTurn()] + " will have the option of aunctioning for the property since it was not bought.\nIf you do not want to buy it, put 0 in the textbox and press enter.\nIf you do, bid an amount that is higher than the last bidder.\nSimply add the money after the $ sign, for example, if you want to bid 100, the textbox should look like: $100.");
@@ -1004,12 +1004,12 @@ public class Board extends JFrame implements ActionListener {
 		    rule.setAunctionTurn();
 		    textField.setText("$");
 		    if (textField.getText().charAt(0) == '$') {
+			
 			display.append("\n" + playerName[rule.getAunctionTurn()] "'s turn to aunction."];
-		    }
-		}
-	    }
-	}
-
+			if (!textField.getText().charAt(0) == 'S') {
+			    display.append("\nPlease enter in the correct format");
+			}				
+	*/			
 	if (event.equals("House") && playerTurn.getHasMonopoly1(temp) == true){
 	    if (tiles.get(playerTurn.getPosition()).getMortgaged() == true) {
 		display.append("\nSorry. You cannot buy a house when the property is mortgaged.");

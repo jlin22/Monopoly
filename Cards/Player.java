@@ -3,7 +3,7 @@ public class Player{
     private int money,position,getOutOfJailCards,count,doubleRolls,turn, jailCounter,brownMonopoly,cyanMonopoly,magentaMonopoly,orangeMonopoly,redMonopoly,yellowMonopoly,greenMonopoly,blueMonopoly,railroadMonopoly,utilityMonopoly,hasMonopoly,houseCount,hotelCount;
     private int[] propertiesOwned;
     private int[] houses;
-    private boolean rolls;
+    private boolean rolls,stillIn;
     private int[]monopoly;
     private int[] brownMonopolyH,cyanMonopolyH,magentaMonopolyH,orangeMonopolyH,redMonopolyH,yellowMonopolyH,greenMonopolyH,blueMonopolyH;
     private int[][]houseArray;
@@ -70,6 +70,15 @@ public class Player{
 	houseArray[6][2] = greenMonopolyH[2];
 	houseArray[7][0] = blueMonopolyH[0];
 	houseArray[7][1] = blueMonopolyH[1];
+	stillIn = true;
+    }
+
+    public void setStillIn() {
+	stillIn = false;
+    }
+
+    public boolean getStillIn() {
+	return stillIn;
     }
 
     public int getHouseArray1(int whichArray) {
