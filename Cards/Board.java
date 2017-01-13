@@ -442,12 +442,13 @@ public class Board extends JFrame implements ActionListener {
 	Log.setLayout(new BoxLayout(Log,BoxLayout.PAGE_AXIS));
 	    
 	Log1 = new JTextArea("");
-	Log1.setPreferredSize(new Dimension(150,600));
+	Log1.setPreferredSize(new Dimension(150,500));
 	Log1.setLineWrap(true);
 	Log1.setWrapStyleWord(true);
 	Log1.setEditable(false);
 	JScrollPane Scroll = new JScrollPane(Log1);
 	Scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+	Scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 	Log.add(Log1);
 	Log.add(Scroll);
 	Log.add(textField);
@@ -999,6 +1000,7 @@ public class Board extends JFrame implements ActionListener {
 		tiles.get(playerTurn.getPosition()).setOwnedBy(rule.getTurn() + 1);
 	        playerTurn.addProperty(playerTurn.getPosition());
 	        playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getCost());
+		Log1.setCaretPosition(0);	
 		//edit for mortgage
 		if (playerTurn.getMoney() < 0) {
 		    playerDead[rule.getTurn()] = true;
