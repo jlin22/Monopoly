@@ -16,15 +16,11 @@ public class Board extends JFrame implements ActionListener {
     private ArrayList<Player> PlayerNumber;
     private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter;
     private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
-    private boolean[] playerDead,playerAunctioning;
+    private boolean[] playerDead;
     private boolean gameStart,setNickname;
     
     
     public Board() {
-	playerAunctioning = new boolean[4];
-	for (int a = 0; a < 4; a ++) {
-	    playerAunctioning[a] = true;
-	}
 	setNickname = false;
 	gameStart = true;
 	houseCount = 32;
@@ -569,11 +565,11 @@ public class Board extends JFrame implements ActionListener {
     
 	Player playerTurn = PlayerNumber.get(rule.getTurn());
 
-	
+	/*
 	if (event.equals("Dice") && playerTurn.getRolls() == false && playerDead[rule.getTurn() + 1] == false && playerTurn.getJailCounter() == 0) {	    
 		display.setText("It is not your turn to roll again.\nAfter conducting your moves, please end your turn.");
 	    }
-	
+	*/
 
 	//fix later
 
@@ -586,7 +582,7 @@ public class Board extends JFrame implements ActionListener {
 	    tiles.get(12).setRentMonopoly((randomNum + randomNum1) * 10);
 	    tiles.get(28).setRent((randomNum + randomNum1) * 4);
 	    tiles.get(28).setRentMonopoly((randomNum + randomNum1) * 10);
-	    
+	    /*
 	    if (playerTurn.getJailCounter() > 0 && randomNum != randomNum1) {
 		display.setText("You are in Jail for your " + playerTurn.getJailCounter() + "st turn. You can only get out if you roll a double and you did not get a double.\nAfter your third turn of not getting a double, you will be forced to pay 50 and get out anyways.\nYou can also opt to pay 50 now and get out.");
 		playerTurn.setRolls(false);
@@ -594,7 +590,7 @@ public class Board extends JFrame implements ActionListener {
 		playerTurn.loseJailCounter();
 
 	    }
-	    
+	    */
 	    
 	    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
 	    int newPosition = (playerTurn.getPosition() + randomNum + randomNum1) % 40;
@@ -990,7 +986,7 @@ public class Board extends JFrame implements ActionListener {
 		playerTurn.setTurn(rule.getTurn() + 1);
 	    }
 	    }
-	    display.setText("Auctioning will begin.");
+	    //display.setText("Auctioning will begin.");
 	}
 
 	/*	if(display.getText().equals("Auctioning will begin.")) {
