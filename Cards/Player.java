@@ -276,6 +276,10 @@ public class Player{
     public void addMoney(int x){
 	money += x;
     }
+
+    public void addMoney1(double x){
+	money += (int)x;
+    }
     
     public void loseMoney(int x){
 	money -= x;

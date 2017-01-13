@@ -173,6 +173,9 @@ public class Deeds {
     public void setHouseNumber(){
 	houseNumber += 1;
     }
+    public void setHouseNumber1(int x){
+	houseNumber += x;
+    }
     public boolean getHotel(){
 	return hotel;
     }

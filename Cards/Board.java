@@ -17,7 +17,7 @@ public class Board extends JFrame implements ActionListener {
     private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid,highestNumber,roll1,roll2,roll3,roll4,playerWithHighestNumber;
     private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
     private boolean[] playerDead;
-    private boolean gameStart,setNickname,setTurns;
+    private boolean gameStart,setNickname,setTurns,mortgagingHouse;
     
     
     public Board() {
@@ -598,7 +598,6 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	}
 	if (event.equals("Dice") && !gameStart  && !setNickname && !setTurns && rule.getTurn() == 2 && (playerDead[3] || !playerDead[3])) {
-	    System.out.println(rule.getTurn());
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
 	    roll3 = randomNum + randomNum1;
@@ -628,8 +627,10 @@ public class Board extends JFrame implements ActionListener {
 	}
 	Player playerTurn = PlayerNumber.get(rule.getTurn());
 	if (event.equals("Dice") && playerTurn.getRolls() && !gameStart && !setNickname && setTurns){
-	    randomNum = 1 + (int)(Math.random() * 6);
-	    randomNum1 = 1 + (int)(Math.random() * 6);
+	    //randomNum = 1 + (int)(Math.random() * 6);
+	    //randomNum1 = 1 + (int)(Math.random() * 6);
+	    randomNum = 0;
+	    randomNum1 = 1;
 	    display.setText("" + randomNum + "," + randomNum1);
 	    tiles.get(12).setRent((randomNum + randomNum1) * 4);
 	    tiles.get(12).setRentMonopoly((randomNum + randomNum1) * 10);
@@ -901,20 +902,20 @@ public class Board extends JFrame implements ActionListener {
 	    if(((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) >= 0) && charged == false && (tiles.get(playerTurn.getPosition()).getHouseNumber() > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false) {
 		playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getHouseRent(tiles.get(playerTurn.getPosition()).getHouseNumber()));
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getHouseRent(tiles.get(playerTurn.getPosition()).getHouseNumber()));
-		display.append("\n" + Name[playerTurn.getPosition()] + " has already been bought by " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1] + "\n" + playerName[rule.getTurn()] + " has paid $" +  tiles.get(playerTurn.getPosition()).getHouseRent(tiles.get(playerTurn.getPosition()).getHouseNumber())+ " to " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1] + " because he or she has " + tiles.get(playerTurn.getPosition()).getHouseNumber() + " house(s).");
+		display.append("\n" + Name[playerTurn.getPosition()] + " has already been bought by " + playerName[rule.getTurn()] + "\n" + playerName[rule.getTurn()] + " has paid $" +  tiles.get(playerTurn.getPosition()).getHouseRent(tiles.get(playerTurn.getPosition()).getHouseNumber())+ " to " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1] + " because he or she has " + tiles.get(playerTurn.getPosition()).getHouseNumber() + " house(s).");
 		charged = true;
 	    }
 	    
 	    if(((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) >= 0) && charged == false && (PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).getHasMonopoly1(temp)) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false) {
 		playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
-		display.append("\n" + Name[playerTurn.getPosition()] + " has already been bought by " + tiles.get(playerTurn.getPosition()).getOwnedBy() + "\n" + playerName[rule.getTurn()] + " has paid $" + tiles.get(playerTurn.getPosition()).getRentMonopoly()+ " to " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1] + " because he or she has a monopoly over the property");
+		display.append("\n" + Name[playerTurn.getPosition()] + " has already been bought by " + playerName[rule.getTurn()] + "\n" + playerName[rule.getTurn()] + " has paid $" + tiles.get(playerTurn.getPosition()).getRentMonopoly()+ " to " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1] + " because he or she has a monopoly over the property");
 		charged = true;
 	    }
 	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) >= 0) && charged == false && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false) {
 	        playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRent());
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRent());
-		display.append("\n" + Name[playerTurn.getPosition()] + " has already been bought by " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1] + "\n" + playerName[rule.getTurn()] + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1]);
+		display.append("\n" + Name[playerTurn.getPosition()] + " has already been bought by " + playerName[rule.getTurn()] + "\n" + playerName[rule.getTurn()] + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1]);
 		charged = true;
 	}
 
@@ -1102,11 +1103,53 @@ public class Board extends JFrame implements ActionListener {
 		playerTurn.setJailCounter();
 	    }
 	}
-
-	// need boolean for if player owns property
-	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false){
+	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false && tiles.get(playerTurn.getPosition()).getHouseNumber() > 0) {
+		textField.setText("");
+		display.append("\nYou must mortgage your houses before you mortgage your property.\nEnter the amount of houses you would like to mortgage, and then press Enter.");
+		mortgagingHouse = true;
+	}
+	if (mortgagingHouse) {
+	    try {
+	    if (textField.getText().equals("1")) {
+		tiles.get(playerTurn.getPosition()).setHouseNumber1(-1);
+		houseCount += 1;
+		mortgagingHouse = false;
+		playerTurn.addMoney1(.5 * (double)tiles.get(playerTurn.getPosition()).getHouseCost());
+		display.append("\nYou have mortgaged " + Name[playerTurn.getPosition()] + " for " + (.5 * (double)tiles.get(playerTurn.getPosition()).getHouseCost()) + ".");
+		Log1.append("\n" + playerName[rule.getTurn()] + " has mortgaged 1 house on " + Name[playerTurn.getPosition()]);
+	    }
+	    if (textField.getText().equals("2") && tiles.get(playerTurn.getPosition()).getHouseNumber() >= 2) {
+		tiles.get(playerTurn.getPosition()).setHouseNumber1(-2);
+		houseCount += 2;
+		mortgagingHouse = false;
+		playerTurn.addMoney(tiles.get(playerTurn.getPosition()).getHouseCost());
+		display.append("\nYou have mortgaged " + Name[playerTurn.getPosition()] + " for " + (1 * tiles.get(playerTurn.getPosition()).getHouseCost()) + ".");
+		Log1.append("\n" + playerName[rule.getTurn()] + " has mortgaged 2 houses on " + Name[playerTurn.getPosition()]);
+	    }
+	    if (textField.getText().equals("3") && tiles.get(playerTurn.getPosition()).getHouseNumber() >= 3) {
+		tiles.get(playerTurn.getPosition()).setHouseNumber1(-2);
+		houseCount += 3;
+		mortgagingHouse = false;
+		playerTurn.addMoney1(1.5 * (double)tiles.get(playerTurn.getPosition()).getHouseCost());
+		display.append("\nYou have mortgaged " + Name[playerTurn.getPosition()] + " for " + (1.5 * (double)tiles.get(playerTurn.getPosition()).getHouseCost()) + ".");
+		Log1.append("\n" + playerName[rule.getTurn()] + " has mortgaged 3 houses on " + Name[playerTurn.getPosition()]);
+	    }
+	    if (textField.getText().equals("4") && tiles.get(playerTurn.getPosition()).getHouseNumber() == 4) {
+		tiles.get(playerTurn.getPosition()).setHouseNumber1(-2);
+		houseCount += 4;
+		mortgagingHouse = false;
+		playerTurn.addMoney(2 * tiles.get(playerTurn.getPosition()).getHouseCost());
+		display.append("\nYou have mortgaged " + Name[playerTurn.getPosition()] + " for " + (2 * tiles.get(playerTurn.getPosition()).getHouseCost()) + ".");
+		Log1.append("\n" + playerName[rule.getTurn()] + " has mortgaged 4 houses on " + Name[playerTurn.getPosition()]);
+	    }
+	    }
+	    catch (StringIndexOutOfBoundsException gt) {
+	    }
+	}
+	
+	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false && tiles.get(playerTurn.getPosition()).getHouseNumber() == 0){
 	    display.append("\n" + playerName[rule.getTurn()]+ " has mortgaged " +Name[ playerTurn.getPosition()] + ".\n" + playerName[rule.getTurn()] + " will receive " + tiles.get(playerTurn.getPosition()).getMortgage() + " for mortgaging the property.\nThe cost for unmortgaging will be $" + tiles.get(playerTurn.getPosition()).getUnmortgage() + "");
-	    Log1.append("" + playerName[rule.getTurn()]  + " has mortgaged " +Name[ playerTurn.getPosition()] + ".");
+	    Log1.append("\n" + playerName[rule.getTurn()]  + " has mortgaged " +Name[ playerTurn.getPosition()] + ".");
 	    tiles.get(playerTurn.getPosition()).setMortgaged(true);
 	    tiles.get(playerTurn.getPosition()).setMortgageCounter();
 	    playerTurn.addMoney(tiles.get(playerTurn.getPosition()).getMortgage());
