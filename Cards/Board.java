@@ -14,13 +14,14 @@ public class Board extends JFrame implements ActionListener {
     private JButton[] ButtonsOnBoard;
     private JLabel[] Players;
     private ArrayList<Player> PlayerNumber;
-    private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid,highestNumber,roll1,roll2,roll3,roll4,playerWithHighestNumber,trading1;
+    private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid,highestNumber,roll1,roll2,roll3,roll4,playerWithHighestNumber,trading1,tradedTile;
     private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
     private boolean[] playerDead;
-    private boolean gameStart,setNickname,setTurns,mortgagingHouse,trading;
+    private boolean trading3, gameStart,setNickname,setTurns,mortgagingHouse,trading;
     
     
     public Board() {
+	trading3 = false;
 	trading = false;
 	setTurns = false;
 	setNickname = false;
@@ -906,20 +907,20 @@ public class Board extends JFrame implements ActionListener {
 	    if(((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) >= 0) && charged == false && (tiles.get(playerTurn.getPosition()).getHouseNumber() > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false) {
 		playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getHouseRent(tiles.get(playerTurn.getPosition()).getHouseNumber()));
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getHouseRent(tiles.get(playerTurn.getPosition()).getHouseNumber()));
-		display.append("\n" + Name[playerTurn.getPosition()] + " has already been bought by " + playerName[rule.getTurn()] + "\n" + playerName[rule.getTurn()] + " has paid $" +  tiles.get(playerTurn.getPosition()).getHouseRent(tiles.get(playerTurn.getPosition()).getHouseNumber())+ " to " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1] + " because he or she has " + tiles.get(playerTurn.getPosition()).getHouseNumber() + " house(s).");
+		display.append("\n" + Name[playerTurn.getPosition()] + " has already been bought by " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1] + "\n" + playerName[rule.getTurn()] + " has paid $" +  tiles.get(playerTurn.getPosition()).getHouseRent(tiles.get(playerTurn.getPosition()).getHouseNumber())+ " to " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1] + " because he or she has " + tiles.get(playerTurn.getPosition()).getHouseNumber() + " house(s).");
 		charged = true;
 	    }
 	    
 	    if(((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) >= 0) && charged == false && (PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).getHasMonopoly1(temp)) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false) {
 		playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRentMonopoly());
-		display.append("\n" + Name[playerTurn.getPosition()] + " has already been bought by " + playerName[rule.getTurn()] + "\n" + playerName[rule.getTurn()] + " has paid $" + tiles.get(playerTurn.getPosition()).getRentMonopoly()+ " to " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1] + " because he or she has a monopoly over the property");
+		display.append("\n" + Name[playerTurn.getPosition()] + " has already been bought by " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1] + "\n" + playerName[rule.getTurn()] + " has paid $" + tiles.get(playerTurn.getPosition()).getRentMonopoly()+ " to " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1] + " because he or she has a monopoly over the property");
 		charged = true;
 	    }
 	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) >= 0) && charged == false && ((tiles.get(playerTurn.getPosition()).getOwnedBy() - 1) != rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false) {
 	        playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getRent());
 		PlayerNumber.get(tiles.get(playerTurn.getPosition()).getOwnedBy() - 1).addMoney(tiles.get(playerTurn.getPosition()).getRent());
-		display.append("\n" + Name[playerTurn.getPosition()] + " has already been bought by " + playerName[rule.getTurn()] + "\n" + playerName[rule.getTurn()] + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1]);
+		display.append("\n" + Name[playerTurn.getPosition()] + " has already been bought by " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1] + "\n" + playerName[rule.getTurn()] + " has paid $" +  tiles.get(playerTurn.getPosition()).getRent()+ " to " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1]);
 		charged = true;
 	}
 
@@ -1255,48 +1256,61 @@ public class Board extends JFrame implements ActionListener {
 	}
 
 	if (event.equals("Trade") && !trading) {
-	    display.append("\nType in the player number of which you want to trade property with.");
+	    display.setText("Type in the player number of which you want to trade property with.");
 	    textField.setText("");
 	    trading = true;
 	}
 
-	if(event.equals("Enter") && trading && setTurns) {
+	if (textField.getText().equals("1") || textField.getText().equals("2") || textField.getText().equals("3") || textField.getText().equals("4") && event.equals("Enter")) {
+	    try{
+		trading3 = true;
+		display.append("\nPlease type the number of the property you want.(The number corresponds with the position the property is on the board.)");
+	    }
+	    catch (Exception dd){
+	    }
+	}
+
+	if(event.equals("Enter") && !textField.getText().equals("") && trading && setTurns && trading3) {
 	    try {
-		String superTemp = "";
+		int temptemp1 = Integer.parseInt(textField.getText());	    
+		if(temptemp1 < 0 || temptemp1 > 39) {
+		    display.append("\nInvalid number");
+		    trading3= false;
+		    trading = false;
+		}
+		if(tiles.get(temptemp1).getRent1H() == 0) {
+		    display.append("\nCannot trade for this tile. Start over.");
+		trading3 = false;
+		trading = false;
+		}
 		if ((textField.getText().charAt(0) == '1')  && rule.getTurn() != 0) {
-		    for (int i = 0; i < PlayerNumber.get(0).getProperty().length(); i++) {
-		    if (event.equals(PlayerNumber.get(0).getProperty1(i))) {
-			superTemp += ", " +  Name[i] + "(" + i + ")"; 
-		    }
-		    }
-		    display.append("\nYou can choose any one of these properties to trade for: " + superTemp + "\nPlease press the button for the property you would like.(The number corresponds with the position the property is on the board.");
+		    tradedTile = temptemp1;
 		    trading1 = 1;
 		}
 		if ((textField.getText().charAt(0) == '2') && rule.getTurn() != 1) {
-		    if ((textField.getText().charAt(0) == '1')  && rule.getTurn() != 1) {
-		    display.append("\nNow click on the property you would like to trade for.");
+		    tradedTile = temptemp1;
 		    trading1 = 2;
-		    }
 		}
-		    /*
-	    if (textField.getText().charAt(0) == '3') {
+		if (textField.getText().charAt(0) == '3' && rule.getTurn() != 2) {
+		    tradedTile = temptemp1;
+		    trading1 = 3;
+		}
+		if (textField.getText().charAt(0) == '4') {
+		    tradedTile = temptemp1;
+		    trading1 = 4;
+		}
 	    }
-	    if (textField.getText().charAt(0) == '4') {
+	    catch (Exception j) {
 	    }
-		    */
-	    }	
-	    catch (StringIndexOutOfBoundsException j) {
-	    }
-	}    
+	}
 
-	if(trading1 > 0 && setTurns) {
-	    display.setText("Please let " + playerName[trading1] + " type in one of the ofollowing options: \nYes,followed by amount of money demanded for the property.\nYes,followed by the exact name of the property tile that is to be exchanged.(You can press on the tile to see the exact name)\nFor example, either of these are fine: Yes,300 or Yes,Boardwalk)\nThen, " + playerName[rule.getTurn()] + "can type in yes or no.");
-		    }
-	
+	if(trading1 > 0 && setTurns && trading && tradedTile > 0) {
+	    display.append("\nPlease let " + playerName[trading1 - 1] + " type in one of the following options: \nYes,followed by amount of money demanded for the property.\nYes,followed by the exact name of the property tile that is to be exchanged.(You can press on the tile to see the exact name)\nFor example, either of these are fine: Yes,300 or Yes,Boardwalk");
+		    }	
 	if (textField.getText().toUpperCase().equals("YES") && trading1 > 0) {
 	    try {
 		if(textField.getText().charAt(4) < 'A') {
-		    int temptemp = Integer.parseInt(textField.getText().substring(3,textField.length()));
+		    int temptemp = Integer.parseInt(textField.getText().substring(3,textField.getText().length()));
 		    if (temptemp > playerTurn.getMoney()) {
 			display.setText("Sorry, you do not have enough money. You may restart the trade.");
 			trading = false;
@@ -1311,7 +1325,7 @@ public class Board extends JFrame implements ActionListener {
 			
 		    }
 	    }
-	    catch (NumberFormatException ll){
+	    catch (Exception ll){
 	    }
     	}							   
 	

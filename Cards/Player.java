@@ -314,9 +314,15 @@ public class Player{
 	return answer;
     }
 
-    public String getProperty1(int i) {
-	return propertiesOwned[i] + "";
-    }
+    public boolean getProperty1(int x) {
+	for (int i = 0; i < count + 1; i ++) {
+	    if ( propertiesOwned[i] == x) {
+		return true;
+	    }
+	}
+	return false;
+    }    
+    
     
     public int getJailCard(){
 	return getOutOfJailCards;
