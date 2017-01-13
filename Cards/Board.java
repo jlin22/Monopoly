@@ -14,17 +14,14 @@ public class Board extends JFrame implements ActionListener {
     private JButton[] ButtonsOnBoard;
     private JLabel[] Players;
     private ArrayList<Player> PlayerNumber;
-    private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid;
+    private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid,highestNumber,roll1,roll2,roll3,roll4,playerWithHighestNumber;
     private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
-    private boolean[] playerDead,playerAunctioning;
-    private boolean gameStart,setNickname;
+    private boolean[] playerDead;
+    private boolean gameStart,setNickname,setTurns;
     
     
     public Board() {
-	playerAunctioning = new boolean[4];
-	for (int a = 0; a < 4; a ++) {
-	    playerAunctioning[a] = true;
-	}
+	setTurns = false;
 	setNickname = false;
 	gameStart = true;
 	houseCount = 32;
@@ -566,10 +563,7 @@ public class Board extends JFrame implements ActionListener {
 	    break;
 
 	}
-    
-	Player playerTurn = PlayerNumber.get(rule.getTurn());
-
-	/*
+    	/*
 	if (event.equals("Dice") && playerTurn.getRolls() == false && playerDead[rule.getTurn() + 1] == false && playerTurn.getJailCounter() == 0) {	    
 		display.setText("It is not your turn to roll again.\nAfter conducting your moves, please end your turn.");
 	    }
@@ -577,8 +571,63 @@ public class Board extends JFrame implements ActionListener {
 
 	//fix later
 
-	if (event.equals("Dice") && playerTurn.getRolls() && !gameStart && !setNickname){
-	    
+	if (event.equals("Dice") && !gameStart && !setNickname &&!setTurns && rule.getTurn() == 0) {
+	    highestNumber = 0;
+	    playerWithHighestNumber = 0;
+	    randomNum = 1 + (int)(Math.random() * 6);
+	    randomNum1 = 1 + (int)(Math.random() * 6);
+	    roll1 = randomNum + randomNum1;
+	    highestNumber = roll1;
+	    Log1.setText("" + playerName[rule.getTurn()] + " has rolled a " + randomNum + "," + randomNum1);
+	    rule.setTurn();
+	}
+	if (event.equals("Dice") && !gameStart  && !setNickname && !setTurns && rule.getTurn() == 1 && (playerDead[3] || playerDead[2] || !playerDead[3])) {
+	    randomNum = 1 + (int)(Math.random() * 6);
+	    randomNum1 = 1 + (int)(Math.random() * 6);
+	    roll2 = randomNum + randomNum1;
+	    if (roll2 > roll1) {
+		highestNumber = roll2;
+		playerWithHighestNumber = 1;
+	    }
+	    Log1.append("\n" + playerName[rule.getTurn()] + " has rolled a " + randomNum + "," + randomNum1);
+	    rule.setTurn();
+	    if (playerDead[2]) {
+		Log1.append("\nThe highest roll is by " + playerName[playerWithHighestNumber]);
+		rule.setTurn1(playerWithHighestNumber);
+		setTurns = true;
+	    }
+	}
+	if (event.equals("Dice") && !gameStart  && !setNickname && !setTurns && rule.getTurn() == 2 && (playerDead[3] || !playerDead[3])) {
+	    System.out.println(rule.getTurn());
+	    randomNum = 1 + (int)(Math.random() * 6);
+	    randomNum1 = 1 + (int)(Math.random() * 6);
+	    roll3 = randomNum + randomNum1;
+	    if (roll3 > highestNumber) {
+		highestNumber = roll3;
+		playerWithHighestNumber = 2;
+	    }
+	    Log1.append("\n" + playerName[rule.getTurn()] + " has rolled a " + randomNum + "," + randomNum1);
+	    rule.setTurn();
+	    if (playerDead[3]) {
+		Log1.append("\nThe highest roll is by " + playerName[playerWithHighestNumber]);
+		rule.setTurn1(playerWithHighestNumber);
+		setTurns = true;
+	    }
+	}
+	if (event.equals("Dice") && !gameStart  && !setNickname && !setTurns && rule.getTurn() == 3 ) {
+	    randomNum = 1 + (int)(Math.random() * 6);
+	    randomNum1 = 1 + (int)(Math.random() * 6);
+	    roll4 = randomNum + randomNum1;
+	    if (roll4 > highestNumber) {
+		highestNumber = roll4;
+		playerWithHighestNumber = 3;
+	    }
+	    Log1.append("\n" + playerName[rule.getTurn()] + " has rolled a " + randomNum + "," + randomNum1 + "\nThe highest roll is by " + playerName[playerWithHighestNumber]);
+	    rule.setTurn1(playerWithHighestNumber);
+	    setTurns = true;
+	}
+	Player playerTurn = PlayerNumber.get(rule.getTurn());
+	if (event.equals("Dice") && playerTurn.getRolls() && !gameStart && !setNickname && setTurns){
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
 	    display.setText("" + randomNum + "," + randomNum1);
@@ -1066,18 +1115,13 @@ public class Board extends JFrame implements ActionListener {
 	}
 	//add the option for deciding who goes first
 	if (event.equals("Enter") && gameStart && !textField.getText().equals("") ) {
+	    try {
 	    gameStart = false;
 	    if (textField.getText().equals("1")) {
 		display.setText("You must have more than one player. Please type in a number from 2 to 4.");
 		gameStart = true;
 	    }
 	    if (textField.getText().equals("2")) {
-		/*textField.setText("");
-		display.setText("Enter in Player 1's nickname in the textbox and press enter.");
-		playerName[0] = textField.getText();
-		display.append("\nThen, enter Player 2's nickname and press enter.");
-		playerName[1] = textField.getText();
-		*/
 		display.append("\nPlayer set.");
 		display.append("\nEnter in Player 1's nickname followed by a comma and then Player 2's in the textbox and press enter.(Do this for as many Players as you have.) Remove the name part and leave no spaces in between.\nFor example, if it is 3 Players:\nAlan,John,Andy.");
 		textField.setText("Names:");
@@ -1089,7 +1133,7 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	    if (textField.getText().equals("3")) {
 	        display.append("\nPlayer set.");
-		display.append("\nEnter in Player 1's nickname followed by a comma and then Player 2's in the textbox and press enter.(Do this for as many Players as you have.) Remove the name part and leave no spaces in between.\nFor example, if it is 3 Players:\nAlan,John,Andy.");
+		display.append("\nEnter in Player 1's nickname followed by a comma and then Player 2's in the textbox and press enter.(Do this for as many Players as you have.) Remove the name part and leave no spaces in between.\nFor example, if it is 3 Players:\nAlan,John,Andy");
 		textField.setText("Names:");
 		playerDead[3] = true;
 		rule.setPlayers(3);
@@ -1104,9 +1148,13 @@ public class Board extends JFrame implements ActionListener {
 		display.append("\nPlease input a valid number.");
 		gameStart = true;
 	    }
+	    }
+	    catch (StringIndexOutOfBoundsException a){
+	    }
 	}
 	
-	if (event.equals("Enter") && !gameStart && !setNickname  &&!((textField.getText().charAt(0)) == 'N')){
+	if (event.equals("Enter") && !gameStart && !setNickname){
+	    try {
 	    String t = textField.getText();
 	    if (rule.getPlayers() == 2) {
 		playerName[0] = t.substring(0,t.indexOf(','));
@@ -1131,10 +1179,13 @@ public class Board extends JFrame implements ActionListener {
 		display.setText("Nicknames set.");
 	    }
 	    if (!setNickname) {
-		display.append("\nRoll the dice to begin.");
+		display.append("\nRoll the dice to decide who's turn it is.");
+	    }
+	    }
+	    catch (StringIndexOutOfBoundsException j) {
 	    }
 	}
-	    
+	 
 	
 	/*
 	if(event.equals("Trade") {

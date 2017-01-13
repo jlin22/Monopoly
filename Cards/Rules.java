@@ -29,6 +29,10 @@ public class Rules {
 	turn += 1;
 	
     }
+
+    public void setTurn1(int x) {
+	turn = x;
+    }
     
     public int getTurn(){
 	return (turn % players);
