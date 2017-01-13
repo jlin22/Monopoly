@@ -116,6 +116,9 @@ public class Player{
     public void setJailCounter() {
 	jailCounter += 1 ; 
     }
+    public void loseJailCounter(){
+	jailCounter -= 1;
+    }
 
     public int[] getMonopoly() {
 	 monopoly[0] = brownMonopoly;
