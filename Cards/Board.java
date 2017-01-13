@@ -17,7 +17,7 @@ public class Board extends JFrame implements ActionListener {
     private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid,highestNumber,roll1,roll2,roll3,roll4,playerWithHighestNumber;
     private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
     private boolean[] playerDead;
-    private boolean gameStart,setNickname,setTurns,mortgagingHouse;
+    private boolean gameStart,setNickname,setTurns,mortgagingHouse,trading;
     
     
     public Board() {
@@ -480,6 +480,7 @@ public class Board extends JFrame implements ActionListener {
     
     public void actionPerformed(ActionEvent e){
 	String event = e.getActionCommand();
+	if (!trading) {
 	switch(event) {
     case "0": display.setText("GO\nCollect $200 Salary As You Pass");
 	    break;
@@ -561,16 +562,13 @@ public class Board extends JFrame implements ActionListener {
 	    break;
 	case "39": display.setText("Name: " + Name[39] + "\nCost: " + tiles.get(39).getCost() + "\nRent: " + tiles.get(39).getRent() + "\nRent of 1 House: " + tiles.get(39).getRent1H() + "\nRent of 2 House: " + tiles.get(39).getRent2H() + "\nRent of 3 House: " + tiles.get(39).getRent3H() + "\nRent of 4 Houses: " + tiles.get(39).getRent4H() + "\nRent of Hotel: " + tiles.get(39).getHotelRent() + "\nCost of Buying a House: " + tiles.get(39).getHouseCost() + "\nCost of Buying a Hotel: " + tiles.get(39).getHouseCost() + "\nMortgage Cost: " + tiles.get(39).getMortgage() + "\nUnmortgage Cost: " + tiles.get(39).getUnmortgage() + "\nOwned By Player: "+ tiles.get(39).getOwnedBy() + "\nNumber of Houses: " + tiles.get(39).getHouseNumber() + "\nHotel: " + tiles.get(39).getHotel());
 	    break;
-
 	}
-    	/*
+	}
+	/*
 	if (event.equals("Dice") && playerTurn.getRolls() == false && playerDead[rule.getTurn() + 1] == false && playerTurn.getJailCounter() == 0) {	    
 		display.setText("It is not your turn to roll again.\nAfter conducting your moves, please end your turn.");
 	    }
 	*/
-
-	//fix later
-
 	if (event.equals("Dice") && !gameStart && !setNickname &&!setTurns && rule.getTurn() == 0) {
 	    highestNumber = 0;
 	    playerWithHighestNumber = 0;
@@ -589,10 +587,14 @@ public class Board extends JFrame implements ActionListener {
 		highestNumber = roll2;
 		playerWithHighestNumber = 1;
 	    }
+	    /*if (roll 2 == roll1) {
+		
+	    }
+	    */
 	    Log1.append("\n" + playerName[rule.getTurn()] + " has rolled a " + randomNum + "," + randomNum1);
 	    rule.setTurn();
 	    if (playerDead[2]) {
-		Log1.append("\nThe highest roll is by " + playerName[playerWithHighestNumber]);
+		Log1.append("\nThe highest roll is by " + playerName[playerWithHighestNumber] + "\n");
 		rule.setTurn1(playerWithHighestNumber);
 		setTurns = true;
 	    }
@@ -608,7 +610,7 @@ public class Board extends JFrame implements ActionListener {
 	    Log1.append("\n" + playerName[rule.getTurn()] + " has rolled a " + randomNum + "," + randomNum1);
 	    rule.setTurn();
 	    if (playerDead[3]) {
-		Log1.append("\nThe highest roll is by " + playerName[playerWithHighestNumber]);
+		Log1.append("\nThe highest roll is by " + playerName[playerWithHighestNumber] + "\n");
 		rule.setTurn1(playerWithHighestNumber);
 		setTurns = true;
 	    }
@@ -621,16 +623,16 @@ public class Board extends JFrame implements ActionListener {
 		highestNumber = roll4;
 		playerWithHighestNumber = 3;
 	    }
-	    Log1.append("\n" + playerName[rule.getTurn()] + " has rolled a " + randomNum + "," + randomNum1 + "\nThe highest roll is by " + playerName[playerWithHighestNumber]);
+	    Log1.append("\n" + playerName[rule.getTurn()] + " has rolled a " + randomNum + "," + randomNum1 + "\nThe highest roll is by " + playerName[playerWithHighestNumber] + "\n");
 	    rule.setTurn1(playerWithHighestNumber);
 	    setTurns = true;
 	}
 	Player playerTurn = PlayerNumber.get(rule.getTurn());
 	if (event.equals("Dice") && playerTurn.getRolls() && !gameStart && !setNickname && setTurns){
-	    //randomNum = 1 + (int)(Math.random() * 6);
-	    //randomNum1 = 1 + (int)(Math.random() * 6);
-	    randomNum = 0;
-	    randomNum1 = 1;
+	    randomNum = 1 + (int)(Math.random() * 6);
+	    randomNum1 = 1 + (int)(Math.random() * 6);
+	    //randomNum = 0;
+	    //randomNum1 = 1;
 	    display.setText("" + randomNum + "," + randomNum1);
 	    tiles.get(12).setRent((randomNum + randomNum1) * 4);
 	    tiles.get(12).setRentMonopoly((randomNum + randomNum1) * 10);
@@ -977,7 +979,7 @@ public class Board extends JFrame implements ActionListener {
 	    display.setText("It is " + playerName[rule.getTurn()]+ "'s Turn!\nPlease roll the dice.");
 	}
 
-	if (event.equals("Property")){
+	if (event.equals("Property") && !setTurns){
 	    if (((playerTurn.getMoney() - tiles.get(playerTurn.getPosition()).getCost()) < 0 ) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) == rule.getTurn() + 1)) {
 		display.append("\nSorry, you do not have enough money to buy this property.");
 	    }
@@ -1003,6 +1005,26 @@ public class Board extends JFrame implements ActionListener {
 		}
 		display.append("\n" + playerName[rule.getTurn()] + " has bought " + Name[playerTurn.getPosition()] + "!");
 		Log1.append("" + playerName[rule.getTurn()] + " has bought " +  Name[playerTurn.getPosition()] + "!\n");
+		if (rule.getPlayers() == 2) {
+		a5.setText("" + playerName[0] + "'s Money: " + PlayerNumber.get(0).getMoney() + "\nProperties: " + PlayerNumber.get(0).getProperty());
+		b5.setText("" + playerName[1] + "'s Money: " + PlayerNumber.get(1).getMoney() + "\nProperties: " + PlayerNumber.get(1).getProperty());
+	    c5.setText("Player 3 is not playing.");
+	    d5.setText("Player 4 is not playing.");
+	    }
+	    if (rule.getPlayers() == 3) {
+		a5.setText("" + playerName[0] + "'s Money: " + PlayerNumber.get(0).getMoney() + "\nProperties: " + PlayerNumber.get(0).getProperty());
+	    b5.setText("" + playerName[1] + "'s Money: "  + PlayerNumber.get(1).getMoney() + "\nProperties: " + PlayerNumber.get(1).getProperty());
+		c5.setText("" + playerName[2] + "'s Money: "  + PlayerNumber.get(2).getMoney() + "\nProperties: " + PlayerNumber.get(2).getProperty());
+		d5.setText("Player 4 is not playing.");
+
+	    }
+	    if (rule.getPlayers() == 4) {
+		a5.setText("" + playerName[0] + "'s Money: "  + PlayerNumber.get(0).getMoney() + "\nProperties: " + PlayerNumber.get(0).getProperty());
+		b5.setText("" + playerName[1] + "'s Money: "  + PlayerNumber.get(1).getMoney() + "\nProperties: " + PlayerNumber.get(1).getProperty());
+		c5.setText("" + playerName[2] + "'s Money: " + PlayerNumber.get(2).getMoney() + "\nProperties: " + PlayerNumber.get(2).getProperty());
+		d5.setText("" + playerName[3] + "'s Money: "  + PlayerNumber.get(3).getMoney() + "\nProperties: " + PlayerNumber.get(3).getProperty());
+
+	    }
 		if(tiles.get(1).getOwnedBy() ==  tiles.get(3).getOwnedBy() && tiles.get(3).getOwnedBy() == (rule.getTurn() + 1)) {
 		    playerTurn.setMonopoly(0,rule.getTurn() + 1);
 		}
@@ -1060,7 +1082,7 @@ public class Board extends JFrame implements ActionListener {
 			    display.append("\nPlease enter in the correct format");
 			}				
 	*/			
-	if (event.equals("House") && playerTurn.getHasMonopoly1(temp) == true){
+	if (event.equals("House") && playerTurn.getHasMonopoly1(temp) && !setTurns){
 	    if (tiles.get(playerTurn.getPosition()).getMortgaged() == true) {
 		display.append("\nSorry. You cannot buy a house when the property is mortgaged.");
 	    }
@@ -1088,7 +1110,7 @@ public class Board extends JFrame implements ActionListener {
 	     }
 	}
 
-	if(event.equals("House") && playerTurn.getHasMonopoly1(temp) == false) {
+	if(event.equals("House") && !playerTurn.getHasMonopoly1(temp) && !setTurns) {
 	    if (tiles.get(playerTurn.getPosition()).getOwnedBy() == -1) {
 		display.append("\nYou cannot buy this property meaning you cannot build houses on it.");
 		}
@@ -1097,13 +1119,13 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	    }
        
-	if (event.equals("Jail Card") && playerTurn.getJailCard() > 0 && playerTurn.getPosition() == 10) {
+	if (event.equals("Jail Card") && playerTurn.getJailCard() > 0 && playerTurn.getPosition() == 10 && !setTurns) {
 	    playerTurn.setJailCard(-1);
 	    while (playerTurn.getJailCounter() < 3){
 		playerTurn.setJailCounter();
 	    }
 	}
-	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false && tiles.get(playerTurn.getPosition()).getHouseNumber() > 0) {
+	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false && tiles.get(playerTurn.getPosition()).getHouseNumber() > 0 && !setTurns) {
 		textField.setText("");
 		display.append("\nYou must mortgage your houses before you mortgage your property.\nEnter the amount of houses you would like to mortgage, and then press Enter.");
 		mortgagingHouse = true;
@@ -1147,7 +1169,7 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	}
 	
-	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false && tiles.get(playerTurn.getPosition()).getHouseNumber() == 0){
+	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false && tiles.get(playerTurn.getPosition()).getHouseNumber() == 0  && !setTurns){
 	    display.append("\n" + playerName[rule.getTurn()]+ " has mortgaged " +Name[ playerTurn.getPosition()] + ".\n" + playerName[rule.getTurn()] + " will receive " + tiles.get(playerTurn.getPosition()).getMortgage() + " for mortgaging the property.\nThe cost for unmortgaging will be $" + tiles.get(playerTurn.getPosition()).getUnmortgage() + "");
 	    Log1.append("\n" + playerName[rule.getTurn()]  + " has mortgaged " +Name[ playerTurn.getPosition()] + ".");
 	    tiles.get(playerTurn.getPosition()).setMortgaged(true);
@@ -1160,11 +1182,11 @@ public class Board extends JFrame implements ActionListener {
 	if (event.equals("Enter") && gameStart && !textField.getText().equals("") ) {
 	    try {
 	    gameStart = false;
-	    if (textField.getText().equals("1")) {
+	    if (textField.getText().charAt(0) == '1') {
 		display.setText("You must have more than one player. Please type in a number from 2 to 4.");
 		gameStart = true;
 	    }
-	    if (textField.getText().equals("2")) {
+	    if (textField.getText().charAt(0) == '2') {
 		display.append("\nPlayer set.");
 		display.append("\nEnter in Player 1's nickname followed by a comma and then Player 2's in the textbox and press enter.(Do this for as many Players as you have.) Remove the name part and leave no spaces in between.\nFor example, if it is 3 Players:\nAlan,John,Andy.");
 		textField.setText("Names:");
@@ -1174,7 +1196,7 @@ public class Board extends JFrame implements ActionListener {
 		ButtonsOnBoard[0].remove(Players[2]);
 		ButtonsOnBoard[0].remove(Players[3]);
 	    }
-	    if (textField.getText().equals("3")) {
+	    if (textField.getText().charAt(0) == '3') {
 	        display.append("\nPlayer set.");
 		display.append("\nEnter in Player 1's nickname followed by a comma and then Player 2's in the textbox and press enter.(Do this for as many Players as you have.) Remove the name part and leave no spaces in between.\nFor example, if it is 3 Players:\nAlan,John,Andy");
 		textField.setText("Names:");
@@ -1182,7 +1204,7 @@ public class Board extends JFrame implements ActionListener {
 		rule.setPlayers(3);
 		ButtonsOnBoard[0].remove(Players[3]);
 	    }
-	    if (textField.getText().equals("4")) {
+	    if (textField.getText().charAt(0) == '4') {
 	        display.append("\nPlayer set.");
 		display.append("\nEnter in Player 1's nickname followed by a comma and then Player 2's in the textbox and press enter.(Do this for as many Players as you have.) Remove the name part and leave no spaces in between.\nFor example, if it is 3 Players:\nAlan,John,Andy");
 		textField.setText("Names:");
@@ -1228,15 +1250,34 @@ public class Board extends JFrame implements ActionListener {
 	    catch (StringIndexOutOfBoundsException j) {
 	    }
 	}
-	 
-	
-	/*
-	if(event.equals("Trade") {
-		if (textField.get() == "1") {
+
+	if (event.equals("Trade")) {
+	    display.append("\nType in the player number of which you want to trade property with.");
+	    textField.setText("");
+	    trading = true;
+	}
+
+	if(textField.getText().equals("") && trading && !setTurns) {
+	    try {
+		if ((textField.getText().charAt(0) == '1')  && rule.getTurn() != 1) {
+		    display.append("\nNow click on the property you would like to trade for.");
+		    System.out.println(event);
 		    
-		}
 	    }
-	*/
+		if ((textField.getText().charAt(0) == '2') && rule.getTurn() != 2) {
+
+	    }
+		    /*
+	    if (textField.getText().charAt(0) == '3') {
+	    }
+	    if (textField.getText().charAt(0) == '4') {
+	    }
+		    */
+	    }
+	    catch (StringIndexOutOfBoundsException j) {
+	    }
+	}
+	
     
     }	    
     
