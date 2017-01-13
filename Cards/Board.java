@@ -17,7 +17,7 @@ public class Board extends JFrame implements ActionListener {
     private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid,highestNumber,roll1,roll2,roll3,roll4,playerWithHighestNumber;
     private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
     private boolean[] playerDead;
-    private boolean gameStart,setNickname,setTurns,mortgagingHouse,trading;
+    private boolean gameStart,setNickname,setTurns,mortgagingHouse,trading,trading1;
     
     
     public Board() {
@@ -447,7 +447,7 @@ public class Board extends JFrame implements ActionListener {
 	Log1.setWrapStyleWord(true);
 	Log1.setEditable(false);
 	JScrollPane Scroll = new JScrollPane(Log1);
-	
+	Scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 	Log.add(Log1);
 	Log.add(Scroll);
 	Log.add(textField);
@@ -857,7 +857,7 @@ public class Board extends JFrame implements ActionListener {
 		    playerTurn.addMoney(cards.getChanceMoney(CC));
 		    ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
 		    ButtonsOnBoard[cards.getChancePosition(CC)].add(Players[rule.getTurn()]);
-		    TurnDisplay.setText("" + playerName[rule.getTurn()]  + "'s Turn. Player " + (rule.getTurn() + 1) + " is on " + Name[playerTurn.getPosition()]);
+		    TurnDisplay.setText("" + playerName[rule.getTurn()]  + "'s Turn." +  playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 		}
 		 
 		if (cards.ChanceEmpty()){
@@ -881,7 +881,7 @@ public class Board extends JFrame implements ActionListener {
 		    if ((rule.getTurn() + 1 )!= i) {
 			PlayerNumber.get(i).loseMoney(-10); //edit for # of players
 		    }
-		}
+	      }
 	    }
 	    if (CCC.equals("Get Out of Jail Free Card.")) {
 		playerTurn.setJailCard(1);
@@ -979,7 +979,7 @@ public class Board extends JFrame implements ActionListener {
 	    display.setText("It is " + playerName[rule.getTurn()]+ "'s Turn!\nPlease roll the dice.");
 	}
 
-	if (event.equals("Property") && !setTurns){
+	if (event.equals("Property") && setTurns){
 	    if (((playerTurn.getMoney() - tiles.get(playerTurn.getPosition()).getCost()) < 0 ) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) == rule.getTurn() + 1)) {
 		display.append("\nSorry, you do not have enough money to buy this property.");
 	    }
@@ -995,7 +995,7 @@ public class Board extends JFrame implements ActionListener {
 		    display.append("\nSorry, this property is owned by " + playerName[tiles.get(playerTurn.getPosition()).getOwnedBy() - 1]);
 		}
 	    }
-	    if ((tiles.get(playerTurn.getPosition()).getOwnedBy()) == 0) {
+	    if (((tiles.get(playerTurn.getPosition()).getOwnedBy()) == 0) || playerTurn.getPosition() == 39) {
 		tiles.get(playerTurn.getPosition()).setOwnedBy(rule.getTurn() + 1);
 	        playerTurn.addProperty(playerTurn.getPosition());
 	        playerTurn.loseMoney(tiles.get(playerTurn.getPosition()).getCost());
@@ -1082,7 +1082,7 @@ public class Board extends JFrame implements ActionListener {
 			    display.append("\nPlease enter in the correct format");
 			}				
 	*/			
-	if (event.equals("House") && playerTurn.getHasMonopoly1(temp) && !setTurns){
+	if (event.equals("House") && playerTurn.getHasMonopoly1(temp) && setTurns){
 	    if (tiles.get(playerTurn.getPosition()).getMortgaged() == true) {
 		display.append("\nSorry. You cannot buy a house when the property is mortgaged.");
 	    }
@@ -1110,7 +1110,7 @@ public class Board extends JFrame implements ActionListener {
 	     }
 	}
 
-	if(event.equals("House") && !playerTurn.getHasMonopoly1(temp) && !setTurns) {
+	if(event.equals("House") && !playerTurn.getHasMonopoly1(temp) && setTurns) {
 	    if (tiles.get(playerTurn.getPosition()).getOwnedBy() == -1) {
 		display.append("\nYou cannot buy this property meaning you cannot build houses on it.");
 		}
@@ -1119,13 +1119,13 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	    }
        
-	if (event.equals("Jail Card") && playerTurn.getJailCard() > 0 && playerTurn.getPosition() == 10 && !setTurns) {
+	if (event.equals("Jail Card") && playerTurn.getJailCard() > 0 && playerTurn.getPosition() == 10 && setTurns) {
 	    playerTurn.setJailCard(-1);
 	    while (playerTurn.getJailCounter() < 3){
 		playerTurn.setJailCounter();
 	    }
 	}
-	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false && tiles.get(playerTurn.getPosition()).getHouseNumber() > 0 && !setTurns) {
+	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false && tiles.get(playerTurn.getPosition()).getHouseNumber() > 0 && setTurns) {
 		textField.setText("");
 		display.append("\nYou must mortgage your houses before you mortgage your property.\nEnter the amount of houses you would like to mortgage, and then press Enter.");
 		mortgagingHouse = true;
@@ -1138,7 +1138,7 @@ public class Board extends JFrame implements ActionListener {
 		mortgagingHouse = false;
 		playerTurn.addMoney1(.5 * (double)tiles.get(playerTurn.getPosition()).getHouseCost());
 		display.append("\nYou have mortgaged " + Name[playerTurn.getPosition()] + " for " + (.5 * (double)tiles.get(playerTurn.getPosition()).getHouseCost()) + ".");
-		Log1.append("\n" + playerName[rule.getTurn()] + " has mortgaged 1 house on " + Name[playerTurn.getPosition()]);
+		Log1.append("" + playerName[rule.getTurn()] + " has mortgaged 1 house on " + Name[playerTurn.getPosition()]);
 	    }
 	    if (textField.getText().equals("2") && tiles.get(playerTurn.getPosition()).getHouseNumber() >= 2) {
 		tiles.get(playerTurn.getPosition()).setHouseNumber1(-2);
@@ -1169,7 +1169,7 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	}
 	
-	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false && tiles.get(playerTurn.getPosition()).getHouseNumber() == 0  && !setTurns){
+	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false && tiles.get(playerTurn.getPosition()).getHouseNumber() == 0  && setTurns){
 	    display.append("\n" + playerName[rule.getTurn()]+ " has mortgaged " +Name[ playerTurn.getPosition()] + ".\n" + playerName[rule.getTurn()] + " will receive " + tiles.get(playerTurn.getPosition()).getMortgage() + " for mortgaging the property.\nThe cost for unmortgaging will be $" + tiles.get(playerTurn.getPosition()).getUnmortgage() + "");
 	    Log1.append("\n" + playerName[rule.getTurn()]  + " has mortgaged " +Name[ playerTurn.getPosition()] + ".");
 	    tiles.get(playerTurn.getPosition()).setMortgaged(true);
@@ -1257,30 +1257,35 @@ public class Board extends JFrame implements ActionListener {
 	    trading = true;
 	}
 
-	if(textField.getText().equals("") && trading && !setTurns) {
+	if(event.equals("Enter") && trading && setTurns) {
 	    try {
 		if ((textField.getText().charAt(0) == '1')  && rule.getTurn() != 1) {
 		    display.append("\nNow click on the property you would like to trade for.");
-		    System.out.println(event);
+		    trading1 = true;
 		    
 	    }
 		if ((textField.getText().charAt(0) == '2') && rule.getTurn() != 2) {
-
-	    }
+		    if ((textField.getText().charAt(0) == '1')  && rule.getTurn() != 1) {
+		    display.append("\nNow click on the property you would like to trade for.");
+		    trading1 = true;
+		    }
+		}
 		    /*
 	    if (textField.getText().charAt(0) == '3') {
 	    }
 	    if (textField.getText().charAt(0) == '4') {
 	    }
 		    */
-	    }
+	    }	
 	    catch (StringIndexOutOfBoundsException j) {
 	    }
+	}    
+
+	if(trading1 && setTurns) {
+	    
 	}
-	
-    
-    }	    
-    
+
+    }
     public static void main(String[] args) {
       Board g = new Board();
       g.setVisible(true);
