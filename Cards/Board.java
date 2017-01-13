@@ -14,13 +14,14 @@ public class Board extends JFrame implements ActionListener {
     private JButton[] ButtonsOnBoard;
     private JLabel[] Players;
     private ArrayList<Player> PlayerNumber;
-    private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid,highestNumber,roll1,roll2,roll3,roll4,playerWithHighestNumber;
+    private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid,highestNumber,roll1,roll2,roll3,roll4,playerWithHighestNumber,trading1;
     private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
     private boolean[] playerDead;
-    private boolean gameStart,setNickname,setTurns,mortgagingHouse,trading,trading1;
+    private boolean gameStart,setNickname,setTurns,mortgagingHouse,trading;
     
     
     public Board() {
+	trading = false;
 	setTurns = false;
 	setNickname = false;
 	gameStart = true;
@@ -629,12 +630,12 @@ public class Board extends JFrame implements ActionListener {
 	    setTurns = true;
 	}
 	Player playerTurn = PlayerNumber.get(rule.getTurn());
-	if (event.equals("Dice") && playerTurn.getRolls() && !gameStart && !setNickname && setTurns){
+	if (event.equals("Dice") && playerTurn.getRolls() && !gameStart && !setNickname && setTurns && !trading){
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
 	    //randomNum = 0;
 	    //randomNum1 = 1;
-	    display.setText("" + randomNum + "," + randomNum1);
+	    display.setText("Dice rolls are " + randomNum + "," + randomNum1);
 	    tiles.get(12).setRent((randomNum + randomNum1) * 4);
 	    tiles.get(12).setRentMonopoly((randomNum + randomNum1) * 10);
 	    tiles.get(28).setRent((randomNum + randomNum1) * 4);
@@ -1084,8 +1085,8 @@ public class Board extends JFrame implements ActionListener {
 			    display.append("\nPlease enter in the correct format");
 			}				
 	*/			
-	if (event.equals("House") && playerTurn.getHasMonopoly1(temp) && setTurns){
-	    if (tiles.get(playerTurn.getPosition()).getMortgaged() == true) {
+	if (event.equals("House") && playerTurn.getHasMonopoly1(temp) && setTurns && !trading){
+	    if (tiles.get(playerTurn.getPosition()).getMortgaged()) {
 		display.append("\nSorry. You cannot buy a house when the property is mortgaged.");
 	    }
 	    if (houseCount == 0){
@@ -1098,7 +1099,7 @@ public class Board extends JFrame implements ActionListener {
 		     canDo = false;
 		 }
 	     }
-	     if (canDo == true) {
+	     if (canDo) {
 	    display.append("\nYou have bought a house on " + Name[playerTurn.getPosition()] +"\nKeep in mind that you  must have at least 1 house on all tiles of that color before buying a second one.");
 	    houseCount -= 1;
 	    tiles.get(playerTurn.getPosition()).setHouseNumber();
@@ -1107,7 +1108,7 @@ public class Board extends JFrame implements ActionListener {
 	    display.append("\n" + playerName[rule.getTurn()] + " has bought 1 house on " + Name[playerTurn.getPosition()] +  "!");
 	    Log1.append("" + playerName[rule.getTurn()] + " has bought 1 house on " + Name[playerTurn.getPosition()]+  "!");
 	     }
-	     if (canDo == false) {
+	     if (!canDo) {
 		 display.append("\nYou must have at least 1 house on all tiles of that color before buying a second one.");
 	     }
 	}
@@ -1127,7 +1128,7 @@ public class Board extends JFrame implements ActionListener {
 		playerTurn.setJailCounter();
 	    }
 	}
-	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false && tiles.get(playerTurn.getPosition()).getHouseNumber() > 0 && setTurns) {
+	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && !tiles.get(playerTurn.getPosition()).getMortgaged() && tiles.get(playerTurn.getPosition()).getHouseNumber() > 0 && setTurns && !trading) {
 		textField.setText("");
 		display.append("\nYou must mortgage your houses before you mortgage your property.\nEnter the amount of houses you would like to mortgage, and then press Enter.");
 		mortgagingHouse = true;
@@ -1171,7 +1172,7 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	}
 	
-	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false && tiles.get(playerTurn.getPosition()).getHouseNumber() == 0  && setTurns){
+	if (event.equals("Mortgage") && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) > 0) && (tiles.get(playerTurn.getPosition()).getOwnedBy() - 1 == rule.getTurn()) && tiles.get(playerTurn.getPosition()).getMortgaged() == false && tiles.get(playerTurn.getPosition()).getHouseNumber() == 0  && setTurns && !trading){
 	    display.append("\n" + playerName[rule.getTurn()]+ " has mortgaged " +Name[ playerTurn.getPosition()] + ".\n" + playerName[rule.getTurn()] + " will receive " + tiles.get(playerTurn.getPosition()).getMortgage() + " for mortgaging the property.\nThe cost for unmortgaging will be $" + tiles.get(playerTurn.getPosition()).getUnmortgage() + "");
 	    Log1.append("\n" + playerName[rule.getTurn()]  + " has mortgaged " +Name[ playerTurn.getPosition()] + ".");
 	    tiles.get(playerTurn.getPosition()).setMortgaged(true);
@@ -1253,7 +1254,7 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	}
 
-	if (event.equals("Trade")) {
+	if (event.equals("Trade") && !trading) {
 	    display.append("\nType in the player number of which you want to trade property with.");
 	    textField.setText("");
 	    trading = true;
@@ -1261,15 +1262,20 @@ public class Board extends JFrame implements ActionListener {
 
 	if(event.equals("Enter") && trading && setTurns) {
 	    try {
-		if ((textField.getText().charAt(0) == '1')  && rule.getTurn() != 1) {
-		    display.append("\nNow click on the property you would like to trade for.");
-		    trading1 = true;
-		    
-	    }
-		if ((textField.getText().charAt(0) == '2') && rule.getTurn() != 2) {
+		String superTemp = "";
+		if ((textField.getText().charAt(0) == '1')  && rule.getTurn() != 0) {
+		    for (int i = 0; i < PlayerNumber.get(0).getProperty().length(); i++) {
+		    if (event.equals(PlayerNumber.get(0).getProperty1(i))) {
+			superTemp += ", " +  Name[i] + "(" + i + ")"; 
+		    }
+		    }
+		    display.append("\nYou can choose any one of these properties to trade for: " + superTemp + "\nPlease press the button for the property you would like.(The number corresponds with the position the property is on the board.");
+		    trading1 = 1;
+		}
+		if ((textField.getText().charAt(0) == '2') && rule.getTurn() != 1) {
 		    if ((textField.getText().charAt(0) == '1')  && rule.getTurn() != 1) {
 		    display.append("\nNow click on the property you would like to trade for.");
-		    trading1 = true;
+		    trading1 = 2;
 		    }
 		}
 		    /*
@@ -1283,10 +1289,33 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	}    
 
-	if(trading1 && setTurns) {
-	    
-	}
-
+	if(trading1 > 0 && setTurns) {
+	    display.setText("Please let " + playerName[trading1] + " type in one of the ofollowing options: \nYes,followed by amount of money demanded for the property.\nYes,followed by the exact name of the property tile that is to be exchanged.(You can press on the tile to see the exact name)\nFor example, either of these are fine: Yes,300 or Yes,Boardwalk)\nThen, " + playerName[rule.getTurn()] + "can type in yes or no.");
+		    }
+	
+	if (textField.getText().toUpperCase().equals("YES") && trading1 > 0) {
+	    try {
+		if(textField.getText().charAt(4) < 'A') {
+		    int temptemp = Integer.parseInt(textField.getText().substring(3,textField.length()));
+		    if (temptemp > playerTurn.getMoney()) {
+			display.setText("Sorry, you do not have enough money. You may restart the trade.");
+			trading = false;
+		    }
+		    PlayerNumber.get(trading1).addMoney(temptemp);
+		    playerTurn.loseMoney(temptemp);
+		    display.append("\nTrade done!");
+		    trading = false;
+		}
+		    if(textField.getText().charAt(4) >= 'A' && textField.getText().charAt(4) <= 'Z') {
+			
+			
+		    }
+	    }
+	    catch (NumberFormatException ll){
+	    }
+    	}							   
+	
+    
     }
     public static void main(String[] args) {
       Board g = new Board();

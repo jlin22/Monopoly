@@ -313,6 +313,11 @@ public class Player{
 	}
 	return answer;
     }
+
+    public String getProperty1(int i) {
+	return propertiesOwned[i] + "";
+    }
+    
     public int getJailCard(){
 	return getOutOfJailCards;
     }
