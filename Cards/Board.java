@@ -938,26 +938,7 @@ public class Board extends JFrame implements ActionListener {
 	        TurnDisplay.setText("It is now " + playerName[rule.getTurn() + 1] + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 		playerTurn.setJailCounter();
 	    }
-	    if (playerTurn.getJailCounter() != 0){
-		playerTurn.loseJailCounter();
-		TurnDisplay.setText("You can choose to either pay 50 or stay in jail for " + playerTurn.getJailCounter() + "turns. Type Yes or No to pay or to not pay 50 to get out of jail");
-		try {
-		    String yn = textField.getText();
-		    if (yn.toUpperCase().equals("YES")){
-			playerTurn.loseMoney(50);
-			for (int i = playerTurn.getJailCounter(); i > 0; i--){
-			    playerTurn.loseJailCounter();
-			}
-			TurnDisplay.setText("Please roll dice now");
-		    }
-		    if (yn.toUpperCase().equals("NO")){
-			    TurnDisplay.setText("Please end turn now");
-			}
-		}
-	    catch (Exception j) {
-	    }
-	    
-	    }
+
 
 	    if (randomNum == randomNum1 && playerTurn.getJailCounter() ==  0){
 	        playerTurn.setDoubleRolls(playerTurn.getDoubleRolls() + 1);
@@ -991,17 +972,40 @@ public class Board extends JFrame implements ActionListener {
 		d5.setText("" + playerName[3] + "'s Money: "  + PlayerNumber.get(3).getMoney() + "\nProperties: " + PlayerNumber.get(3).getProperty());
 
 	    }
-	    if (randomNum != randomNum1 || playerTurn.getJailCounter() != 0) {
+	    if (randomNum != randomNum1) {
 	        playerTurn.setDoubleRolls(0);
 		playerTurn.setRolls(true);
-		TurnDisplay.setText("It is now " + playerName[rule.getTurn()] + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 		rule.setTurn();
 		charged = false;
+		if (playerTurn.getJailCounter() == 0){
+		    	TurnDisplay.setText("It is now " + playerName[rule.getTurn()] + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
+		}
 	    }
-	    display.setText("It is " + playerName[rule.getTurn()]+ "'s Turn!\nPlease roll the dice.");
+	    if (playerTurn.getJailCounter() == 0){
+		display.setText("It is " + playerName[rule.getTurn()]+ "'s Turn!\nPlease roll the dice.");
+	    }
+	    if (playerTurn.getJailCounter() != 0){
+		playerTurn.loseJailCounter();
+		TurnDisplay.setText("You can choose to either pay 50 or stay in jail for " + playerTurn.getJailCounter() + "turns. Type Yes or No to pay or to not pay 50 to get out of jail");
+		    String yn = textField.getText();
+		    if (yn.toUpperCase().equals("YES")){
+			playerTurn.loseMoney(50);
+			for (int i = playerTurn.getJailCounter(); i > 0; i--){
+			    playerTurn.loseJailCounter();
+			}
+			TurnDisplay.setText("Please roll dice now");
+		    }
+		    if (yn.toUpperCase().equals("NO")){
+			    TurnDisplay.setText("Please end turn now");
+			}
+		
+	    
+	    }
 	}
+	       
+    
 
-	if (event.equals("Property") && setTurns){
+	if (event.equals("Property") && setTurns && playerTurn.getJailCounter() == 0){
 	    if (((playerTurn.getMoney() - tiles.get(playerTurn.getPosition()).getCost()) < 0 ) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) == rule.getTurn() + 1)) {
 		display.append("\nSorry, you do not have enough money to buy this property.");
 	    }
