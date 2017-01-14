@@ -1300,11 +1300,17 @@ public class Board extends JFrame implements ActionListener {
 		    if (temptemp > playerTurn.getMoney()) {
 			display.setText("Sorry, you do not have enough money. You may restart the trade.");
 			trading = false;
+			trigger = false;
+			trading1 = 0;
+			tradedTile = 0;
 		    }
 		    PlayerNumber.get(trading1).addMoney(temptemp);
 		    playerTurn.loseMoney(temptemp);
 		    display.append("\nTrade done!");
 		    trading = false;
+		    trigger = false;
+		    trading1 = 0;
+		    tradedTile = 0;
 		}
 		    if(textField.getText().charAt(4) >= 'A' && textField.getText().charAt(4) <= 'Z') {
 			
