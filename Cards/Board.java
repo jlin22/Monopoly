@@ -14,7 +14,7 @@ public class Board extends JFrame implements ActionListener {
     private JButton[] ButtonsOnBoard;
     private JLabel[] Players;
     private ArrayList<Player> PlayerNumber;
-    private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid,highestNumber,roll1,roll2,roll3,roll4,playerWithHighestNumber,trading1,tradedTile;
+    private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid,highestNumber,roll1,roll2,roll3,roll4,playerWithHighestNumber,trading1,tradedTile,tradedMoney;
     private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
     private boolean[] playerDead;
     private boolean trading3, gameStart,setNickname,setTurns,mortgagingHouse,trading;
@@ -1261,44 +1261,27 @@ public class Board extends JFrame implements ActionListener {
 	    trading = true;
 	}
 
-	if (textField.getText().equals("1") || textField.getText().equals("2") || textField.getText().equals("3") || textField.getText().equals("4") && event.equals("Enter")) {
+	if  (event.equals("Enter") && setTurns && !gameStart && !setNickname && (textField.getText().equals("1") || textField.getText().equals("2") || textField.getText().equals("3") || textField.getText().equals("4"))) {
 	    try{
+		trading1 = Integer.parseInt(textField.getText());
 		trading3 = true;
-		display.append("\nPlease type the number of the property you want.(The number corresponds with the position the property is on the board.)");
+		display.append("\nPlease type the name of the property you want.(The number corresponds with the position the property is on the board.)Leave the Property there.\nFor example, Property:37");
+		textField.setText("Property:");
 	    }
 	    catch (Exception dd){
 	    }
 	}
 
-	if(event.equals("Enter") && !textField.getText().equals("") && trading && setTurns && trading3) {
+	if(event.equals("Enter") && trading && setTurns && trading3 && !gameStart && !setNickname && textField.getText().length() > 9)  {
 	    try {
-		int temptemp1 = Integer.parseInt(textField.getText());	    
-		if(temptemp1 < 0 || temptemp1 > 39) {
-		    display.append("\nInvalid number");
-		    trading3= false;
-		    trading = false;
-		}
+		int temptemp1 = Integer.parseInt(textField.getText().substring(9,textField.getText().length()));	    
 		if(tiles.get(temptemp1).getRent1H() == 0) {
 		    display.append("\nCannot trade for this tile. Start over.");
 		trading3 = false;
 		trading = false;
 		}
-		if ((textField.getText().charAt(0) == '1')  && rule.getTurn() != 0) {
-		    tradedTile = temptemp1;
-		    trading1 = 1;
-		}
-		if ((textField.getText().charAt(0) == '2') && rule.getTurn() != 1) {
-		    tradedTile = temptemp1;
-		    trading1 = 2;
-		}
-		if (textField.getText().charAt(0) == '3' && rule.getTurn() != 2) {
-		    tradedTile = temptemp1;
-		    trading1 = 3;
-		}
-		if (textField.getText().charAt(0) == '4') {
-		    tradedTile = temptemp1;
-		    trading1 = 4;
-		}
+		tradedTile = temptemp1;
+		display.append("\nTrading for " + Name[tradedTile] + ".");
 	    }
 	    catch (Exception j) {
 	    }
