@@ -15,7 +15,7 @@ public class Board extends JFrame implements ActionListener {
     private JLabel[] Players;
     private ArrayList<Player> PlayerNumber;
     private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid,highestNumber,roll1,roll2,roll3,roll4,playerWithHighestNumber,trading1,tradedTile,tradedMoney;
-    private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead;
+    private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead,trigger;
     private boolean[] playerDead;
     private boolean trading3, gameStart,setNickname,setTurns,mortgagingHouse,trading;
     
@@ -1275,7 +1275,7 @@ public class Board extends JFrame implements ActionListener {
 	if(event.equals("Enter") && trading && setTurns && trading3 && !gameStart && !setNickname && textField.getText().length() > 9)  {
 	    try {
 		int temptemp1 = Integer.parseInt(textField.getText().substring(9,textField.getText().length()));	    
-		if(tiles.get(temptemp1).getRent1H() == 0) {
+		if(tiles.get(temptemp1).getRent() == 0) {
 		    display.append("\nCannot trade for this tile. Start over.");
 		trading3 = false;
 		trading = false;
@@ -1289,10 +1289,13 @@ public class Board extends JFrame implements ActionListener {
 
 	if(trading1 > 0 && setTurns && trading && tradedTile > 0) {
 	    display.append("\nPlease let " + playerName[trading1 - 1] + " type in one of the following options: \nYes,followed by amount of money demanded for the property.\nYes,followed by the exact name of the property tile that is to be exchanged.(You can press on the tile to see the exact name)\nFor example, either of these are fine: Yes,300 or Yes,Boardwalk");
-		    }	
-	if (textField.getText().toUpperCase().equals("YES") && trading1 > 0) {
+	    trigger = true;
+		    }
+	
+	if  (trigger && trading1 > 0 && tradedTile > 0 && setTurns && trading && event.equals("Enter") && textField.getText().substring(0,3).equals("Yes")) {
+	    System.out.println("OK");
 	    try {
-		if(textField.getText().charAt(4) < 'A') {
+		if(textField.getText().charAt(4) <= '9') {
 		    int temptemp = Integer.parseInt(textField.getText().substring(3,textField.getText().length()));
 		    if (temptemp > playerTurn.getMoney()) {
 			display.setText("Sorry, you do not have enough money. You may restart the trade.");
