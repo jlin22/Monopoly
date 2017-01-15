@@ -298,7 +298,7 @@ public class Player{
 	    if (propertiesOwned[i] == 0) {
 		propertiesOwned[i] = x;
 		houses[i] = 1;
-		count = i + 1;
+		count += 1;
 		return;
 	    }
 	    else{
@@ -308,21 +308,32 @@ public class Player{
 
     public String getProperty() {
 	String answer = "";
-	for (int i = 0; i < count; i ++) {
+	for (int i = 0; i < 40; i ++) {
+	    if (propertiesOwned[i] != 0) {
 	    answer += propertiesOwned[i] + ",";
+	    }
 	}
 	return answer;
     }
+    
+    public boolean getProperty1(int x) {
+	for (int i = 0; i < count; i ++) {
+	    if (propertiesOwned[i] == x) {
+		return true;
+	    }
+	}
+	return false;
+    }
 
     public void loseProperty(int x) {
-        int[] tempArray = new int[count];
+        int[] tempArray = new int[40];
 	for (int i = 0; i < count; i++) {
 	    if (propertiesOwned[i] != x) {
 		tempArray[i] = propertiesOwned[i];
 	    }
 	}
 	propertiesOwned = tempArray;
-	count -= 1;
+	count += 1;
     }
     
     
