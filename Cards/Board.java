@@ -576,6 +576,7 @@ public class Board extends JFrame implements ActionListener {
 		display.setText("It is not your turn to roll again.\nAfter conducting your moves, please end your turn.");
 	    }
 	*/
+
 	if (event.equals("Dice") && !gameStart && !setNickname &&!setTurns && rule.getTurn() == 0) {
 	    highestNumber = 0;
 	    playerWithHighestNumber = 0;
@@ -586,7 +587,7 @@ public class Board extends JFrame implements ActionListener {
 	    Log1.setText("" + playerName[rule.getTurn()] + " has rolled a " + randomNum + "," + randomNum1);
 	    rule.setTurn();
 	}
-	if (event.equals("Dice") && !gameStart  && !setNickname && !setTurns && rule.getTurn() == 1 && (playerDead[3] || playerDead[2] || !playerDead[3])) {
+	if (event.equals("Dice")  && !gameStart  && !setNickname && !setTurns && rule.getTurn() == 1 && (playerDead[3] || playerDead[2] || !playerDead[3])) {
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
 	    roll2 = randomNum + randomNum1;
@@ -606,7 +607,7 @@ public class Board extends JFrame implements ActionListener {
 		setTurns = true;
 	    }
 	}
-	if (event.equals("Dice") && !gameStart  && !setNickname && !setTurns && rule.getTurn() == 2 && (playerDead[3] || !playerDead[3])) {
+	if (event.equals("Dice")  && !gameStart  && !setNickname && !setTurns && rule.getTurn() == 2 && (playerDead[3] || !playerDead[3])) {
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
 	    roll3 = randomNum + randomNum1;
@@ -622,7 +623,7 @@ public class Board extends JFrame implements ActionListener {
 		setTurns = true;
 	    }
 	}
-	if (event.equals("Dice") && !gameStart  && !setNickname && !setTurns && rule.getTurn() == 3 ) {
+	if (event.equals("Dice")  && !gameStart  && !setNickname && !setTurns && rule.getTurn() == 3 ) {
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
 	    roll4 = randomNum + randomNum1;
@@ -635,11 +636,16 @@ public class Board extends JFrame implements ActionListener {
 	    setTurns = true;
 	}
 	Player playerTurn = PlayerNumber.get(rule.getTurn());
-	if (event.equals("Dice") && playerTurn.getRolls() && !gameStart && !setNickname && setTurns && !trading){
+	if (event.equals("Dice") && playerTurn.getJailCounter() != 0){
+	    display.setText("You are in jail for " + (playerTurn.getJailCounter()) + "turns . Please end your turn");
+	    return;
+	}
+	
+	if (event.equals("Dice") && playerTurn.getJailCounter() == 0 && playerTurn.getRolls() && !gameStart && !setNickname && setTurns && !trading){
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
-	    //randomNum = 0;
-	    //randomNum1 = 1;
+	    randomNum = 5;
+	    randomNum1 = 5;
 	    display.setText("Dice rolls are " + randomNum + "," + randomNum1);
 	    tiles.get(12).setRent((randomNum + randomNum1) * 4);
 	    tiles.get(12).setRentMonopoly((randomNum + randomNum1) * 10);
@@ -693,7 +699,7 @@ public class Board extends JFrame implements ActionListener {
 		playerTurn.loseMoney(100);
 		display.append("\n" + playerName[rule.getTurn()] + " has to pay $100 Tax!");
 	    }
-
+	
 	    if (newPosition == 7 || newPosition == 22 || newPosition == 36) {
 	    cards.setChancePosition(1,playerTurn.getPosition());
 	    cards.setChancePosition(2,playerTurn.getPosition() - 3);
@@ -732,6 +738,7 @@ public class Board extends JFrame implements ActionListener {
 		    cards.setChanceMoney(3,-1 * 10 * (randomNum + randomNum1));
 		}
 	    }
+	    
 	    if (playerTurn.getPosition() < 5 || playerTurn.getPosition() > 35) {
 		if (tiles.get(5).getOwnedBy() == 0) {
 		    if (playerTurn.getPosition() > 5) {
@@ -802,6 +809,7 @@ public class Board extends JFrame implements ActionListener {
 		    cards.setChanceMoney(8,25);
 		}
 	    }
+	    
 
 	    if (playerTurn.getPosition() > 15 && playerTurn.getPosition() < 25) {
 		 if (tiles.get(25).getOwnedBy() == 0) {
@@ -928,20 +936,16 @@ public class Board extends JFrame implements ActionListener {
 		charged = true;
 	}
 
-	    if (randomNum == randomNum1){
-	        playerTurn.setDoubleRolls(playerTurn.getDoubleRolls() + 1);
-		display.append("\nYou rolled a double! Roll again.");
-	    }
-	    if (randomNum != randomNum1) {
-	        playerTurn.setRolls(false);
-	    }
-	    /*
+
 	    if (playerTurn.getDoubleRolls() == 3) {
 		display.append("\n" + playerName[rule.getTurn()] + " has rolled 3 doubles in a roll.\nTherefore, he or she has been sent to Jail!");
 		ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
 		ButtonsOnBoard[10].add(Players[rule.getTurn()]);
 		playerTurn.setPosition(10);
 		TurnDisplay.setText("It is now " + playerName[rule.getTurn()]  + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
+		playerTurn.setJailCounter();
+		playerTurn.setJailCounter();
+		playerTurn.setJailCounter();
 		playerTurn.setJailCounter();
 	    }
 	    if (playerTurn.getPosition() == 30) {
@@ -951,8 +955,26 @@ public class Board extends JFrame implements ActionListener {
 		playerTurn.setPosition(10);
 	        TurnDisplay.setText("It is now " + playerName[rule.getTurn() + 1] + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 		playerTurn.setJailCounter();
+		playerTurn.setJailCounter();
+		playerTurn.setJailCounter();
+		playerTurn.setJailCounter();
+		return;
 	    }
-	    */
+	    if (playerTurn.getPosition() == 10){
+		playerTurn.setJailCounter();
+		playerTurn.setJailCounter();
+		playerTurn.setJailCounter();
+		playerTurn.setJailCounter();
+		TurnDisplay.setText("It is now " + playerName[rule.getTurn() + 1] +"'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
+	    }
+	    if (randomNum == randomNum1 && playerTurn.getJailCounter() == 0){
+	        playerTurn.setDoubleRolls(playerTurn.getDoubleRolls() + 1);
+		display.append("\nYou rolled a double! Roll again.");
+	    }
+	    if (randomNum != randomNum1 && playerTurn.getJailCounter() == 0) {
+	        playerTurn.setRolls(false);
+	    }
+	    
 	    
     }
 	
@@ -977,11 +999,15 @@ public class Board extends JFrame implements ActionListener {
 		d5.setText("" + playerName[3] + "'s Money: "  + PlayerNumber.get(3).getMoney() + "\nProperties: " + PlayerNumber.get(3).getProperty());
 
 	    }
-	    if (randomNum != randomNum1) {
+
+	    if (playerTurn.getJailCounter() != 0){
+		playerTurn.loseJailCounter();
+	    }
+	    if (randomNum != randomNum1 || (randomNum == randomNum1 && playerTurn.getJailCounter() != 0)) {
 	        playerTurn.setDoubleRolls(0);
 		playerTurn.setRolls(true);
-		TurnDisplay.setText("It is now " + playerName[rule.getTurn()] + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 		rule.setTurn();
+		TurnDisplay.setText("It is now " + playerName[rule.getTurn()] + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 		charged = false;
 	    }
 	    display.setText("It is " + playerName[rule.getTurn()]+ "'s Turn!\nPlease roll the dice.");
