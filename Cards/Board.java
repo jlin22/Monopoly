@@ -17,7 +17,7 @@ public class Board extends JFrame implements ActionListener {
     private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid,highestNumber,roll1,roll2,roll3,roll4,playerWithHighestNumber,trading1,tradedTile,tradedMoney,tempMoney,tradedTile1;
     private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead,trigger,trigger1;
     private boolean[] playerDead;
-    private boolean trading3, gameStart,setNickname,setTurns,mortgagingHouse,trading;
+    private boolean trading3, gameStart,setNickname,setTurns,mortgagingHouse,trading, jail;
 
     public int toGetName(String x) {
 	  for (int i = 0; i < 40; i ++) {
@@ -29,6 +29,7 @@ public class Board extends JFrame implements ActionListener {
     }
    
     public Board() {
+	jail = false;
 	trigger1 = false;
 	trading3 = false;
 	trading = false;
@@ -576,7 +577,9 @@ public class Board extends JFrame implements ActionListener {
 		display.setText("It is not your turn to roll again.\nAfter conducting your moves, please end your turn.");
 	    }
 	*/
-	if (event.equals("Dice") && !gameStart && !setNickname &&!setTurns && rule.getTurn() == 0) {
+	if (event.equals("Dice") && !gameStart && !setNickname &&!setTurns && rule.getTurn() == 0 && jail){
+	}
+	if (event.equals("Dice") && !gameStart && !setNickname &&!setTurns && rule.getTurn() == 0 && !jail) {
 	    highestNumber = 0;
 	    playerWithHighestNumber = 0;
 	    randomNum = 1 + (int)(Math.random() * 6);
@@ -980,8 +983,8 @@ public class Board extends JFrame implements ActionListener {
 	    if (randomNum != randomNum1) {
 	        playerTurn.setDoubleRolls(0);
 		playerTurn.setRolls(true);
-		TurnDisplay.setText("It is now " + playerName[rule.getTurn()] + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 		rule.setTurn();
+		TurnDisplay.setText("It is now " + playerName[rule.getTurn()] + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 		charged = false;
 	    }
 	    display.setText("It is " + playerName[rule.getTurn()]+ "'s Turn!\nPlease roll the dice.");
