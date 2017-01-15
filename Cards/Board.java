@@ -14,8 +14,8 @@ public class Board extends JFrame implements ActionListener {
     private JButton[] ButtonsOnBoard;
     private JLabel[] Players;
     private ArrayList<Player> PlayerNumber;
-    private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid,highestNumber,roll1,roll2,roll3,roll4,playerWithHighestNumber,trading1,tradedTile,tradedMoney;
-    private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead,trigger;
+    private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid,highestNumber,roll1,roll2,roll3,roll4,playerWithHighestNumber,trading1,tradedTile,tradedMoney,tempMoney,tradedTile1;
+    private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead,trigger,trigger1;
     private boolean[] playerDead;
     private boolean trading3, gameStart,setNickname,setTurns,mortgagingHouse,trading;
 
@@ -29,6 +29,7 @@ public class Board extends JFrame implements ActionListener {
     }
    
     public Board() {
+	trigger1 = false;
 	trading3 = false;
 	trading = false;
 	setTurns = false;
@@ -1258,13 +1259,13 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	}
 
-	if (event.equals("Trade") && !trading && !gameStart && !setNickname) {
+	if (event.equals("Trade") && !trading && !gameStart && !trigger & !trigger1) {
 	    display.setText("Type in the player number of which you want to trade property with.");
 	    textField.setText("");
 	    trading = true;
 	}
 
-	if  (event.equals("Enter") && setTurns && !gameStart && !setNickname && (textField.getText().equals("1") || textField.getText().equals("2") || textField.getText().equals("3") || textField.getText().equals("4"))) {
+	if  (event.equals("Enter") && setTurns && !trigger1 && !trigger && !gameStart && (textField.getText().equals("1") || textField.getText().equals("2") || textField.getText().equals("3") || textField.getText().equals("4"))) {
 	    try{
 		trading1 = Integer.parseInt(textField.getText());
 		trading3 = true;
@@ -1275,7 +1276,7 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	}
 
-	if(event.equals("Enter") && trading && setTurns && trading3 && !gameStart && !setNickname && textField.getText().length() > 9 && !trigger)  {
+	if(event.equals("Enter") && trading && setTurns && trading3 && !trigger1&& !trigger && !gameStart && textField.getText().length() > 9 )  {
 	    try {
 		int temptemp1 = Integer.parseInt(textField.getText().substring(9,textField.getText().length()));	    
 		if(tiles.get(temptemp1).getRent() == 0) {
@@ -1301,11 +1302,11 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	}
 
-	if(trading1 > 0 && setTurns && trading && tradedTile > 0 && !trigger) {
+	if(trading1 > 0 && setTurns && trading && tradedTile > 0 && !trigger&& !trigger1) {
 	    display.append("\nPlease let " + playerName[trading1 - 1] + " type in one of the following options: \nYes,followed by amount of money demanded for the property.\nYes,followed by the exact name of the property tile that is to be exchanged.(You can press on the tile to see the exact name)\nFor example, either of these are fine: Yes,300 or Yes,Boardwalk");
 	    trigger = true;
 		    }
-	if  (trigger && trading1 > 0 && tradedTile > 0 && setTurns && trading && event.equals("Enter") && textField.getText().substring(0,2).equals("No")) {
+	if  (trigger && trading1 > 0 && tradedTile > 0 && setTurns && trading && !trigger1 && event.equals("Enter") && textField.getText().substring(0,2).equals("No")) {
 	    display.append("\nSorry, the trade did not go through.");
 	    trading = false;
 	    trigger = false;
@@ -1314,10 +1315,11 @@ public class Board extends JFrame implements ActionListener {
 	    tradedTile = 0;
 	}
 	
-	if  (trigger && trading1 > 0 && tradedTile > 0 && setTurns && trading && event.equals("Enter") && textField.getText().substring(0,3).equals("Yes")) {
+	if  (trigger && trading1 > 0 && tradedTile > 0 && setTurns && trading && !trigger1 &&  event.equals("Enter") && textField.getText().substring(0,3).equals("Yes")) {
 	    try {
 		if(textField.getText().charAt(4) <= '9') {
 		    int temptemp = Integer.parseInt(textField.getText().substring(4,textField.getText().length()));
+		    tempMoney = temptemp;
 		    if (temptemp > playerTurn.getMoney()) {
 			display.setText("Sorry, the player does not have enough money. You may restart the trade.");
 			trading = false;
@@ -1325,64 +1327,74 @@ public class Board extends JFrame implements ActionListener {
 			trading3 = false;
 			trading1 = 0;
 			tradedTile = 0;
+			tempMoney = 0;
+			tradedTile1 = 0;
+			trigger1 = false;
 		    }
 		    if (temptemp < playerTurn.getMoney()) {
-			playerTurn.loseMoney(temptemp);
-		       	PlayerNumber.get(trading1 - 1).addMoney(temptemp);
-			PlayerNumber.get(trading1 - 1).loseProperty(tradedTile);
-			playerTurn.addProperty(tradedTile);
-			tiles.get(tradedTile).setOwnedBy(rule.getTurn() + 1);
-			display.append("\nTrade done!");
-			trading = false;
-			trading3 = false;
-			trigger = false;
-			trading1 = 0;
-			tradedTile = 0;
+			display.append("\n Let " + playerName[rule.getTurn()]+ "  with yes or no.");
+			trigger1 = true;
 		    }
 		}
 		    if(toGetName(textField.getText().substring(4,textField.getText().length())) != -1) {
-		    int tradedTile1 = toGetName(textField.getText().substring(4,textField.getText().length()));
+			tradedTile1 = toGetName(textField.getText().substring(4,textField.getText().length()));
 		    if (!playerTurn.getProperty1(tradedTile1) || tradedTile1 == -1) {					       
 			display.setText("Sorry, you do not have the property.");
 			trading = false;
 			trigger = false;
 			trading3 = false;
 			trading1 = 0;
+			tradedTile1 = 0;
+			tempMoney = 0;
 			tradedTile = 0;
+			trigger1 = false;
+						
 		    }
 		    if (playerTurn.getProperty1(tradedTile1) && tradedTile1 > 0) {
-			playerTurn.loseProperty(tradedTile1);
-			PlayerNumber.get(trading1 - 1).addProperty(tradedTile1);
-			PlayerNumber.get(trading1 - 1).loseProperty(tradedTile);
-			playerTurn.addProperty(tradedTile);
-			tiles.get(tradedTile).setOwnedBy(rule.getTurn() + 1);
-			tiles.get(tradedTile1).setOwnedBy(trading1);
-			display.append("\nTrade done!");
-			trading = false;
-			trading3 = false;
-			trigger = false;
-			trading1 = 0;
-			tradedTile = 0;
+			display.append("\n Let " + playerName[rule.getTurn()]+ "  with yes or no.");
+			trigger1 = true;
 		    }
 		}
 	    }
       	    catch (Exception ll){
 	    }
 	}
-	/*(
-	    if (trigger && trading1 > 0 && tradedTile > 0 && setTurns && trading && event.equals("Enter") && textField.getText().substring(0,3).equals("Yes")) {
-		try {
-		    if (temptemp < playerTurn.getMoney()) {
-		
-		    }
-		}   
-		}
-		catch {
-
-		}
+	if (trigger && trading1 > 0 && tradedTile > 0 && setTurns && trading && trigger1 &&  event.equals("Enter") && textField.getText().equals("Yes")){
+	    if (tempMoney > 0) {
+		playerTurn.loseMoney(tempMoney);
+		PlayerNumber.get(trading1 - 1).addMoney(tempMoney);
+		PlayerNumber.get(trading1 - 1).loseProperty(tradedTile);
+		playerTurn.addProperty(tradedTile);
+		tiles.get(tradedTile).setOwnedBy(rule.getTurn() + 1);
+		display.append("\nTrade done!");
+		trading = false;
+		trigger = false;
+		trading3 = false;
+		trading1 = 0;
+		tradedTile1 = 0;
+		tempMoney = 0;
+		tradedTile = 0;
+		trigger1 = false;
 	    }
-	*/
-    
+	    if(tradedTile1 > 0) {
+		playerTurn.loseProperty(tradedTile1);
+		PlayerNumber.get(trading1 - 1).addProperty(tradedTile1);
+		PlayerNumber.get(trading1 - 1).loseProperty(tradedTile);
+		playerTurn.addProperty(tradedTile);
+		tiles.get(tradedTile).setOwnedBy(rule.getTurn() + 1);
+		tiles.get(tradedTile1).setOwnedBy(trading1);
+		display.append("\nTrade done!");
+		trading = false;
+		trigger = false;
+		trading3 = false;
+		trading1 = 0;
+		tradedTile1 = 0;
+		tempMoney = 0;
+		tradedTile = 0;
+		trigger1 = false;
+		
+	    }
+	}
     }
     public static void main(String[] args) {
       Board g = new Board();
