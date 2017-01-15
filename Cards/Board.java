@@ -636,14 +636,12 @@ public class Board extends JFrame implements ActionListener {
 	    setTurns = true;
 	}
 	Player playerTurn = PlayerNumber.get(rule.getTurn());
-	if (event.equals("Dice") && !gameStart && !setNickname &&!setTurns && rule.getTurn() == 0 && playerTurn.getJailCounter() != 0){
-	    playerTurn.loseJailCounter();
-	        playerTurn.setDoubleRolls(0);
-		playerTurn.setRolls(true);
-		rule.setTurn();
-		TurnDisplay.setText("It is now " + playerName[rule.getTurn()] + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
-		charged = false;	   
+	if (event.equals("Dice") && playerTurn.getJailCounter() != 0){
+	    playerTurn.setRolls(false);
+	    display.setText("You are in jail. Please end your turn");
+	    return;
 	}
+	
 	if (event.equals("Dice") && playerTurn.getJailCounter() == 0 && playerTurn.getRolls() && !gameStart && !setNickname && setTurns && !trading){
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
@@ -939,13 +937,7 @@ public class Board extends JFrame implements ActionListener {
 		charged = true;
 	}
 
-	    if (randomNum == randomNum1 && playerTurn.getJailCounter() == 0){
-	        playerTurn.setDoubleRolls(playerTurn.getDoubleRolls() + 1);
-		display.append("\nYou rolled a double! Roll again.");
-	    }
-	    if (randomNum != randomNum1 && playerTurn.getJailCounter() == 0) {
-	        playerTurn.setRolls(false);
-	    }
+
 	    if (playerTurn.getDoubleRolls() == 3) {
 		display.append("\n" + playerName[rule.getTurn()] + " has rolled 3 doubles in a roll.\nTherefore, he or she has been sent to Jail!");
 		ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
@@ -966,6 +958,14 @@ public class Board extends JFrame implements ActionListener {
 		playerTurn.setJailCounter();
 		TurnDisplay.setText("It is now " + playerName[rule.getTurn() + 1] +"'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 	    }
+	    if (randomNum == randomNum1 && playerTurn.getJailCounter() == 0){
+	        playerTurn.setDoubleRolls(playerTurn.getDoubleRolls() + 1);
+		display.append("\nYou rolled a double! Roll again.");
+	    }
+	    if (randomNum != randomNum1 && playerTurn.getJailCounter() == 0) {
+	        playerTurn.setRolls(false);
+	    }
+	    
 	    
     }
 	
