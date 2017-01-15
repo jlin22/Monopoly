@@ -637,8 +637,7 @@ public class Board extends JFrame implements ActionListener {
 	}
 	Player playerTurn = PlayerNumber.get(rule.getTurn());
 	if (event.equals("Dice") && playerTurn.getJailCounter() != 0){
-	    playerTurn.setRolls(false);
-	    display.setText("You are in jail. Please end your turn");
+	    display.setText("You are in jail for " + (playerTurn.getJailCounter()) + "turns . Please end your turn");
 	    return;
 	}
 	
@@ -945,6 +944,9 @@ public class Board extends JFrame implements ActionListener {
 		playerTurn.setPosition(10);
 		TurnDisplay.setText("It is now " + playerName[rule.getTurn()]  + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 		playerTurn.setJailCounter();
+		playerTurn.setJailCounter();
+		playerTurn.setJailCounter();
+		playerTurn.setJailCounter();
 	    }
 	    if (playerTurn.getPosition() == 30) {
 		display.append("\n" + playerName[rule.getTurn()]+ " has been sent to Jail!");
@@ -953,8 +955,15 @@ public class Board extends JFrame implements ActionListener {
 		playerTurn.setPosition(10);
 	        TurnDisplay.setText("It is now " + playerName[rule.getTurn() + 1] + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 		playerTurn.setJailCounter();
+		playerTurn.setJailCounter();
+		playerTurn.setJailCounter();
+		playerTurn.setJailCounter();
+		return;
 	    }
 	    if (playerTurn.getPosition() == 10){
+		playerTurn.setJailCounter();
+		playerTurn.setJailCounter();
+		playerTurn.setJailCounter();
 		playerTurn.setJailCounter();
 		TurnDisplay.setText("It is now " + playerName[rule.getTurn() + 1] +"'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 	    }
@@ -991,7 +1000,9 @@ public class Board extends JFrame implements ActionListener {
 
 	    }
 
-
+	    if (playerTurn.getJailCounter() != 0){
+		playerTurn.loseJailCounter();
+	    }
 	    if (randomNum != randomNum1 || (randomNum == randomNum1 && playerTurn.getJailCounter() != 0)) {
 	        playerTurn.setDoubleRolls(0);
 		playerTurn.setRolls(true);
