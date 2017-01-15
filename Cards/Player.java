@@ -298,7 +298,7 @@ public class Player{
 	    if (propertiesOwned[i] == 0) {
 		propertiesOwned[i] = x;
 		houses[i] = 1;
-		count = i;
+		count = i + 1;
 		return;
 	    }
 	    else{
@@ -308,20 +308,22 @@ public class Player{
 
     public String getProperty() {
 	String answer = "";
-	for (int i = 0; i < count + 1; i ++) {
+	for (int i = 0; i < count; i ++) {
 	    answer += propertiesOwned[i] + ",";
 	}
 	return answer;
     }
 
-    public boolean getProperty1(int x) {
-	for (int i = 0; i < count + 1; i ++) {
-	    if ( propertiesOwned[i] == x) {
-		return true;
+    public void loseProperty(int x) {
+        int[] tempArray = new int[count];
+	for (int i = 0; i < count; i++) {
+	    if (propertiesOwned[i] != x) {
+		tempArray[i] = propertiesOwned[i];
 	    }
 	}
-	return false;
-    }    
+	propertiesOwned = tempArray;
+	count -= 1;
+    }
     
     
     public int getJailCard(){
