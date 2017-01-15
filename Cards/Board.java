@@ -935,7 +935,7 @@ public class Board extends JFrame implements ActionListener {
 	    if (randomNum != randomNum1) {
 	        playerTurn.setRolls(false);
 	    }
-	    //need to fix
+	    /*
 	    if (playerTurn.getDoubleRolls() == 3) {
 		display.append("\n" + playerName[rule.getTurn()] + " has rolled 3 doubles in a roll.\nTherefore, he or she has been sent to Jail!");
 		ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
@@ -952,6 +952,7 @@ public class Board extends JFrame implements ActionListener {
 	        TurnDisplay.setText("It is now " + playerName[rule.getTurn() + 1] + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 		playerTurn.setJailCounter();
 	    }
+	    */
 	    
     }
 	
@@ -986,7 +987,7 @@ public class Board extends JFrame implements ActionListener {
 	    display.setText("It is " + playerName[rule.getTurn()]+ "'s Turn!\nPlease roll the dice.");
 	}
 
-	if (event.equals("Property") && setTurns){
+	if (event.equals("Property") && setTurns) {
 	    if (((playerTurn.getMoney() - tiles.get(playerTurn.getPosition()).getCost()) < 0 ) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) == rule.getTurn() + 1)) {
 		display.append("\nSorry, you do not have enough money to buy this property.");
 	    }
@@ -1063,7 +1064,7 @@ public class Board extends JFrame implements ActionListener {
 		}
 		*/
 		if (tiles.get(12).getOwnedBy() == tiles.get(28).getOwnedBy()&& tiles.get(12).getOwnedBy() == rule.getTurn()) {
-		    playerTurn.setMonopoly(9,rule.getTurn());
+		    playerTurn.setMonopoly(9,rule.getTurn() + 1);
 		}
 		playerTurn.setTurn(rule.getTurn() + 1);
 	    }
@@ -1173,7 +1174,7 @@ public class Board extends JFrame implements ActionListener {
 		Log1.append("\n" + playerName[rule.getTurn()] + " has mortgaged 4 houses on " + Name[playerTurn.getPosition()]);
 	    }
 	    }
-	    catch (StringIndexOutOfBoundsException gt) {
+	    catch (Exception gt) {
 	    }
 	}
 	
@@ -1222,7 +1223,7 @@ public class Board extends JFrame implements ActionListener {
 		gameStart = true;
 	    }
 	    }
-	    catch (StringIndexOutOfBoundsException a){
+	    catch (Exception a){
 	    }
 	}
 	
@@ -1255,26 +1256,39 @@ public class Board extends JFrame implements ActionListener {
 		display.append("\nRoll the dice to decide who's turn it is.");
 	    }
 	    }
-	    catch (StringIndexOutOfBoundsException j) {
+	    catch (Exception j) {
 	    }
 	}
 
+	if (event.equals("Trade") && trading && !gameStart) {
+	    display.append("\nTrade is cancelled.");
+	    trading = false;
+	    trigger = false;
+	    trading3 = false;
+	    trading1 = 0;
+	    tradedTile1 = 0;
+	    tempMoney = 0;
+	    tradedTile = 0;
+	    trigger1 = false;
+	}
+	
 	if (event.equals("Trade") && !trading && !gameStart && !trigger & !trigger1) {
-	    display.setText("Type in the player number of which you want to trade property with.");
+	    display.setText("Type in the player number of which you want to trade property with.\nPress trade again to cancel at anytime.");
 	    textField.setText("");
 	    trading = true;
 	}
-
+	
+	try{
 	if  (event.equals("Enter") && setTurns && !trigger1 && !trigger && !gameStart && (textField.getText().equals("1") || textField.getText().equals("2") || textField.getText().equals("3") || textField.getText().equals("4"))) {
-	    try{
 		trading1 = Integer.parseInt(textField.getText());
 		trading3 = true;
 		display.append("\nPlease type the name of the property you want.(The number corresponds with the position the property is on the board.)Leave the Property there.\nFor example, Property:37");
 		textField.setText("Property:");
-	    }
-	    catch (Exception dd){
-	    }
 	}
+	}
+	catch (Exception dd){
+	}
+	
 
 	if(event.equals("Enter") && trading && setTurns && trading3 && !trigger1&& !trigger && !gameStart && textField.getText().length() > 9 )  {
 	    try {
@@ -1305,7 +1319,8 @@ public class Board extends JFrame implements ActionListener {
 	if(trading1 > 0 && setTurns && trading && tradedTile > 0 && !trigger&& !trigger1) {
 	    display.append("\nPlease let " + playerName[trading1 - 1] + " type in one of the following options: \nYes,followed by amount of money demanded for the property.\nYes,followed by the exact name of the property tile that is to be exchanged.(You can press on the tile to see the exact name)\nFor example, either of these are fine: Yes,300 or Yes,Boardwalk");
 	    trigger = true;
-		    }
+	}
+	try {
 	if  (trigger && trading1 > 0 && tradedTile > 0 && setTurns && trading && !trigger1 && event.equals("Enter") && textField.getText().substring(0,2).equals("No")) {
 	    display.append("\nSorry, the trade did not go through.");
 	    trading = false;
@@ -1314,9 +1329,13 @@ public class Board extends JFrame implements ActionListener {
 	    trading1 = 0;
 	    tradedTile = 0;
 	}
+	}
+	catch(Exception eddd) {
+
+	}
 	
+	try {
 	if  (trigger && trading1 > 0 && tradedTile > 0 && setTurns && trading && !trigger1 &&  event.equals("Enter") && textField.getText().substring(0,3).equals("Yes")) {
-	    try {
 		if(textField.getText().charAt(4) <= '9') {
 		    int temptemp = Integer.parseInt(textField.getText().substring(4,textField.getText().length()));
 		    tempMoney = temptemp;
@@ -1332,11 +1351,11 @@ public class Board extends JFrame implements ActionListener {
 			trigger1 = false;
 		    }
 		    if (temptemp < playerTurn.getMoney()) {
-			display.append("\n Let " + playerName[rule.getTurn()]+ "  with yes or no.");
+			display.append("\nLet " + playerName[rule.getTurn()]+ " with yes or no.");
 			trigger1 = true;
 		    }
 		}
-		    if(toGetName(textField.getText().substring(4,textField.getText().length())) != -1) {
+		if(toGetName(textField.getText().substring(4,textField.getText().length())) != -1) {
 			tradedTile1 = toGetName(textField.getText().substring(4,textField.getText().length()));
 		    if (!playerTurn.getProperty1(tradedTile1) || tradedTile1 == -1) {					       
 			display.setText("Sorry, you do not have the property.");
@@ -1351,13 +1370,26 @@ public class Board extends JFrame implements ActionListener {
 						
 		    }
 		    if (playerTurn.getProperty1(tradedTile1) && tradedTile1 > 0) {
-			display.append("\n Let " + playerName[rule.getTurn()]+ "  with yes or no.");
+			display.append("\nLet " + playerName[rule.getTurn()]+ " with yes or no.");
 			trigger1 = true;
 		    }
 		}
-	    }
-      	    catch (Exception ll){
-	    }
+	}
+	}
+	catch (Exception ll){
+	}
+	
+	try {
+	if (trigger && trading1 > 0 && tradedTile > 0 && setTurns && trading && trigger1 &&  event.equals("Enter") && textField.getText().equals("No")){
+	    display.append("\nSorry, the trade did not go through.");
+	    trading = false;
+	    trigger = false;
+	    trading3 = false;
+	    trading1 = 0;
+	    tradedTile1 = 0;
+	    tempMoney = 0;
+	    tradedTile = 0;
+	    trigger1 = false;
 	}
 	if (trigger && trading1 > 0 && tradedTile > 0 && setTurns && trading && trigger1 &&  event.equals("Enter") && textField.getText().equals("Yes")){
 	    if (tempMoney > 0) {
@@ -1392,8 +1424,76 @@ public class Board extends JFrame implements ActionListener {
 		tempMoney = 0;
 		tradedTile = 0;
 		trigger1 = false;
+		if(tiles.get(1).getOwnedBy() ==  tiles.get(3).getOwnedBy() && tiles.get(3).getOwnedBy() == trading1) {
+		    PlayerNumber.get(trading1 - 1).setMonopoly(0,trading1);
+		}
+		if (tiles.get(6).getOwnedBy() == tiles.get(8).getOwnedBy() && tiles.get(9).getOwnedBy() == tiles.get(6).getOwnedBy() && tiles.get(6).getOwnedBy() == trading1){
+		    PlayerNumber.get(trading1 - 1).setMonopoly(1,trading1);
+		}
+		if (tiles.get(11).getOwnedBy() == tiles.get(13).getOwnedBy() && tiles.get(11).getOwnedBy() == tiles.get(14).getOwnedBy()&& tiles.get(11).getOwnedBy() == trading1) {
+		    PlayerNumber.get(trading1 - 1).setMonopoly(2,trading1);
+	    }
+		if(tiles.get(16).getOwnedBy() == tiles.get(18).getOwnedBy() &&tiles.get(19).getOwnedBy() == tiles.get(16).getOwnedBy() && tiles.get(18).getOwnedBy() == trading1) {
+		    PlayerNumber.get(trading1 - 1).setMonopoly(3,trading1);
+		}
+		if(tiles.get(21).getOwnedBy() == tiles.get(23).getOwnedBy() &&tiles.get(21).getOwnedBy() == tiles.get(24).getOwnedBy() && tiles.get(24).getOwnedBy() == trading1){
+		    PlayerNumber.get(trading1 - 1).setMonopoly(4,trading1);
+		}
+		if (tiles.get(26).getOwnedBy() == tiles.get(28).getOwnedBy() &&tiles.get(29).getOwnedBy() == tiles.get(26).getOwnedBy() && tiles.get(28).getOwnedBy() == trading1){
+		    PlayerNumber.get(trading1 - 1).setMonopoly(5,trading1);
+		}
+		if(tiles.get(31).getOwnedBy() == tiles.get(32).getOwnedBy() &&tiles.get(32).getOwnedBy() == tiles.get(34).getOwnedBy() && tiles.get(34).getOwnedBy() == trading1) {
+		    PlayerNumber.get(trading1 - 1).setMonopoly(6,trading1);
+		}
+		if(tiles.get(37).getOwnedBy() == tiles.get(39).getOwnedBy() && tiles.get(37).getOwnedBy() == trading1) {
+		    PlayerNumber.get(trading1 - 1).setMonopoly(7,trading1);
+		}
+		/*
+		if(tiles.get(5).getOwnedBy() == tiles.get(15).getOwnedBy() &&tiles.get(25).getOwnedBy() == tiles.get(35).getOwnedBy() && tiles.get(15).getOwnedBy() == rule.getTurn()) {
+		    playerTurn.setMonopoly(8,rule.getTurn());
+		}
+		*/
+		if (tiles.get(12).getOwnedBy() == tiles.get(28).getOwnedBy()&& tiles.get(12).getOwnedBy() == trading1) {
+		    PlayerNumber.get(trading1 - 1).setMonopoly(9,trading1);
+		}
+		
+		if(tiles.get(1).getOwnedBy() ==  tiles.get(3).getOwnedBy() && tiles.get(3).getOwnedBy() == (rule.getTurn() + 1)) {
+		    playerTurn.setMonopoly(0,rule.getTurn() + 1);
+		}
+		if (tiles.get(6).getOwnedBy() == tiles.get(8).getOwnedBy() && tiles.get(9).getOwnedBy() == tiles.get(6).getOwnedBy() && tiles.get(6).getOwnedBy() == rule.getTurn() + 1){
+		    playerTurn.setMonopoly(1,rule.getTurn() + 1);
+		}
+		if (tiles.get(11).getOwnedBy() == tiles.get(13).getOwnedBy() && tiles.get(11).getOwnedBy() == tiles.get(14).getOwnedBy()&& tiles.get(11).getOwnedBy() == rule.getTurn() + 1) {
+		playerTurn.setMonopoly(2,rule.getTurn() + 1);
+	    }
+		if(tiles.get(16).getOwnedBy() == tiles.get(18).getOwnedBy() &&tiles.get(19).getOwnedBy() == tiles.get(16).getOwnedBy() && tiles.get(18).getOwnedBy() == rule.getTurn() + 1 ) {
+		playerTurn.setMonopoly(3,rule.getTurn() + 1);
+		}
+		if(tiles.get(21).getOwnedBy() == tiles.get(23).getOwnedBy() &&tiles.get(21).getOwnedBy() == tiles.get(24).getOwnedBy() && tiles.get(24).getOwnedBy() == rule.getTurn() + 1){
+		playerTurn.setMonopoly(4,rule.getTurn() + 1);
+		}
+		if (tiles.get(26).getOwnedBy() == tiles.get(28).getOwnedBy() &&tiles.get(29).getOwnedBy() == tiles.get(26).getOwnedBy() && tiles.get(28).getOwnedBy() == rule.getTurn() + 1){
+		    playerTurn.setMonopoly(5,rule.getTurn() + 1);
+		}
+		if(tiles.get(31).getOwnedBy() == tiles.get(32).getOwnedBy() &&tiles.get(32).getOwnedBy() == tiles.get(34).getOwnedBy() && tiles.get(34).getOwnedBy() == rule.getTurn() + 1) {
+		    playerTurn.setMonopoly(6,rule.getTurn() + 1);
+		}
+		if(tiles.get(37).getOwnedBy() == tiles.get(39).getOwnedBy() && tiles.get(37).getOwnedBy() == rule.getTurn() + 1 ) {
+		    playerTurn.setMonopoly(7,rule.getTurn() + 1);
+		}
+		/*
+		if(tiles.get(5).getOwnedBy() == tiles.get(15).getOwnedBy() &&tiles.get(25).getOwnedBy() == tiles.get(35).getOwnedBy() && tiles.get(15).getOwnedBy() == rule.getTurn()) {
+		    playerTurn.setMonopoly(8,rule.getTurn());
+		}
+		*/
+		if (tiles.get(12).getOwnedBy() == tiles.get(28).getOwnedBy()&& tiles.get(12).getOwnedBy() == rule.getTurn()) {
+		    playerTurn.setMonopoly(9,rule.getTurn() + 1);
+		}
 		
 	    }
+	}
+	}
+	catch(Exception eee) {
 	}
     }
     public static void main(String[] args) {
