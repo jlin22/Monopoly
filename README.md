@@ -1,11 +1,39 @@
 #Monopoly
 <b>How to Play</b><br>
-Each player rolls the dice at the start of the turn. If it is a double, you get to roll again. But it you get 3 doubles, you will go to jail.
+You start off by inputting how many players you want, then have an option of a nickname for each player. Then, you roll to see which player goes first. <br>
+Most of the rules are given as messages in the middle of the board throughout when you play. Your goal is to buy as much property and then build houses and hotels such that you bankrupt other players. Once you run out of money, you lose.<br>
+<br><br>
+Working features: <br>
+Pressing on a tile gives you the information on that tile. <br>
+Choosing players, and nicknames (You can skip the nickname part and you'll have default nickname.) <br>
+Rolling, giving back a random number. You cannot skip your turn without rolling. After rolling you can buy property, mortgage, choose to trade with another player. <br>
+Buying property. (It doesn't allow you to buy property another player owns, or tiles such as Chance or Jail.) <br>
+Paying rent correctly to the right player, and paying double if they own a monopoly, more if they own a house. (Electric Company and Water Works works properly, the pay is according to the roll.) <br>
+Buying houses, making sure that you can only buy if you own a monopoly and land on the property and have at least 1 on each before buying another house. <br>
+Mortgaging property that you own when you land on it. <br>
+Trading with another player using money or one of their properties. <br>
+Jail works such that you get locked in for 3 turns unless you roll a double. <br>
+Chance and Community Chest cards work for the most part. <br>
+<br><br>
+Bugs: <br>
+For some reason, players cannot buy Boardwalk. <br>
+Some Chance and Community Chest cards don't work properly (You don't get the right amount of money when it depends on the number of players in the game, you don't pay the rent when you move back 3 spaces) <br>
+Railroad rent doesn't work, players just pay $25, not more even if the owner owns more railroads. <br>
+Not really a bug but, when needing to input into the textbox, it needs to be really exact (in regards to spaces and stuff, especially for trading) <br>
+Sometimes doesn't catch when a player runs out of money. <br>
 <br>
-If you land on a property, you can buy it. If it is owned, you must pay rent to the owner. (You pay double if they own a monopoly, and more if there are houses or hotels.<br>
-If you have a monopoly of that color, you can buy houses for the properties that you land on. Note that you have to buy at least 1 house on each of the respective tiles of that color, before a 2nd and so forth. When you have 4 on each of the properties, you can then buy a hotel.<br>
-If you land on a Chance or Community Chest tile, you will draw the respective card, which will do something. (Most work for now)<br>
-
-<!--You can choose to mortagage your property for money.-->
-<!---You still own the property that you mortgage.-->
-<!--People who land on the mortgaged property will not have to pay you rent.-->
+The GUI display doesn't look too nice, the top row doesn't show the number. <br>
+You have to hover over the tile to clear the black dots which represent the players because it lags in removing it from the button. <br>
+It's not clear which black dot represents which player. <br>
+Some features that we couldn't implement: <br>
+Property going up to aunction when it is not bought. <br>
+Mortgaging at anytime, and unmortgaing at any time. <br>
+Unmortgaing. <br>
+<br><br>
+Directions on how to compile and run the code: <br>
+cd into Cards/ <br>
+javac Board.java <br>
+java Board <br>
+<br><br>
+Directions on how to run the program: <br>
+Follow the messages on the middle of the board. 
