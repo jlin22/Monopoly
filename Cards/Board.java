@@ -140,16 +140,21 @@ public class Board extends JFrame implements ActionListener {
       tiles.add(a391);
       Name = new String[]{"GO", "Mediterranean Ave", "Community Chest","Baltic Ave", "Income Tax","Reading Railroad","Oriental Ave","Chance","Vermont Ave","Connecticut Ave","Jail(Just Visiting Jail If You Land On It)", "St. Charles Place"," Electric Company","States Ave","Virginia Ave","Pennsylvania Railroad","St. James Place","Community Chest","Tennessee Avenue","New York Avenue","Free Parking","Kentucky Avenue","Chance","Indiana Avenue","Illinois Avenue","B&O Railroad","Atlantic Avenue","Ventnor Avenue","Water Work","Marvin Gardens","Go To Jail", "Pacific Avenue","North Carolina Avenue","Community Chest","Pennsylvania Avenue","Short Line","Chance","Park Place", "Luxury Tax","Boardwalk"};
       
-	p1 = new JLabel("P1",JLabel.LEFT);
-	p2 = new JLabel("P2",JLabel.RIGHT);
-	p3 = new JLabel("P3",JLabel.LEADING);
-	p4 = new JLabel("P4",JLabel.TRAILING);
-
-	Font labelFont = p1.getFont();
-	p1.setFont(new Font(labelFont.getName(), Font.PLAIN, 50));
-	p2.setFont(new Font(labelFont.getName(), Font.PLAIN, 50));
-	p3.setFont(new Font(labelFont.getName(), Font.PLAIN, 50));
-	p4.setFont(new Font(labelFont.getName(), Font.PLAIN, 50));
+	p1 = new JLabel("P1",JLabel.CENTER);
+	p2 = new JLabel("P2",JLabel.CENTER);
+	p3 = new JLabel("P3",JLabel.CENTER);
+	p4 = new JLabel("P4",JLabel.CENTER);
+	
+	p1.setFont(new Font("Monotype Corsiva", 1, 60));
+	p2.setFont(new Font("Monotype Corsiva", 1, 65));
+	p3.setFont(new Font("Monotype Corsiva", 1, 65));
+	p4.setFont(new Font("Monotype Corsiva", 1, 65));
+	p4.setForeground(Color.RED);
+	p3.setForeground(Color.BLUE);
+	p2.setForeground(Color.YELLOW);
+	p1.setForeground(Color.GREEN);
+	
+	
 
 	Players = new JLabel[4];
 	Players[0] = p1;
@@ -188,7 +193,7 @@ public class Board extends JFrame implements ActionListener {
 	display.setPreferredSize(new Dimension(150,150));
 	wholePane.add(display, BorderLayout.CENTER);
 		
-	Dimension dim = new Dimension(42,45);
+	Dimension dim = new Dimension(44,44);
 	Dimension dim1 = new Dimension(48,52);
 	
 	JButton a = new JButton("20");
@@ -1254,11 +1259,11 @@ public class Board extends JFrame implements ActionListener {
 	if (event.equals("Enter") && gameStart && !textField.getText().equals("") ) {
 	    try {
 	    gameStart = false;
-	    if (textField.getText().charAt(0) == '1') {
+	    if (textField.getText().equals("1")) {
 		display.setText("You must have more than one player. Please type in a number from 2 to 4.");
 		gameStart = true;
 	    }
-	    if (textField.getText().charAt(0) == '2') {
+	    if(textField.getText().equals("2"))  {
 		display.append("\nPlayer set.");
 		display.append("\nEnter in Player 1's nickname followed by a comma and then Player 2's in the textbox and press enter.(Do this for as many Players as you have.) Remove the name part and leave no spaces in between.\nFor example, if it is 3 Players:\nAlan,John,Andy.");
 		textField.setText("Names:");
@@ -1268,7 +1273,7 @@ public class Board extends JFrame implements ActionListener {
 		ButtonsOnBoard[0].remove(Players[2]);
 		ButtonsOnBoard[0].remove(Players[3]);
 	    }
-	    if (textField.getText().charAt(0) == '3') {
+	    if (textField.getText().equals("3")) {
 	        display.append("\nPlayer set.");
 		display.append("\nEnter in Player 1's nickname followed by a comma and then Player 2's in the textbox and press enter.(Do this for as many Players as you have.) Remove the name part and leave no spaces in between.\nFor example, if it is 3 Players:\nAlan,John,Andy");
 		textField.setText("Names:");
@@ -1276,7 +1281,7 @@ public class Board extends JFrame implements ActionListener {
 		rule.setPlayers(3);
 		ButtonsOnBoard[0].remove(Players[3]);
 	    }
-	    if (textField.getText().charAt(0) == '4') {
+	    if (textField.getText().equals("4"))  {
 	        display.append("\nPlayer set.");
 		display.append("\nEnter in Player 1's nickname followed by a comma and then Player 2's in the textbox and press enter.(Do this for as many Players as you have.) Remove the name part and leave no spaces in between.\nFor example, if it is 3 Players:\nAlan,John,Andy");
 		textField.setText("Names:");
