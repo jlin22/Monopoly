@@ -682,8 +682,8 @@ public class Board extends JFrame implements ActionListener {
 	    pls = true;
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
-	    //randomNum = 5 ;
-	    //randomNum1 = 5;
+	    randomNum = 6 ;
+	    randomNum1 = 1;
 	    display.setText("Dice rolls are " + randomNum + "," + randomNum1);
 	    tiles.get(12).setRent((randomNum + randomNum1) * 4);
 	    tiles.get(12).setRentMonopoly((randomNum + randomNum1) * 10);
@@ -890,13 +890,16 @@ public class Board extends JFrame implements ActionListener {
 	    cards.setChanceMoney(14,((playerTurn.getHouseCount()) * 25 + (playerTurn.getHotelCount() * 100)));
 
 		String CC = cards.getRandomizedChanceCard();
+		CC = "You Have Been Elected Chairman Of the Board. Pay Each Player $50.";
 		display.append("\nYou have landed on Chance!\n" + CC);
 		if (CC.equals("You Have Been Elected Chairman Of the Board. Pay Each Player $50.")) {
-		    for (int i = 0; i < 4; i++) {
-			if ((rule.getTurn() + 1) != i) {
+		    for (int i = 0; i < 4; i++){
+			if (playerDead[i] == false){
+			    playerTurn.loseMoney(50);
 			    PlayerNumber.get(i).addMoney(50);
 			}
 		    }
+		
 		}
 		if (CC.equals("This Card May Be Kept Until Needed or Sold. GET OUT OF JAIL FREE.")) {
 		     playerTurn.setJailCard(1);

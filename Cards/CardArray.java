@@ -83,7 +83,7 @@ public class CardArray{
     chanceListMoney[12] = 0;
     chanceListMoney[13] = 0; 
     chanceListMoney[14] = 1000; // fix this later
-    chanceListMoney[15] = -150;
+    chanceListMoney[15] = 0;
 
     communityListPosition[0] = -1;
     communityListPosition[1] = -1;
