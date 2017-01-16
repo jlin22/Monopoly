@@ -113,8 +113,8 @@ public class Player{
 	return jailCounter;
     }
 
-    public void setJailCounter() {
-	jailCounter += 1 ; 
+    public void setJailCounter(int x) {
+	jailCounter = x;
     }
     public void loseJailCounter(){
 	jailCounter -= 1;
