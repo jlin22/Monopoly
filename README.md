@@ -1,6 +1,6 @@
 #Monopoly
 <b>How to Play</b><br>
-You start off by inputting how many players you want, then have an option of a nickname for each player. Then, you roll to see which player goes first. <br>
+You start off by inputting how many players you want, then have an option of a nickname for each player. Each player has a preset color that corresponds with it.Then, you roll to see which player goes first. <br>
 Most of the rules are given as messages in the middle of the board throughout when you play. Your goal is to buy as much property and then build houses and hotels such that you bankrupt other players. Once you run out of money, you lose.<br>
 <br><br>
 Working features: <br>
@@ -23,7 +23,7 @@ Not really a bug but, when needing to input into the textbox, it needs to be rea
 Sometimes doesn't catch when a player runs out of money. <br>
 The GUI display doesn't look too nice, the top row doesn't show the number. <br>
 You have to hover over the tile to clear the black dots which represent the players because it lags in removing it from the button. <br>
-It's not clear which black dot represents which player. <br>
+If the player is on a tile with the same color as its dot, you can't see it. <br>
 The log on the side doesn't keep going when it reaches the max. <br>
 Some features that we couldn't implement: <br>
 Property going up to aunction when it is not bought. <br>
