@@ -21,10 +21,10 @@ Some Chance and Community Chest cards don't work properly (You don't get the rig
 Railroad rent doesn't work, players just pay $25, not more even if the owner owns more railroads. <br>
 Not really a bug but, when needing to input into the textbox, it needs to be really exact (in regards to spaces and stuff, especially for trading) <br>
 Sometimes doesn't catch when a player runs out of money. <br>
-<br>
 The GUI display doesn't look too nice, the top row doesn't show the number. <br>
 You have to hover over the tile to clear the black dots which represent the players because it lags in removing it from the button. <br>
 It's not clear which black dot represents which player. <br>
+The log on the side doesn't keep going when it reaches the max. <br>
 Some features that we couldn't implement: <br>
 Property going up to aunction when it is not bought. <br>
 Mortgaging at anytime, and unmortgaing at any time. <br>
