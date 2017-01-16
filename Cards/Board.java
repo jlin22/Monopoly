@@ -15,10 +15,9 @@ public class Board extends JFrame implements ActionListener {
     private JLabel[] Players;
     private ArrayList<Player> PlayerNumber;
     private int randomNum,randomNum1,doubleRolls,jailCounter,temp,houseCount,hotelCount,counter,highestBid,highestNumber,roll1,roll2,roll3,roll4,playerWithHighestNumber,trading1,tradedTile,tradedMoney,tempMoney,tradedTile1;
-    private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead,trigger,trigger1;
+    private boolean rolls,hasMonopoly,hasHouse,hasHotel,charged,player1Dead,player2Dead,player3Dead,player4Dead,trigger,trigger1,trading3, gameStart,setNickname,setTurns,mortgagingHouse,trading,pls;
     private boolean[] playerDead;
-    private boolean trading3, gameStart,setNickname,setTurns,mortgagingHouse,trading;
-
+    
     public int toGetName(String x) {
 	  for (int i = 0; i < 40; i ++) {
 	      if (Name[i].equals(x)) {
@@ -35,6 +34,7 @@ public class Board extends JFrame implements ActionListener {
 	setTurns = false;
 	setNickname = false;
 	gameStart = true;
+	pls = false;
 	houseCount = 32;
 	hotelCount = 12;
 	playerDead = new boolean[4];
@@ -638,6 +638,7 @@ public class Board extends JFrame implements ActionListener {
 	Player playerTurn = PlayerNumber.get(rule.getTurn());
 
 	if (event.equals("Dice") && playerTurn.getJailCounter() != 0){
+	    pls = true;
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
 	    playerTurn.setJailCounter(playerTurn.getJailCounter() - 1);	
@@ -656,6 +657,8 @@ public class Board extends JFrame implements ActionListener {
 		display.append("\nYou are still in jail for " + (playerTurn.getJailCounter()) + " turns.");
 		playerTurn.setRolls(false);
 		rule.setTurn();
+		pls = false;
+
 	    }
 	    if (randomNum != randomNum1 && playerTurn.getJailCounter() == 0) {
 		playerTurn.setRolls(true);
@@ -669,10 +672,11 @@ public class Board extends JFrame implements ActionListener {
 		display.setText("" + playerName[rule.getTurn()] + " has lost because he ran out of money.");
 		playerDead[rule.getTurn()] = true;
 	    }
+	    pls = true;
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
-	    //randomNum = 5;
-	    //randomNum1 = 5;
+	    // randomNum = 39;
+	    //randomNum1 = 0;
 	    display.setText("Dice rolls are " + randomNum + "," + randomNum1);
 	    tiles.get(12).setRent((randomNum + randomNum1) * 4);
 	    tiles.get(12).setRentMonopoly((randomNum + randomNum1) * 10);
@@ -999,7 +1003,7 @@ public class Board extends JFrame implements ActionListener {
 	    
     }
 	
-	if (event.equals("End") && !setNickname && !gameStart && setTurns && !trading) {
+	if (event.equals("End") && !setNickname && !gameStart && setTurns && !trading && pls) {
 	    if (rule.getPlayers() == 2) {
 		a5.setText("" + playerName[0] + "'s Money: " + PlayerNumber.get(0).getMoney() + "\nProperties: " + PlayerNumber.get(0).getProperty());
 		b5.setText("" + playerName[1] + "'s Money: " + PlayerNumber.get(1).getMoney() + "\nProperties: " + PlayerNumber.get(1).getProperty());
@@ -1027,11 +1031,13 @@ public class Board extends JFrame implements ActionListener {
 	    if (playerTurn.getJailCounter() > 0) {
 		rule.setTurn();
 		playerTurn.setRolls(true);
+		pls = false;
 		TurnDisplay.setText("It is now " + playerName[rule.getTurn()] + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 	    }
 	    else if (randomNum != randomNum1 || (randomNum == randomNum1 && playerTurn.getJailCounter() != 0)) {
 	        playerTurn.setDoubleRolls(0);
 		playerTurn.setRolls(true);
+		pls = false;
 		rule.setTurn();
 		TurnDisplay.setText("It is now " + playerName[rule.getTurn()] + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[PlayerNumber.get(rule.getTurn()).getPosition()]);
 		charged = false;
@@ -1040,6 +1046,9 @@ public class Board extends JFrame implements ActionListener {
 	}
 
 	if (event.equals("Property") && setTurns) {
+	    if (tiles.get(39).getOwnedBy() == -1) {
+		tiles.get(39).setOwnedBy(0);
+	    }
 	    if (((playerTurn.getMoney() - tiles.get(playerTurn.getPosition()).getCost()) < 0 ) && ((tiles.get(playerTurn.getPosition()).getOwnedBy()) == rule.getTurn() + 1)) {
 		display.append("\nSorry, you do not have enough money to buy this property.");
 	    }
