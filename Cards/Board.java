@@ -653,7 +653,7 @@ public class Board extends JFrame implements ActionListener {
 		playerTurn.setRolls(true);
 	    }
 	    if (randomNum != randomNum1 && playerTurn.getJailCounter() != 0) {
-		display.append("\nYou are still in jail for " + (playerTurn.getJailCounter()) + " turns . Please end your turn.");
+		display.append("\nYou are still in jail for " + (playerTurn.getJailCounter()) + " turns.");
 		playerTurn.setRolls(false);
 		rule.setTurn();
 	    }
@@ -1033,7 +1033,7 @@ public class Board extends JFrame implements ActionListener {
 	        playerTurn.setDoubleRolls(0);
 		playerTurn.setRolls(true);
 		rule.setTurn();
-		TurnDisplay.setText("It is now " + playerName[rule.getTurn()+ 1] + "'s Turn. " + playerName[rule.getTurn() + 1] + " is on " + Name[playerTurn.getPosition()] + 1);
+		TurnDisplay.setText("It is now " + playerName[rule.getTurn()] + "'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[PlayerNumber.get(rule.getTurn()).getPosition()]);
 		charged = false;
 	    }
 	    display.setText("It is " + playerName[rule.getTurn()]+ "'s Turn!\nPlease roll the dice.");
@@ -1331,7 +1331,7 @@ public class Board extends JFrame implements ActionListener {
 	}
 	
 	try{
-	if  (event.equals("Enter") && setTurns && !trigger1 && !trigger && !gameStart && (textField.getText().equals("1") || textField.getText().equals("2") || textField.getText().equals("3") || textField.getText().equals("4"))) {
+	if  (event.equals("Enter") && setTurns && !trigger1 && !trigger && !gameStart && !mortgagingHouse && (textField.getText().equals("1") || textField.getText().equals("2") || textField.getText().equals("3") || textField.getText().equals("4"))) {
 		trading1 = Integer.parseInt(textField.getText());
 		trading3 = true;
 		display.append("\nPlease type the name of the property you want.(The number corresponds with the position the property is on the board.)Leave the Property there.\nFor example, Property:37");
