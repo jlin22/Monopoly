@@ -644,11 +644,13 @@ public class Board extends JFrame implements ActionListener {
 	    playerTurn.setJailCounter(playerTurn.getJailCounter() - 1);	
 	    display.setText("Dice rolls are " + randomNum + "," + randomNum1);
 	    if (randomNum == randomNum1 && playerTurn.getJailCounter() != 0) {
+		Log1.append("\nDouble!");
 		display.append("\nYou have rolled a double, you are now out of jail.");
 		playerTurn.setJailCounter(0);
 		playerTurn.setRolls(true);
 	    }
 	    if (randomNum == randomNum1 &&  playerTurn.getJailCounter() == 0) {
+		Log1.append("\nDouble!");
 		display.append("\nYou are now out of jail.");
 		playerTurn.setJailCounter(0);
 		playerTurn.setRolls(true);
