@@ -682,8 +682,8 @@ public class Board extends JFrame implements ActionListener {
 	    pls = true;
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
-	     randomNum = 5 ;
-	   randomNum1 = 5;
+	    //randomNum = 5 ;
+	    //randomNum1 = 5;
 	    display.setText("Dice rolls are " + randomNum + "," + randomNum1);
 	    tiles.get(12).setRent((randomNum + randomNum1) * 4);
 	    tiles.get(12).setRentMonopoly((randomNum + randomNum1) * 10);
@@ -1002,6 +1002,7 @@ public class Board extends JFrame implements ActionListener {
 	    if (randomNum == randomNum1 && playerTurn.getJailCounter() == 0){
 	        playerTurn.setDoubleRolls(playerTurn.getDoubleRolls() + 1);
 		display.append("\nYou rolled a double! Roll again.");
+		pls = false;
 	    }
 	    if (randomNum != randomNum1 && playerTurn.getJailCounter() == 0) {
 	        playerTurn.setRolls(false);
