@@ -646,7 +646,7 @@ public class Board extends JFrame implements ActionListener {
 	    pls = true;
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
-	    playerTurn.setJailCounter(playerTurn.getJailCounter() - 1);	
+	    playerTurn.loseJailCounter();
 	    display.setText("Dice rolls are " + randomNum + "," + randomNum1);
 	    if (randomNum == randomNum1 && playerTurn.getJailCounter() != 0) {
 		Log1.append("\nDouble!");
@@ -682,8 +682,8 @@ public class Board extends JFrame implements ActionListener {
 	    pls = true;
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
-	    // randomNum = 39;
-	    //randomNum1 = 0;
+	     randomNum = 5 ;
+	   randomNum1 = 5;
 	    display.setText("Dice rolls are " + randomNum + "," + randomNum1);
 	    tiles.get(12).setRent((randomNum + randomNum1) * 4);
 	    tiles.get(12).setRentMonopoly((randomNum + randomNum1) * 10);
@@ -994,11 +994,11 @@ public class Board extends JFrame implements ActionListener {
 		rule.setTurn();
 		return;
 	    }
-	    /*if (playerTurn.getPosition() == 10){
+	      if (playerTurn.getPosition() == 10){
 		playerTurn.setJailCounter(3);
 		TurnDisplay.setText("It is now " + playerName[rule.getTurn()] +"'s Turn. " + playerName[rule.getTurn()] + " is on " + Name[playerTurn.getPosition()]);
 	    }
-	    */
+       
 	    if (randomNum == randomNum1 && playerTurn.getJailCounter() == 0){
 	        playerTurn.setDoubleRolls(playerTurn.getDoubleRolls() + 1);
 		display.append("\nYou rolled a double! Roll again.");
@@ -1030,10 +1030,6 @@ public class Board extends JFrame implements ActionListener {
 		c5.setText("" + playerName[2] + "'s Money: " + PlayerNumber.get(2).getMoney() + "\nProperties: " + PlayerNumber.get(2).getProperty());
 		d5.setText("" + playerName[3] + "'s Money: "  + PlayerNumber.get(3).getMoney() + "\nProperties: " + PlayerNumber.get(3).getProperty());
 
-	    }
-
-	    if (playerTurn.getJailCounter() != 0){
-		playerTurn.loseJailCounter();
 	    }
 	    if (playerTurn.getJailCounter() > 0) {
 		rule.setTurn();
