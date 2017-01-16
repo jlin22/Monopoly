@@ -682,7 +682,7 @@ public class Board extends JFrame implements ActionListener {
 	    pls = true;
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
-	    randomNum = 6 ;
+	    randomNum = 32 ;
 	    randomNum1 = 1;
 	    display.setText("Dice rolls are " + randomNum + "," + randomNum1);
 	    tiles.get(12).setRent((randomNum + randomNum1) * 4);
@@ -890,7 +890,6 @@ public class Board extends JFrame implements ActionListener {
 	    cards.setChanceMoney(14,((playerTurn.getHouseCount()) * 25 + (playerTurn.getHotelCount() * 100)));
 
 		String CC = cards.getRandomizedChanceCard();
-		CC = "You Have Been Elected Chairman Of the Board. Pay Each Player $50.";
 		display.append("\nYou have landed on Chance!\n" + CC);
 		if (CC.equals("You Have Been Elected Chairman Of the Board. Pay Each Player $50.")) {
 		    for (int i = 0; i < 4; i++){
@@ -931,13 +930,16 @@ public class Board extends JFrame implements ActionListener {
 		cards.setCommunityMoney(10,(playerTurn.getHouseCount() * 40 + playerTurn.getHotelCount() * 115));
 		
 	    String CCC = cards.getRandomizedCommunityChestCard();
+	    CCC = "It Is Your Birthday. Collect $10 From Every Player.";
 	    display.append("\nYou have landed on Community Chest!\n" + CCC);
 	    if (CCC.equals("It Is Your Birthday. Collect $10 From Every Player.")){
-		for (int i = 0; i < 4; i++) {
-		    if ((rule.getTurn() + 1 )!= i) {
-			PlayerNumber.get(i).loseMoney(-10); //edit for # of players
+		for (int i = 0; i < 4; i++){
+		    if (playerDead[i] == false){
+			playerTurn.addMoney(10);
+			PlayerNumber.get(i).loseMoney(10);
+			}
 		    }
-	      }
+		playerTurn.loseMoney(10);
 	    }
 	    if (CCC.equals("Get Out of Jail Free Card.")) {
 		playerTurn.setJailCard(1);
