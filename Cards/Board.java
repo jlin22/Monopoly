@@ -649,41 +649,52 @@ public class Board extends JFrame implements ActionListener {
 	    playerTurn.loseJailCounter();
 	    display.setText("Dice rolls are " + randomNum + "," + randomNum1);
 	    if (randomNum == randomNum1 && playerTurn.getJailCounter() != 0) {
-		Log1.append("\nDouble!");
 		display.append("\nYou have rolled a double, you are now out of jail.");
 		playerTurn.setJailCounter(0);
 		playerTurn.setRolls(true);
+		pls = false;
 	    }
 	    if (randomNum == randomNum1 &&  playerTurn.getJailCounter() == 0) {
-		Log1.append("\nDouble!");
 		display.append("\nYou are now out of jail.");
 		playerTurn.setJailCounter(0);
 		playerTurn.setRolls(true);
+		pls = false;
+
 	    }
 	    if (randomNum != randomNum1 && playerTurn.getJailCounter() != 0) {
-		display.append("\nYou are still in jail for " + (playerTurn.getJailCounter()) + " turns.");
+		display.append("\nYou are still in jail for " + (playerTurn.getJailCounter()) + " turns.\nLet the new player roll.");
 		playerTurn.setRolls(false);
 		rule.setTurn();
-		pls = false;
 
 	    }
 	    if (randomNum != randomNum1 && playerTurn.getJailCounter() == 0) {
 		playerTurn.setRolls(true);
 		display.append("\n You are out of jail, but had to pay $50");
 		playerTurn.loseMoney(50);
+		pls = false;
+
 	    }
 	}
 	
 	if (event.equals("Dice") && playerTurn.getJailCounter() == 0 && playerTurn.getRolls() && !gameStart && !setNickname && setTurns && !trading){
 	    if (playerTurn.getMoney() < 0) {
-		display.setText("" + playerName[rule.getTurn()] + " has lost because he ran out of money.");
+		display.setText("" + playerName[rule.getTurn()] + " has lost because he ran out of money.\nPress end.");
+		for (int i = 0; i < 40; i++) {
+		    if (tiles.get(i).getOwnedBy() == rule.getTurn() + 1) {
+			tiles.get(i).setOwnedBy(0);
+			playerTurn.loseProperty(i);
+		    }
+		}
 		playerDead[rule.getTurn()] = true;
+		pls = true;
+		return;
+		
 	    }
 	    pls = true;
 	    randomNum = 1 + (int)(Math.random() * 6);
 	    randomNum1 = 1 + (int)(Math.random() * 6);
-	    randomNum = 32 ;
-	    randomNum1 = 1;
+	    //randomNum = 32 ;
+	    //randomNum1 = 1;
 	    display.setText("Dice rolls are " + randomNum + "," + randomNum1);
 	    tiles.get(12).setRent((randomNum + randomNum1) * 4);
 	    tiles.get(12).setRentMonopoly((randomNum + randomNum1) * 10);
@@ -930,7 +941,6 @@ public class Board extends JFrame implements ActionListener {
 		cards.setCommunityMoney(10,(playerTurn.getHouseCount() * 40 + playerTurn.getHotelCount() * 115));
 		
 	    String CCC = cards.getRandomizedCommunityChestCard();
-	    CCC = "It Is Your Birthday. Collect $10 From Every Player.";
 	    display.append("\nYou have landed on Community Chest!\n" + CCC);
 	    if (CCC.equals("It Is Your Birthday. Collect $10 From Every Player.")){
 		for (int i = 0; i < 4; i++){
@@ -981,6 +991,7 @@ public class Board extends JFrame implements ActionListener {
 
 
 	    if (playerTurn.getDoubleRolls() == 3) {
+		playerTurn.setDoubleRolls(0);
 		display.append("\n" + playerName[rule.getTurn()] + " has rolled 3 doubles in a roll.\nTherefore, he or she has been sent to Jail!");
 		ButtonsOnBoard[playerTurn.getPosition()].remove(Players[rule.getTurn()]);
 		ButtonsOnBoard[10].add(Players[rule.getTurn()]);
@@ -1297,7 +1308,7 @@ public class Board extends JFrame implements ActionListener {
 	    }
 	}
 	
-	if (event.equals("Enter") && !gameStart && !setNickname && !trading){
+	if (event.equals("Enter") && !gameStart && !setNickname && !trading && !mortgagingHouse && tradedTile == 0 && !trigger && !trigger1){
 	    try {
 	    String t = textField.getText();
 	    if (rule.getPlayers() == 2) {
@@ -1350,10 +1361,20 @@ public class Board extends JFrame implements ActionListener {
 	
 	try{
 	if  (event.equals("Enter") && setTurns && !trigger1 && !trigger && !gameStart && !mortgagingHouse && (textField.getText().equals("1") || textField.getText().equals("2") || textField.getText().equals("3") || textField.getText().equals("4"))) {
+	    System.out.println("" + rule.getTurn());
 		trading1 = Integer.parseInt(textField.getText());
+		if (trading1 == rule.getTurn()) {
+		    display.append("\nCannot trade with yourself, start over.");
+		    trading3 = false;
+		    trading = false;
+		    trading1 = 0;
+		    tradedTile = 0;
+		}
+		if (trading1 != rule.getTurn()) {
 		trading3 = true;
 		display.append("\nPlease type the name of the property you want.(The number corresponds with the position the property is on the board.)Leave the Property there.\nFor example, Property:37");
 		textField.setText("Property:");
+		}
 	}
 	}
 	catch (Exception dd){
