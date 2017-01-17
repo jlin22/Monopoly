@@ -17,10 +17,9 @@ Chance and Community Chest cards work for the most part. <br>
 <br><br>
 Bugs: <br>
 For some reason, players cannot buy Boardwalk. <br>
-Some Chance and Community Chest cards don't work properly (You don't get the right amount of money when it depends on the number of players in the game, you don't pay the rent when you move back 3 spaces) <br>
+Some Chance and Community Chest cards don't work properly (You don't pay the rent when you move back 3 spaces) <br>
 Railroad rent doesn't work, players just pay $25, not more even if the owner owns more railroads. <br>
 Not really a bug but, when needing to input into the textbox, it needs to be really exact (in regards to spaces and stuff, especially for trading) <br>
-Sometimes doesn't catch when a player runs out of money. <br>
 The GUI display doesn't look too nice, the top row doesn't show the number. <br>
 You have to hover over the tile to clear the black dots which represent the players because it lags in removing it from the button. <br>
 If the player is on a tile with the same color as its dot, you can't see it. <br>
